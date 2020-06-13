@@ -395,7 +395,7 @@ class PluginManager:
         if "hooks" in as_dict or "internal" in as_dict:
             return False
 
-        for type in as_dict.keys():
+        for type in iter(as_dict.items()):
             for plugin in as_dict[type]:
                 if plugin in self.plugins[type]:
                     if "module" in self.plugins[type][plugin]:

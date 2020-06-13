@@ -7,7 +7,7 @@ import binascii
 import re
 try:
     import urlparse
-except:
+except ImportError:
     from urllib.parse import urlparse
 
 import Crypto.Cipher.AES

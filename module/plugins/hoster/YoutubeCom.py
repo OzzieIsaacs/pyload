@@ -7,7 +7,7 @@ import subprocess
 import time
 try:
     import urlparse
-except:
+except ImportError:
     from urllib.parse import urlparse
 
 from xml.dom.minidom import parseString as parse_xml

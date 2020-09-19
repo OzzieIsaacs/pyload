@@ -41,9 +41,10 @@ class WebServerThread(threading.Thread):
 
     def _run_produc(self):
         bind_path = self.prefix.strip("/") + "/"
+        if self.host == '':
+            self.host = '0.0.0.0'
         bind_addr = (self.host, self.port)
         wsgi_app = wsgi.PathInfoDispatcher({bind_path: self.app})
-
         server = wsgi.Server(bind_addr, wsgi_app)
 
         if self.use_ssl:

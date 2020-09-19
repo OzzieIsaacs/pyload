@@ -107,17 +107,15 @@ class BaseHoster(BasePlugin):
         #: Hide any user/password
         try:
             user = self.account.user
-            hidden_user = "{:*<{}}".format(self.account.user[:3], 7)
-            args = tuple(arg.replace(user, hidden_user) for arg in args if arg)
-        except (AttributeError, KeyError, TypeError):
-            pass
-
-        try:
             pw = self.account.info["login"]["password"]
-            hidden_pw = "*" * 10
-            args = tuple(arg.replace(pw, hidden_pw) for arg in args if arg)
-        except (AttributeError, KeyError, TypeError):
+        except AttributeError:
             pass
+        else:
+            hidden_user = "{:*<{}}".format(self.account.user[:3], 7)
+            hidden_pw = "*" * 10
+            args = (
+                a.replace(user, hidden_user).replace(pw, hidden_pw) for a in args if a
+            )
 
         log(
             "{plugintype} {pluginname}[{id}]: {msg}".format(

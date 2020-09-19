@@ -26,6 +26,9 @@
 !.vscode/extensions.json
 *.code-workspace
 
+# pyCharm IDE project files
+/.idea
+
 # Local History for Visual Studio Code
 .history/
 

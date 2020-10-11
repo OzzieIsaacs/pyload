@@ -46,9 +46,9 @@ class ReCaptcha(CaptchaService):
 				document.children[0].removeChild(document.children[0].children[0]);
 			}
 			document.children[0].innerHTML = '<html><head></head><body style="display:inline-block;"><div id="captchadiv" style="display: inline-block;"></div></body></html>';
-			
+
 			gpyload.data.sitekey = request.params.sitekey;
-			
+
 			gpyload.getFrameSize = function() {
 				var rectAnchor =  {top: 0, right: 0, bottom: 0, left: 0},
 					rectPopup =  {top: 0, right: 0, bottom: 0, left: 0},
@@ -69,7 +69,7 @@ class ReCaptcha(CaptchaService):
 				var bottom = Math.round(Math.max(rectAnchor.top, rectAnchor.bottom, rectPopup.top, rectPopup.bottom));
 				return {top: top, left: left, bottom: bottom, right: right};
 			};
-			
+
 			// function that is called when the captcha finished loading and is ready to interact
 			window.pyloadCaptchaOnLoadCallback = function() {
 				grecaptcha.render (
@@ -83,7 +83,7 @@ class ReCaptcha(CaptchaService):
 				);
 				gpyload.activated();
 			};
-			
+
 			if(typeof grecaptcha !== 'undefined' && grecaptcha) {
 				window.pyloadCaptchaOnLoadCallback();
 			} else {

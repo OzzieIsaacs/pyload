@@ -6,10 +6,10 @@ from ..base.xfs_downloader import XFSDownloader
 class FilerioCom(XFSDownloader):
     __name__ = "FilerioCom"
     __type__ = "downloader"
-    __version__ = "0.13"
+    __version__ = "0.14"
     __status__ = "testing"
 
-    __pattern__ = r"http://(?:www\.)?(filerio\.(in|com)|filekeen\.com)/\w{12}"
+    __pattern__ = r"https?://(?:www\.)?(filerio\.(in|com)|filekeen\.com)/\w{12}"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),
@@ -27,3 +27,5 @@ class FilerioCom(XFSDownloader):
     URL_REPLACEMENTS = [(r"filekeen\.com", "filerio.in")]
 
     OFFLINE_PATTERN = r">&quot;File Not Found|File has been removed"
+
+    LINK_PATTERN = r'<a href="(.+?)" class="btn btn-primary btn-block">'

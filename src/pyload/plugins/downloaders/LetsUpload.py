@@ -2,7 +2,6 @@
 
 from ..base.simple_downloader import SimpleDownloader
 import re
-import time
 
 
 class LetsUpload(SimpleDownloader):
@@ -51,7 +50,7 @@ class LetsUpload(SimpleDownloader):
         # Get the link to the file that has the real link
         html_file_link = self.parse_regex(self.LINK_FREE_PATTERN, self.data)
 
-        time.sleep(5)  # Sometimes it fails if you request too soon, wait a bit
+        self.wait(5)  # Sometimes it fails if you request too soon, wait a bit
 
         # Get the real download link
         html = self.load(html_file_link)

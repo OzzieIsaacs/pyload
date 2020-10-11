@@ -34,7 +34,8 @@ class OboomCom(BaseDownloader):
 
     @classmethod
     def api_respond(cls, subdomain, method, args={}):
-        return json.loads(get_url(cls.API_URL % subdomain + method, args))
+        return json.loads(get_url(cls.API_URL % subdomain + method,
+                                  post=args))
 
     @classmethod
     def api_info(cls, url):
@@ -139,12 +140,13 @@ class OboomCom(BaseDownloader):
         else:
             self.fail(_("Could not retrieve download ticket. Error %s: %s") % (res[0], res[1]))
 
-    def process(self, pyfile):
-        self.pyfile.url.replace(".com/#id=", ".com/#")
-        self.pyfile.url.replace(".com/#/", ".com/#")
+    def handle_free(self, pyfile):
         self.get_session_token()
         if not self.premium:
             self.handle_captcha()
         self.get_download_ticket()
         self.download("http://%s/1/dlh" % self.download_domain,
                       get={'ticket': self.download_ticket})
+
+    def handle_premium(self, pyfile):
+        self.handle_free(self, pyfile)

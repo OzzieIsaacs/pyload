@@ -195,7 +195,7 @@ class SimpleDownloader(BaseDownloader):
 
         if "N" in info["pattern"]:
             name = replace_patterns(info["pattern"]["N"], cls.NAME_REPLACEMENTS)
-            info["name"] = parse_name(name)
+            info["name"] = parse.name(name)
 
         if "S" in info["pattern"]:
             size = replace_patterns(

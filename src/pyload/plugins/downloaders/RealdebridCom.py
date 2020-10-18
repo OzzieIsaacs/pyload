@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-
+import pycurl
 import json
 
+from pyload.core.network.http.exceptions import BadHeader
 from ..base.multi_downloader import MultiDownloader
 
 
@@ -12,7 +13,7 @@ def args(**kwargs):
 class RealdebridCom(MultiDownloader):
     __name__ = "RealdebridCom"
     __type__ = "downloader"
-    __version__ = "0.78"
+    __version__ = "0.81"
     __status__ = "testing"
 
     __pattern__ = (
@@ -36,7 +37,13 @@ class RealdebridCom(MultiDownloader):
     API_URL = "https://api.real-debrid.com/rest/1.0"
 
     def api_response(self, namespace, get={}, post={}):
-        json_data = self.load(self.API_URL + namespace, get=get, post=post)
+        self.req.http.c.setopt(pycurl.USERAGENT, "pyLoad/{}".format(self.pyload.version))
+
+        try:
+            json_data = self.load(self.API_URL + namespace, get=get, post=post)
+
+        except BadHeader as exc:
+                json_data = exc.content
 
         return json.loads(json_data)
 
@@ -44,8 +51,8 @@ class RealdebridCom(MultiDownloader):
         self.chunk_limit = 3
 
     def handle_premium(self, pyfile):
-        user = list(self.account.accounts.keys())[0]
-        api_token = self.account.accounts[user]["password"]
+        user = self.account.accounts.keys()[0]
+        api_token = self.account.accounts[user]["api_token"]
 
         data = self.api_response(
             "/unrestrict/link",
@@ -56,7 +63,15 @@ class RealdebridCom(MultiDownloader):
         self.log_debug(f"Returned Data: {data}")
 
         if "error" in data:
-            self.fail("{} (code: {})".format(data["error"], data["error_code"]))
+            if data['error_code'] == 24:
+                self.offline()
+
+            elif data['error_code'] == 8:  #: Token expired?
+                self.account.relogin()
+                self.retry()
+
+            else:    
+            	self.fail("{} (code: {})".format(data["error"], data["error_code"]))
 
         else:
             if data["filename"]:

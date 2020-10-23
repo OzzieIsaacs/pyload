@@ -14,11 +14,11 @@ from ..base.simple_downloader import SimpleDownloader
 
 class RapidgatorNet(SimpleDownloader):
     __name__ = "RapidgatorNet"
-    __type__ = "hoster"
-    __version__ = "0.55"
+    __type__ = "downloader"
+    __version__ = "0.56"
     __status__ = "testing"
 
-    __pattern__ = r'https?://(?:www\.)?(?:rapidgator\.(?:net|asia|)|rg\.to)/file/(?P<ID>\w+)'
+    __pattern__ = r"https?://(?:www\.)?(?:rapidgator\.(?:net|asia|)|rg\.to)/file/(?P<ID>\w+)"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),
@@ -56,7 +56,7 @@ class RapidgatorNet(SimpleDownloader):
     )
     WAIT_PATTERN = r"(?:Delay between downloads must be not less than|Try again in).+"
 
-    LINK_FREE_PATTERN = r"return \'(http://\w+.rapidgator.net/.*)\';"
+    LINK_FREE_PATTERN = r"return \'(https?://\w+.rapidgator.net/.*)\';"
 
     RECAPTCHA_PATTERN = r'"http://api\.recaptcha\.net/challenge\?k=(.*?)"'
     ADSCAPTCHA_PATTERN = r'(http://api\.adscaptcha\.com/Get\.aspx[^"\']+)'
@@ -66,8 +66,8 @@ class RapidgatorNet(SimpleDownloader):
         (r"//(?:www\.)?rg\.to/", "//rapidgator.net/"),
         (r"(//rapidgator.net/file/[0-9A-z]+).*", r"\1"),
     ]
-    URL_REPLACEMENTS = [(__pattern__ + '.*', r'https://rapidgator.net/file/\g<ID>')]
-
+    URL_REPLACEMENTS = [(__pattern__ + ".*", r"https://rapidgator.net/file/\g<ID>")]
+    
     API_URL = "https://rapidgator.net/api/"
 
     def api_response(self, method, **kwargs):
@@ -99,18 +99,18 @@ class RapidgatorNet(SimpleDownloader):
         self.chunk_limit = -1 if self.premium else 1
 
     def handle_premium(self, pyfile):
-        json_data = self.api_response("file/info",
-                                      sid=self.account.info['data']['sid'],
-                                      url=pyfile.url)
+        json_data = self.api_response(
+            "file/info", sid=self.account.info["data"]["sid"], url=pyfile.url
+        )
 
-        self.info['md5'] = json_data['hash']
-        pyfile.name = json_data['filename']
-        pyfile.size = json_data['size']
+        self.info["md5"] = json_data["hash"]
+        pyfile.name = json_data["filename"]
+        pyfile.size = json_data["size"]
 
-        json_data = self.api_response("file/download",
-                                      sid=self.account.info['data']['sid'],
-                                      url=pyfile.url)
-        self.link = json_data['url']
+        json_data = self.api_response(
+            "file/download", sid=self.account.info["data"]["sid"], url=pyfile.url
+        )
+        self.link = json_data["url"]
 
     def check_errors(self):
         SimpleDownloader.check_errors(self)
@@ -136,17 +136,21 @@ class RapidgatorNet(SimpleDownloader):
         jsvars = dict(re.findall(self.JSVARS_PATTERN, self.data))
         self.log_debug(jsvars)
 
-        url = "https://rapidgator.net%s?fid=%s" % (
-            jsvars.get('startTimerUrl', '/download/AjaxStartTimer'), jsvars['fid'])
+        url = "https://rapidgator.net{}?fid={}".format(
+            jsvars.get("startTimerUrl", "/download/AjaxStartTimer"), jsvars["fid"]
+        )
         jsvars.update(self.get_json_response(url))
 
-        self.wait(jsvars.get('secs', 180), False)
+        self.wait(jsvars.get("secs", 180), False)
 
-        url = "https://rapidgator.net%s?sid=%s" % (
-            jsvars.get('getDownloadUrl', '/download/AjaxGetDownloadLink'), jsvars['sid'])
+        url = "https://rapidgator.net{}?sid={}".format(
+            jsvars.get("getDownloadUrl", "/download/AjaxGetDownloadLink"), jsvars["sid"]
+        )
         jsvars.update(self.get_json_response(url))
 
-        url = "https://rapidgator.net%s" % jsvars.get('captchaUrl', '/download/captcha')
+        url = "https://rapidgator.net{}".format(
+            jsvars.get("captchaUrl", "/download/captcha")
+        )
         self.data = self.load(url, ref=pyfile.url)
 
         m = re.search(self.LINK_FREE_PATTERN, self.data)

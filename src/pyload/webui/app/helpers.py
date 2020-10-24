@@ -113,8 +113,8 @@ def set_permission(perms):
     :param perms: dict
     """
     permission = 0
-    for name in Perms:
-        if str(name).startswith("_"):
+    for name in permlist():
+        if name.startswith("_"):
             continue
 
         if name in perms and perms[name]:

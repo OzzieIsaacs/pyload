@@ -279,7 +279,7 @@ class Api:
             self.pyload.files.get_file_count(),
             0,
             not self.pyload.thread_manager.pause and self.is_time_download(),
-            self.pyload.config.get("reconnect", "enabled") == "True" and self.is_time_reconnect(),
+            self.pyload.config.get("reconnect", "enabled") and self.is_time_reconnect(),
             self.is_captcha_waiting(),
         )
 
@@ -367,7 +367,7 @@ class Api:
         end = self.pyload.config.get("reconnect", "end_time").split(":")
         return seconds.compare(start, end) and self.pyload.config.get(
             "reconnect", "enabled"
-        ) == "True"
+        )
 
     @legacy("statusDownloads")
     @permission(Perms.LIST)
@@ -416,7 +416,7 @@ class Api:
         :param dest: `Destination`
         :return: package id of the new package
         """
-        if self.pyload.config.get("general", "folder_per_package") == "True":
+        if self.pyload.config.get("general", "folder_per_package"):
             folder = name
         else:
             folder = ""

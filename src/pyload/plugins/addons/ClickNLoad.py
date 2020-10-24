@@ -53,7 +53,7 @@ class ClickNLoad(BaseAddon):
         self.exit_done = threading.Event()
 
     def activate(self):
-        if self.pyload.config.get("webui", "enabled") =="False":
+        if not self.pyload.config.get("webui", "enabled"):
             self.log_warning(
                 self._("pyLoad's Web interface is not active, ClickNLoad cannot start")
             )
@@ -133,7 +133,7 @@ class ClickNLoad(BaseAddon):
                             socket.AF_INET, socket.SOCK_STREAM
                         )
 
-                        if self.pyload.config.get("webui", "use_ssl") =="True":
+                        if self.pyload.config.get("webui", "use_ssl"):
                             try:
                                 server_socket = ssl.wrap_socket(server_socket)
 

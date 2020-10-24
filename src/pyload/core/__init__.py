@@ -107,7 +107,7 @@ class Core:
         self.config = ConfigParser(self.userdir)
 
         if debug is None:
-            if self.config.get("general", "debug_mode") == "True":
+            if self.config.get("general", "debug_mode"):
                 debug_level = self.config.get("general", "debug_level")
                 self._debug = self.DEBUG_LEVEL_MAP[debug_level]
         else:
@@ -191,8 +191,8 @@ class Core:
         if os.name == "nt":
             return
 
-        change_group = self.config.get("permission", "change_group") == "True"
-        change_user = self.config.get("permission", "change_user") == "True"
+        change_group = self.config.get("permission", "change_group")
+        change_user = self.config.get("permission", "change_user")
 
         if change_group:
             try:
@@ -263,7 +263,7 @@ class Core:
         self.adm.core_ready()
 
     def _start_webserver(self):
-        if self.config.get("webui", "enabled") == "False":
+        if not self.config.get("webui", "enabled"):
             return
         self.webserver.start()
 

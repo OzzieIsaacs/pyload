@@ -70,7 +70,7 @@ class XMPP(IRC):
             self.jid,
             self.config.get('pw'),
             self.config.get('tls'),
-            self.config.get('use_ssl'),
+            self.config.get('use_ssl')=="True",
             self.log_info,
             self.log_debug
         )

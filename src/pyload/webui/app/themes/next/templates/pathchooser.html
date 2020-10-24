@@ -8,16 +8,16 @@
       var cwd = "{{oldfile|default(cwd, True)|abspath|quotepath|replace('\\', '\\\\')}}";
       var isabsolute = true;
     {% else %}
-      var cwd = "{{oldfile|default(cwd, True)|abspath|quotepath|replace('\\', '\\\\')}}";
+      var cwd = "{{oldfile|default(cwd, True)|relpath|quotepath|replace('\\', '\\\\')}}";
       var isabsolute = false;
     {% endif %}
 
     {% if type == 'folder' %} {# browsing for folder #}
-      var abspath = "{{'/pathchooser/'|url + cwd|abspath|quotepath|replace('\\', '\\\\')}}";
-      var relpath = "{{'/pathchooser/'|url + cwd|relpath|quotepath|replace('\\', '\\\\')}}";
+      var abspath = "{{'/pathchooser/' + cwd|abspath|quotepath|replace('\\', '\\\\')}}";
+      var relpath = "{{'/pathchooser/' + cwd|relpath|quotepath|replace('\\', '\\\\')}}";
     {% else %} {# browsing for file #}
-      var abspath = "{{'/filechooser/'|url + oldfile|default(cwd, True)|abspath|quotepath|replace('\\', '\\\\')}}";
-      var relpath = "{{'/filechooser/'|url + oldfile|default(cwd, True)|relpath|quotepath|replace('\\', '\\\\')}}";
+      var abspath = "{{'/filechooser/' + oldfile|default(cwd, True)|abspath|quotepath|replace('\\', '\\\\')}}";
+      var relpath = "{{'/filechooser/' + oldfile|default(cwd, True)|relpath|quotepath|replace('\\', '\\\\')}}";
     {% endif %}
     document.addEventListener("readystatechange", function(event) {
       if (this.readyState === "complete") {
@@ -46,7 +46,7 @@
     });
     function updateParent()
     {
-        if (window.top.SettingsUI != undefined) {
+        if (window.top.SettingsUI !== undefined) {
             window.top.SettingsUI.prototype.pathchooserChanged(this);
         }
     }
@@ -63,8 +63,8 @@
     {
         cwd = fullpath;
         {% if type == "file" %} {# browsing for file #}
-          abspath = "{{'/filechooser/'|url + cwd|abspath|quotepath|replace('\\', '\\\\')}}" + name;
-          relpath = "{{'/filechooser/'|url + cwd|relpath|quotepath|replace('\\', '\\\\')}}" + name;
+          abspath = "{{'/filechooser/' + cwd|abspath|quotepath|replace('\\', '\\\\')}}" + name;
+          relpath = "{{'/filechooser/' + cwd|relpath|quotepath|replace('\\', '\\\\')}}" + name;
         {% endif %}
         setValid();
     }
@@ -83,7 +83,7 @@
     </thead>
     <tbody id="tbody">
     {% if parentdir %}
-        <tr class='tr-clickable' data-href="{% if type == 'folder' %}/pathchooser/{{parentdir|quotepath)}}{% else %}/filechooser/{{parentdir|quotepath}}{% endif %}">
+        <tr class='tr-clickable' data-href="{% if type == 'folder' %}/pathchooser/{{parentdir|quotepath}}{% else %}/filechooser/{{parentdir|quotepath}}{% endif %}">
           <td title="{{_('Parent Directory')}}"><span class="parentdir">..</span></td>
           <td></td>
           <td colspan="2">&lt;DIR&gt;</td>
@@ -109,10 +109,10 @@
             {% endif %}
 
             <td class="size">{% if file.type == 'file' %}
-              {% if file.unit == 'Byte' %}1 KB{% else %}{{(file.size|round(precision=0, method='common'))|int}} {{file.unit|replace('Byte', 'B')}}{% endif %}
+              {{(file.size|round(precision=0, method='common'))|int}} {{file.unit|replace('Byte', 'B')}}
               {% endif %}</td>
             <td class="type">{% if file.type == 'dir' %}&lt;DIR&gt;{% else %}{{file.ext|default('file', True)}}{% endif %}</td>
-            <td class="mtime">{{file.modified|date('d.m.Y - H:i:s')}}</td>
+            <td class="mtime">{{file.modified|date("%d/%m/%Y %H:%M:%S")}}</td>
         </tr>
     {% endfor %}
     </tbody>

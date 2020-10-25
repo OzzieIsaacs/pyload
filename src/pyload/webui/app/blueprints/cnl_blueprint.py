@@ -6,9 +6,10 @@ from functools import wraps
 from urllib.parse import unquote
 
 import flask
-# from cryptography.fernet import Fernet
-from Crypto.Cipher import AES
 from flask.json import jsonify
+
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
 from pyload.core.utils.misc import eval_js
 from pyload.core.utils.convert import to_str
@@ -109,8 +110,12 @@ def addcrypted2():
 
     IV = key
 
-    obj = AES.new(key, AES.MODE_CBC, IV)
-    urls = to_str(obj.decrypt(crypted)).replace("\x00", "").replace("\r","").split("\n")
+    cipher = Cipher(
+        algorithms.AES(key), modes.CBC(IV), backend=default_backend()
+    )
+    decryptor = cipher.decryptor()
+    decrypted = decryptor.update(crypted) + decryptor.finalize()
+    urls = to_str(decrypted).replace("\x00", "").replace("\r","").split("\n")
     urls = [url for url in urls if url.strip()]
 
     api = flask.current_app.config["PYLOAD_API"]

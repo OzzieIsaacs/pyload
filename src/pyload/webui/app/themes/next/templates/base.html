@@ -177,17 +177,17 @@
     {% block hidden %}
     {% endblock %}
 </div>
-{% block dialog %}
-{% endblock %}
-{% include theme('window.html')  %}
-{% include theme('captcha.html') %}
+
 <noscript><h1>Enable JavaScript to use the webinterface.</h1></noscript>
 
 
 
 {% block footer %}
 {% endblock %}
-
+{% block dialog %}
+{% endblock %}
+{% include theme('window.html')  %}
+{% include theme('captcha.html') %}
 </body>
 </html>
 

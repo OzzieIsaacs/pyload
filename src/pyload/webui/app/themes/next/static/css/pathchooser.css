@@ -165,7 +165,7 @@ a:visited {
   color: #3c3c3c;
   font-style: italic;
 }
-/*
+
 tr.tr-nonclickable {
   cursor: wait;
   -webkit-touch-callout: none;
@@ -191,5 +191,3 @@ tr.tr-clickable:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-*/

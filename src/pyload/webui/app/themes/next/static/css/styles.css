@@ -61,6 +61,8 @@ hr {
   .col-lg-auto {
     width: auto;
   }
+}
+
 
 .progressani.aqua {
 	position: relative;
@@ -115,7 +117,6 @@ hr {
     justify-content: center;
 }
 
-.modal-backdrop.in { z-index: auto;}
 
 .text-ellipsis {
   width: 100%;
@@ -145,5 +146,7 @@ fieldset[disabled] .btn {
   width: 100%;
   left: 0;
   right: 0;
-  text-align: center
+  text-align: center;
+  z-index: 1040;
 }
+

@@ -29,7 +29,7 @@
             <p>
             <div class="text-ellipsis">
             <label class="btn btn-primary" for="add_file" style="padding: 0 25px; margin-right: 5px;">
-              <input name="add_file" id="add_file" type="file" style="display:none;"onchange="$('#upload-file-info').text(this.files[0].name);">
+              <input name="add_file" id="add_file" type="file" style="display:none;" onchange="$('#upload-file-info').text(this.files[0].name);">
                 {{_("File")}}
               </label>
               <span id="upload-file-info">{{_('not available')}}</span>

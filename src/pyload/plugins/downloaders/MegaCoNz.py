@@ -93,12 +93,12 @@ class MegaCrypto:
 
     @staticmethod
     def ecb_decrypt(data, key):
-        ecb = Cryptodome.Cipher.AES.new(MegaCrypto.a32_to_str(key), Crypto.Cipher.AES.MODE_ECB)
+        ecb = Cryptodome.Cipher.AES.new(MegaCrypto.a32_to_str(key), Cryptodome.Cipher.AES.MODE_ECB)
         return ecb.decrypt(data)
 
     @staticmethod
     def ecb_encrypt(data, key):
-        ecb = Cryptodome.Cipher.AES.new(MegaCrypto.a32_to_str(key), Crypto.Cipher.AES.MODE_ECB)
+        ecb = Cryptodome.Cipher.AES.new(MegaCrypto.a32_to_str(key), Cryptodome.Cipher.AES.MODE_ECB)
         return ecb.encrypt(data)
 
     @staticmethod

@@ -57,7 +57,7 @@ class FilerNet(SimpleDownloader):
         )
 
     def check_download(self):
-        if self.scan_download({"html": re.compile(r"\A\s*<!DOCTYPE html")}) == "html":
+        if self.scan_download({"html": re.compile(rb"\A\s*<!DOCTYPE html")}) == "html":
             with open(self.last_download, "r") as f:
                 self.data = f.read()
             os.remove(self.last_download)

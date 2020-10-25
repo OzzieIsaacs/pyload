@@ -4,6 +4,7 @@ import urllib.parse
 import re
 import os
 import json
+from datetime import timedelta
 
 from pyload.core.utils import parse
 from ..helpers import timestamp
@@ -228,7 +229,7 @@ class UlozTo(SimpleDownloader):
     def check_download(self):
         check = self.scan_download(
             {
-                "wrong_captcha": ">An error ocurred while verifying the user",
+                "wrong_captcha": b">An error ocurred while verifying the user",
                 "offline": re.compile(self.OFFLINE_PATTERN),
                 "passwd": self.PASSWD_PATTERN,
                 #: Paralell dl, server overload etc.

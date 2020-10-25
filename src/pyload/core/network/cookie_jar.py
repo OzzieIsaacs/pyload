@@ -33,7 +33,7 @@ class CookieJar:
         name,
         value,
         path="/",
-        exp=time.time() + timedelta(hours=4320).total_seconds(),  #: 31 days retention
+        exp=time.time() + timedelta(hours=744).total_seconds(),  #: 31 days retention
     ):
         self.cookies[
             name

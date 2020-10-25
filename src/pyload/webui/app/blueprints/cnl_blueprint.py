@@ -6,10 +6,12 @@ from functools import wraps
 from urllib.parse import unquote
 
 import flask
-from cryptography.fernet import Fernet
+# from cryptography.fernet import Fernet
+from Crypto.Cipher import AES
 from flask.json import jsonify
 
 from pyload.core.utils.misc import eval_js
+from pyload.core.utils.convert import to_str
 
 from .app_blueprint import bp as app_bp
 
@@ -105,8 +107,10 @@ def addcrypted2():
     except Exception:
         return "Could not decrypt key", 500
 
-    obj = Fernet(key)
-    urls = obj.decrypt(crypted).replace("\x00", "").replace("\r", "").split("\n")
+    IV = key
+
+    obj = AES.new(key, AES.MODE_CBC, IV)
+    urls = to_str(obj.decrypt(crypted)).replace("\x00", "").replace("\r","").split("\n")
     urls = [url for url in urls if url.strip()]
 
     api = flask.current_app.config["PYLOAD_API"]

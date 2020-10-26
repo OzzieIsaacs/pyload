@@ -39,8 +39,7 @@ function indicateFail() {
     });
 }
 var PackageUI = new Class({
-    initialize: function(url, type) {
-        this.url = url;
+    initialize: function(type) {
         this.type = type;
         this.packages = [];
         this.parsePackages();

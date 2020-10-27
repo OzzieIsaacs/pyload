@@ -4,8 +4,8 @@ function PackageUI (type){
     var packages = [];
     var thisObject;
     this.initialize = function(type) {
-        thisObject = this;
         this.type = type;
+        thisObject = this;
 
         $("#del_finished").click(this.deleteFinished);
         $("#restart_failed").click(this.restartFailed);

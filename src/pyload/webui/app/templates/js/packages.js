@@ -42,6 +42,7 @@ var PackageUI = new Class({
     initialize: function(type) {
         this.type = type;
         this.packages = [];
+
         this.parsePackages();
         this.sorts = new Sortables($("package-list"), {
             constrain: false,

@@ -5,9 +5,9 @@
 {% block footer %}
 <script type="text/javascript" src="{{theme_template('js/packages.js')}}"></script>
 <script type="text/javascript">
-$(function() {
-    var pUI = new PackageUI({{ target }});
-});
+  $(function() {
+      var pUI = new PackageUI({{ target }});
+  });
 </script>
 {% endblock %}
 
@@ -48,7 +48,7 @@ $(function() {
         {% set progress = (package.linksdone * 100) / package.linkstotal %}
 
         <div id="progress" class="progress col-xs-4 col-sm-4 noPadding" style="color:#fff; font-weight: 700; font-size:12px; cursor: grab; margin-bottom: 15px;">
-            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width: {{progress}}%; height: 100%; position: relative; z-index: 100; text-align:left;"> </div>
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width: {{progress}}%; height: 100%; position: relative; z-index: 1; text-align:left;"> </div>
             <label style="left:10px; line-height: 20px; position: absolute; z-index: 2; color: #000;">{{package.linksdone}} / {{package.linkstotal}}</label>
             <label class="hidden-xs" style="line-height: 20px; right: 30px; position: absolute; z-index: 2; color:#000;">{{package.sizedone|formatsize}} / {{package.sizetotal|formatsize}}</label>
         </div>

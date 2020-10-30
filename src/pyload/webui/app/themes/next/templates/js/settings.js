@@ -1,6 +1,6 @@
 {% autoescape true %}
-var SettingsUI, root;
-root = this;
+
+var SettingsUI;
 
 $(function() {
     return new SettingsUI();

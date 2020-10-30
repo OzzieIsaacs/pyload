@@ -69,7 +69,10 @@ $(function() {
             $('#quit_box').modal('hide');
             $('#content').addClass("hidden");
             $('#shutdown_msg').removeClass("hidden");
-        });
+        })
+        .fail(function() {
+            indicateFail("{{_('Error occurred')}}");
+        });        
     });
 
     $("#restart_box").on('click', '#restart_button', function () {
@@ -80,7 +83,10 @@ $(function() {
             setTimeout(function() {
                 window.location = "/dashboard";
             }, 10000);
-        });
+        })
+        .fail(function() {
+            indicateFail("{{_('Error occurred')}}");
+        });        
     });
 });
 

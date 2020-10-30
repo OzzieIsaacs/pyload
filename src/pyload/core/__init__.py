@@ -272,6 +272,11 @@ class Core:
             return
         self.webserver.start()
 
+    def _stop_webserver(self):
+        if not self.config.get("webui", "enabled"):
+            return
+        self.webserver.stop()
+        
     def _get_args_for_reloading(self):
         """Determine how the script was executed, and return the args needed
         to execute it again in a new process.
@@ -440,6 +445,7 @@ class Core:
             self.addon_manager.core_exiting()
 
         finally:
+            self._stop_webserver()
             self.files.sync_save()
             self._running.clear()
             # self.evm.fire('pyload:stopped')

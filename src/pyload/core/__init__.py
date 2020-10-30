@@ -115,8 +115,12 @@ class Core:
         else:
             self._debug = max(0, int(debug))
 
+        # If no argument set, read storage dir from config file, otherwise save setting to config dir
+        if storagedir == None:
+            storagedir = self.config.get("general", "storage_folder")
+        else:
+            self.config.set("general", "storage_folder", storagedir)
         os.makedirs(storagedir, exist_ok=True)
-        self.config.set("general", "storage_folder", storagedir)
 
         self.config.save()  #: save so config files gets filled
 
@@ -276,7 +280,7 @@ class Core:
         if not self.config.get("webui", "enabled"):
             return
         self.webserver.stop()
-        
+
     def _get_args_for_reloading(self):
         """Determine how the script was executed, and return the args needed
         to execute it again in a new process.

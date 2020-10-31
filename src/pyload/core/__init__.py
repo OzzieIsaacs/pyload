@@ -418,6 +418,7 @@ class Core:
         self.log.info(self._("pyLoad is restarting..."))
         # self.evm.fire('pyload:restarting')
         self.terminate()
+        self._stop_webserver()
         os.chdir(sys.path[0])
 
         args = self._get_args_for_reloading()
@@ -449,7 +450,6 @@ class Core:
             self.addon_manager.core_exiting()
 
         finally:
-            self._stop_webserver()
             self.files.sync_save()
             self._running.clear()
             # self.evm.fire('pyload:stopped')

@@ -115,8 +115,9 @@ class Core:
         else:
             self._debug = max(0, int(debug))
 
-        # If no argument set, read storage dir from config file, otherwise save setting to config dir
-        if storagedir == None:
+        # If no argument set, read storage dir from config file,
+        # otherwise save setting to config dir
+        if storagedir is None:
             storagedir = self.config.get("general", "storage_folder")
         else:
             self.config.set("general", "storage_folder", storagedir)
@@ -418,8 +419,9 @@ class Core:
         self.log.info(self._("pyLoad is restarting..."))
         # self.evm.fire('pyload:restarting')
         self.terminate()
-        self._stop_webserver()
-        os.chdir(sys.path[0])
+
+        if sys.path[0]:
+            os.chdir(sys.path[0])
 
         args = self._get_args_for_reloading()
         exit_code = subprocess.call(args, close_fds=True)
@@ -452,4 +454,6 @@ class Core:
         finally:
             self.files.sync_save()
             self._running.clear()
+            if self._do_restart:
+                self._stop_webserver()
             # self.evm.fire('pyload:stopped')

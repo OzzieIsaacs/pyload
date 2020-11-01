@@ -1,26 +1,26 @@
-# Translations template for PROJECT.
-# Copyright (C) 2020 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2020-11-01 13:58+0100\n"
-"PO-Revision-Date: 2020-11-01 14:06+0100\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"PO-Revision-Date: 2020-11-01 21:10+0100\n"
 "Last-Translator: \n"
-"Language-Team: \n"
-"Language: de\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: pyload\n"
+"X-Crowdin-Project-ID: 18363\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /pyLoad/django.pot\n"
+"X-Crowdin-File-ID: 42\n"
 "X-Generator: Poedit 2.4.1\n"
 
 #: src/pyload/__main__.py:122
 msgid "Killed from terminal"
-msgstr "Von der Konsole beendet"
+msgstr "Von Konsole beendet"
 
 #: src/pyload/core/__init__.py:169
 msgid "Successfully restored default login credentials `{}|{}`"
@@ -28,45 +28,45 @@ msgstr ""
 
 #: src/pyload/core/__init__.py:212
 msgid "Unable to change gid"
-msgstr ""
+msgstr "Gid konnte nicht geändert werden"
 
 #: src/pyload/core/__init__.py:226
 msgid "Unable to change uid"
-msgstr ""
+msgstr "Uid konnte nicht geändert werden"
 
 #: src/pyload/core/__init__.py:268
 msgid "Activating accounts..."
-msgstr ""
+msgstr "Accounts werden aktiviert..."
 
 #: src/pyload/core/__init__.py:272
 msgid "Activating Plugins..."
-msgstr ""
+msgstr "Plugins werden aktiviert..."
 
 #: src/pyload/core/__init__.py:364
 msgid "User directory: {}"
-msgstr "Benutzer Verzeichnis: {}"
+msgstr "Benutzerverzeichnis: {}"
 
 #: src/pyload/core/__init__.py:365
 msgid "Cache directory: {}"
-msgstr ""
+msgstr "Cache Verzeichnis: {}"
 
 #: src/pyload/core/__init__.py:368
 msgid "Storage directory: {}"
-msgstr ""
+msgstr "Speicher Verzeichnis: {}"
 
 #: src/pyload/core/__init__.py:371
 msgid "Storage free space: {}"
-msgstr ""
+msgstr "Freier Speicherplatz: {}"
 
 #: src/pyload/core/__init__.py:419
 #: src/pyload/webui/app/themes/modern/templates/settings.html:209
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:209
 msgid "pyLoad is restarting..."
-msgstr ""
+msgstr "pyLoad startet neu..."
 
 #: src/pyload/core/__init__.py:433
 msgid "Exiting core..."
-msgstr ""
+msgstr "Pyload wird beendet..."
 
 #: src/pyload/core/api/__init__.py:435
 msgid "Added package {name} containing {count:d} links"
@@ -82,15 +82,15 @@ msgstr ""
 
 #: src/pyload/core/managers/addon_manager.py:125
 msgid "Failed activating {}"
-msgstr ""
+msgstr "Aktivierung fehlgeschlagen {}"
 
 #: src/pyload/core/managers/addon_manager.py:131
 msgid "Activated plugins: {}"
-msgstr ""
+msgstr "Aktivierte Plugins: {}"
 
 #: src/pyload/core/managers/addon_manager.py:134
 msgid "Deactivate plugins: {}"
-msgstr ""
+msgstr "Deaktivierte Plugins: {}"
 
 #: src/pyload/core/managers/addon_manager.py:314
 msgid "Error calling event handler {}: {}, {}, {}"
@@ -106,70 +106,70 @@ msgstr ""
 
 #: src/pyload/core/managers/file_manager.py:36
 msgid "finished"
-msgstr ""
+msgstr "Abgeschlossen"
 
 #: src/pyload/core/managers/file_manager.py:37
 msgid "offline"
-msgstr ""
+msgstr "Offline"
 
 #: src/pyload/core/managers/file_manager.py:38
 msgid "online"
-msgstr ""
+msgstr "Online"
 
 #: src/pyload/core/managers/file_manager.py:39
 #: src/pyload/webui/app/themes/modern/templates/js/packages.js:217
 #: src/pyload/webui/app/themes/pyplex/templates/js/packages.js:217
 msgid "queued"
-msgstr ""
+msgstr "Eingereiht"
 
 #: src/pyload/core/managers/file_manager.py:40
 msgid "skipped"
-msgstr ""
+msgstr "Übersprungen"
 
 #: src/pyload/core/managers/file_manager.py:41
 msgid "waiting"
-msgstr ""
+msgstr "Warte"
 
 #: src/pyload/core/managers/file_manager.py:42
 msgid "temp. offline"
-msgstr ""
+msgstr "zeitweise offline"
 
 #: src/pyload/core/managers/file_manager.py:43
 msgid "starting"
-msgstr ""
+msgstr "Starte"
 
 #: src/pyload/core/managers/file_manager.py:44
 msgid "failed"
-msgstr ""
+msgstr "Fehlgeschlagen"
 
 #: src/pyload/core/managers/file_manager.py:45
 msgid "aborted"
-msgstr ""
+msgstr "Abgebrochen"
 
 #: src/pyload/core/managers/file_manager.py:46
 msgid "decrypting"
-msgstr ""
+msgstr "Entschlüsseln"
 
 #: src/pyload/core/managers/file_manager.py:47
 msgid "custom"
-msgstr ""
+msgstr "Angepasst"
 
 #: src/pyload/core/managers/file_manager.py:48
 msgid "downloading"
-msgstr ""
+msgstr "Lade"
 
 #: src/pyload/core/managers/file_manager.py:49
 msgid "processing"
-msgstr ""
+msgstr "Verarbeite"
 
 #: src/pyload/core/managers/file_manager.py:50
 msgid "unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: src/pyload/core/managers/file_manager.py:601
 #: src/pyload/plugins/addons/IRC.py:61 src/pyload/plugins/addons/XMPP.py:84
 msgid "Package finished: {}"
-msgstr ""
+msgstr "Paket beendet: {}"
 
 #: src/pyload/core/managers/plugin_manager.py:111
 #: src/pyload/core/managers/plugin_manager.py:237
@@ -179,11 +179,11 @@ msgstr ""
 
 #: src/pyload/core/managers/plugin_manager.py:210
 msgid "{} has a invalid pattern"
-msgstr ""
+msgstr "{} hat ein ungültiges Pattern"
 
 #: src/pyload/core/managers/plugin_manager.py:304
 msgid "Plugin {} not found"
-msgstr ""
+msgstr "Plugin {} nicht gefunden"
 
 #: src/pyload/core/managers/plugin_manager.py:347
 msgid "Error importing {name}: {msg}"
@@ -191,7 +191,7 @@ msgstr ""
 
 #: src/pyload/core/managers/thread_manager.py:134
 msgid "Reconnect Failed: {}"
-msgstr ""
+msgstr "Reconnect fehlgeschlage: {}"
 
 #: src/pyload/core/managers/thread_manager.py:183
 msgid "Reconnect script not found!"
@@ -199,23 +199,23 @@ msgstr ""
 
 #: src/pyload/core/managers/thread_manager.py:189
 msgid "Starting reconnect"
-msgstr ""
+msgstr "Neuverbinden wird gestartet"
 
 #: src/pyload/core/managers/thread_manager.py:205
 msgid "Failed executing reconnect script!"
-msgstr ""
+msgstr "Auführen des Reconnect Scriptes fehlgeschlagen!"
 
 #: src/pyload/core/managers/thread_manager.py:214
 msgid "Reconnected, new IP: {}"
-msgstr ""
+msgstr "Neu verbunden, neue IP: {}"
 
 #: src/pyload/core/managers/thread_manager.py:332
 msgid "Not enough space left on device"
-msgstr ""
+msgstr "Nicht genug freier Speicherplatz auf dem Gerät"
 
 #: src/pyload/core/threads/clicknload_thread.py:31
 msgid "Remote backend error: {}"
-msgstr ""
+msgstr "Remoteinterface Fehler: {}"
 
 #: src/pyload/core/threads/database_thread.py:142
 msgid "Filedatabase was deleted due to incompatible version."
@@ -235,43 +235,43 @@ msgstr ""
 
 #: src/pyload/core/threads/database_thread.py:223
 msgid "Converting old Django DB"
-msgstr ""
+msgstr "Konvertierte alte Django DB"
 
 #: src/pyload/core/threads/decrypter_thread.py:38
 msgid "Decrypting starts: {}"
-msgstr ""
+msgstr "Entschlüsseln startet: {}"
 
 #: src/pyload/core/threads/decrypter_thread.py:44
 #: src/pyload/core/threads/download_thread.py:66
 msgid "Plugin {} is missing a function"
-msgstr ""
+msgstr "Dem Plugin {} fehlt eine Funktion"
 
 #: src/pyload/core/threads/decrypter_thread.py:54
 #: src/pyload/core/threads/download_thread.py:104
 msgid "Download is offline: {}"
-msgstr ""
+msgstr "Download ist offline: {}"
 
 #: src/pyload/core/threads/decrypter_thread.py:59
 #: src/pyload/core/threads/decrypter_thread.py:81
 msgid "Decrypting failed: {name} | {msg}"
-msgstr ""
+msgstr "Entschlüsseln fehlgeschlagen: {name} | {msg}"
 
 #: src/pyload/core/threads/decrypter_thread.py:68
 #: src/pyload/core/threads/download_thread.py:75
 msgid "Download aborted: {}"
-msgstr ""
+msgstr "Download abgebrochen: {}"
 
 #: src/pyload/core/threads/decrypter_thread.py:74
 msgid "Retrying {}"
-msgstr ""
+msgstr "Wiederhole {}"
 
 #: src/pyload/core/threads/download_thread.py:52
 msgid "Download starts: {}"
-msgstr ""
+msgstr "Download startet: {}"
 
 #: src/pyload/core/threads/download_thread.py:59
 msgid "Download finished: {}"
-msgstr ""
+msgstr "Download abgeschlossen: {}"
 
 #: src/pyload/core/threads/download_thread.py:91
 msgid "Download restarted: {name} | {msg}"
@@ -310,11 +310,11 @@ msgstr ""
 
 #: src/pyload/plugins/accounts/FilecloudIo.py:36
 msgid "Wrong username or password"
-msgstr ""
+msgstr "Falscher Benutzername oder Passwort"
 
 #: src/pyload/plugins/accounts/FshareVn.py:44
 msgid "TRAFFIC_LEFT_PATTERN not found"
-msgstr ""
+msgstr "TRAFFIC_LEFT_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/accounts/HellshareCz.py:53
 msgid "Unable to parse credit info"
@@ -337,7 +337,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/MegaDebridEu.py:66
 #: src/pyload/plugins/downloaders/MegaDebridEu.py:79
 msgid "Banned IP"
-msgstr ""
+msgstr "Geblockte IP"
 
 #: src/pyload/plugins/accounts/MyfastfileCom.py:39
 msgid "Unable to get account information"
@@ -349,7 +349,7 @@ msgstr ""
 
 #: src/pyload/plugins/accounts/NitroflareCom.py:60
 msgid "Banned"
-msgstr ""
+msgstr "Geblockt"
 
 #: src/pyload/plugins/accounts/NitroflareCom.py:63
 msgid "Account Login Requires Recaptcha"
@@ -357,10 +357,12 @@ msgstr ""
 
 #: src/pyload/plugins/accounts/OboomCom.py:30
 msgid "Failed to log in: {}"
-msgstr ""
+msgstr "Login fehlgeschlagen: {}"
 
 #: src/pyload/plugins/accounts/RealdebridCom.py:58
-msgid "Password for Real-debrid should be the API token - get it from: https://real-debrid.com/apitoken"
+msgid ""
+"Password for Real-debrid should be the API token - get it from: https://real-"
+"debrid.com/apitoken"
 msgstr ""
 
 #: src/pyload/plugins/accounts/TenluaVn.py:54
@@ -369,11 +371,13 @@ msgstr ""
 
 #: src/pyload/plugins/accounts/TurbobitNet.py:49
 msgid "Login form not found"
-msgstr ""
+msgstr "Login Formular nicht gefunden"
 
 #: src/pyload/plugins/accounts/TurbobitNet.py:57
 #: src/pyload/plugins/accounts/TurbobitNet.py:72
-msgid "Logging in with captcha is not supported, please disable catcha in turbobit's account settings"
+msgid ""
+"Logging in with captcha is not supported, please disable catcha in "
+"turbobit's account settings"
 msgstr ""
 
 #: src/pyload/plugins/accounts/TurbobitNet.py:78
@@ -389,7 +393,9 @@ msgid "Unable to retrieve account information, pattern not found"
 msgstr ""
 
 #: src/pyload/plugins/accounts/ZeveraCom.py:71
-msgid "Password for Zevera should be the API token - get it from: https://www.zevera.com/account"
+msgid ""
+"Password for Zevera should be the API token - get it from: https://www."
+"zevera.com/account"
 msgstr ""
 
 #: src/pyload/plugins/addons/AntiStandby.py:109
@@ -458,7 +464,7 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:450
 #: src/pyload/plugins/downloaders/PremiumizeMe.py:66
 msgid "Invalid url"
-msgstr ""
+msgstr "Ungültige Url"
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:178
 msgid "Bad request: {}"
@@ -526,7 +532,7 @@ msgstr ""
 #: src/pyload/plugins/addons/Checksum.py:401
 #: src/pyload/plugins/base/hoster.py:369
 msgid "Waiting {}..."
-msgstr ""
+msgstr "Warte {}..."
 
 #: src/pyload/plugins/addons/ClickNLoad.py:58
 msgid "pyLoad's Web interface is not active, ClickNLoad cannot start"
@@ -594,7 +600,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/DeathByCaptcha.py:188
 msgid "Account balance"
-msgstr ""
+msgstr "Kontostand"
 
 #: src/pyload/plugins/addons/DeathByCaptcha.py:189
 msgid "US${:.3f} ({} captchas left at {:.2f} cents each)"
@@ -602,14 +608,15 @@ msgstr ""
 
 #: src/pyload/plugins/addons/DeleteFinished.py:30
 msgid "including"
-msgstr ""
+msgstr "Inklusive"
 
 #: src/pyload/plugins/addons/DeleteFinished.py:30
 msgid "excluding"
-msgstr ""
+msgstr "Exklusive"
 
 #: src/pyload/plugins/addons/DeleteFinished.py:32
-msgid "delete all finished packages in queue list ({} packages with offline links)"
+msgid ""
+"delete all finished packages in queue list ({} packages with offline links)"
 msgstr ""
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:63
@@ -701,7 +708,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/ExtractArchive.py:463
 msgid "Password protected"
-msgstr ""
+msgstr "Passwortgeschützt"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:468
 msgid "CRC Error"
@@ -754,7 +761,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/ExtractArchive.py:583
 msgid "Extract failed"
-msgstr ""
+msgstr "Auspacken fehlgeschlagen"
 
 #: src/pyload/plugins/addons/HotFolder.py:74
 msgid "Added {} from HotFolder"
@@ -766,11 +773,13 @@ msgstr ""
 
 #: src/pyload/plugins/addons/IRC.py:89
 msgid "New Captcha Request: {}"
-msgstr ""
+msgstr "Neue Captcha-Anfrage: {}"
 
 #: src/pyload/plugins/addons/IRC.py:91
+#, fuzzy
+#| msgid "Input the text on the captcha."
 msgid "Answer with 'c {} text on the captcha'"
-msgstr ""
+msgstr "Gib den Text aus dem Captcha ein."
 
 #: src/pyload/plugins/addons/IRC.py:112
 msgid "Connected to"
@@ -818,7 +827,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/MultiHome.py:85
 msgid "Best interface not found"
-msgstr ""
+msgstr "Beste Schnittstelle nicht gefunden"
 
 #: src/pyload/plugins/addons/RestartFailed.py:23
 msgid "Restarting all failed downloads..."
@@ -847,19 +856,22 @@ msgstr ""
 
 #: src/pyload/plugins/addons/UpdateManager.py:174
 msgid "pyLoad restart scheduled"
-msgstr ""
+msgstr "pyLoad Neustart geplant"
 
 #: src/pyload/plugins/addons/UpdateManager.py:175
-msgid "Downloads are active, pyLoad restart postponed once the download is done"
+msgid ""
+"Downloads are active, pyLoad restart postponed once the download is done"
 msgstr ""
 
 #: src/pyload/plugins/addons/UpdateManager.py:192
 msgid "pyLoad is up to date!"
-msgstr ""
+msgstr "Keine Update für pyLoad gefunden!"
 
 #: src/pyload/plugins/addons/UpdateManager.py:197
+#, fuzzy
+#| msgid "New pyLoad version %s available!"
 msgid "***  New pyLoad {} available  ***"
-msgstr ""
+msgstr "Neue pyload Version verfügbar: %s"
 
 #: src/pyload/plugins/addons/UpdateManager.py:200
 msgid "***  Get it here: https://github.com/pyload/pyload/releases  ***"
@@ -988,7 +1000,7 @@ msgstr ""
 
 #: src/pyload/plugins/anticaptchas/SolveMedia.py:96
 msgid "Captcha code was invalid"
-msgstr ""
+msgstr "Captcha Code war ungültig"
 
 #: src/pyload/plugins/anticaptchas/SolveMedia.py:103
 msgid "SolveMedia max retries exceeded"
@@ -999,7 +1011,9 @@ msgid "Unable to decode audio captcha"
 msgstr ""
 
 #: src/pyload/plugins/anticaptchas/UlozTo.py:34
-msgid "Please install adecaptcha library from https://github.com/izderadicka/adecaptcha"
+msgid ""
+"Please install adecaptcha library from https://github.com/izderadicka/"
+"adecaptcha"
 msgstr ""
 
 #: src/pyload/plugins/base/account.py:117
@@ -1089,8 +1103,10 @@ msgid "Invalid captcha"
 msgstr ""
 
 #: src/pyload/plugins/base/captcha.py:211
+#, fuzzy
+#| msgid "The captcha."
 msgid "Correct captcha"
-msgstr ""
+msgstr "Das Captcha."
 
 #: src/pyload/plugins/base/captcha_service.py:25
 msgid "{} key not found"
@@ -1115,7 +1131,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/decrypter.py:93
 msgid "{} links"
-msgstr ""
+msgstr "{} Links"
 
 #: src/pyload/plugins/base/decrypter.py:117
 msgid "Save package `{name}` to folder: {folder}"
@@ -1240,7 +1256,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/hoster.py:458
 msgid "Restart plugin"
-msgstr ""
+msgstr "Plugin neu starten"
 
 #: src/pyload/plugins/base/hoster.py:460
 msgid "Fallback to free processing"
@@ -1252,7 +1268,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/hoster.py:506
 msgid "Retry Captcha"
-msgstr ""
+msgstr "Captcha erneut versuchen"
 
 #: src/pyload/plugins/base/multi_account.py:95
 msgid "Multi-hoster feature will be deactivated due missing plugin reference"
@@ -1334,15 +1350,19 @@ msgstr ""
 
 #: src/pyload/plugins/base/notifier.py:52
 msgid "pyLoad updated"
-msgstr ""
+msgstr "pyLoad wurde aktualisiert"
 
 #: src/pyload/plugins/base/notifier.py:59
+#, fuzzy
+#| msgid "Restart pyLoad"
 msgid "Restarting pyLoad"
-msgstr ""
+msgstr "pyLoad neustarten"
 
 #: src/pyload/plugins/base/notifier.py:61
+#, fuzzy
+#| msgid "Quit pyLoad"
 msgid "Exiting pyLoad"
-msgstr ""
+msgstr "pyLoad beenden"
 
 #: src/pyload/plugins/base/notifier.py:67
 #: src/pyload/plugins/downloaders/ExtabitCom.py:77
@@ -1351,7 +1371,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:14
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:14
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: src/pyload/plugins/base/notifier.py:67
 msgid "New request waiting user input"
@@ -1367,8 +1387,10 @@ msgid "Current IP: {}"
 msgstr ""
 
 #: src/pyload/plugins/base/notifier.py:79
+#, fuzzy
+#| msgid "Reconnect:"
 msgid "Reconnection failed"
-msgstr ""
+msgstr "Erneut verbinden:"
 
 #: src/pyload/plugins/base/notifier.py:85
 msgid "Package finished"
@@ -1380,11 +1402,13 @@ msgstr ""
 
 #: src/pyload/plugins/base/notifier.py:97
 msgid "Download finished"
-msgstr ""
+msgstr "Download beendet"
 
 #: src/pyload/plugins/base/notifier.py:103
+#, fuzzy
+#| msgid "Download Folder:"
 msgid "Download failed"
-msgstr ""
+msgstr "Downloadordner:"
 
 #: src/pyload/plugins/base/notifier.py:106
 msgid "All downloads processed"
@@ -1438,8 +1462,10 @@ msgid "Direct link detected"
 msgstr ""
 
 #: src/pyload/plugins/base/simple_decrypter.py:215
+#, fuzzy
+#| msgid "Download directory not found."
 msgid "Direct link not found"
-msgstr ""
+msgstr "Downloadverzeichnis nicht gefunden."
 
 #: src/pyload/plugins/base/simple_decrypter.py:229
 msgid "Free decrypting not implemented"
@@ -1474,8 +1500,10 @@ msgstr ""
 #: src/pyload/plugins/base/simple_decrypter.py:287
 #: src/pyload/plugins/base/simple_downloader.py:355
 #: src/pyload/plugins/base/xfs_account.py:204
+#, fuzzy
+#| msgid "No Captchas to read."
 msgid "No data to check"
-msgstr ""
+msgstr "Keine Captchas verfügbar."
 
 #: src/pyload/plugins/base/simple_decrypter.py:291
 #: src/pyload/plugins/base/simple_decrypter.py:335
@@ -1498,8 +1526,10 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:391
 #: src/pyload/plugins/base/simple_downloader.py:423
 #: src/pyload/plugins/downloaders/DatafileCom.py:93
+#, fuzzy
+#| msgid "Download Folder:"
 msgid "Download limit exceeded"
-msgstr ""
+msgstr "Downloadordner:"
 
 #: src/pyload/plugins/base/simple_decrypter.py:342
 #: src/pyload/plugins/base/simple_downloader.py:434
@@ -1526,8 +1556,10 @@ msgid "Direct download link detected"
 msgstr ""
 
 #: src/pyload/plugins/base/simple_downloader.py:290
+#, fuzzy
+#| msgid "Download directory not found."
 msgid "Direct download link not found"
-msgstr ""
+msgstr "Downloadverzeichnis nicht gefunden."
 
 #: src/pyload/plugins/base/simple_downloader.py:304
 msgid "Processing as premium download..."
@@ -1541,8 +1573,10 @@ msgstr ""
 #: src/pyload/plugins/downloaders/PornovkaCz.py:41
 #: src/pyload/plugins/downloaders/StreamCz.py:92
 #: src/pyload/plugins/downloaders/YesPornPleaseCom.py:43
+#, fuzzy
+#| msgid "Download Folder:"
 msgid "Downloading file..."
-msgstr ""
+msgstr "Downloadordner:"
 
 #: src/pyload/plugins/base/simple_downloader.py:322
 msgid "Checking file (with built-in rules)..."
@@ -1567,24 +1601,30 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:370
 #: src/pyload/plugins/base/simple_downloader.py:440
 #: src/pyload/plugins/downloaders/FilefactoryCom.py:62
+#, fuzzy
+#| msgid "Name of subfolder for these downloads."
 msgid "File too large for free download"
-msgstr ""
+msgstr "Name des Unterordners für diese Downloads."
 
 #: src/pyload/plugins/base/simple_downloader.py:491
 msgid "Free download not implemented"
 msgstr ""
 
 #: src/pyload/plugins/base/simple_downloader.py:495
+#, fuzzy
+#| msgid "Download directory not found."
 msgid "Free download link not found"
-msgstr ""
+msgstr "Downloadverzeichnis nicht gefunden."
 
 #: src/pyload/plugins/base/simple_downloader.py:501
 msgid "Premium download not implemented"
 msgstr ""
 
 #: src/pyload/plugins/base/simple_downloader.py:506
+#, fuzzy
+#| msgid "Download directory not found."
 msgid "Premium download link not found"
-msgstr ""
+msgstr "Downloadverzeichnis nicht gefunden."
 
 #: src/pyload/plugins/base/xfs_account.py:62
 #: src/pyload/plugins/base/xfs_decrypter.py:55
@@ -1621,7 +1661,7 @@ msgstr ""
 #: src/pyload/plugins/decrypters/LinkdecrypterCom.py:77
 #: src/pyload/plugins/downloaders/CloudzillaTo.py:37
 msgid "Missing password"
-msgstr ""
+msgstr "Passwort fehlt"
 
 #: src/pyload/plugins/containers/CCF.py:56
 #: src/pyload/plugins/containers/DLC.py:127
@@ -1645,7 +1685,7 @@ msgstr ""
 #: src/pyload/plugins/decrypters/DataHuFolder.py:39
 #: src/pyload/plugins/decrypters/SafelinkingNet.py:107
 msgid "Password required"
-msgstr ""
+msgstr "Passwort notwendig"
 
 #: src/pyload/plugins/decrypters/CryptCat.py:60
 #: src/pyload/plugins/decrypters/DataHuFolder.py:48
@@ -1658,7 +1698,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/UlozTo.py:236
 #: src/pyload/plugins/downloaders/VimeoCom.py:70
 msgid "Wrong password"
-msgstr ""
+msgstr "Falsches Passwort"
 
 #: src/pyload/plugins/decrypters/CzshareComFolder.py:37
 #: src/pyload/plugins/decrypters/FileserveComFolder.py:39
@@ -1669,8 +1709,10 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/DailymotionComFolder.py:103
 #: src/pyload/plugins/decrypters/YoutubeComFolder.py:150
+#, fuzzy
+#| msgid "not available"
 msgid "No playlist available"
-msgstr ""
+msgstr "nicht verfügbar"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:134
 msgid "Found {} mirrors"
@@ -1690,7 +1732,7 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:191
 msgid "No captcha found"
-msgstr ""
+msgstr "Kein Captcha gefunden"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:321
 #: src/pyload/plugins/downloaders/Keep2ShareCc.py:131
@@ -1712,7 +1754,7 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/ImgurCom.py:68
 msgid "{}_{}"
-msgstr ""
+msgstr "{}_{}"
 
 #: src/pyload/plugins/decrypters/ImgurCom.py:158
 msgid "Processing of additional links unsuccessful - {}: {}"
@@ -1724,11 +1766,11 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/LinkdecrypterCom.py:59
 msgid "Captcha protected link"
-msgstr ""
+msgstr "Captcha geschützer Link"
 
 #: src/pyload/plugins/decrypters/LinkdecrypterCom.py:72
 msgid "Password protected link"
-msgstr ""
+msgstr "Password geschützter Link"
 
 #: src/pyload/plugins/decrypters/LixIn.py:39
 msgid "Unable to identify file ID"
@@ -1740,7 +1782,7 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/LixIn.py:60
 msgid "No captcha solved"
-msgstr ""
+msgstr "Keine Captcha gelöst "
 
 #: src/pyload/plugins/decrypters/LixIn.py:67
 msgid "Unable to find destination url"
@@ -1754,7 +1796,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/MegadyskPl.py:97
 #: src/pyload/plugins/downloaders/YadiSk.py:76
 msgid "Missing JSON data"
-msgstr ""
+msgstr "Fehlende JSON Data"
 
 #: src/pyload/plugins/decrypters/MultiUpOrg.py:74
 msgid "Unsupported reCAPTCHA, retrying"
@@ -1766,19 +1808,19 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/SafelinkingNet.py:123
 msgid "Invalid JSON response"
-msgstr ""
+msgstr "Ungültige JSON Antwort"
 
 #: src/pyload/plugins/decrypters/SafelinkingNet.py:128
 msgid "Wrong password: \"{}\""
-msgstr ""
+msgstr "Falsches Passwort: \"{}\""
 
 #: src/pyload/plugins/decrypters/SafelinkingNet.py:137
 msgid "Site error: {}"
-msgstr ""
+msgstr "Seitenfehler: {}"
 
 #: src/pyload/plugins/decrypters/SafelinkingNet.py:146
 msgid "Unexpected JSON response"
-msgstr ""
+msgstr "Unerwartete JSON Antwort"
 
 #: src/pyload/plugins/decrypters/SexuriaCom.py:114
 #: src/pyload/plugins/decrypters/SexuriaCom.py:122
@@ -1795,23 +1837,23 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/UlozToFolder.py:51
 msgid "Limit of 99 pages reached, aborting"
-msgstr ""
+msgstr "Maximale Anzahl (99) an Seiten erreicht, Abbruch"
 
 #: src/pyload/plugins/decrypters/XupPl.py:34
 msgid "Unable to find link"
-msgstr ""
+msgstr "Link konnte nicht gefunden werden"
 
 #: src/pyload/plugins/downloaders/BasketbuildCom.py:47
 msgid "Hop #1 not found"
-msgstr ""
+msgstr "Hop #1 nicht gefunden"
 
 #: src/pyload/plugins/downloaders/BasketbuildCom.py:64
 msgid "DL-Link not found"
-msgstr ""
+msgstr "DL Link nicht gefunden"
 
 #: src/pyload/plugins/downloaders/BezvadataCz.py:41
 msgid "Page 1 URL not found"
-msgstr ""
+msgstr "Seite 1 Url nicht gefunden"
 
 #: src/pyload/plugins/downloaders/BezvadataCz.py:50
 msgid "FreeForm"
@@ -1819,7 +1861,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/BezvadataCz.py:65
 msgid "Page 2 URL not found"
-msgstr ""
+msgstr "Seite 2 Url nicht gefunden"
 
 #: src/pyload/plugins/downloaders/BezvadataCz.py:82
 #: src/pyload/plugins/downloaders/CzshareCom.py:117
@@ -1840,7 +1882,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/CrockoCom.py:55
 msgid "FORM_PATTERN not found"
-msgstr ""
+msgstr "FORM_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:64
 msgid "Premium download for {} KiB of Credit"
@@ -1860,15 +1902,15 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:129
 msgid "Form"
-msgstr ""
+msgstr "Formular"
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:155
 msgid "Download URL not found"
-msgstr ""
+msgstr "Download Url nicht gefunden"
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:173
 msgid "File not available - try later"
-msgstr ""
+msgstr "Datei nicht verfügbar - versuche es später erneut"
 
 #: src/pyload/plugins/downloaders/DailymotionCom.py:117
 msgid "Download video quality {}x{}"
@@ -1887,7 +1929,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/KatfileCom.py:75
 #: src/pyload/plugins/downloaders/UploadheroCom.py:54
 msgid "Captcha not found"
-msgstr ""
+msgstr "Captcha nicht gefunden"
 
 #: src/pyload/plugins/downloaders/DateiTo.py:56
 msgid "Data pattern not found"
@@ -1905,7 +1947,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/EdiskCz.py:46
 msgid "ACTION_PATTERN not found"
-msgstr ""
+msgstr "ACTION_PATTERN nicht gefudnen"
 
 #: src/pyload/plugins/downloaders/EdiskCz.py:59
 #: src/pyload/plugins/downloaders/Ftp.py:95
@@ -1915,7 +1957,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/EuroshareEu.py:59
 #: src/pyload/plugins/downloaders/UpleaCom.py:89
 msgid "LINK_PATTERN not found"
-msgstr ""
+msgstr "LINK_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/downloaders/ExtabitCom.py:41
 msgid "Only premium users can download this file"
@@ -1927,7 +1969,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/ExtabitCom.py:80
 msgid "Bad JSON response"
-msgstr ""
+msgstr "Fehlerhafte JSON Antwort"
 
 #: src/pyload/plugins/downloaders/ExtabitCom.py:88
 #: src/pyload/plugins/downloaders/FastshareCz.py:63
@@ -1935,23 +1977,23 @@ msgstr ""
 #: src/pyload/plugins/downloaders/UloziskoSk.py:53
 #: src/pyload/plugins/downloaders/YibaishiwuCom.py:37
 msgid "LINK_FREE_PATTERN not found"
-msgstr ""
+msgstr "LINK_FREE_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FastshareCz.py:50
 msgid "No free slots"
-msgstr ""
+msgstr "Keine Free Slots verfügbar"
 
 #: src/pyload/plugins/downloaders/FastshareCz.py:54
 msgid "Not enough traffic left"
-msgstr ""
+msgstr "Nicht genug verbleibender Traffic"
 
 #: src/pyload/plugins/downloaders/FastshareCz.py:80
 msgid "Paralell download"
-msgstr ""
+msgstr "Parallele Downloads"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:62
 msgid "Another download already run"
-msgstr ""
+msgstr "Ein anderer Download läuft gerade"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:70
 msgid "Only connections from Polish IP are allowed"
@@ -1959,7 +2001,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:73
 msgid "No free download slots available"
-msgstr ""
+msgstr "Keine Free download Slots verfügbar"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:78
 msgid "Still no free download slots available"
@@ -1967,12 +2009,14 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:83
 msgid "Try again later"
-msgstr ""
+msgstr "Versuche es später erneut"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:90
 #: src/pyload/plugins/downloaders/KingfilesNet.py:83
+#, fuzzy
+#| msgid "Download directory not found."
 msgid "Download url not found"
-msgstr ""
+msgstr "Downloadverzeichnis nicht gefunden."
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:106
 #: src/pyload/plugins/downloaders/TurbobitNet.py:92
@@ -2005,11 +2049,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FilepostCom.py:40
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: src/pyload/plugins/downloaders/FilepostCom.py:45
 msgid "Captcha key"
-msgstr ""
+msgstr "Captcha Schhlüssel"
 
 #: src/pyload/plugins/downloaders/FilepostCom.py:73
 #: src/pyload/plugins/downloaders/UlozTo.py:199
@@ -2020,26 +2064,30 @@ msgstr ""
 #: src/pyload/plugins/downloaders/MediafireCom.py:84
 #: src/pyload/plugins/downloaders/UlozTo.py:209
 msgid "No password found"
-msgstr ""
+msgstr "Kein Password gefunden"
 
 #: src/pyload/plugins/downloaders/FilepostCom.py:107
 msgid "JSON {} 1"
-msgstr ""
+msgstr "JSON {} 2"
 
 #: src/pyload/plugins/downloaders/FilepostCom.py:134
 msgid "JSON {} 2"
-msgstr ""
+msgstr "JSON {} 2"
 
 #: src/pyload/plugins/downloaders/FilerNet.py:48
 msgid "Unable to detect hash"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/FilerNet.py:66
-msgid "There was HTML code in the downloaded file ({})...bad captcha? The download will be restarted"
+msgid ""
+"There was HTML code in the downloaded file ({})...bad captcha? The download "
+"will be restarted"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/FilesMailRu.py:95
-msgid "There was HTML Code in the Downloaded File ({})...redirect error? The Download will be restarted"
+msgid ""
+"There was HTML Code in the Downloaded File ({})...redirect error? The "
+"Download will be restarted"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:100
@@ -2048,7 +2096,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:101
 msgid "parallelDownload"
-msgstr ""
+msgstr "Parallele Downloads"
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:104
 msgid "Download check returned: {}"
@@ -2056,27 +2104,29 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:114
 msgid "Unknown server response"
-msgstr ""
+msgstr "Unbekannte Serverantwort"
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:120
 msgid "Couldn't retrieve download url"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:142
+#, fuzzy
+#| msgid "Download directory not found."
 msgid "Download limited reached for today"
-msgstr ""
+msgstr "Downloadverzeichnis nicht gefunden."
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:154
 msgid "Failed getting wait time"
-msgstr ""
+msgstr "Fehler bei Suche nach Wartezeit"
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:159
 msgid "Cannot get wait time"
-msgstr ""
+msgstr "Wartezeit nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:229
 msgid "Not logged in"
-msgstr ""
+msgstr "Nicht eingeloggt"
 
 #: src/pyload/plugins/downloaders/FiregetCom.py:91
 #: src/pyload/plugins/downloaders/UlozTo.py:230
@@ -2098,7 +2148,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FreakshareCom.py:75
 msgid "No Download server"
-msgstr ""
+msgstr "Kein Download server"
 
 #: src/pyload/plugins/downloaders/FshareVn.py:54
 #: src/pyload/plugins/downloaders/OneFichierCom.py:130
@@ -2107,8 +2157,10 @@ msgid "Download is password protected"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/FshareVn.py:68
+#, fuzzy
+#| msgid "Download directory not found."
 msgid "Free Download form not found"
-msgstr ""
+msgstr "Downloadverzeichnis nicht gefunden."
 
 #: src/pyload/plugins/downloaders/FshareVn.py:76
 msgid "Expected JSON data"
@@ -2116,16 +2168,16 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FshareVn.py:83
 msgid "Unexpected response"
-msgstr ""
+msgstr "Unerwartete Antwort"
 
 #: src/pyload/plugins/downloaders/Ftp.py:62
 #: src/pyload/plugins/downloaders/Http.py:63
 msgid "Authorization required"
-msgstr ""
+msgstr "Anmeldung erforderlich"
 
 #: src/pyload/plugins/downloaders/Ftp.py:64
 msgid "Error {}: {}"
-msgstr ""
+msgstr "Fehler {}: {}"
 
 #: src/pyload/plugins/downloaders/HearthisAt.py:29
 msgid "Track ID not found"
@@ -2168,19 +2220,19 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/HostujeNet.py:44
 msgid "Script not found"
-msgstr ""
+msgstr "Script nicht gefunden"
 
 #: src/pyload/plugins/downloaders/HostujeNet.py:50
 msgid "Form not found"
-msgstr ""
+msgstr "Formular nicht gefunden"
 
 #: src/pyload/plugins/downloaders/KatfileCom.py:53
 msgid "Form 1 not found"
-msgstr ""
+msgstr "Formular 1 nicht gefunden"
 
 #: src/pyload/plugins/downloaders/KatfileCom.py:61
 msgid "Form 2 not found"
-msgstr ""
+msgstr "Formular 2 nicht gefunden"
 
 #: src/pyload/plugins/downloaders/Keep2ShareCc.py:79
 #: src/pyload/plugins/downloaders/Keep2ShareCc.py:156
@@ -2189,11 +2241,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/Keep2ShareCc.py:94
 msgid "Request captcha API failed"
-msgstr ""
+msgstr "Anfrage Captcha API fehlgeschlagen"
 
 #: src/pyload/plugins/downloaders/KingfilesNet.py:62
 msgid "Random key not found"
-msgstr ""
+msgstr "Zufälliger Schlüssel nicht gefunden"
 
 #: src/pyload/plugins/downloaders/LinksnappyCom.py:49
 msgid "Error converting the link"
@@ -2205,7 +2257,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/LuckyShareNet.py:44
 msgid "Hash expired"
-msgstr ""
+msgstr "Ist abgelaufen"
 
 #: src/pyload/plugins/downloaders/MediafireCom.py:87
 msgid "Password protected link, trying: {}"
@@ -2213,12 +2265,12 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:253
 msgid "Server busy"
-msgstr ""
+msgstr "Server ist ausgelastet"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:278
 #: src/pyload/plugins/downloaders/MegaCoNz.py:282
 msgid "Error code: [{}]"
-msgstr ""
+msgstr "Fehlercode: [{}]"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:362
 msgid "File decrypted"
@@ -2234,7 +2286,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:381
 msgid "Checksums do not match"
-msgstr ""
+msgstr "Checksummen stimmen nicht überein."
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:430
 msgid "File exists."
@@ -2247,15 +2299,15 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:444
 msgid "Key: {}"
-msgstr ""
+msgstr "Schlüssel: {}"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:445
 msgid "Type: {}"
-msgstr ""
+msgstr "Typ: {}"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:446
 msgid "Owner: {}"
-msgstr ""
+msgstr "Besitzer: {}"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:451
 #: src/pyload/plugins/downloaders/MegaCoNz.py:452
@@ -2279,7 +2331,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/MegaRapidCz.py:54
 msgid "User login failed"
-msgstr ""
+msgstr "Benutzer Login fehlgeschlagen"
 
 #: src/pyload/plugins/downloaders/MegaRapidCz.py:57
 #: src/pyload/plugins/downloaders/QuickshareCz.py:56
@@ -2309,7 +2361,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/MegasharesCom.py:116
 msgid "Download passport: {}"
-msgstr ""
+msgstr "Download Pass: {}"
 
 #: src/pyload/plugins/downloaders/MegasharesCom.py:121
 msgid "Data left: {} {} ({} MiB needed)"
@@ -2334,11 +2386,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/NitrobitNet.py:59
 msgid "Account valid until {}"
-msgstr ""
+msgstr "Account gültig bis {}"
 
 #: src/pyload/plugins/downloaders/NitrobitNet.py:68
 msgid "Daily traffic left {}"
-msgstr ""
+msgstr "Verbleibender täglicher Traffic {}"
 
 #: src/pyload/plugins/downloaders/NoPremiumPl.py:85
 #: src/pyload/plugins/downloaders/RapideoPl.py:93
@@ -2360,7 +2412,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/OboomCom.py:109
 msgid "Service unavailable"
-msgstr ""
+msgstr "Service nicht verfügbar"
 
 #: src/pyload/plugins/downloaders/OboomCom.py:128
 msgid "Could not retrieve file info. Error code {}: {}"
@@ -2379,7 +2431,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/UlozTo.py:102
 #: src/pyload/plugins/downloaders/UploadgigCom.py:41
 msgid "Free download form not found"
-msgstr ""
+msgstr "Free Download Formular nicht gefunden"
 
 #: src/pyload/plugins/downloaders/OnlineTvRecorder.py:41
 msgid "Waiting in download queue"
@@ -2409,7 +2461,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/QuickshareCz.py:50
 msgid "User not logged in"
-msgstr ""
+msgstr "Benutzer nicht eingeloggt"
 
 #: src/pyload/plugins/downloaders/QuickshareCz.py:65
 msgid "File not found or plugin defect"
@@ -2417,7 +2469,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/QuickshareCz.py:92
 msgid "Error {}"
-msgstr ""
+msgstr "Fehler {}"
 
 #: src/pyload/plugins/downloaders/RPNetBiz.py:82
 msgid "Waited for about 15 minutes for download to finish but failed"
@@ -2428,11 +2480,15 @@ msgid "Something went wrong, not supposed to enter here"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/RapideoPl.py:99
-msgid "Download from {} is possible only using Rapideo.pl website                     directly"
+msgid ""
+"Download from {} is possible only using Rapideo.pl "
+"website                     directly"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/RapidgatorNet.py:128
-msgid "You can't download more than one file within a certain time period in free mode"
+msgid ""
+"You can't download more than one file within a certain time period in free "
+"mode"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/RapiduNet.py:64
@@ -2441,7 +2497,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/RapiduNet.py:67
 msgid "Try tomorrow again"
-msgstr ""
+msgstr "Versuche es erneut morgen"
 
 #: src/pyload/plugins/downloaders/RealdebridComTorrent.py:45
 #: src/pyload/plugins/downloaders/RealdebridComTorrent.py:106
@@ -2460,11 +2516,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/RealdebridComTorrent.py:86
 msgid "File does not exists"
-msgstr ""
+msgstr "Datei ist nicht vorhanden"
 
 #: src/pyload/plugins/downloaders/RealdebridComTorrent.py:116
 msgid "Illegal URL"
-msgstr ""
+msgstr "Illegale Url"
 
 #: src/pyload/plugins/downloaders/RealdebridComTorrent.py:218
 #: src/pyload/plugins/downloaders/RealdebridComTorrent.py:222
@@ -2481,11 +2537,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/RemixshareCom.py:55
 msgid "File url"
-msgstr ""
+msgstr "Datei Url"
 
 #: src/pyload/plugins/downloaders/RemixshareCom.py:59
 msgid "File token"
-msgstr ""
+msgstr "Datei Token"
 
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:49
 msgid "Reached daily limit for this host"
@@ -2493,7 +2549,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/SimplydebridCom.py:58
 msgid "Bad file downloaded"
-msgstr ""
+msgstr "Ungültige Datei heruntergeladen"
 
 #: src/pyload/plugins/downloaders/SmoozedCom.py:77
 msgid "Unable to initialize download"
@@ -2517,7 +2573,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/SoundcloudCom.py:38
 msgid "Could not find song id"
-msgstr ""
+msgstr "Kann Song Id nicht finden"
 
 #: src/pyload/plugins/downloaders/TurbobitNet.py:64
 msgid "minLimit pattern not found"
@@ -2525,7 +2581,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/TurbobitNet.py:99
 msgid "Unknown captcha type"
-msgstr ""
+msgstr "Unbekannter Captcha Typ"
 
 #: src/pyload/plugins/downloaders/TwojlimitPl.py:81
 msgid "Download from {} is possible only using TwojLimit.pl website directly"
@@ -2537,7 +2593,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/UlozTo.py:184
 msgid "CAPTCHA form changed"
-msgstr ""
+msgstr "CAPTCHA Formular ist geändert"
 
 #: src/pyload/plugins/downloaders/UlozTo.py:239
 msgid "Server error, try downloading later"
@@ -2549,11 +2605,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/UlozTo.py:256
 msgid "Something went wrong"
-msgstr ""
+msgstr "Etwas ist schief gegangen"
 
 #: src/pyload/plugins/downloaders/UloziskoSk.py:58
 msgid "ID_PATTERN not found"
-msgstr ""
+msgstr "ID_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/downloaders/UloziskoSk.py:65
 msgid "CAPTCHA_PATTERN not found"
@@ -2587,7 +2643,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/VeohCom.py:53
 #: src/pyload/plugins/downloaders/VimeoCom.py:107
 msgid "No video found!"
-msgstr ""
+msgstr "Kein Video gefunden!"
 
 #: src/pyload/plugins/downloaders/VimeoCom.py:61
 msgid "Video is password protected"
@@ -2611,7 +2667,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/XDCC.py:98
 msgid "Connecting to: {}:{}"
-msgstr ""
+msgstr "Verbinde mit: {}:{}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:124
 msgid "Successfully connected to {}:{}"
@@ -2631,15 +2687,15 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/XDCC.py:174
 msgid "[{}] CTCP VERSION"
-msgstr ""
+msgstr "[{}] CTCP VERSION"
 
 #: src/pyload/plugins/downloaders/XDCC.py:184
 msgid "[{}] CTCP TIME"
-msgstr ""
+msgstr "[{}] CTCP TIME"
 
 #: src/pyload/plugins/downloaders/XDCC.py:194
 msgid "[{}] Ping? Pong!"
-msgstr ""
+msgstr "[{}] Ping? Pong!"
 
 #: src/pyload/plugins/downloaders/XDCC.py:217
 msgid "Joining channel {}"
@@ -2719,7 +2775,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/XDCC.py:476
 msgid "Requesting pack #{} info"
-msgstr ""
+msgstr "Frage Info zu Paket #{} an"
 
 #: src/pyload/plugins/downloaders/XDCC.py:527
 msgid "XDCC Bot '{}' did not answer"
@@ -2731,11 +2787,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/XDCC.py:645
 msgid "Cannot join channel"
-msgstr ""
+msgstr "Kann Kanal nicht beitreten"
 
 #: src/pyload/plugins/downloaders/XDCC.py:648
 msgid "Bot is offline"
-msgstr ""
+msgstr "Bot ist offline"
 
 #: src/pyload/plugins/downloaders/XDCC.py:676
 #: src/pyload/plugins/downloaders/XDCC.py:679
@@ -2760,40 +2816,40 @@ msgstr ""
 #: src/pyload/plugins/downloaders/XDCC.py:763
 #: src/pyload/plugins/downloaders/XDCC.py:764
 msgid "Invalid channel"
-msgstr ""
+msgstr "Ungültiger Kanal"
 
 #: src/pyload/plugins/downloaders/XDCC.py:767
 #: src/pyload/plugins/downloaders/XDCC.py:768
 msgid "Invalid Pack Number"
-msgstr ""
+msgstr "Ungültige Paketnummer"
 
 #: src/pyload/plugins/downloaders/XDCC.py:810
 msgid "DOWNLOAD XDCC '{}' from {}:{}"
-msgstr ""
+msgstr "DOWNLOAD XDCC '{}' von {}:{}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:826
 msgid "{name} saved as {newname}"
-msgstr ""
+msgstr "{name} als {newname} gespeichert"
 
 #: src/pyload/plugins/downloaders/XHamsterCom.py:67
 msgid "video data not found"
-msgstr ""
+msgstr "Video Daten nicht gefunden"
 
 #: src/pyload/plugins/downloaders/XHamsterCom.py:73
 msgid "Could not find video model!"
-msgstr ""
+msgstr "Video Model konnte nicht gefunden werden!"
 
 #: src/pyload/plugins/downloaders/XHamsterCom.py:77
 msgid "Could not find sources!"
-msgstr ""
+msgstr "Quellen konnten nicht gefunden werden!"
 
 #: src/pyload/plugins/downloaders/XHamsterCom.py:81
 msgid "Could not find mp4 sources!"
-msgstr ""
+msgstr "mp4 Quellen konnten nicht gefunden werden!"
 
 #: src/pyload/plugins/downloaders/YesPornPleaseCom.py:33
 msgid "Iframe url not found"
-msgstr ""
+msgstr "IFrame Url nicht gefunden"
 
 #: src/pyload/plugins/downloaders/YibaishiwuCom.py:65
 msgid "No working link found"
@@ -2839,7 +2895,7 @@ msgstr ""
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1100
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1130
 msgid "ffmpeg error"
-msgstr ""
+msgstr "ffmpeg Error"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1185
 msgid "Player config pattern not found"
@@ -2851,28 +2907,28 @@ msgstr ""
 
 #: src/pyload/webui/webserver_thread.py:70
 msgid "Starting webserver: {scheme}://{host}:{port}"
-msgstr "Starte Webserver: {scheme}://{host}:{port}"
+msgstr ""
 
 #: src/pyload/webui/app/blueprints/json_blueprint.py:44
 msgid "waiting {}"
-msgstr ""
+msgstr "Warte {}"
 
 #: src/pyload/webui/app/templates/admin.html:8
 #: src/pyload/webui/app/templates/admin.html:9
 msgid "Profile Permissions"
-msgstr ""
+msgstr "Benutzer Berechtigungen"
 
 #: src/pyload/webui/app/templates/admin.html:13
 #: src/pyload/webui/app/themes/modern/templates/settings.html:17
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:17
 msgid "Quit pyLoad"
-msgstr ""
+msgstr "pyLoad beenden"
 
 #: src/pyload/webui/app/templates/admin.html:14
 #: src/pyload/webui/app/themes/modern/templates/settings.html:18
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:18
 msgid "Restart pyLoad"
-msgstr ""
+msgstr "pyLoad neustarten"
 
 #: src/pyload/webui/app/templates/admin.html:18
 #: src/pyload/webui/app/templates/login.html:30
@@ -2881,7 +2937,7 @@ msgstr ""
 
 #: src/pyload/webui/app/templates/admin.html:19
 msgid "Important: Admin user have always all permissions!"
-msgstr ""
+msgstr "Wichtig: Admin User haben immer alle Berechtigungen!"
 
 #: src/pyload/webui/app/templates/admin.html:25
 #: src/pyload/webui/app/templates/dashboard.html:67
@@ -2899,7 +2955,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:89
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:10
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: src/pyload/webui/app/templates/admin.html:28
 #: src/pyload/webui/app/templates/admin.html:67
@@ -2908,25 +2964,25 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:30
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:67
 msgid "Change Password"
-msgstr ""
+msgstr "Passwort ändern"
 
 #: src/pyload/webui/app/templates/admin.html:31
 #: src/pyload/webui/app/themes/modern/templates/admin.html:31
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:31
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 #: src/pyload/webui/app/templates/admin.html:34
 #: src/pyload/webui/app/themes/modern/templates/admin.html:32
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:32
 msgid "Permissions"
-msgstr ""
+msgstr "Berechtigungen"
 
 #: src/pyload/webui/app/templates/admin.html:41
 #: src/pyload/webui/app/themes/modern/templates/admin.html:39
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:39
 msgid "change"
-msgstr ""
+msgstr "ändern"
 
 #: src/pyload/webui/app/templates/admin.html:61
 #: src/pyload/webui/app/templates/admin.html:91
@@ -2942,82 +2998,82 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:94
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:140
 msgid "Submit"
-msgstr ""
+msgstr "Übernehmen"
 
 #: src/pyload/webui/app/templates/admin.html:69
 #: src/pyload/webui/app/themes/modern/templates/admin.html:70
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:70
 msgid "Enter your current and desired Password."
-msgstr ""
+msgstr "Gib dein momentanes und dein neues Passwort ein."
 
 #: src/pyload/webui/app/templates/admin.html:70
 #: src/pyload/webui/app/themes/modern/templates/admin.html:72
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:72
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 #: src/pyload/webui/app/templates/admin.html:71
 #: src/pyload/webui/app/templates/settings.html:177
 #: src/pyload/webui/app/themes/modern/templates/admin.html:74
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:74
 msgid "Your username."
-msgstr ""
+msgstr "Dein Benutzername."
 
 #: src/pyload/webui/app/templates/admin.html:75
 #: src/pyload/webui/app/themes/modern/templates/admin.html:77
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:77
 msgid "Current password"
-msgstr ""
+msgstr "Momentanes Passwort"
 
 #: src/pyload/webui/app/templates/admin.html:76
 #: src/pyload/webui/app/templates/settings.html:182
 #: src/pyload/webui/app/themes/modern/templates/admin.html:79
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:79
 msgid "The password for this account."
-msgstr ""
+msgstr "Das Password für diesen Account."
 
 #: src/pyload/webui/app/templates/admin.html:80
 #: src/pyload/webui/app/themes/modern/templates/admin.html:82
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:82
 msgid "New password"
-msgstr ""
+msgstr "Neues Passwort"
 
 #: src/pyload/webui/app/templates/admin.html:81
 #: src/pyload/webui/app/themes/modern/templates/admin.html:84
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:84
 msgid "The new password."
-msgstr ""
+msgstr "Das neue Passwort."
 
 #: src/pyload/webui/app/templates/admin.html:85
 #: src/pyload/webui/app/themes/modern/templates/admin.html:87
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:87
 msgid "New password (repeat)"
-msgstr ""
+msgstr "Neues Passwort (wiederholen)"
 
 #: src/pyload/webui/app/templates/admin.html:86
 #: src/pyload/webui/app/themes/modern/templates/admin.html:89
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:89
 msgid "Please repeat the new password."
-msgstr ""
+msgstr "Bitte wiederhole das neue Passwort."
 
 #: src/pyload/webui/app/templates/admin.html:92
 #: src/pyload/webui/app/templates/packages.html:90
 #: src/pyload/webui/app/templates/settings.html:196
 #: src/pyload/webui/app/templates/window.html:70
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: src/pyload/webui/app/templates/base.html:37
 #: src/pyload/webui/app/themes/modern/templates/base.html:89
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:89
 msgid "pyLoad Update available!"
-msgstr ""
+msgstr "pyLoad Update verfügbar!"
 
 #: src/pyload/webui/app/templates/base.html:43
 #: src/pyload/webui/app/themes/modern/templates/base.html:94
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:94
 msgid "Plugins updated, please restart!"
-msgstr ""
+msgstr "Plugins aktualisiert, bitte pyLoad neustarten!"
 
 #: src/pyload/webui/app/templates/base.html:49
 #: src/pyload/webui/app/themes/modern/templates/base.html:75
@@ -3025,17 +3081,17 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:75
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:185
 msgid "Captcha waiting"
-msgstr ""
+msgstr "Captchas verfügbar"
 
 #: src/pyload/webui/app/templates/base.html:54
 #: src/pyload/webui/app/themes/modern/templates/base.html:150
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:150
 msgid "Logout"
-msgstr ""
+msgstr "Abmelden"
 
 #: src/pyload/webui/app/templates/base.html:56
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: src/pyload/webui/app/templates/base.html:58
 #: src/pyload/webui/app/templates/dashboard.html:68
@@ -3045,11 +3101,11 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/dashboard.html:21
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:91
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/pyload/webui/app/templates/base.html:62
 msgid "Please Login!"
-msgstr ""
+msgstr "Bitte anmelden!"
 
 #: src/pyload/webui/app/templates/base.html:80
 #: src/pyload/webui/app/templates/dashboard.html:14
@@ -3060,7 +3116,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:118
 #: src/pyload/webui/app/themes/pyplex/templates/dashboard.html:14
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: src/pyload/webui/app/templates/base.html:83
 #: src/pyload/webui/app/templates/dashboard.html:23
@@ -3076,7 +3132,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:44
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:40
 msgid "Queue"
-msgstr ""
+msgstr "Warteschlange"
 
 #: src/pyload/webui/app/templates/base.html:86
 #: src/pyload/webui/app/templates/dashboard.html:32
@@ -3091,7 +3147,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:44
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:43
 msgid "Packages"
-msgstr ""
+msgstr "Pakete"
 
 #: src/pyload/webui/app/templates/base.html:89
 #: src/pyload/webui/app/templates/dashboard.html:41
@@ -3102,14 +3158,14 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:127
 #: src/pyload/webui/app/themes/pyplex/templates/files.html:3
 msgid "Files"
-msgstr ""
+msgstr "Dateien"
 
 #: src/pyload/webui/app/templates/base.html:92
 #: src/pyload/webui/app/templates/dashboard.html:45
 #: src/pyload/webui/app/templates/filemanager.html:7
 #: src/pyload/webui/app/templates/filemanager.html:10
 msgid "File Manager"
-msgstr ""
+msgstr "Dateimanager"
 
 #: src/pyload/webui/app/templates/base.html:95
 #: src/pyload/webui/app/templates/dashboard.html:52
@@ -3121,7 +3177,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:133
 #: src/pyload/webui/app/themes/pyplex/templates/logs.html:3
 msgid "Logs"
-msgstr ""
+msgstr "Protokoll"
 
 #: src/pyload/webui/app/templates/base.html:98
 #: src/pyload/webui/app/templates/dashboard.html:60
@@ -3134,16 +3190,16 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:136
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:3
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: src/pyload/webui/app/templates/base.html:110
 #: src/pyload/webui/app/templates/logs.html:12
 msgid "Start"
-msgstr ""
+msgstr "Starten"
 
 #: src/pyload/webui/app/templates/base.html:111
 msgid "Stop"
-msgstr ""
+msgstr "Stoppen"
 
 #: src/pyload/webui/app/templates/base.html:112
 #: src/pyload/webui/app/themes/modern/templates/admin.html:92
@@ -3161,7 +3217,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:239
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:47
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: src/pyload/webui/app/templates/base.html:113
 #: src/pyload/webui/app/templates/settings.html:166
@@ -3169,13 +3225,13 @@ msgstr ""
 #: src/pyload/webui/app/themes/modern/templates/settings.html:174
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:174
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: src/pyload/webui/app/templates/base.html:119
 #: src/pyload/webui/app/themes/modern/templates/base.html:164
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:164
 msgid "Running:"
-msgstr ""
+msgstr "Laufend:"
 
 #: src/pyload/webui/app/templates/base.html:119
 #: src/pyload/webui/app/templates/base.html:120
@@ -3193,7 +3249,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:363
 #: src/pyload/webui/app/themes/pyplex/templates/settings_item.html:14
 msgid "on"
-msgstr ""
+msgstr "ein"
 
 #: src/pyload/webui/app/templates/base.html:119
 #: src/pyload/webui/app/templates/base.html:120
@@ -3211,83 +3267,83 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:365
 #: src/pyload/webui/app/themes/pyplex/templates/settings_item.html:15
 msgid "off"
-msgstr ""
+msgstr "aus"
 
 #: src/pyload/webui/app/templates/base.html:120
 #: src/pyload/webui/app/themes/modern/templates/base.html:165
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:165
 msgid "Reconnect:"
-msgstr ""
+msgstr "Erneut verbinden:"
 
 #: src/pyload/webui/app/templates/base.html:121
 #: src/pyload/webui/app/themes/modern/templates/base.html:166
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:166
 msgid "Speed:"
-msgstr ""
+msgstr "Geschwindigkeit:"
 
 #: src/pyload/webui/app/templates/base.html:122
 #: src/pyload/webui/app/themes/modern/templates/base.html:167
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:167
 msgid "Active:"
-msgstr ""
+msgstr "Aktiv:"
 
 #: src/pyload/webui/app/templates/base.html:122
 #: src/pyload/webui/app/themes/modern/templates/base.html:167
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:167
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: src/pyload/webui/app/templates/base.html:122
 #: src/pyload/webui/app/themes/modern/templates/base.html:167
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:167
 msgid "Queued"
-msgstr ""
+msgstr "Warteschlange"
 
 #: src/pyload/webui/app/templates/base.html:122
 #: src/pyload/webui/app/themes/modern/templates/base.html:167
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:167
 msgid "Total"
-msgstr ""
+msgstr "Gesamt"
 
 #: src/pyload/webui/app/templates/base.html:123
 msgid "Reload page"
-msgstr ""
+msgstr "Aktualisieren"
 
 #: src/pyload/webui/app/templates/base.html:152
 msgid "loading"
-msgstr ""
+msgstr "lade"
 
 #: src/pyload/webui/app/templates/base.html:161
 #: src/pyload/webui/app/themes/modern/templates/base.html:216
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:216
 msgid "Back to top"
-msgstr ""
+msgstr "Nach oben"
 
 #: src/pyload/webui/app/templates/captcha.html:4
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:7
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:7
 msgid "Captcha reading"
-msgstr ""
+msgstr "Captchas lesen"
 
 #: src/pyload/webui/app/templates/captcha.html:5
 msgid "Please read the text on the captcha."
-msgstr ""
+msgstr "Bitte lies den Text auf dem Captcha."
 
 #: src/pyload/webui/app/templates/captcha.html:10
 msgid "The captcha."
-msgstr ""
+msgstr "Das Captcha."
 
 #: src/pyload/webui/app/templates/captcha.html:15
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:18
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:18
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: src/pyload/webui/app/templates/captcha.html:16
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:20
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:20
 msgid "Input the text on the captcha."
-msgstr ""
+msgstr "Gib den Text aus dem Captcha ein."
 
 #: src/pyload/webui/app/templates/captcha.html:28
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:30
@@ -3310,24 +3366,26 @@ msgstr ""
 #: src/pyload/webui/app/templates/captcha.html:34
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:36
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:36
-msgid "Please install the <a href='https://tampermonkey.net/' target='_blank'>Tampermonkey</a> add-on in your browser and add the "
+msgid ""
+"Please install the <a href='https://tampermonkey.net/' "
+"target='_blank'>Tampermonkey</a> add-on in your browser and add the "
 msgstr ""
 
 #: src/pyload/webui/app/templates/captcha.html:34
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:36
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:36
 msgid "pyload userscript"
-msgstr ""
+msgstr "pyLoad Benutzerscript"
 
 #: src/pyload/webui/app/templates/captcha.html:40
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:39
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:39
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: src/pyload/webui/app/templates/dashboard.html:6
 msgid "Active Connections"
-msgstr ""
+msgstr "Aktive Verbindungen"
 
 #: src/pyload/webui/app/templates/dashboard.html:69
 #: src/pyload/webui/app/themes/modern/templates/base.html:151
@@ -3335,19 +3393,19 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:151
 #: src/pyload/webui/app/themes/pyplex/templates/dashboard.html:24
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/pyload/webui/app/templates/dashboard.html:70
 #: src/pyload/webui/app/themes/modern/templates/dashboard.html:25
 #: src/pyload/webui/app/themes/pyplex/templates/dashboard.html:25
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #: src/pyload/webui/app/templates/dashboard.html:71
 #: src/pyload/webui/app/themes/modern/templates/dashboard.html:26
 #: src/pyload/webui/app/themes/pyplex/templates/dashboard.html:26
 msgid "Progress"
-msgstr ""
+msgstr "Fortschritt"
 
 #: src/pyload/webui/app/templates/error.html:2
 #: src/pyload/webui/app/themes/modern/templates/error.html:2
@@ -3359,100 +3417,100 @@ msgstr ""
 #: src/pyload/webui/app/templates/filemanager.html:35
 #: src/pyload/webui/app/templates/folder.html:7
 msgid "Rename Directory"
-msgstr ""
+msgstr "Verzeichnis umbenennen"
 
 #: src/pyload/webui/app/templates/filemanager.html:22
 #: src/pyload/webui/app/templates/filemanager.html:37
 #: src/pyload/webui/app/templates/folder.html:9
 msgid "Delete Directory"
-msgstr ""
+msgstr "Verzeichnis löschen"
 
 #: src/pyload/webui/app/templates/filemanager.html:39
 #: src/pyload/webui/app/templates/folder.html:11
 msgid "Add subdirectory"
-msgstr ""
+msgstr "Unterverzeichnis hinzufügen"
 
 #: src/pyload/webui/app/templates/filemanager.html:56
 #: src/pyload/webui/app/templates/folder.html:14
 #: src/pyload/webui/app/templates/js/filemanager.js:184
 msgid "Folder is empty"
-msgstr ""
+msgstr "Ordner ist leer"
 
 #: src/pyload/webui/app/templates/files.html:3
 #: src/pyload/webui/app/templates/files.html:6
 msgid "Saved Files"
-msgstr ""
+msgstr "Gespeicherte Dateien"
 
 #: src/pyload/webui/app/templates/info.html:7
 #: src/pyload/webui/app/templates/info.html:8
 #: src/pyload/webui/app/themes/modern/templates/info.html:3
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:3
 msgid "Information"
-msgstr ""
+msgstr "Informationen"
 
 #: src/pyload/webui/app/templates/info.html:11
 #: src/pyload/webui/app/themes/modern/templates/info.html:17
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:17
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: src/pyload/webui/app/templates/info.html:30
 #: src/pyload/webui/app/themes/modern/templates/info.html:45
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:45
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: src/pyload/webui/app/templates/info.html:33
 msgid "Python version:"
-msgstr ""
+msgstr "Python Version:"
 
 #: src/pyload/webui/app/templates/info.html:37
 msgid "OS platform:"
-msgstr ""
+msgstr "Betriebssystem"
 
 #: src/pyload/webui/app/templates/info.html:42
 #: src/pyload/webui/app/themes/modern/templates/info.html:37
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:37
 msgid "Storage"
-msgstr ""
+msgstr "Speicher"
 
 #: src/pyload/webui/app/templates/info.html:45
 msgid "Download folder:"
-msgstr ""
+msgstr "Downloadordner:"
 
 #: src/pyload/webui/app/templates/info.html:49
 msgid "Available space:"
-msgstr ""
+msgstr "Vorhandener Speicherplatz:"
 
 #: src/pyload/webui/app/templates/info.html:54
 #: src/pyload/webui/app/themes/modern/templates/info.html:53
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:53
 msgid "pyLoad"
-msgstr ""
+msgstr "pyLoad"
 
 #: src/pyload/webui/app/templates/info.html:57
 #: src/pyload/webui/app/themes/modern/templates/info.html:55
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:55
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #: src/pyload/webui/app/templates/info.html:61
 msgid "Installation folder:"
-msgstr ""
+msgstr "Installationsordner:"
 
 #: src/pyload/webui/app/templates/info.html:65
 msgid "Config folder:"
-msgstr ""
+msgstr "Konfigurationsordner:"
 
 #: src/pyload/webui/app/templates/info.html:69
 #: src/pyload/webui/app/themes/modern/templates/info.html:61
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:61
 msgid "Language:"
-msgstr ""
+msgstr "Sprache:"
 
 #: src/pyload/webui/app/templates/info.html:73
 msgid "WebUI port:"
-msgstr ""
+msgstr "WebUI Port:"
 
 #: src/pyload/webui/app/templates/login.html:3
 #: src/pyload/webui/app/templates/settings.html:176
@@ -3461,13 +3519,13 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/login.html:2
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:156
 msgid "Login"
-msgstr ""
+msgstr "Anmeldung"
 
 #: src/pyload/webui/app/templates/login.html:14
 #: src/pyload/webui/app/themes/modern/templates/login.html:27
 #: src/pyload/webui/app/themes/pyplex/templates/login.html:27
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: src/pyload/webui/app/templates/login.html:19
 #: src/pyload/webui/app/templates/packages.html:87
@@ -3485,59 +3543,61 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:161
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:23
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: src/pyload/webui/app/templates/login.html:29
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
+"Dein Benutzername und/oder Passwort sind falsch. Bitte versuche es noch "
+"einmal."
 
 #: src/pyload/webui/app/templates/logout.html:8
 #: src/pyload/webui/app/themes/modern/templates/logout.html:11
 #: src/pyload/webui/app/themes/pyplex/templates/logout.html:11
 msgid "You were successfully logged out."
-msgstr ""
+msgstr "Du wurdest erfolgreich abgemeldet."
 
 #: src/pyload/webui/app/templates/logs.html:12
 msgid "prev"
-msgstr ""
+msgstr "zurück"
 
 #: src/pyload/webui/app/templates/logs.html:12
 msgid "next"
-msgstr ""
+msgstr "weiter"
 
 #: src/pyload/webui/app/templates/logs.html:12
 msgid "End"
-msgstr ""
+msgstr "Ende"
 
 #: src/pyload/webui/app/templates/packages.html:12
 msgid "Running Packages"
-msgstr ""
+msgstr "Laufende Pakete"
 
 #: src/pyload/webui/app/templates/packages.html:14
 msgid "Saved Packages"
-msgstr ""
+msgstr "Gespeicherte Pakete"
 
 #: src/pyload/webui/app/templates/packages.html:22
 msgid "Delete Finished"
-msgstr ""
+msgstr "Fertige löschen"
 
 #: src/pyload/webui/app/templates/packages.html:23
 #: src/pyload/webui/app/themes/modern/templates/packages.html:23
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:23
 msgid "Restart Failed"
-msgstr ""
+msgstr "Fehlgeschlagene neustarten"
 
 #: src/pyload/webui/app/templates/packages.html:36
 #: src/pyload/webui/app/themes/modern/templates/packages.html:41
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:41
 msgid "Delete Package"
-msgstr ""
+msgstr "Paket löschen"
 
 #: src/pyload/webui/app/templates/packages.html:37
 #: src/pyload/webui/app/themes/modern/templates/packages.html:42
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:42
 msgid "Restart Package"
-msgstr ""
+msgstr "Paket neustarten"
 
 #: src/pyload/webui/app/templates/packages.html:38
 #: src/pyload/webui/app/templates/packages.html:80
@@ -3546,113 +3606,113 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:43
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:74
 msgid "Edit Package"
-msgstr ""
+msgstr "Paket bearbeiten"
 
 #: src/pyload/webui/app/templates/packages.html:40
 msgid "Move Package"
-msgstr ""
+msgstr "Paket verschieben"
 
 #: src/pyload/webui/app/templates/packages.html:69
 #: src/pyload/webui/app/themes/modern/templates/packages.html:58
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:58
 msgid "Folder:"
-msgstr ""
+msgstr "Ordner:"
 
 #: src/pyload/webui/app/templates/packages.html:69
 #: src/pyload/webui/app/themes/modern/templates/packages.html:59
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:59
 msgid "Password:"
-msgstr ""
+msgstr "Passwort:"
 
 #: src/pyload/webui/app/templates/packages.html:81
 msgid "Edit the package detais below."
-msgstr ""
+msgstr "Bearbeiten Sie hier die Paketdetails."
 
 #: src/pyload/webui/app/templates/packages.html:83
 msgid "The name of the package."
-msgstr ""
+msgstr "Name des Pakets."
 
 #: src/pyload/webui/app/templates/packages.html:85
 #: src/pyload/webui/app/themes/modern/templates/packages.html:85
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:85
 msgid "Folder"
-msgstr ""
+msgstr "Verzeichnis"
 
 #: src/pyload/webui/app/templates/packages.html:85
 msgid "Name of subfolder for these downloads."
-msgstr ""
+msgstr "Name des Unterordners für diese Downloads."
 
 #: src/pyload/webui/app/templates/packages.html:87
 msgid "List of passwords used for unrar."
-msgstr ""
+msgstr "Liste der Passwörter, welche für das Entpacken genutzt werden."
 
 #: src/pyload/webui/app/templates/pathchooser.html:14
 #: src/pyload/webui/app/themes/modern/templates/settings.html:188
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:188
 msgid "Path"
-msgstr ""
+msgstr "Pfad"
 
 #: src/pyload/webui/app/templates/pathchooser.html:14
 #: src/pyload/webui/app/themes/modern/templates/settings.html:190
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:190
 msgid "absolute"
-msgstr ""
+msgstr "absolut"
 
 #: src/pyload/webui/app/templates/pathchooser.html:14
 #: src/pyload/webui/app/themes/modern/templates/settings.html:193
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:193
 msgid "relative"
-msgstr ""
+msgstr "relativ"
 
 #: src/pyload/webui/app/templates/pathchooser.html:19
 #: src/pyload/webui/app/themes/modern/templates/pathchooser.html:78
 #: src/pyload/webui/app/themes/pyplex/templates/pathchooser.html:78
 msgid "name"
-msgstr ""
+msgstr "Name"
 
 #: src/pyload/webui/app/templates/pathchooser.html:20
 #: src/pyload/webui/app/themes/modern/templates/pathchooser.html:79
 #: src/pyload/webui/app/themes/pyplex/templates/pathchooser.html:79
 msgid "size"
-msgstr ""
+msgstr "Größe"
 
 #: src/pyload/webui/app/templates/pathchooser.html:21
 #: src/pyload/webui/app/themes/modern/templates/pathchooser.html:80
 #: src/pyload/webui/app/themes/pyplex/templates/pathchooser.html:80
 msgid "type"
-msgstr ""
+msgstr "Typ"
 
 #: src/pyload/webui/app/templates/pathchooser.html:22
 #: src/pyload/webui/app/themes/modern/templates/pathchooser.html:81
 #: src/pyload/webui/app/themes/pyplex/templates/pathchooser.html:81
 msgid "last modified"
-msgstr ""
+msgstr "zuletzt verändert"
 
 #: src/pyload/webui/app/templates/pathchooser.html:27
 msgid "parent directory"
-msgstr ""
+msgstr "übergeordnetes Verzeichnis"
 
 #: src/pyload/webui/app/templates/pathchooser.html:43
 msgid "no content"
-msgstr ""
+msgstr "kein Inhalt"
 
 #: src/pyload/webui/app/templates/settings.html:14
 #: src/pyload/webui/app/themes/modern/templates/settings.html:25
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:25
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: src/pyload/webui/app/templates/settings.html:15
 #: src/pyload/webui/app/themes/modern/templates/settings.html:26
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:26
 msgid "Plugins"
-msgstr ""
+msgstr "Zusatzprogramme"
 
 #: src/pyload/webui/app/templates/settings.html:16
 #: src/pyload/webui/app/themes/modern/templates/settings.html:27
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:27
 msgid "Accounts"
-msgstr ""
+msgstr "Konten"
 
 #: src/pyload/webui/app/templates/settings.html:43
 #: src/pyload/webui/app/templates/settings.html:72
@@ -3661,93 +3721,93 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:46
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:77
 msgid "Choose a section from the menu"
-msgstr ""
+msgstr "Wähle einen Abschnitt aus dem Menü"
 
 #: src/pyload/webui/app/templates/settings.html:88
 #: src/pyload/webui/app/themes/modern/templates/settings.html:88
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:88
 msgid "Plugin"
-msgstr ""
+msgstr "Erweiterung"
 
 #: src/pyload/webui/app/templates/settings.html:92
 #: src/pyload/webui/app/themes/modern/templates/settings.html:92
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:92
 msgid "Premium"
-msgstr ""
+msgstr "Premium"
 
 #: src/pyload/webui/app/templates/settings.html:93
 #: src/pyload/webui/app/themes/modern/templates/settings.html:93
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:93
 msgid "Valid until"
-msgstr ""
+msgstr "Gültig bis"
 
 #: src/pyload/webui/app/templates/settings.html:94
 #: src/pyload/webui/app/themes/modern/templates/settings.html:94
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:94
 msgid "Traffic left"
-msgstr ""
+msgstr "Verbleibender Traffic"
 
 #: src/pyload/webui/app/templates/settings.html:95
 #: src/pyload/webui/app/themes/modern/templates/settings.html:95
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:95
 msgid "Time"
-msgstr ""
+msgstr "Zeit"
 
 #: src/pyload/webui/app/templates/settings.html:96
 #: src/pyload/webui/app/themes/modern/templates/settings.html:96
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:96
 msgid "Max Parallel"
-msgstr ""
+msgstr "Max Parallel"
 
 #: src/pyload/webui/app/templates/settings.html:97
 #: src/pyload/webui/app/themes/modern/templates/settings.html:97
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:97
 msgid "Delete?"
-msgstr ""
+msgstr "Löschen?"
 
 #: src/pyload/webui/app/templates/settings.html:119
 #: src/pyload/webui/app/themes/modern/templates/settings.html:115
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:115
 msgid "valid"
-msgstr ""
+msgstr "gültig"
 
 #: src/pyload/webui/app/templates/settings.html:122
 #: src/pyload/webui/app/themes/modern/templates/settings.html:115
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:115
 msgid "not valid"
-msgstr ""
+msgstr "ungültig"
 
 #: src/pyload/webui/app/templates/settings.html:129
 #: src/pyload/webui/app/themes/modern/templates/settings.html:119
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:119
 msgid "yes"
-msgstr ""
+msgstr "ja"
 
 #: src/pyload/webui/app/templates/settings.html:132
 #: src/pyload/webui/app/themes/modern/templates/settings.html:119
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:119
 msgid "no"
-msgstr ""
+msgstr "nein"
 
 #: src/pyload/webui/app/templates/settings.html:174
 #: src/pyload/webui/app/themes/modern/templates/settings.html:151
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:151
 msgid "Add Account"
-msgstr ""
+msgstr "Konto hinzufügen"
 
 #: src/pyload/webui/app/templates/settings.html:175
 msgid "Enter your account data to use premium features."
-msgstr ""
+msgstr "Gib deine Benutzerdaten ein, um die Premiumfunktionen zu nutzen."
 
 #: src/pyload/webui/app/templates/settings.html:186
 #: src/pyload/webui/app/themes/modern/templates/settings.html:166
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:166
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: src/pyload/webui/app/templates/settings.html:187
 msgid "Choose the hoster for your account."
-msgstr ""
+msgstr "Wähle den Hoster für dein Benutzerkonto."
 
 #: src/pyload/webui/app/templates/settings_item.html:30
 #: src/pyload/webui/app/themes/modern/templates/settings_item.html:27
@@ -3766,79 +3826,81 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:5
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:46
 msgid "Add Package"
-msgstr ""
+msgstr "Paket hinzufügen"
 
 #: src/pyload/webui/app/templates/window.html:16
 #: src/pyload/webui/app/themes/modern/templates/window.html:7
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:7
 msgid "Paste your links or upload a container."
-msgstr ""
+msgstr "Links einfügen oder Container hochladen."
 
 #: src/pyload/webui/app/templates/window.html:19
 msgid "The name of the new package."
-msgstr ""
+msgstr "Name des neuen Pakets."
 
 #: src/pyload/webui/app/templates/window.html:24
 #: src/pyload/webui/app/themes/modern/templates/window.html:15
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:15
 msgid "Links"
-msgstr ""
+msgstr "Links"
 
 #: src/pyload/webui/app/templates/window.html:26
+#, fuzzy
+#| msgid "Paste your links here or any text and press the filter button."
 msgid ""
 "Paste your links here or any text and press the filter\n"
 "        button."
-msgstr ""
+msgstr "Füge deine Links oder einen Text hier ein und drück den 'Filter' Knopf"
 
 #: src/pyload/webui/app/templates/window.html:30
 #: src/pyload/webui/app/themes/modern/templates/window.html:17
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:17
 msgid "Filter urls"
-msgstr ""
+msgstr "Links filtern"
 
 #: src/pyload/webui/app/templates/window.html:44
 msgid "Password for RAR-Archive"
-msgstr ""
+msgstr "Passwort für RAR-Archive"
 
 #: src/pyload/webui/app/templates/window.html:49
 #: src/pyload/webui/app/themes/modern/templates/window.html:32
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:32
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #: src/pyload/webui/app/templates/window.html:50
 msgid "Upload a container."
-msgstr ""
+msgstr "Container hochladen."
 
 #: src/pyload/webui/app/templates/window.html:54
 #: src/pyload/webui/app/themes/modern/templates/window.html:38
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:38
 msgid "Destination"
-msgstr ""
+msgstr "Ziel"
 
 #: src/pyload/webui/app/templates/js/admin.js:43
 msgid "Passwords did not match"
-msgstr ""
+msgstr "Passwörter stimmen nicht überein"
 
 #: src/pyload/webui/app/templates/js/admin.js:57
 #: src/pyload/webui/app/themes/modern/templates/settings.html:236
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:236
 msgid "You are really sure you want to quit pyLoad?"
-msgstr ""
+msgstr "Bist du sicher, dass du pyLoad beenden möchtest?"
 
 #: src/pyload/webui/app/templates/js/admin.js:68
 #: src/pyload/webui/app/themes/modern/templates/settings.html:223
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:223
 msgid "Are you sure you want to restart pyLoad?"
-msgstr ""
+msgstr "Sicher, dass du pyLoad neustarten willst?"
 
 #: src/pyload/webui/app/templates/js/admin.js:72
 msgid "pyLoad restarted"
-msgstr ""
+msgstr "pyLoad wurde neu gestartet"
 
 #: src/pyload/webui/app/templates/js/base.js:81
 msgid "Please Enter a packagename"
-msgstr ""
+msgstr "Bitte gib einen Paketnamen ein"
 
 #: src/pyload/webui/app/templates/js/base.js:132
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:330
@@ -3846,53 +3908,53 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:330
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:341
 msgid "New Captcha Request"
-msgstr ""
+msgstr "Neue Captcha-Anfrage"
 
 #: src/pyload/webui/app/templates/js/base.js:165
 msgid "Please read the text on the captcha"
-msgstr ""
+msgstr "Bitte lies den Text auf dem Captcha"
 
 #: src/pyload/webui/app/templates/js/base.js:172
 msgid "Please click on the right captcha position"
-msgstr ""
+msgstr "Bitte klicke auf die richtige Position im Captcha"
 
 #: src/pyload/webui/app/templates/js/base.js:194
 msgid "No Captchas to read"
-msgstr ""
+msgstr "Keine Captchas verfügbar"
 
 #: src/pyload/webui/app/templates/js/filemanager.js:40
 #: src/pyload/webui/app/templates/js/packages.js:30
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:16
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:16
 msgid "Success"
-msgstr ""
+msgstr "Erfolgreich"
 
 #: src/pyload/webui/app/templates/js/filemanager.js:47
 #: src/pyload/webui/app/templates/js/packages.js:37
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:31
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:31
 msgid "Failed"
-msgstr ""
+msgstr "Fehlgeschlagen"
 
 #: src/pyload/webui/app/templates/js/filemanager.js:163
 msgid "Are you sure you want to delete the selected item?"
-msgstr ""
+msgstr "Sicher, dass du das ausgewählte Element löschen willst?"
 
 #: src/pyload/webui/app/templates/js/filemanager.js:239
 msgid "New folder"
-msgstr ""
+msgstr "Neuer Ordner"
 
 #: src/pyload/webui/app/templates/js/packages.js:212
 #: src/pyload/webui/app/themes/modern/templates/js/packages.js:177
 #: src/pyload/webui/app/themes/pyplex/templates/js/packages.js:177
 msgid "Delete Link"
-msgstr ""
+msgstr "Link löschen"
 
 #: src/pyload/webui/app/templates/js/packages.js:213
 #: src/pyload/webui/app/themes/modern/templates/js/packages.js:178
 #: src/pyload/webui/app/themes/pyplex/templates/js/packages.js:178
 msgid "Restart Link"
-msgstr ""
+msgstr "Link neu starten"
 
 #: src/pyload/webui/app/templates/js/settings.js:84
 #: src/pyload/webui/app/themes/modern/templates/js/admin.js:14
@@ -3900,13 +3962,13 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/js/admin.js:14
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:140
 msgid "Settings saved"
-msgstr ""
+msgstr "Einstellungen gespeichert"
 
 #: src/pyload/webui/app/templates/js/settings.js:89
 #: src/pyload/webui/app/templates/js/settings.js:104
 #: src/pyload/webui/app/templates/js/settings.js:120
 msgid "Error occured"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten"
 
 #: src/pyload/webui/app/themes/modern/templates/admin.html:11
 #: src/pyload/webui/app/themes/modern/templates/base.html:70
@@ -3915,22 +3977,22 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:70
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:140
 msgid "Users"
-msgstr ""
+msgstr "Benutzer"
 
 #: src/pyload/webui/app/themes/modern/templates/admin.html:18
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:18
 msgid "To add user or change passwords use:"
-msgstr ""
+msgstr "Um Benutzer hinzuzufügen oder Passwörter zu ändern benutze:"
 
 #: src/pyload/webui/app/themes/modern/templates/admin.html:19
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:19
 msgid "Important:"
-msgstr ""
+msgstr "Wichtig:"
 
 #: src/pyload/webui/app/themes/modern/templates/admin.html:19
 #: src/pyload/webui/app/themes/pyplex/templates/admin.html:19
 msgid "Admin user have always all permissions!"
-msgstr ""
+msgstr "Wichtig: Admin User haben immer alle Berechtigungen!"
 
 #: src/pyload/webui/app/themes/modern/templates/admin.html:58
 #: src/pyload/webui/app/themes/modern/templates/settings.html:49
@@ -3939,7 +4001,7 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:49
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:80
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: src/pyload/webui/app/themes/modern/templates/admin.html:91
 #: src/pyload/webui/app/themes/modern/templates/settings.html:225
@@ -3948,202 +4010,202 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:225
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:238
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/pyload/webui/app/themes/modern/templates/base.html:174
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:174
 msgid "Resume Queue"
-msgstr ""
+msgstr "Warteschlange fortsetzen"
 
 #: src/pyload/webui/app/themes/modern/templates/base.html:175
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:175
 msgid "Pause Queue"
-msgstr ""
+msgstr "Warteschlange pausieren"
 
 #: src/pyload/webui/app/themes/modern/templates/base.html:176
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:176
 msgid "Abort Downloads"
-msgstr ""
+msgstr "Downloads abbrechen"
 
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:25
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:382
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:25
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:382
 msgid "Please click on the right captcha position."
-msgstr ""
+msgstr "Bitte klicke auf die richtige Position im Captcha."
 
 #: src/pyload/webui/app/themes/modern/templates/dashboard.html:23
 #: src/pyload/webui/app/themes/pyplex/templates/dashboard.html:23
 msgid "Hoster"
-msgstr ""
+msgstr "Hoster"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:14
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:14
 msgid "News"
-msgstr ""
+msgstr "Neuigkeiten"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:39
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:39
 msgid "Download Folder:"
-msgstr ""
+msgstr "Downloadordner:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:41
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:41
 msgid "Available Space:"
-msgstr ""
+msgstr "Verfügbarer Speicherplatz:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:47
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:47
 msgid "Python Version:"
-msgstr ""
+msgstr "Python Version:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:49
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:49
 msgid "OS Platform:"
-msgstr ""
+msgstr "Betriebssystem:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:57
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:57
 msgid "Installation Folder:"
-msgstr ""
+msgstr "Installationsordner:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:59
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:59
 msgid "Config Folder:"
-msgstr ""
+msgstr "Konfigurationsordner:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:65
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:65
 msgid "WebUI"
-msgstr ""
+msgstr "WebUI"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:67
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:67
 msgid "Port:"
-msgstr ""
+msgstr "Port:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:69
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:69
 msgid "Theme:"
-msgstr ""
+msgstr "Thema:"
 
 #: src/pyload/webui/app/themes/modern/templates/info.html:75
 #: src/pyload/webui/app/themes/pyplex/templates/info.html:75
 msgid "Donate"
-msgstr ""
+msgstr "Spenden"
 
 #: src/pyload/webui/app/themes/modern/templates/login.html:20
 #: src/pyload/webui/app/themes/pyplex/templates/login.html:20
 msgid "Incorrect username/email or password."
-msgstr ""
+msgstr "Ungültiger Benutzername/eMail oder Password."
 
 #: src/pyload/webui/app/themes/modern/templates/login.html:35
 #: src/pyload/webui/app/themes/pyplex/templates/login.html:35
 msgid "SIGN IN"
-msgstr ""
+msgstr "EINLOGGEN"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:22
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:22
 msgid "Clear Finished"
-msgstr ""
+msgstr "Fertige löschen"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:44
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:44
 msgid "Move Package To"
-msgstr ""
+msgstr "Verschiebe Paket zu"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:44
 msgid "Collector"
-msgstr ""
+msgstr "Linksammler"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:45
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:45
 msgid "Reverse Entries"
-msgstr ""
+msgstr "Reihenfolge umkehren"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:77
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:77
 msgid "Edit the package detais below"
-msgstr ""
+msgstr "Bearbeite hier die Paketdetails"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:82
 #: src/pyload/webui/app/themes/modern/templates/window.html:12
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:82
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:12
 msgid "The name of the package"
-msgstr ""
+msgstr "Name des Pakets"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:87
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:87
 msgid "Name of subfolder for these downloads"
-msgstr ""
+msgstr "Name des Unterordners für diese Downloads"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:92
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:92
 msgid "The package password"
-msgstr ""
+msgstr "Paketpasswort"
 
 #: src/pyload/webui/app/themes/modern/templates/pathchooser.html:87
 #: src/pyload/webui/app/themes/pyplex/templates/pathchooser.html:87
 msgid "Parent Directory"
-msgstr ""
+msgstr "Übergeordnetes Verzeichnis"
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:57
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:57
 msgid " Loading data..."
-msgstr ""
+msgstr " Lade Daten..."
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:154
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:154
 msgid "Enter your account data to use premium features"
-msgstr ""
+msgstr "Gib deine Benutzerdaten ein, um die Premiumfunktionen zu nutzen"
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:158
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:158
 msgid "Your username"
-msgstr ""
+msgstr "Dein Benutzername"
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:163
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:163
 msgid "The password for this account"
-msgstr ""
+msgstr "Das Password für diesen Account"
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:167
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:167
 msgid "Choose the hoster for your account"
-msgstr ""
+msgstr "Wähle den Hoster für dein Benutzerkonto"
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:185
 #: src/pyload/webui/app/themes/modern/templates/settings.html:199
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:185
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:199
 msgid "Select"
-msgstr ""
+msgstr "Auswahl"
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:215
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:215
 msgid "pyLoad was shut down, goodbye!"
-msgstr ""
+msgstr "pyLoad wurde heruntergefahren, Auf Wiedersehen!"
 
 #: src/pyload/webui/app/themes/modern/templates/window.html:20
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:20
 msgid "Add a list of links"
-msgstr ""
+msgstr "Füge Liste von Links hinzu"
 
 #: src/pyload/webui/app/themes/modern/templates/window.html:25
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:25
 msgid "Type the package password"
-msgstr ""
+msgstr "Gib das neue Passworte ein"
 
 #: src/pyload/webui/app/themes/modern/templates/window.html:28
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:28
 msgid "Upload a container"
-msgstr ""
+msgstr "Container hochladen"
 
 #: src/pyload/webui/app/themes/modern/templates/window.html:34
 #: src/pyload/webui/app/themes/pyplex/templates/window.html:34
 msgid "not available"
-msgstr ""
+msgstr "nicht verfügbar"
 
 #: src/pyload/webui/app/themes/modern/templates/js/admin.js:18
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:248
@@ -4160,46 +4222,87 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:162
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:179
 msgid "Error occurred"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten"
 
 #: src/pyload/webui/app/themes/modern/templates/js/admin.js:22
 #: src/pyload/webui/app/themes/pyplex/templates/js/admin.js:22
 msgid "Passwords did not match."
-msgstr ""
+msgstr "Passwörter stimmen nicht überein."
 
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:231
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:231
 msgid "Please Enter a package name."
-msgstr ""
+msgstr "Bitte gib einen Paketnamen ein."
 
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:416
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:416
 msgid "No Captchas to read."
-msgstr ""
+msgstr "Keine Captchas verfügbar."
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:107
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:107
 msgid "Name of plugin"
-msgstr ""
+msgstr "Pluginname"
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:202
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:202
 msgid "Select File"
-msgstr ""
+msgstr "Datei auswählen"
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:206
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:206
 msgid "Select Folder"
-msgstr ""
+msgstr "Verzeichnis auswählen"
 
 #: src/pyload/webui/app/themes/pyplex/templates/logs.html:16
 msgid "Reversed"
-msgstr ""
+msgstr "Umgekehrt"
 
 #: src/pyload/webui/app/themes/pyplex/templates/logs.html:18
 msgid "Lines per page"
-msgstr ""
+msgstr "Zeilen pro Seite"
 
 #: src/pyload/webui/app/themes/pyplex/templates/logs.html:39
 msgid "Go"
-msgstr ""
+msgstr "Los"
+
+#~ msgid "Home"
+#~ msgstr "Start"
+
+#~ msgid "Config"
+#~ msgstr "Einstellungen"
+
+#~ msgid "To reset your login data or add an user run:"
+#~ msgstr ""
+#~ "Um deine Login-Informationen zurückzusetzen oder einen Benutzer "
+#~ "hinzuzufügen, starte:"
+
+#~ msgid "Python:"
+#~ msgstr "Python:"
+
+#~ msgid "OS:"
+#~ msgstr "Betriebssystem:"
+
+#~ msgid "Free Space:"
+#~ msgstr "Freier Speicherplatz:"
+
+#~ msgid "Setup"
+#~ msgstr "Konfiguration"
+
+#~ msgid "Webinterface"
+#~ msgstr "Weboberfläche"
+
+#~ msgid "Administrate"
+#~ msgstr "Administrieren"
+
+#~ msgid "Download:"
+#~ msgstr "Download:"
+
+#~ msgid "You dont have permission to access this page."
+#~ msgstr "Sie haben nicht die Berechtigung diese Seite zu besuchen."
+
+#~ msgid "unlimited"
+#~ msgstr "unbegrenzt"
+
+#~ msgid "Run pyLoadCore.py -s to access the setup."
+#~ msgstr "Starte das Setup durch Aufruf von 'pyLoadCore.py -s'."

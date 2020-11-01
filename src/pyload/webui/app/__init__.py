@@ -22,7 +22,7 @@ from .config import get_default_config
 from .helpers import JSONEncoder
 
 from flask_babel import Babel
-
+from pyload import APPID
 
 #: flask app singleton?
 class App:
@@ -118,7 +118,7 @@ class App:
         cls._configure_json_encoding(app)
         cls._configure_session(app)
         cls._configure_blueprints(app, path_prefix)
-        Babel(app, default_locale=locale)
+        Babel(app, default_domain=APPID, default_locale=locale)
         cls._configure_extensions(app)
         cls._configure_themes(app, path_prefix)
         cls._configure_handlers(app)

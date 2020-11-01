@@ -11,7 +11,7 @@ $(function() {
         if (i === g) {
             $.ajax({
                 method: "post",
-                url: "/json/change_password",
+                url: "{{url_for('json.change_password')}}",
                 data: $("#password_form").serialize(),
                 async: true,
                 success: function () {
@@ -49,7 +49,7 @@ $(function() {
         $(this).addClass("disabled");
         $.ajax({
             method: "post",
-            url: "/json/add_user",
+            url: "{{url_for('json.add_user')}}",
             async: true,
             data: $("#user_add_form").serialize(),
             success: function () {
@@ -65,28 +65,28 @@ $(function() {
 
 
     $("#quit_box").on('click', '#quit_button', function () {
-        $.get("/api/kill", function() {
+        $.get("{{url_for('api.rpc', func='kill')}}", function() {
             $('#quit_box').modal('hide');
             $('#content').addClass("hidden");
             $('#shutdown_msg').removeClass("hidden");
         })
         .fail(function() {
             indicateFail("{{_('Error occurred')}}");
-        });        
+        });
     });
 
     $("#restart_box").on('click', '#restart_button', function () {
-        $.get("/api/restart", function() {
+        $.get("{{url_for('api.rpc', func='restart')}}", function() {
             $('#restart_box').modal('hide');
             $('#content').addClass("hidden");
             $('#restart_msg').removeClass("hidden");
             setTimeout(function() {
-                window.location = "/dashboard";
+                window.location = "{{url_for('app.dashboard')}}";
             }, 10000);
         })
         .fail(function() {
             indicateFail("{{_('Error occurred')}}");
-        });        
+        });
     });
 });
 

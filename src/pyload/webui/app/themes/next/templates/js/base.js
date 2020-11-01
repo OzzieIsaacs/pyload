@@ -214,7 +214,7 @@ $(function() {
         } else {
             var form = new FormData(this);
             $.ajax({
-                    url: "/json/add_package",
+                    url: "{{url_for('json.add_package')}}",
                     method: "POST",
                     data: form,
                     processData: false,
@@ -225,7 +225,7 @@ $(function() {
             var re = new RegExp("/" + queue + "/?$", "i");
             if (window.location.toString().match(re)) {
 				setTimeout(function() {
-	                window.location = "/dashboard";
+	                window.location = "{{url_for('app.dashboard')}}";
 	            }, 1000);
             }
             return false;
@@ -237,10 +237,10 @@ $(function() {
     });
 
     $("#action_play").click(function() {
-        $.get("/api/unpause_server", function () {
+        $.get("{{url_for('api.rpc', func='unpause_server')}}", function () {
             $.ajax({
                 method: "post",
-                url:"/json/status",
+                url: "{{url_for('json.status')}}",
                 async: true,
                 timeout: 3000,
                 success: LoadJsonToContent
@@ -249,26 +249,26 @@ $(function() {
     });
 
     $("#action_cancel").click(function() {
-        $.get("/api/stop_all_downloads");
+        $.get("{{url_for('api.rpc', func='stop_all_downloads')}}");
     });
 
     $("#restart_failed").click(function() {
-        $.get( "/api/restart_failed",function(data) {
+        $.get("{{url_for('api.rpc', func='restart_failed')}}", function(data) {
             indicateSuccess();
         }).fail(indicateFail);
     });
 
     $("#del_finished").click(function() {
-        $.get( "/api/delete_finished", function(data) {
+        $.get("{{url_for('api.rpc', func='delete_finished')}}", function(data) {
             indicateSuccess();
         }).fail(indicateFail);
     });
 
     $("#action_stop").click(function() {
-        $.get("/api/pause_server", function () {
+        $.get("{{url_for('api.rpc', func='pause_server')}}", function () {
             $.ajax({
                 method: "post",
-                url: "/json/status",
+                url: "{{url_for('json.status')}}",
                 async: true,
                 timeout: 3000,
                 success: LoadJsonToContent
@@ -289,7 +289,7 @@ $(function() {
 
     $.ajax({
         method:"post",
-        url: "/json/status",
+        url: "{{url_for('json.status')}}",
         async: true,
         timeout: 3000,
         success:LoadJsonToContent
@@ -298,7 +298,7 @@ $(function() {
     setInterval(function() {
         $.ajax({
             method:"post",
-            url: "/json/status",
+            url: "{{url_for('json.status')}}",
             async: true,
             timeout: 3000,
             success:LoadJsonToContent
@@ -387,7 +387,7 @@ function set_captcha(a) {
 
 function load_captcha(b, a) {
     $.ajax({
-            url: "/json/set_captcha",
+            url: "{{url_for('json.set_captcha')}}",
             async: true,
             method: b,
             data: a,

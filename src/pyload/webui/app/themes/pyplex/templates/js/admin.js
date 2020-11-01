@@ -7,7 +7,7 @@ $(function() {
         if (passwd === passwdConfirm) {
             $.ajax({
                 method: "post",
-                url: "/json/change_password",
+                url: "{{url_for('json.change_password')}}",
                 data: $("#password_form").serialize(),
                 async: true,
                 success: function () {
@@ -45,7 +45,7 @@ $(function() {
         $(this).addClass("disabled");
         $.ajax({
             method: "post",
-            url: "/json/add_user",
+            url: "{{url_for('json.add_user')}}",
             async: true,
             data: $("#user_add_form").serialize(),
             success: function () {

@@ -10,7 +10,7 @@ from flask.json import jsonify
 
 from ..helpers import clear_session, login_required, set_session
 
-bp = flask.Blueprint("api", __name__)
+bp = flask.Blueprint("api", __name__) #  url_prefix="/api")
 
 
 # accepting positional arguments, as well as kwargs via post and get

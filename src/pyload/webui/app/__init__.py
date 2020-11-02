@@ -44,7 +44,10 @@ class App:
     @classmethod
     def _configure_blueprints(cls, app, path_prefix):
         for blueprint in cls.FLASK_BLUEPRINTS:
-            app.register_blueprint(blueprint, url_prefix=path_prefix)
+            prefix = None
+            if not blueprint.url_prefix:
+                prefix = path_prefix
+            app.register_blueprint(blueprint, url_prefix=prefix)
 
     @classmethod
     def _configure_extensions(cls, app):
@@ -120,7 +123,7 @@ class App:
         cls._configure_blueprints(app, path_prefix)
         Babel(app, default_domain=APPID, default_locale=locale)
         cls._configure_extensions(app)
-        cls._configure_themes(app, path_prefix)
+        cls._configure_themes(app, path_prefix or "")
         cls._configure_handlers(app)
 
         return app

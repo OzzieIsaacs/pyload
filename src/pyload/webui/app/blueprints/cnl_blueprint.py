@@ -178,6 +178,14 @@ def checksupport():
 @app_bp.route("/jdcheck.js", endpoint="jdcheck")
 @local_check
 def jdcheck():
-    rep = "jdownloader=true;\n"
-    rep += "var version='9.581;'"
-    return rep
+    rep = "jdownloader=true;\r\n"
+    rep += "var version='42707';\r\n"
+    comp = flask.make_response(rep)
+    comp.headers['Server'] = 'AppWork GmbH HttpServer'
+    comp.headers['Connection'] = 'close'
+    comp.headers['Content-Type'] = 'text/html'
+    comp.headers['Access-Control-Max-Age'] = '1800'
+    comp.headers['Access-Control-Allow-Origin'] = '*'
+    comp.headers['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST'
+
+    return comp

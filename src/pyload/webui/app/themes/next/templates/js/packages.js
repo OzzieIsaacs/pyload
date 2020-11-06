@@ -303,7 +303,7 @@ function Package (ui, id, ele){
 
     this.movePackage = function(event) {
         indicateLoad();
-        $.get(window.location.pathname + "/../json/move_package/" + ((ui.type + 1) % 2) + "/" + id, function () {
+        $.get(window.location.pathname + "/../json/move_package/" + ((ui.type + 1) % 2) + "|" + id, function () {
             $(ele).remove();
             indicateFinish();
         }).fail(function () {

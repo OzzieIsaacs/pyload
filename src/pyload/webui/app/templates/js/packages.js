@@ -318,7 +318,7 @@ var Package = new Class({
         indicateLoad();
         new Request({
             method: 'get',
-            url: window.location.pathname + "/../json/move_package/" + ((this.ui.type + 1) % 2) + '/' + this.id,
+            url: window.location.pathname + "/../json/move_package/" + ((this.ui.type + 1) % 2) + '|' + this.id,
             onSuccess: function() {
                 this.ele.nix();
                 indicateFinish();

@@ -185,7 +185,7 @@ class CriptTo(SimpleDecrypter):
 
                 #: Extract links
                 text = to_str(text).replace("\x00", "").replace("\r", "")
-                links = filter(bool, text.split('\n'))
+                links = [item for item in text.split('\n') if bool(item)]
 
         return links
 

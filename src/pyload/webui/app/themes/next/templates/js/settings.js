@@ -110,12 +110,12 @@ SettingsUI = (function() {
         })
     };
     a.prototype.configSubmit = function(d) {
-        var c, b;
-        c = $(this).attr('id').split("_")[0];
+        var category, b;
+        category = $(this).attr('id').split("_")[0];
         $.ajax({
             method: "post",
-            url: window.location.pathname + "/../json/save_config/" + c,
-            data: $("#" + c + "_form").serialize(),
+            url: "{{url_for('json.save_config')}}" + "?category=" + category,
+            data: $("#" + category + "_form").serialize(),
             async: true,
             success: function () {
                 indicateSuccess("{{_('Settings saved')}}");

@@ -245,11 +245,15 @@ function Package (ui, id, ele){
                 if (newIndex == oldIndex) {
                     return false;
                 }
-                var order = ui.item.data('lid') + '|' + newIndex;
                 indicateLoad();
-                $.get(window.location.pathname + "/../json/link_order/" + order, function () {
-                    indicateFinish();
-                    return true;
+                $.get({
+                    url: "{{url_for('json.link_order')}}",
+                    data: {fid: ui.item.data('lid'), pos: newIndex},
+                    traditional: true,
+                    success: function () {
+                        indicateFinish();
+                        return true;
+                    }
                 } ).fail(function () {
                     indicateFail();
                     return false;

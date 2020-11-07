@@ -26,11 +26,11 @@ SettingsUI = (function() {
         generalPanel = $("#core_form_content");
         pluginPanel = $("#plugin_form_content");
         thisObject = this;
-        $("#general-menu").find("li").each(function(a) {
+        $("#core-menu").find("li").each(function(a) {
             $(this).click(thisObject.menuClick);
         });
 
-        $("#general_submit").click(this.configSubmit);
+        $("#core_submit").click(this.configSubmit);
         $("#plugin_submit").click(this.configSubmit);
         $("#account_add").click(function(f) {
             $("#account_box").modal('show');
@@ -99,10 +99,15 @@ SettingsUI = (function() {
         var c, b, g, f, d;
         d = $(this).attr('id').split('|'), c = d[0], g = d[1];
         b = $(this).text();
-        f = c === 'general' ? generalPanel : pluginPanel;
-        $.get( window.location.pathname + "/../json/load_config/" + c + '/' + g, function(e) {
+        f = c === 'core' ? generalPanel : pluginPanel;
+        $.get({
+            url: "{{url_for('json.load_config')}}",
+            data: {category: c, section: g},
+            traditional: true,
+            success: function(e) {
                 f.html(e);
-            });
+            }
+        })
     };
     a.prototype.configSubmit = function(d) {
         var c, b;

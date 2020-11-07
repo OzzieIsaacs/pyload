@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2020-11-01 13:58+0100\n"
-"PO-Revision-Date: 2020-11-07 07:04+0100\n"
+"PO-Revision-Date: 2020-11-07 08:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -219,19 +219,19 @@ msgstr "Remoteinterface Fehler: {}"
 
 #: src/pyload/core/threads/database_thread.py:142
 msgid "Filedatabase was deleted due to incompatible version."
-msgstr ""
+msgstr "Dateidatenbank wurde aufgrund inkompatibler Version gelöscht."
 
 #: src/pyload/core/threads/database_thread.py:154
 msgid "Filedatabase could NOT be converted."
-msgstr ""
+msgstr "Dateidatenbank konnte NICHT konvertiert werden."
 
 #: src/pyload/core/threads/database_thread.py:162
 msgid "Database was converted from v2 to v3."
-msgstr ""
+msgstr "Datenbank wurde von v2 nach v3 konvertiert."
 
 #: src/pyload/core/threads/database_thread.py:169
 msgid "Database was converted from v3 to v4."
-msgstr ""
+msgstr "Datenbank wurde von v3 nach v4 konvertiert"
 
 #: src/pyload/core/threads/database_thread.py:223
 msgid "Converting old Django DB"
@@ -284,7 +284,7 @@ msgstr "Download ist temporär offline: {}"
 #: src/pyload/core/threads/download_thread.py:114
 #: src/pyload/core/threads/download_thread.py:196
 msgid "Download failed: {name} | {msg}"
-msgstr ""
+msgstr "Herunterladen fehlgeschlagen: {name} | {msg}"
 
 #: src/pyload/core/threads/download_thread.py:177
 msgid "Download skipped: {name} due to {plugin}"
@@ -292,11 +292,11 @@ msgstr ""
 
 #: src/pyload/core/threads/info_thread.py:186
 msgid "Info Fetching for {name} failed | {err}"
-msgstr ""
+msgstr "Laden der Info für {name} fehlgeschlagen | {err}"
 
 #: src/pyload/core/threads/plugin_thread.py:72
 msgid "Debug Report written to {}"
-msgstr ""
+msgstr "Debug Report nach {} geschrieben "
 
 #: src/pyload/plugins/helpers.py:146
 msgid "Error performing periodical task"
@@ -322,15 +322,15 @@ msgstr "Credit Info konnte nicht erhalten werden"
 
 #: src/pyload/plugins/accounts/MegaDebridEu.py:58
 msgid "Unable to retrieve hosters list: Banned IP"
-msgstr ""
+msgstr "Hoster Liste konnte nicht geladen werden: IP geblockt"
 
 #: src/pyload/plugins/accounts/MegaDebridEu.py:62
 msgid "Unable to retrieve hosters list: error {}"
-msgstr ""
+msgstr "Hoster Liste konnte nicht geladen werden; Fehler {}"
 
 #: src/pyload/plugins/accounts/MegaDebridEu.py:78
 msgid "Unable to retrieve hoster list: {}"
-msgstr ""
+msgstr "Hoster Liste konnte nicht geladen werden: {}"
 
 #: src/pyload/plugins/accounts/MegaDebridEu.py:116
 #: src/pyload/plugins/accounts/MegaDebridEu.py:130
@@ -341,7 +341,7 @@ msgstr "Geblockte IP"
 
 #: src/pyload/plugins/accounts/MyfastfileCom.py:39
 msgid "Unable to get account information"
-msgstr ""
+msgstr "Account Informationen konnten nicht geladen werden"
 
 #: src/pyload/plugins/accounts/MyfastfileCom.py:51
 msgid "Invalid username or password"
@@ -387,10 +387,12 @@ msgstr "Unbekannte Antwort"
 #: src/pyload/plugins/accounts/UlozTo.py:43
 msgid "Unable to retrieve account information, unexpected response"
 msgstr ""
+"Account Informationen konnten nicht geladen werden, unerwartete Antwort"
 
 #: src/pyload/plugins/accounts/UlozTo.py:63
 msgid "Unable to retrieve account information, pattern not found"
 msgstr ""
+"Account Informationen konnten nicht geladen werden, Begriffe nicht gefunden"
 
 #: src/pyload/plugins/accounts/ZeveraCom.py:71
 msgid ""
@@ -419,7 +421,7 @@ msgstr "Displayzustand konnte nicht verändert werden"
 
 #: src/pyload/plugins/addons/AntiVirus.py:51
 msgid "Antivirus executable not found"
-msgstr ""
+msgstr "Ausführbare Antivirus Datei nicht gefunden"
 
 #: src/pyload/plugins/addons/AntiVirus.py:72
 msgid "virus scanning"
@@ -431,17 +433,17 @@ msgstr ""
 
 #: src/pyload/plugins/addons/AntiVirus.py:99
 msgid "Infected file"
-msgstr ""
+msgstr "Infizierte Datei"
 
 #: src/pyload/plugins/addons/AntiVirus.py:112
 msgid "Send2Trash lib not found, moving to quarantine instead"
-msgstr ""
+msgstr "Send2Trash Bibliothek nicht gefunden, verschiebe in Quarantäne"
 
 #: src/pyload/plugins/addons/AntiVirus.py:116
 #: src/pyload/plugins/addons/AntiVirus.py:125
 #: src/pyload/plugins/addons/AntiVirus.py:132
 msgid "file moving"
-msgstr ""
+msgstr "Verschiebe Datei"
 
 #: src/pyload/plugins/addons/AntiVirus.py:121
 msgid "Unable to move file to trash: {}, moving to quarantine instead"
@@ -449,17 +451,17 @@ msgstr ""
 
 #: src/pyload/plugins/addons/BypassCaptcha.py:95
 msgid "Could not send response"
-msgstr ""
+msgstr "Antwort konnte nicht gesendet werden"
 
 #: src/pyload/plugins/addons/BypassCaptcha.py:117
 #: src/pyload/plugins/addons/ImageTyperz.py:126
 msgid "Your account has not enough credits"
-msgstr ""
+msgstr "Der Account hat nicht genug Credits"
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:71
 #: src/pyload/plugins/addons/ExpertDecoders.py:36
 msgid "{} credits left"
-msgstr ""
+msgstr "{} Credits verfügbar"
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:83
 #: src/pyload/plugins/base/simple_decrypter.py:358
@@ -470,7 +472,7 @@ msgstr "Ungültige Url"
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:178
 msgid "Bad request: {}"
-msgstr ""
+msgstr "Fehlerhafte Anfrage: {}"
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:209
 msgid "Captcha result for ticket {}: {}"
@@ -482,7 +484,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:247
 msgid "Too many captchas in queue"
-msgstr ""
+msgstr "Zu viele Captchas in der Warteschlange"
 
 #: src/pyload/plugins/addons/Checksum.py:108
 msgid "Checksum validation is disabled in plugin configuration"
@@ -495,7 +497,7 @@ msgstr ""
 #: src/pyload/plugins/addons/Checksum.py:195
 #: src/pyload/plugins/addons/Checksum.py:310
 msgid "checksum verifying"
-msgstr ""
+msgstr "Überprüfe Checksumme"
 
 #: src/pyload/plugins/addons/Checksum.py:212
 #: src/pyload/plugins/addons/Checksum.py:332
@@ -505,7 +507,7 @@ msgstr ""
 #: src/pyload/plugins/addons/Checksum.py:216
 #: src/pyload/plugins/addons/Checksum.py:338
 msgid "checksum verified"
-msgstr ""
+msgstr "Checksumme überprüft"
 
 #: src/pyload/plugins/addons/Checksum.py:221
 #: src/pyload/plugins/addons/Checksum.py:344
@@ -515,7 +517,7 @@ msgstr ""
 #: src/pyload/plugins/addons/Checksum.py:237
 #: src/pyload/plugins/addons/Checksum.py:358
 msgid "Unsupported hashing algorithm"
-msgstr ""
+msgstr "Hash Algorithmus wird nicht unterstützt"
 
 #: src/pyload/plugins/addons/Checksum.py:242
 msgid "Unable to validate checksum for file: \"{}\""
@@ -525,7 +527,7 @@ msgstr ""
 #: src/pyload/plugins/base/container.py:76
 #: src/pyload/plugins/downloaders/QuickshareCz.py:78
 msgid "File not found"
-msgstr ""
+msgstr "Datei nicht gefunden"
 
 #: src/pyload/plugins/addons/Checksum.py:366
 msgid "All files specified by \"{}\" verified successfully"
@@ -550,11 +552,11 @@ msgstr ""
 
 #: src/pyload/plugins/addons/ClickNLoad.py:108
 msgid "Proxy listening on {}:{}"
-msgstr ""
+msgstr "Proxy lauscht auf {}:{}"
 
 #: src/pyload/plugins/addons/ClickNLoad.py:142
 msgid "Missing SSL lib"
-msgstr ""
+msgstr "SSL Bibliothek nicht gefunden"
 
 #: src/pyload/plugins/addons/ClickNLoad.py:143
 msgid "Please disable HTTPS in pyLoad settings"
@@ -562,11 +564,11 @@ msgstr ""
 
 #: src/pyload/plugins/addons/ClickNLoad.py:149
 msgid "SSL error: {}"
-msgstr ""
+msgstr "SSL Fehler: {}"
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:67
 msgid "Unknown CloudFlare response code {}"
-msgstr ""
+msgstr "Unbekannter CloudFlare Antwort Code {}"
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:86
 msgid "Detected CloudFlare's DDoS protection page"
@@ -606,7 +608,7 @@ msgstr "Kontostand"
 
 #: src/pyload/plugins/addons/DeathByCaptcha.py:189
 msgid "US${:.3f} ({} captchas left at {:.2f} cents each)"
-msgstr ""
+msgstr "US${:.3f} ({} Captchas übrig, zu je {:.2f} Cents )"
 
 #: src/pyload/plugins/addons/DeleteFinished.py:30
 msgid "including"
@@ -623,7 +625,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:63
 msgid "Invalid schedule"
-msgstr ""
+msgstr "Ungültige Abfolge"
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:95
 msgid "Stopping download server. (Running downloads will be aborted.)"
@@ -639,7 +641,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:115
 msgid "Setting download speed to FULL"
-msgstr ""
+msgstr "Setze Downloadgeschwindigkeit wurde auf FULL"
 
 #: src/pyload/plugins/addons/ExpertDecoders.py:85
 msgid "Your ExpertDecoders Account has not enough credits"
@@ -647,15 +649,15 @@ msgstr ""
 
 #: src/pyload/plugins/addons/ExpertDecoders.py:99
 msgid "Request refund"
-msgstr ""
+msgstr "Gutschrift anfordern"
 
 #: src/pyload/plugins/addons/ExpertDecoders.py:102
 msgid "Could not send refund request"
-msgstr ""
+msgstr "Anftrage für Gutschrift konnte nicht gesendet werden"
 
 #: src/pyload/plugins/addons/ExternalScripts.py:111
 msgid "Script `{}` is not executable"
-msgstr ""
+msgstr "Script `{}` ist nicht ausführbar"
 
 #: src/pyload/plugins/addons/ExternalScripts.py:120
 msgid "Activated scripts in folder `{}`: {}"
@@ -671,42 +673,42 @@ msgstr ""
 
 #: src/pyload/plugins/addons/ExternalScripts.py:168
 msgid "Runtime error: {}"
-msgstr ""
+msgstr "Laufzeitfehler:{}"
 
 #: src/pyload/plugins/addons/ExternalScripts.py:169
 #: src/pyload/plugins/addons/ExtractArchive.py:579
 #: src/pyload/plugins/downloaders/FilefactoryCom.py:93
 msgid "Unknown error"
-msgstr ""
+msgstr "Unbekannter Fehler"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:123
 msgid "No {} installed"
-msgstr ""
+msgstr "Kein {} installiert"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:125
 #: src/pyload/plugins/addons/ExtractArchive.py:128
 msgid "Could not activate: {}"
-msgstr ""
+msgstr "Aktivierung fehlgeschlagen: {}"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:139
 msgid "No Extract plugins activated"
-msgstr ""
+msgstr "Kein Entpackplugin aktiviert"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:242
 msgid "Check package: {}"
-msgstr ""
+msgstr "Überprüfte Paket: {}"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:311
 msgid "Extract to: {}"
-msgstr ""
+msgstr "Entpacke nach: {}"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:427
 msgid "No files found to extract"
-msgstr ""
+msgstr "Keine Dateien zum Auspacken gefunden"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:456
 msgid "archive testing"
-msgstr ""
+msgstr "Archiv wird geprüft"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:463
 msgid "Password protected"
@@ -714,52 +716,52 @@ msgstr "Passwortgeschützt"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:468
 msgid "CRC Error"
-msgstr ""
+msgstr "CRC Fehler"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:474
 msgid "Repairing..."
-msgstr ""
+msgstr "Repariere..."
 
 #: src/pyload/plugins/addons/ExtractArchive.py:475
 msgid "archive repairing"
-msgstr ""
+msgstr "Archiv reparieren"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:494
 msgid "archive extracting"
-msgstr ""
+msgstr "Archiv entpacken"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:527
 msgid "Deleting {} files"
-msgstr ""
+msgstr "Lösche {} Dateien"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:544
 #: src/pyload/plugins/addons/ExtractArchive.py:552
 msgid "Unable to move {} to trash"
-msgstr ""
+msgstr "{} kann nicht in Mülleimer verschoben werden"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:547
 msgid "Send2Trash lib not found"
-msgstr ""
+msgstr "Send2Trash Bibliothek nicht gefunden"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:560
 msgid "Moved {} to trash"
-msgstr ""
+msgstr "{} in Mülleimer verschoben"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:563
 msgid "Extracting finished"
-msgstr ""
+msgstr "Entpacken abgeschlossen"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:569
 msgid "Wrong passwordNo password found"
-msgstr ""
+msgstr "Flasches Passwort/Kein Passwort gefunden"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:573
 msgid "CRC mismatch"
-msgstr ""
+msgstr "CRC Differenz"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:576
 msgid "Archive error"
-msgstr ""
+msgstr "Archiv fehlerhaft"
 
 #: src/pyload/plugins/addons/ExtractArchive.py:583
 msgid "Extract failed"
@@ -767,33 +769,31 @@ msgstr "Auspacken fehlgeschlagen"
 
 #: src/pyload/plugins/addons/HotFolder.py:74
 msgid "Added {} from HotFolder"
-msgstr ""
+msgstr "{} von HotFolder hinzugefügt"
 
 #: src/pyload/plugins/addons/IRC.py:70
 msgid "Download finished: {name} @ {plugin} "
-msgstr ""
+msgstr "Download beendet: {name} @ {plugin} "
 
 #: src/pyload/plugins/addons/IRC.py:89
 msgid "New Captcha Request: {}"
 msgstr "Neue Captcha-Anfrage: {}"
 
 #: src/pyload/plugins/addons/IRC.py:91
-#, fuzzy
-#| msgid "Input the text on the captcha."
 msgid "Answer with 'c {} text on the captcha'"
-msgstr "Gib den Text aus dem Captcha ein."
+msgstr "Gib den 'c{}' Text aus dem Captcha ein."
 
 #: src/pyload/plugins/addons/IRC.py:112
 msgid "Connected to"
-msgstr ""
+msgstr "Verbunden mit"
 
 #: src/pyload/plugins/addons/IRC.py:113
 msgid "Switching to listening mode!"
-msgstr ""
+msgstr "Wechsele Zuhörer Modus!"
 
 #: src/pyload/plugins/addons/ImageTyperz.py:65
 msgid "Account balance: ${} left"
-msgstr ""
+msgstr "Account Guthaben: ${}"
 
 #: src/pyload/plugins/addons/ImageTyperz.py:141
 msgid "Bad captcha solution received, requested refund"
@@ -813,11 +813,11 @@ msgstr ""
 
 #: src/pyload/plugins/addons/LogMarker.py:35
 msgid "------------------- DAY MARK -------------------"
-msgstr ""
+msgstr "------------------- TAGESMARKE -------------------"
 
 #: src/pyload/plugins/addons/LogMarker.py:40
 msgid "------------------- HOUR MARK ------------------"
-msgstr ""
+msgstr "------------------- STUNDENMARKE ------------------"
 
 #: src/pyload/plugins/addons/MergeFiles.py:40
 msgid "Starting merging of"
@@ -838,7 +838,7 @@ msgstr ""
 #: src/pyload/plugins/addons/SkipRev.py:94
 #: src/pyload/plugins/addons/UnSkipOnFail.py:42
 msgid "unskipped"
-msgstr ""
+msgstr "Reaktiviert"
 
 #: src/pyload/plugins/addons/UnSkipOnFail.py:22
 msgid "Looking for skipped duplicates of: {} (pid:{})"
@@ -870,10 +870,8 @@ msgid "pyLoad is up to date!"
 msgstr "Keine Update für pyLoad gefunden!"
 
 #: src/pyload/plugins/addons/UpdateManager.py:197
-#, fuzzy
-#| msgid "New pyLoad version %s available!"
 msgid "***  New pyLoad {} available  ***"
-msgstr "Neue pyload Version verfügbar: %s"
+msgstr "***  Neue pyLoad {} verfügabar  ***"
 
 #: src/pyload/plugins/addons/UpdateManager.py:200
 msgid "***  Get it here: https://github.com/pyload/pyload/releases  ***"
@@ -906,7 +904,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/UpdateManager.py:381
 msgid "URL not found"
-msgstr ""
+msgstr "Url nicht gefunden"
 
 #: src/pyload/plugins/addons/UpdateManager.py:393
 msgid "Version mismatch"
@@ -923,7 +921,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/XFileSharing.py:124
 msgid "Handle {} {}{}: {}"
-msgstr ""
+msgstr "Bearbeite {} {}{}: {}"
 
 #: src/pyload/plugins/addons/XFileSharing.py:159
 msgid "Auto-discover new {}s"
@@ -948,7 +946,7 @@ msgstr ""
 #: src/pyload/plugins/anticaptchas/CircleCaptcha.py:804
 #: src/pyload/plugins/anticaptchas/CircleCaptcha.py:810
 msgid "Coords: {}"
-msgstr ""
+msgstr "Koordinaten: {}"
 
 #: src/pyload/plugins/anticaptchas/CoinHive.py:68
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:102
@@ -1044,7 +1042,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/account.py:303
 msgid "Adding user `{}`..."
-msgstr ""
+msgstr "Füge Benutzer `{}`... hinzu"
 
 #: src/pyload/plugins/base/account.py:307
 msgid "Error adding user `{}`"
@@ -1052,7 +1050,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/account.py:308
 msgid "User already exists"
-msgstr ""
+msgstr "Benutzer existiert bereits"
 
 #: src/pyload/plugins/base/account.py:338
 msgid "Updating account info for user `{}`..."
@@ -1060,7 +1058,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/account.py:354
 msgid "Removing user `{}`..."
-msgstr ""
+msgstr "Lösche Benutzer `{}`..."
 
 #: src/pyload/plugins/base/account.py:382
 msgid "Invalid time format `{}` for account `{}`, use 1:22-3:44"
@@ -1076,11 +1074,11 @@ msgstr ""
 
 #: src/pyload/plugins/base/account.py:436
 msgid "Error choosing user `{}`"
-msgstr ""
+msgstr "Fehler bei Auswahl von Benutzer `{}`"
 
 #: src/pyload/plugins/base/account.py:437
 msgid "User does not exists"
-msgstr ""
+msgstr "Benutzer existiert nicht"
 
 #: src/pyload/plugins/base/captcha.py:96
 msgid "Using OCR to decrypt captcha..."
@@ -1088,12 +1086,12 @@ msgstr ""
 
 #: src/pyload/plugins/base/captcha.py:107
 msgid "No OCR result"
-msgstr ""
+msgstr "Kein OCR Ergebnis"
 
 #: src/pyload/plugins/base/captcha.py:145
 #: src/pyload/plugins/base/captcha.py:188
 msgid "Captcha result: `{}`"
-msgstr ""
+msgstr "Captcha Ergebnis: `{"
 
 #: src/pyload/plugins/base/captcha.py:149
 #: src/pyload/plugins/base/captcha.py:192
@@ -1102,7 +1100,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/captcha.py:203
 msgid "Invalid captcha"
-msgstr ""
+msgstr "Ungültiges Captcha"
 
 #: src/pyload/plugins/base/captcha.py:211
 msgid "Correct captcha"
@@ -1110,24 +1108,24 @@ msgstr "Captcha is korrekt"
 
 #: src/pyload/plugins/base/captcha_service.py:25
 msgid "{} key not found"
-msgstr ""
+msgstr "{} Schlüssel nicht gefunden"
 
 #: src/pyload/plugins/base/container.py:43
 #: src/pyload/plugins/base/decrypter.py:48
 msgid "No link grabbed"
-msgstr ""
+msgstr "Kein Link gefunden"
 
 #: src/pyload/plugins/base/dead_decrypter.py:27
 msgid "Crypter is no longer available"
-msgstr ""
+msgstr "Crypter ist nicht länger verfügbar"
 
 #: src/pyload/plugins/base/dead_downloader.py:27
 msgid "Hoster is no longer available"
-msgstr ""
+msgstr "Hoster ist nicht länger verfügbar"
 
 #: src/pyload/plugins/base/decrypter.py:92
 msgid "Create package: {}"
-msgstr ""
+msgstr "Erzeuge Paket: {}"
 
 #: src/pyload/plugins/base/decrypter.py:93
 msgid "{} links"
@@ -1140,83 +1138,83 @@ msgstr ""
 #: src/pyload/plugins/base/downloader.py:100
 #: src/pyload/plugins/base/hoster.py:295
 msgid "Processing url: "
-msgstr ""
+msgstr "Verarbeite Url: "
 
 #: src/pyload/plugins/base/downloader.py:108
 msgid "Premium download failed"
-msgstr ""
+msgstr "Premium Download fehlgeschlagen"
 
 #: src/pyload/plugins/base/downloader.py:110
 msgid "Free download failed"
-msgstr ""
+msgstr "Free Download fehlgeschlagen"
 
 #: src/pyload/plugins/base/downloader.py:245
 msgid "IOError {}"
-msgstr ""
+msgstr "IOError {}"
 
 #: src/pyload/plugins/base/downloader.py:257
 msgid "File saved"
-msgstr ""
+msgstr "Datei gespeichert"
 
 #: src/pyload/plugins/base/downloader.py:338
 msgid "Error renaming `{}` to `{}`"
-msgstr ""
+msgstr "Fehler beim umbenennen von '{}' nach '{}'"
 
 #: src/pyload/plugins/base/downloader.py:344
 msgid "`{}` saved as `{}`"
-msgstr ""
+msgstr "`{}` als `{}` gespeichert"
 
 #: src/pyload/plugins/base/downloader.py:369
 msgid "No file to scan"
-msgstr ""
+msgstr "Keine Datei zu überprüfen"
 
 #: src/pyload/plugins/base/downloader.py:389
 msgid "Checking download..."
-msgstr ""
+msgstr "Überprüfe Download..."
 
 #: src/pyload/plugins/base/downloader.py:390
 msgid "checking"
-msgstr ""
+msgstr "überprüfe"
 
 #: src/pyload/plugins/base/downloader.py:396
 msgid "No file downloaded"
-msgstr ""
+msgstr "Keine Datei heruntergeladen"
 
 #: src/pyload/plugins/base/downloader.py:401
 msgid "Empty file"
-msgstr ""
+msgstr "Leere Datei"
 
 #: src/pyload/plugins/base/downloader.py:407
 msgid "File is OK"
-msgstr ""
+msgstr "Datei ist OK"
 
 #: src/pyload/plugins/base/downloader.py:425
 msgid "Filesize: {} KiB"
-msgstr ""
+msgstr "Dateigröße: {} KiB"
 
 #: src/pyload/plugins/base/downloader.py:426
 msgid "Traffic left for user `{}`: {} KiB"
-msgstr ""
+msgstr "Verbleibendes Transfervolumen für Benutzer `{}`: {} KiB"
 
 #: src/pyload/plugins/base/downloader.py:537
 msgid "File exists"
-msgstr ""
+msgstr "Datei vorhanden"
 
 #: src/pyload/plugins/base/hoster.py:205
 msgid "Link name: {}"
-msgstr ""
+msgstr "Link Name: {}"
 
 #: src/pyload/plugins/base/hoster.py:218
 msgid "Link size: {} ({} bytes)"
-msgstr ""
+msgstr "Link Größe: {} ({} bytes)"
 
 #: src/pyload/plugins/base/hoster.py:221
 msgid "Link size: N/D"
-msgstr ""
+msgstr "Link Größe: N/D"
 
 #: src/pyload/plugins/base/hoster.py:227
 msgid "Link status: "
-msgstr ""
+msgstr "Link Status: "
 
 #: src/pyload/plugins/base/hoster.py:235
 msgid "Grabbing link info..."
@@ -1236,7 +1234,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/hoster.py:372
 msgid "Requiring reconnection..."
-msgstr ""
+msgstr "Neuverbinden erfoderlich..."
 
 #: src/pyload/plugins/base/hoster.py:374
 msgid "Reconnection ignored due logged account"
@@ -1244,15 +1242,15 @@ msgstr ""
 
 #: src/pyload/plugins/base/hoster.py:423
 msgid "{} error"
-msgstr ""
+msgstr "{} Fehler"
 
 #: src/pyload/plugins/base/hoster.py:424
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: src/pyload/plugins/base/hoster.py:426
 msgid "{type}: {msg} | Plugin may be out of date"
-msgstr ""
+msgstr "{type}: {msg} | Plugin eventuell veraltet"
 
 #: src/pyload/plugins/base/hoster.py:458
 msgid "Restart plugin"
@@ -1260,11 +1258,11 @@ msgstr "Plugin neu starten"
 
 #: src/pyload/plugins/base/hoster.py:460
 msgid "Fallback to free processing"
-msgstr ""
+msgstr "Fall zurück auf Free Download"
 
 #: src/pyload/plugins/base/hoster.py:468
 msgid "Url was already processed as free"
-msgstr ""
+msgstr "Url wurde bereits als Free Download verarbeitet"
 
 #: src/pyload/plugins/base/hoster.py:506
 msgid "Retry Captcha"
@@ -1280,7 +1278,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/multi_account.py:215
 msgid "No {} loaded"
-msgstr ""
+msgstr "Nummer {} geladen"
 
 #: src/pyload/plugins/base/multi_account.py:232
 msgid "{}s not overwritten: {}"
@@ -1290,11 +1288,11 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:336
 #: src/pyload/plugins/downloaders/Http.py:92
 msgid "Waiting 1 minute and retry"
-msgstr ""
+msgstr "Warte 1 Minute und versuche es erneute"
 
 #: src/pyload/plugins/base/multi_account.py:278
 msgid "No hoster list retrieved"
-msgstr ""
+msgstr "Keine Hoster Liste erhalten"
 
 #: src/pyload/plugins/base/multi_account.py:323
 msgid "Could not reload hoster list - invalid account, retry in 5 minutes"
@@ -1353,16 +1351,12 @@ msgid "pyLoad updated"
 msgstr "pyLoad wurde aktualisiert"
 
 #: src/pyload/plugins/base/notifier.py:59
-#, fuzzy
-#| msgid "Restart pyLoad"
 msgid "Restarting pyLoad"
 msgstr "pyLoad neustarten"
 
 #: src/pyload/plugins/base/notifier.py:61
-#, fuzzy
-#| msgid "Quit pyLoad"
 msgid "Exiting pyLoad"
-msgstr "pyLoad beenden"
+msgstr "Verlasse pyLoad"
 
 #: src/pyload/plugins/base/notifier.py:67
 #: src/pyload/plugins/downloaders/ExtabitCom.py:77
@@ -1379,36 +1373,32 @@ msgstr ""
 
 #: src/pyload/plugins/base/notifier.py:73
 msgid "Waiting reconnection"
-msgstr ""
+msgstr "Warte auf Neuverbinden"
 
 #: src/pyload/plugins/base/notifier.py:73
 #: src/pyload/plugins/base/notifier.py:79
 msgid "Current IP: {}"
-msgstr ""
+msgstr "Aktuelle IP:{}"
 
 #: src/pyload/plugins/base/notifier.py:79
-#, fuzzy
-#| msgid "Reconnect:"
 msgid "Reconnection failed"
-msgstr "Erneut verbinden:"
+msgstr "Erneut verbinden fehlgeschlagen"
 
 #: src/pyload/plugins/base/notifier.py:85
 msgid "Package finished"
-msgstr ""
+msgstr "Paket beendet"
 
 #: src/pyload/plugins/base/notifier.py:91
 msgid "Package failed"
-msgstr ""
+msgstr "Paket fehlgeschlagen"
 
 #: src/pyload/plugins/base/notifier.py:97
 msgid "Download finished"
 msgstr "Download beendet"
 
 #: src/pyload/plugins/base/notifier.py:103
-#, fuzzy
-#| msgid "Download Folder:"
 msgid "Download failed"
-msgstr "Downloadordner:"
+msgstr "Download fehlgeschlagen"
 
 #: src/pyload/plugins/base/notifier.py:106
 msgid "All downloads processed"
@@ -1424,24 +1414,24 @@ msgstr ""
 
 #: src/pyload/plugins/base/ocr.py:142
 msgid "OCR result: "
-msgstr ""
+msgstr "OCR Ergebnis:"
 
 #: src/pyload/plugins/base/plugin.py:115
 msgid "Path deleted: "
-msgstr ""
+msgstr "Datei gelöscht:"
 
 #: src/pyload/plugins/base/sevenzip.py:118
 msgid "Header protected"
-msgstr ""
+msgstr "Header geschützt"
 
 #: src/pyload/plugins/base/sevenzip.py:161
 #: src/pyload/plugins/base/sevenzip.py:191 src/pyload/plugins/base/unrar.py:182
 msgid "Process return code: {}"
-msgstr ""
+msgstr "Verarbeite Antwort Code: {}"
 
 #: src/pyload/plugins/base/sevenzip.py:188 src/pyload/plugins/base/unrar.py:211
 msgid "Cannot open file"
-msgstr ""
+msgstr "Datei kann nicht geöffnet werden"
 
 #: src/pyload/plugins/base/simple_decrypter.py:184
 #: src/pyload/plugins/base/simple_downloader.py:230
@@ -1459,13 +1449,11 @@ msgstr ""
 
 #: src/pyload/plugins/base/simple_decrypter.py:213
 msgid "Direct link detected"
-msgstr ""
+msgstr "Direkten Link gefunden"
 
 #: src/pyload/plugins/base/simple_decrypter.py:215
-#, fuzzy
-#| msgid "Download directory not found."
 msgid "Direct link not found"
-msgstr "Downloadverzeichnis nicht gefunden."
+msgstr "Direkter Link nicht gefunden"
 
 #: src/pyload/plugins/base/simple_decrypter.py:229
 msgid "Free decrypting not implemented"
@@ -1495,7 +1483,7 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:352
 #: src/pyload/plugins/base/xfs_account.py:201
 msgid "Checking for link errors..."
-msgstr ""
+msgstr "Überprüfe Link auf Fehler..."
 
 #: src/pyload/plugins/base/simple_decrypter.py:287
 #: src/pyload/plugins/base/simple_downloader.py:355
@@ -1524,10 +1512,8 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:391
 #: src/pyload/plugins/base/simple_downloader.py:423
 #: src/pyload/plugins/downloaders/DatafileCom.py:93
-#, fuzzy
-#| msgid "Download Folder:"
 msgid "Download limit exceeded"
-msgstr "Downloadordner:"
+msgstr "Transfervolumen überschritten"
 
 #: src/pyload/plugins/base/simple_decrypter.py:342
 #: src/pyload/plugins/base/simple_downloader.py:434
@@ -1554,10 +1540,8 @@ msgid "Direct download link detected"
 msgstr ""
 
 #: src/pyload/plugins/base/simple_downloader.py:290
-#, fuzzy
-#| msgid "Download directory not found."
 msgid "Direct download link not found"
-msgstr "Downloadverzeichnis nicht gefunden."
+msgstr "Direkter Downloadlink nicht gefunden"
 
 #: src/pyload/plugins/base/simple_downloader.py:304
 msgid "Processing as premium download..."
@@ -1581,7 +1565,7 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:335
 #: src/pyload/plugins/downloaders/Http.py:92
 msgid "Check result: "
-msgstr ""
+msgstr "Überprüfungs Ergebnis: "
 
 #: src/pyload/plugins/base/simple_downloader.py:342
 msgid "Checking file (with custom rules)..."
@@ -1597,30 +1581,24 @@ msgstr ""
 #: src/pyload/plugins/base/simple_downloader.py:370
 #: src/pyload/plugins/base/simple_downloader.py:440
 #: src/pyload/plugins/downloaders/FilefactoryCom.py:62
-#, fuzzy
-#| msgid "Name of subfolder for these downloads."
 msgid "File too large for free download"
-msgstr "Name des Unterordners für diese Downloads."
+msgstr "Datei zu groß für Free Download"
 
 #: src/pyload/plugins/base/simple_downloader.py:491
 msgid "Free download not implemented"
 msgstr ""
 
 #: src/pyload/plugins/base/simple_downloader.py:495
-#, fuzzy
-#| msgid "Download directory not found."
 msgid "Free download link not found"
-msgstr "Downloadverzeichnis nicht gefunden."
+msgstr "Freedownloadlink nicht gefunden"
 
 #: src/pyload/plugins/base/simple_downloader.py:501
 msgid "Premium download not implemented"
 msgstr ""
 
 #: src/pyload/plugins/base/simple_downloader.py:506
-#, fuzzy
-#| msgid "Download directory not found."
 msgid "Premium download link not found"
-msgstr "Downloadverzeichnis nicht gefunden."
+msgstr "Premiumdownloadlink nicht gefunden"
 
 #: src/pyload/plugins/base/xfs_account.py:62
 #: src/pyload/plugins/base/xfs_decrypter.py:55
@@ -1630,7 +1608,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/xfs_downloader.py:123
 msgid "Too many OPs"
-msgstr ""
+msgstr "Zu viele Operationen"
 
 #: src/pyload/plugins/base/xfs_downloader.py:131
 msgid "Only registered or premium users can use url leech feature"
@@ -1643,7 +1621,7 @@ msgstr ""
 
 #: src/pyload/plugins/base/xfs_downloader.py:167
 msgid "Can not leech file"
-msgstr ""
+msgstr "Datei kann nicht geleecht werden"
 
 #: src/pyload/plugins/base/xfs_downloader.py:172
 msgid "You've used all Leech traffic today"
@@ -1667,11 +1645,11 @@ msgstr ""
 
 #: src/pyload/plugins/containers/TXT.py:72
 msgid "Failed to flush list"
-msgstr ""
+msgstr "Fehler beim aktualisieren der Liste"
 
 #: src/pyload/plugins/decrypters/ChipDe.py:35
 msgid "Failed to find the URL"
-msgstr ""
+msgstr "Fehler beim Finden der Url"
 
 #: src/pyload/plugins/decrypters/CloudMailRuFolder.py:38
 msgid "Json pattern not found"
@@ -1705,14 +1683,12 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/DailymotionComFolder.py:103
 #: src/pyload/plugins/decrypters/YoutubeComFolder.py:150
-#, fuzzy
-#| msgid "not available"
 msgid "No playlist available"
-msgstr "nicht verfügbar"
+msgstr "Keine Playliste verfügbar"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:134
 msgid "Found {} mirrors"
-msgstr ""
+msgstr "{} Alternativen gefunden"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:149
 msgid "Folder is password protected"
@@ -1746,7 +1722,7 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/HoerbuchIn.py:61
 msgid "Bad URL"
-msgstr ""
+msgstr "Url fehlerhaft"
 
 #: src/pyload/plugins/decrypters/ImgurCom.py:68
 msgid "{}_{}"
@@ -1774,11 +1750,11 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/LixIn.py:48
 msgid "Link doesn't seem valid"
-msgstr ""
+msgstr "Link scheint nicht gültig zu sein"
 
 #: src/pyload/plugins/decrypters/LixIn.py:60
 msgid "No captcha solved"
-msgstr "Keine Captcha gelöst "
+msgstr "Keine Captchas gelöst"
 
 #: src/pyload/plugins/decrypters/LixIn.py:67
 msgid "Unable to find destination url"
@@ -1786,7 +1762,7 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/MegaCoNzFolder.py:59
 msgid "https://mega.co.nz/#N!{}!{}###n={}"
-msgstr ""
+msgstr "https://mega.co.nz/#N!{}!{}###n={}"
 
 #: src/pyload/plugins/decrypters/MegadyskPlFolder.py:86
 #: src/pyload/plugins/downloaders/MegadyskPl.py:97
@@ -1853,7 +1829,7 @@ msgstr "Seite 1 Url nicht gefunden"
 
 #: src/pyload/plugins/downloaders/BezvadataCz.py:50
 msgid "FreeForm"
-msgstr ""
+msgstr "Free Formular"
 
 #: src/pyload/plugins/downloaders/BezvadataCz.py:65
 msgid "Page 2 URL not found"
@@ -1866,7 +1842,7 @@ msgstr "Seite 2 Url nicht gefunden"
 #: src/pyload/plugins/downloaders/DepositfilesCom.py:93
 #: src/pyload/plugins/downloaders/EuroshareEu.py:51
 msgid "Download limit reached"
-msgstr ""
+msgstr "Downloadlimit erreicht"
 
 #: src/pyload/plugins/downloaders/BigfileTo.py:81
 msgid "Downloadlimit reached, please wait or reconnect"
@@ -1886,7 +1862,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:69
 msgid "User {} has {} KiB left"
-msgstr ""
+msgstr "Benutzer {} hat {} KiB übrig"
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:75
 msgid "Not enough credit to download file: {}"
@@ -1929,17 +1905,17 @@ msgstr "Captcha nicht gefunden"
 
 #: src/pyload/plugins/downloaders/DateiTo.py:56
 msgid "Data pattern not found"
-msgstr ""
+msgstr "Data Begriff nicht gefunden"
 
 #: src/pyload/plugins/downloaders/DefaultPlugin.py:25
 msgid "No plugin matched"
-msgstr ""
+msgstr "Kein passenden Plugin"
 
 #: src/pyload/plugins/downloaders/DepositfilesCom.py:82
 #: src/pyload/plugins/downloaders/DepositfilesCom.py:83
 #: src/pyload/plugins/downloaders/RapidgatorNet.py:164
 msgid "Captcha pattern not found"
-msgstr ""
+msgstr "Captcha Begriff nicht gefunden"
 
 #: src/pyload/plugins/downloaders/EdiskCz.py:46
 msgid "ACTION_PATTERN not found"
@@ -1948,7 +1924,7 @@ msgstr "ACTION_PATTERN nicht gefudnen"
 #: src/pyload/plugins/downloaders/EdiskCz.py:59
 #: src/pyload/plugins/downloaders/Ftp.py:95
 msgid "Unexpected server response"
-msgstr ""
+msgstr "Unerwartete Server Antwort"
 
 #: src/pyload/plugins/downloaders/EuroshareEu.py:59
 #: src/pyload/plugins/downloaders/UpleaCom.py:89
@@ -2023,11 +1999,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FileStoreTo.py:49
 msgid "DID pattern not found"
-msgstr ""
+msgstr "DID Begriff nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilecloudIo.py:48
 msgid "requestUrl not found"
-msgstr ""
+msgstr "requestUrl nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilecloudIo.py:56
 msgid "post parameters pattern not found"
@@ -2035,11 +2011,11 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/FilefactoryCom.py:65
 msgid "All free slots are busy"
-msgstr ""
+msgstr "Alle verfügbaren Free  Slots sind belegt"
 
 #: src/pyload/plugins/downloaders/FilefactoryCom.py:89
 msgid "Parallel downloads"
-msgstr ""
+msgstr "Parallele Downloads"
 
 #: src/pyload/plugins/downloaders/FilepostCom.py:40
 msgid "Token"
@@ -2105,10 +2081,8 @@ msgid "Couldn't retrieve download url"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:142
-#, fuzzy
-#| msgid "Download directory not found."
 msgid "Download limited reached for today"
-msgstr "Downloadverzeichnis nicht gefunden."
+msgstr "Downloadlimit für heute erreicht"
 
 #: src/pyload/plugins/downloaders/FileserveCom.py:154
 msgid "Failed getting wait time"
@@ -2138,7 +2112,7 @@ msgstr "Schlechter Versuch"
 
 #: src/pyload/plugins/downloaders/FreakshareCom.py:68
 msgid "File not downloadable"
-msgstr ""
+msgstr "Datei kann nicht heruntergeladen werden"
 
 #: src/pyload/plugins/downloaders/FreakshareCom.py:75
 msgid "No Download server"
@@ -2151,10 +2125,8 @@ msgid "Download is password protected"
 msgstr ""
 
 #: src/pyload/plugins/downloaders/FshareVn.py:68
-#, fuzzy
-#| msgid "Download directory not found."
 msgid "Free Download form not found"
-msgstr "Downloadverzeichnis nicht gefunden."
+msgstr "Free Download Formular nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FshareVn.py:76
 msgid "Expected JSON data"
@@ -2186,7 +2158,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:46
 msgid "Reached daily limit"
-msgstr ""
+msgstr "Tageslimit erreicht"
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:53
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:56
@@ -2280,7 +2252,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:381
 msgid "Checksums do not match"
-msgstr "Checksummen stimmen nicht überein."
+msgstr "Checksummen stimmen nicht überein"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:430
 msgid "File exists."
@@ -2306,7 +2278,7 @@ msgstr "Besitzer: {}"
 #: src/pyload/plugins/downloaders/MegaCoNz.py:451
 #: src/pyload/plugins/downloaders/MegaCoNz.py:452
 msgid "Invalid key length"
-msgstr ""
+msgstr "Ungültige Schlüssellänge"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:472
 msgid "Decryption failed"
@@ -2441,17 +2413,17 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/PornovkaCz.py:30
 msgid "Data url not found"
-msgstr ""
+msgstr "Daten Url nicht gefunden"
 
 #: src/pyload/plugins/downloaders/PornovkaCz.py:35
 #: src/pyload/plugins/downloaders/YesPornPleaseCom.py:38
 msgid "Video url not found"
-msgstr ""
+msgstr "Video Url nicht gefunden"
 
 #: src/pyload/plugins/downloaders/PromptfileCom.py:38
 #: src/pyload/plugins/downloaders/UpstoreNet.py:49
 msgid "CHASH_PATTERN not found"
-msgstr ""
+msgstr "CHASH_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/downloaders/QuickshareCz.py:50
 msgid "User not logged in"
@@ -2840,7 +2812,7 @@ msgstr "Quellen konnten nicht gefunden werden!"
 
 #: src/pyload/plugins/downloaders/XHamsterCom.py:81
 msgid "Could not find mp4 sources!"
-msgstr "mp4 Quellen konnten nicht gefunden werden!"
+msgstr "MP4 Quellen konnten nicht gefunden werden!"
 
 #: src/pyload/plugins/downloaders/YesPornPleaseCom.py:33
 msgid "Iframe url not found"
@@ -2917,13 +2889,13 @@ msgstr "Benutzer Berechtigungen"
 #: src/pyload/webui/app/themes/modern/templates/settings.html:17
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:17
 msgid "Quit pyLoad"
-msgstr "pyLoad beenden"
+msgstr "Beenden pyLoad"
 
 #: src/pyload/webui/app/templates/admin.html:14
 #: src/pyload/webui/app/themes/modern/templates/settings.html:18
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:18
 msgid "Restart pyLoad"
-msgstr "pyLoad neustarten"
+msgstr "Starte pyLoad neu"
 
 #: src/pyload/webui/app/templates/admin.html:18
 #: src/pyload/webui/app/templates/login.html:30
@@ -3461,7 +3433,7 @@ msgstr "Python Version:"
 
 #: src/pyload/webui/app/templates/info.html:37
 msgid "OS platform:"
-msgstr "Betriebssystem"
+msgstr "Betriebssystem:"
 
 #: src/pyload/webui/app/templates/info.html:42
 #: src/pyload/webui/app/themes/modern/templates/info.html:37

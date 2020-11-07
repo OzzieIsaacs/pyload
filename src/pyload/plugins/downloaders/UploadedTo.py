@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import os
 import re
 import time
+import json
 
 from pyload.core.network.request_factory import get_url
 
@@ -47,8 +47,8 @@ class UploadedTo(SimpleDownloader):
     LINK_FREE_PATTERN = r"url:\s*'(.+?)'"
     LINK_PREMIUM_PATTERN = r'<div class="tfree".*\s*<form method="post" action="(.+?)"'
 
-    WAIT_PATTERN = r"Current waiting period|Aktuelle Wartezeit): <span>(\d+)"
-    DL_LIMIT_PATTERN = r"You have reached the max. number of possible free downloads for this hour"    
+    WAIT_PATTERN = r"(?:Current waiting period|Aktuelle Wartezeit): <span>(\d+)"
+    DL_LIMIT_PATTERN = r"You have reached the max. number of possible free downloads for this hour"
 
     @classmethod
     def api_info(cls, url):
@@ -71,13 +71,13 @@ class UploadedTo(SimpleDownloader):
                         'status': 2,
                         'sha1': api[3]
                     })
-                    name = api[4].strip()
-                    try:
+                    info['name'] = api[4].strip()
+                    '''try:
                         info['name'] = name.decode('latin1')
                     except (UnicodeDecodeError, UnicodeEncodeError):
                         info['name'] = name.decode('utf8')
                     except (UnicodeDecodeError, UnicodeEncodeError):
-                        info['name'] = name
+                        info['name'] = name'''
 
                 else:
                     info["status"] = 1

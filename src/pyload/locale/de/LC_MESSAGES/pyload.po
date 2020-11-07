@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2020-11-01 13:58+0100\n"
-"PO-Revision-Date: 2020-11-07 08:25+0100\n"
+"PO-Revision-Date: 2020-11-07 19:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -1091,7 +1091,7 @@ msgstr "Kein OCR Ergebnis"
 #: src/pyload/plugins/base/captcha.py:145
 #: src/pyload/plugins/base/captcha.py:188
 msgid "Captcha result: `{}`"
-msgstr "Captcha Ergebnis: `{"
+msgstr "Captcha Ergebnis: `{}'"
 
 #: src/pyload/plugins/base/captcha.py:149
 #: src/pyload/plugins/base/captcha.py:192

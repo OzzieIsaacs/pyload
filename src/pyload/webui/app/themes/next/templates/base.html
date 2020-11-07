@@ -88,10 +88,6 @@
     		  <li ondragstart="return false;" {{ selected('admin') }}>
               <a href="{{url_for('app.admin')}}" class="action profile" rel="nofollow"><span class="glyphicon glyphicon-cog"></span><span class="hidden-sm">{{_("Administration")}}</span></a>
           </li>
-	        <li class="divider-vertical"></li>
-	        <li ondragstart="return false;">
-		          <a role="button" id="action_add1" data-toggle="modal" data-target="#add_box" class="action_add" title="{{_('Add Package')}}"><span class="glyphicon glyphicon-plus"></span></a>
-	        </li>
         {% endif %}
         {% endif %}
         {% endblock %}

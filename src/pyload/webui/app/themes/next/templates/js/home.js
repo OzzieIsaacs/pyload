@@ -51,7 +51,7 @@ function EntryManager(){
         {% endif %}
         {% endfor %}];
 
-        container = $('#LinksAktiv');
+        container = $('#LinksActive');
 
         this.parseFromContent();
 
@@ -235,7 +235,12 @@ function LinkEntry(id){
         this.fadeBar = this.elements.pgbTr;
 
         $(this.elements.remove).click(function(){
-            $.get(window.location.pathname + "/../json/abort_link/" + id)});
+            $.get({
+                url: "{{url_for('json.abort_link')}}",
+                data: {id: id},
+                traditional: true,
+            })
+        });
     };
     this.update = function(item){
             $(this.elements.name).text(item.name);

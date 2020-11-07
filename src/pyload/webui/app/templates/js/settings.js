@@ -31,7 +31,7 @@ class SettingsUI {
     this.menu.append($$("#plugin-menu li"));
 
     this.name = $("tabsback");
-    this.general = $("general_form_content");
+    this.general = $("core_form_content");
     this.plugin = $("plugin_form_content");
 
     for (let el of Array.from(this.menu)) { el.addEvent('click', this.menuClick.bind(this)); }

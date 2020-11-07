@@ -23,7 +23,7 @@ SettingsUI = (function() {
             $('#toptabs a[href="' + activeTab + '"]').tab('show');
         }
 
-        generalPanel = $("#general_form_content");
+        generalPanel = $("#core_form_content");
         pluginPanel = $("#plugin_form_content");
         thisObject = this;
         $("#general-menu").find("li").each(function(a) {

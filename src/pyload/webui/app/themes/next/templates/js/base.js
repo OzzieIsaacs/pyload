@@ -1,8 +1,8 @@
 {% autoescape true %}
-// NExt
+
 var desktopNotifications;
 var interactiveCaptchaHandlerInstance = null;
-//root = this;
+
 
 function indicateLoad() {
     $("#load-indicator").css('opacity',1);
@@ -232,7 +232,7 @@ $(function() {
         }
     });
 
-    $("#action_add").click(function() {
+    $(".action_add").click(function() {
         $("#add_form").trigger("reset");
     });
 
@@ -276,7 +276,7 @@ $(function() {
         });
     });
 
-    $("#cap_info").click(function() {
+    $(".cap_info").click(function() {
         load_captcha("get", "");
     });
 
@@ -309,10 +309,10 @@ $(function() {
 function LoadJsonToContent(a) {
     var notification;
     $("#speed").text(humanFileSize(a.speed) + "/s");
-    $("#aktiv").text(a.active);
-    $("#aktiv_from").text(a.queue);
-    $("#aktiv_total").text(a.total);
-    var $cap_info = $("#cap_info");
+    $("#actives").text(a.active);
+    $("#actives_from").text(a.queue);
+    $("#actives_total").text(a.total);
+    var $cap_info = $(".cap_info");
     if (a.captcha) {
         var notificationVisible = ($cap_info.css("display") !== "none");
         if (!notificationVisible) {

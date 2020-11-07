@@ -35,10 +35,15 @@ function PackageUI (url, type){
                 }
                 var order = ui.item.data('pid') + '|' + newIndex;
                 indicateLoad();
-                $.get(window.location.pathname + "/../json/package_order/" + order, function () {
-                    indicateFinish();
-                    return true;
-                } ).fail(function () {
+                $.get({
+                    url: "{{url_for('json.package_order')}}",
+                    data: {pid: ui.item.data('pid'), pos: newIndex},
+                    traditional: true,
+                    success: function () {
+                        indicateFinish();
+                        return true;
+                    }
+                }).fail(function () {
                     indicateFail();
                     return false;
                 });

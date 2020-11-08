@@ -2,7 +2,6 @@
 
 import logging
 import threading
-import time
 
 from cheroot import wsgi
 from cheroot.ssl.builtin import BuiltinSSLAdapter
@@ -57,14 +56,8 @@ class WebServerThread(threading.Thread):
         self.server.error_log = lambda *args, **kwgs: self.log.log(
             kwgs.get("level", logging.ERROR), args[0], exc_info=self.pyload.debug
         )
-        try:
-            self.server.start()
-        except (OSError) as exc:
-            self.log.error(exc)
-            time.sleep(240)
-            return self.run()
-        except (KeyboardInterrupt, IOError, SystemExit):
-            self.stop()
+
+        self.server.start()
 
     def stop(self):
         if not self.develop:
@@ -82,7 +75,19 @@ class WebServerThread(threading.Thread):
                 scheme="https" if self.use_ssl else "http", host=self.host, port=self.port
             )
         )
-        if self.develop:
-            self._run_develop()
-        else:
-            self._run_produc()
+
+        try:
+            if self.develop:
+                self._run_develop()
+            else:
+                self._run_produc()
+
+        except OSError as exc:
+            #: Unfortunately, CherryPy raises socket.error without setting errno :(
+            if exc.errno == 98 or isinstance(exc.args[0], str) and "Errno 98" in exc.args[0]:
+                self.log.fatal(
+                    self._("** FATAL ERROR ** Could not start web server - Address Already in Use | Exiting pyLoad")
+                )
+                self.pyload.api.kill()
+            else:
+                raise

@@ -5,14 +5,13 @@ from base64 import standard_b64decode
 from functools import wraps
 from urllib.parse import unquote
 
-import flask
-from flask.json import jsonify
-
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
-from pyload.core.utils.misc import eval_js
+import flask
+from flask.json import jsonify
 from pyload.core.utils.convert import to_str
+from pyload.core.utils.misc import eval_js
 
 from .app_blueprint import bp as app_bp
 
@@ -104,18 +103,16 @@ def addcrypted2():
     jk = eval_js(f"{jk} f()")
 
     try:
-        key = bytes.fromhex(jk)
+        IV = key = bytes.fromhex(jk)
     except Exception:
         return "Could not decrypt key", 500
-
-    IV = key
 
     cipher = Cipher(
         algorithms.AES(key), modes.CBC(IV), backend=default_backend()
     )
     decryptor = cipher.decryptor()
     decrypted = decryptor.update(crypted) + decryptor.finalize()
-    urls = to_str(decrypted).replace("\x00", "").replace("\r","").split("\n")
+    urls = to_str(decrypted).replace("\x00", "").replace("\r", "").split("\n")
     urls = [url for url in urls if url.strip()]
 
     api = flask.current_app.config["PYLOAD_API"]
@@ -180,12 +177,12 @@ def checksupport():
 def jdcheck():
     rep = "jdownloader=true;\r\n"
     rep += "var version='42707';\r\n"
-    comp = flask.make_response(rep)
-    comp.headers['Server'] = 'AppWork GmbH HttpServer'
-    comp.headers['Connection'] = 'close'
-    comp.headers['Content-Type'] = 'text/html'
-    comp.headers['Access-Control-Max-Age'] = '1800'
-    comp.headers['Access-Control-Allow-Origin'] = '*'
-    comp.headers['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST'
+    resp = flask.make_response(rep)
+    resp.headers['Server'] = 'AppWork GmbH HttpServer'
+    resp.headers['Connection'] = 'close'
+    resp.headers['Content-Type'] = 'text/html'
+    resp.headers['Access-Control-Max-Age'] = '1800'
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST'
 
-    return comp
+    return resp

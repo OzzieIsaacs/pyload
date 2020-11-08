@@ -69,7 +69,7 @@ class TurbobitNet(SimpleDownloader):
 
         self.req.http.c.setopt(pycurl.HTTPHEADER, ["X-Requested-With: XMLHttpRequest"])
         self.data = self.load(
-            "http://turbobit.net/download/getLinkTimeout/{}".format(
+            "https://turbobit.net/download/getLinkTimeout/{}".format(
                 self.info["pattern"]["ID"]
             ),
             ref=self.free_url,
@@ -78,14 +78,14 @@ class TurbobitNet(SimpleDownloader):
 
         if "/download/started/" in self.data:
             self.data = self.load(
-                "http://turbobit.net/download/started/{}".format(
+                "https://turbobit.net/download/started/{}".format(
                     self.info["pattern"]["ID"]
                 )
             )
 
             m = re.search(self.LINK_FREE_PATTERN, self.data)
             if m is not None:
-                self.link = "http://turbobit.net{}".format(m.group(1))
+                self.link = "https://turbobit.net{}".format(m.group(1))
 
     def solve_captcha(self):
         action, inputs = self.parse_html_form("action='#'")

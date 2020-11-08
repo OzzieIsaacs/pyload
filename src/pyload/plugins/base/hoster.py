@@ -351,7 +351,7 @@ class BaseHoster(BasePlugin):
             seconds = 0
 
         if reconnect is None:
-            reconnect = seconds > self.config.get("max_wait", 10) * 60
+            reconnect = float(seconds) > self.config.get("max_wait", 10) * 60
 
         self.set_reconnect(reconnect)
 

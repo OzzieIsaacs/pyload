@@ -172,13 +172,13 @@ const set_captcha = function(data) {
         $('cap_title').set('text', '{{_("Please click on the right captcha position")}}');
         $('cap_submit').setStyle('display', 'none');
         return $('cap_textual').setStyle('display', 'none');
-    } else if (a.result_type === "interactive") {
-        $("#cap_box #cap_title").text("");
+    } else if (data.result_type === "interactive") {
+        $("cap_title").set('text', "");
         if(interactiveCaptchaHandlerInstance == null) {
             interactiveCaptchaHandlerInstance = new interactiveCaptchaHandler("cap_interactive_iframe", "cap_interactive_loading", submit_interactive_captcha);
         }
         if(data.params.url !== undefined && data.params.url.indexOf("http") === 0) {
-            $("#cap_interactive").css("display", "block");
+            $("cap_interactive").setStyle('display', 'block');
             interactiveCaptchaHandlerInstance.startInteraction(data.params.url, data.params);
         }
     }
@@ -203,7 +203,7 @@ var clear_captcha = function() {
     $('cap_positional_img').set('src', '');
     $("#cap_interactive").setStyle("display", "none");
     $("#cap_submit").setStyle("display", "none");
-    $("#cap_interactive_iframe").attr("src", "").setStyle({display: "none", top: "", left: ""})
+    $("#cap_interactive_iframe").set("src", "").setStyle({display: "none", top: "", left: ""})
         .parent().setStyle({height: "", width: ""});
     if(interactiveCaptchaHandlerInstance) {
         interactiveCaptchaHandlerInstance.clearEventlisteners();
@@ -227,6 +227,29 @@ var on_captcha_click = function(e) {
     return submit_captcha();
 };
 
+function submit_interactive_captcha(c) {
+    if (c.constructor === {}.constructor)
+        c = JSON.stringify(c);
+    else if (c.constructor !== "".constructor)
+        return;
+
+    $("#cap_box #cap_result").val(c);
+    return submit_captcha();
+}
+
+function interactiveCaptchaHandler(iframeId, loadingid, captchaResponseCallback) {
+    this._iframeId = iframeId;
+    this._loadingid = loadingid;
+    this._captchaResponseCallback = captchaResponseCallback;
+    this._active = false; // true: link grabbing is running, false: standby
+
+    $(this._loadingid).setStyle('display', 'block');
+    $(this._iframeId).addEvent("load", this, this.iframeLoaded);
+
+    // Register event listener for communication with iframe
+    window.addEventListener('message', this, this.windowEventListener);
+}
+
 // This function is called when the iframe is loaded, and it activates the link grabber of the tampermonkey script
 interactiveCaptchaHandler.prototype.iframeLoaded = function(e) {
     var interactiveHandlerInstance = e.data;
@@ -235,7 +258,7 @@ interactiveCaptchaHandler.prototype.iframeLoaded = function(e) {
             actionCode: interactiveHandlerInstance.actionCodes.activate,
             params: interactiveHandlerInstance._params};
         // Notify TamperMonkey so it can do it's magic..
-        $("#" + interactiveHandlerInstance._iframeId).get(0).contentWindow.postMessage(JSON.stringify(requestMessage),"*");
+        $(interactiveHandlerInstance._iframeId).get(0).contentWindow.postMessage(JSON.stringify(requestMessage),"*");
     }
 };
 
@@ -245,7 +268,7 @@ interactiveCaptchaHandler.prototype.startInteraction = function(url, params) {
 
     this._params = params;
 
-    $("#" + this._iframeId).attr("src", url);
+    $(this._iframeId).set("src", url);
 };
 
 // This function listens to messages from the TamperMonkey script in the iframe
@@ -259,11 +282,11 @@ interactiveCaptchaHandler.prototype.windowEventListener = function(e) {
         interactiveHandlerInstance.clearEventlisteners();
 
     } else if(requestMessage.actionCode === interactiveHandlerInstance.actionCodes.activated) {
-        $("#" + interactiveHandlerInstance._loadingid).css("display", "none");
-        $("#" + interactiveHandlerInstance._iframeId).css("display", "block");
+        $(interactiveHandlerInstance._loadingid).setStyle('display', 'none');
+        $(interactiveHandlerInstance._iframeId).setStyle('display', 'block');
 
     } else if (requestMessage.actionCode === interactiveHandlerInstance.actionCodes.size)  {
-        var $iframe = $("#" + interactiveHandlerInstance._iframeId);
+        var $iframe = $(interactiveHandlerInstance._iframeId);
         var width = requestMessage.params.rect.right - requestMessage.params.rect.left;
         var height = requestMessage.params.rect.bottom - requestMessage.params.rect.top;
         $iframe.css({top : - requestMessage.params.rect.top + "px",
@@ -277,8 +300,8 @@ interactiveCaptchaHandler.prototype.clearEventlisteners = function() {
     this._active = false;
 
     // Clean up event listeners
-    $("#" + this._iframeId).off("load", this.iframeLoaded);
-    $(window).off('message', this.windowEventListener);
+    $(this._iframeId).removeEvent ("load", this.iframeLoaded);
+    $(window).removeEvent ('message', this.windowEventListener);
 };
 
 // Action codes for communication with iframe via postMessage

@@ -41,7 +41,7 @@ class CCF(BaseContainer):
             dlc_content = requests.post(
                 "http://service.jdownloader.net/dlcrypt/getDLC.php",
                 data={"src": "ccf", "filename": "test.ccf"},
-                files={"upload": file},
+                files={"upload": fp},
             ).read()
 
         dl_folder = self.pyload.config.get("general", "storage_folder")

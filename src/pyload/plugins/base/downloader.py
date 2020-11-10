@@ -273,7 +273,6 @@ class BaseDownloader(BaseHoster):
         disposition=True,
         resume=None,
         chunks=None,
-        fixurl=True,
     ):
         """
         Downloads the content at url to download folder.
@@ -299,7 +298,7 @@ class BaseDownloader(BaseHoster):
                 ],
             )
 
-        dl_url = self.fixurl(url) if fixurl else url
+        dl_url = self.fixurl(url)
         dl_basename = parse.name(self.pyfile.name)
 
         self.pyfile.name = dl_basename

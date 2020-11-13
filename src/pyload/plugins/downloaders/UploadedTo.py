@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import os
 import re
 import time
-import json
 
 from pyload.core.network.request_factory import get_url
+from pyload.core.utils.convert import to_str
 
 from ..anticaptchas.ReCaptcha import ReCaptcha
 from ..base.simple_downloader import SimpleDownloader
@@ -27,8 +28,7 @@ class UploadedTo(SimpleDownloader):
 
     __description__ = """Uploaded.net downloader plugin"""
     __license__ = "GPLv3"
-    __authors__ = [("Walter Purcaro", "vuolter@gmail.com"),
-                  ("GammaC0de", "nitzo2001[AT]yahoo[DOT]com")]
+    __authors__ = [("Walter Purcaro", "vuolter@gmail.com")]
 
     CHECK_TRAFFIC = True
 
@@ -47,8 +47,10 @@ class UploadedTo(SimpleDownloader):
     LINK_FREE_PATTERN = r"url:\s*'(.+?)'"
     LINK_PREMIUM_PATTERN = r'<div class="tfree".*\s*<form method="post" action="(.+?)"'
 
-    WAIT_PATTERN = r"(?:Current waiting period|Aktuelle Wartezeit): <span>(\d+)"
-    DL_LIMIT_PATTERN = r"You have reached the max. number of possible free downloads for this hour"
+    WAIT_PATTERN = r"Current waiting period: <span>(\d+)"
+    DL_LIMIT_PATTERN = (
+        r"You have reached the max. number of possible free downloads for this hour"
+    )
 
     @classmethod
     def api_info(cls, url):
@@ -61,24 +63,21 @@ class UploadedTo(SimpleDownloader):
                     "apikey": cls.API_KEY,
                     "id_0": re.match(cls.__pattern__, url).group("ID"),
                 },
-            ).decode('utf-8')
+                decode=False,
+            )
 
+            html = to_str(html, 'latin1')
             if html != "can't find request":
                 api = html.split(",", 4)
                 if api[0] == "online":
-                    info.update({
-                        'size': api[2],
-                        'status': 2,
-                        'sha1': api[3]
-                    })
-                    info['name'] = api[4].strip()
-                    '''try:
-                        info['name'] = name.decode('latin1')
-                    except (UnicodeDecodeError, UnicodeEncodeError):
-                        info['name'] = name.decode('utf8')
-                    except (UnicodeDecodeError, UnicodeEncodeError):
-                        info['name'] = name'''
-
+                    info.update(
+                        {
+                            "name": api[4].strip(),
+                            "size": api[2],
+                            "status": 2,
+                            "sha1": api[3],
+                        }
+                    )
                 else:
                     info["status"] = 1
                 break
@@ -107,19 +106,15 @@ class UploadedTo(SimpleDownloader):
         )
         self.check_errors()
 
-        try:
-            json_data = json.loads(self.data)
-            if 'err' in json_data:
-                if json_data['err'] == "captcha":
-                    self.retry_captcha()
+        super().handle_free(pyfile)
+        self.check_errors()
 
-                else:
-                    self.error(_("Unknown error `%s`" % json_data['err']))
+    def check_download(self):
+        check = self.scan_download({"dl_limit": self.DL_LIMIT_PATTERN})
 
-        except ValueError:
-            pass
+        if check == "dl_limit":
+            self.log_warning(self._("Free download limit reached"))
+            os.remove(self.last_download)
+            self.retry(wait=10800, msg=self._("Free download limit reached"))
 
-        m = re.search(self.LINK_FREE_PATTERN, self.data)
-        if m is not None:
-            self.captcha.correct()
-            self.link = m.group(1)
+        return super().check_download()

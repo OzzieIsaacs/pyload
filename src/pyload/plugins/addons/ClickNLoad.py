@@ -51,6 +51,8 @@ class ClickNLoad(BaseAddon):
     def _find_backend(self):
         if self.pyload.config.get("webui", "enabled"):
             web_host = self.pyload.config.get("webui", "host")
+            if web_host == '':
+                web_host = '0.0.0.0'
             web_port = self.pyload.config.get("webui", "port")
             try:
                 addrinfo = socket.getaddrinfo(

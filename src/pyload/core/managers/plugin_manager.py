@@ -286,7 +286,7 @@ class PluginManager:
                     OrderedDict(sorted(self.container_plugins.items(), key=lambda t: t[1]['order'])).items()
             ):
                 if value["re"].match(url):
-                    res.append((url, name))
+                    res.append((url.lower(), name))
                     last = (name, value)
                     found = True
                     break

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2020-11-01 13:58+0100\n"
-"PO-Revision-Date: 2020-11-13 15:49+0100\n"
+"PO-Revision-Date: 2020-11-21 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -521,7 +521,7 @@ msgstr "Hash Algorithmus wird nicht unterstützt"
 
 #: src/pyload/plugins/addons/Checksum.py:242
 msgid "Unable to validate checksum for file: \"{}\""
-msgstr ""
+msgstr "Checksumme für Datei: \"{}\" kann nicht überprüft werden"
 
 #: src/pyload/plugins/addons/Checksum.py:290
 #: src/pyload/plugins/base/container.py:76
@@ -544,11 +544,11 @@ msgstr ""
 
 #: src/pyload/plugins/addons/ClickNLoad.py:66
 msgid "Shutting down proxy..."
-msgstr ""
+msgstr "Proxy wird heruntergefahren..."
 
 #: src/pyload/plugins/addons/ClickNLoad.py:89
 msgid "Server was not exited gracefully, shutdown forced"
-msgstr ""
+msgstr "Server wurde nicht geordnet beendet, Beenden wird erzwungen"
 
 #: src/pyload/plugins/addons/ClickNLoad.py:108
 msgid "Proxy listening on {}:{}"
@@ -560,7 +560,7 @@ msgstr "SSL Bibliothek nicht gefunden"
 
 #: src/pyload/plugins/addons/ClickNLoad.py:143
 msgid "Please disable HTTPS in pyLoad settings"
-msgstr ""
+msgstr "Bitte HTTPS in den pyLoad Einstellungen deaktivieren"
 
 #: src/pyload/plugins/addons/ClickNLoad.py:149
 msgid "SSL error: {}"
@@ -584,7 +584,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:157
 msgid "Got unexpected CloudFlare html page"
-msgstr ""
+msgstr "Unerwartete CloudFlare html Seite empfangen"
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:219
 msgid "No _preload() override found for {}, cannot un-override>"
@@ -592,7 +592,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:234
 msgid "Already overrided _preload() for {}"
-msgstr ""
+msgstr "_preload() ist bereits für {} überschrieben"
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:277
 msgid "{} is missing _preload() function, cannot override!"
@@ -637,7 +637,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:110
 msgid "Setting download speed to {} kB/s"
-msgstr ""
+msgstr "Setze Download Geschwindigkeit auf {} kB/s"
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:115
 msgid "Setting download speed to FULL"
@@ -661,15 +661,15 @@ msgstr "Script `{}` ist nicht ausführbar"
 
 #: src/pyload/plugins/addons/ExternalScripts.py:120
 msgid "Activated scripts in folder `{}`: {}"
-msgstr ""
+msgstr "Aktivierte Scripts in Ordner `{}`: {}"
 
 #: src/pyload/plugins/addons/ExternalScripts.py:129
 msgid "Deactivated scripts in folder `{}`: {}"
-msgstr ""
+msgstr "Deaktivierte Scripts in Ordner `{}`: {}"
 
 #: src/pyload/plugins/addons/ExternalScripts.py:160
 msgid "Executing scripts in folder `{}`..."
-msgstr ""
+msgstr "Führe Scripts in Ordner `{}` aus..."
 
 #: src/pyload/plugins/addons/ExternalScripts.py:168
 msgid "Runtime error: {}"
@@ -805,7 +805,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/JustPremium.py:80
 msgid "Remove links of plugin: {}"
-msgstr ""
+msgstr "Entferne Links von Plugin: {}"
 
 #: src/pyload/plugins/addons/LinkFilter.py:61
 msgid "Whitelist filter removed {} {} not containing ({})"
@@ -821,11 +821,11 @@ msgstr "------------------- STUNDENMARKE ------------------"
 
 #: src/pyload/plugins/addons/MergeFiles.py:40
 msgid "Starting merging of"
-msgstr ""
+msgstr "Starte Zusammenführen von"
 
 #: src/pyload/plugins/addons/MergeFiles.py:82
 msgid "Finished merging of"
-msgstr ""
+msgstr "Abschluss Zusammenführen von"
 
 #: src/pyload/plugins/addons/MultiHome.py:85
 msgid "Best interface not found"
@@ -833,7 +833,7 @@ msgstr "Beste Schnittstelle nicht gefunden"
 
 #: src/pyload/plugins/addons/RestartFailed.py:23
 msgid "Restarting all failed downloads..."
-msgstr ""
+msgstr "Starte alle fehlgeschlagenen Downloads erneut..."
 
 #: src/pyload/plugins/addons/SkipRev.py:94
 #: src/pyload/plugins/addons/UnSkipOnFail.py:42
@@ -850,7 +850,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/UnSkipOnFail.py:48
 msgid "No duplicates found"
-msgstr ""
+msgstr "Keine Duplikate gefunden"
 
 #: src/pyload/plugins/addons/UpdateManager.py:147
 msgid "Unable to connect to the server to retrieve updates"
@@ -879,15 +879,15 @@ msgstr ""
 
 #: src/pyload/plugins/addons/UpdateManager.py:227
 msgid "*** Plugins updated ***"
-msgstr ""
+msgstr "*** Plugins aktualisiert ***"
 
 #: src/pyload/plugins/addons/UpdateManager.py:233
 msgid "You have to restart pyLoad to use the updated plugins"
-msgstr ""
+msgstr "PyLoad muss neugestartet werden um aktualisierte Plugins zu nutzen"
 
 #: src/pyload/plugins/addons/UpdateManager.py:244
 msgid "All plugins are up to date!"
-msgstr ""
+msgstr "Alle Plugins sind aktuell!"
 
 #: src/pyload/plugins/addons/UpdateManager.py:331
 msgid "Removed blacklisted plugin: {type} {name}"
@@ -896,7 +896,7 @@ msgstr ""
 #: src/pyload/plugins/addons/UpdateManager.py:353
 #: src/pyload/plugins/addons/UpdateManager.py:397
 msgid "Error updating plugin: {} {}"
-msgstr ""
+msgstr "Fehler beim updaten des plugins: {} {}"
 
 #: src/pyload/plugins/addons/UpdateManager.py:356
 msgid "Bad version number on the server"
@@ -908,7 +908,7 @@ msgstr "Url nicht gefunden"
 
 #: src/pyload/plugins/addons/UpdateManager.py:393
 msgid "Version mismatch"
-msgstr ""
+msgstr "Versionen stimmen nicht überein"
 
 #: src/pyload/plugins/addons/UpdateManager.py:453
 #: src/pyload/plugins/base/plugin.py:110
@@ -917,7 +917,7 @@ msgstr ""
 
 #: src/pyload/plugins/addons/XFileSharing.py:117
 msgid "No {} to handle"
-msgstr ""
+msgstr "Nr {} wird bearbeitet"
 
 #: src/pyload/plugins/addons/XFileSharing.py:124
 msgid "Handle {} {}{}: {}"
@@ -925,23 +925,23 @@ msgstr "Bearbeite {} {}{}: {}"
 
 #: src/pyload/plugins/addons/XFileSharing.py:159
 msgid "Auto-discover new {}s"
-msgstr ""
+msgstr "Entdecke neue {}s"
 
 #: src/pyload/plugins/addons/XMPP.py:93
 msgid "Download finished: {name} @ {plugin}"
-msgstr ""
+msgstr "Download abgeschlossen: {name} @ {plugin}"
 
 #: src/pyload/plugins/anticaptchas/AdYouLike.py:55
 msgid "AdYouLike challenge pattern not found"
-msgstr ""
+msgstr "AdYouLike challenge Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/AdYouLike.py:85
 msgid "AdYouLike result not found"
-msgstr ""
+msgstr "AdYouLike Ergebnis nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/AdsCaptcha.py:49
 msgid "AdsCaptcha challenge pattern not found"
-msgstr ""
+msgstr "AdsCaptcha second challenge Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/CircleCaptcha.py:804
 #: src/pyload/plugins/anticaptchas/CircleCaptcha.py:810
@@ -951,52 +951,52 @@ msgstr "Koordinaten: {}"
 #: src/pyload/plugins/anticaptchas/CoinHive.py:68
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:102
 msgid "Key pattern not found"
-msgstr ""
+msgstr "Schlüssel Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/CoinHive.py:79
 msgid "Hashes pattern not found"
-msgstr ""
+msgstr "Hash Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:114
 msgid "Secure Token pattern not found"
-msgstr ""
+msgstr "Secure Token Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:128
 msgid "Could not properly detect reCAPTCHA version, defaulting to v2"
-msgstr ""
+msgstr "Konnte reCAPTCHA Version nicht erkennen, benutze v2 als Rückfalllösung"
 
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:161
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:359
 msgid "reCAPTCHA challenge pattern not found"
-msgstr ""
+msgstr "reCAPTCHA challenge Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:178
 msgid "reCAPTCHA second challenge pattern not found"
-msgstr ""
+msgstr "reCAPTCHA second challenge Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:350
 msgid "reCAPTCHA noscript is blocked, trying reCAPTCHA interactive"
-msgstr ""
+msgstr "reCAPTCHA noscript ist blockiert, versuche interaktives reCAPTCHA"
 
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:375
 msgid "reCAPTCHA challenge message not found"
-msgstr ""
+msgstr "reCAPTCHA challenge Nachricht nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/ReCaptcha.py:415
 msgid "reCAPTCHA max retries exceeded"
-msgstr ""
+msgstr "reCAPTCHA maximale Anzahl Versuche erreicht"
 
 #: src/pyload/plugins/anticaptchas/SolveMedia.py:48
 msgid "Magic pattern not found"
-msgstr ""
+msgstr "Magic Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/SolveMedia.py:58
 msgid "SolveMedia challenge pattern not found"
-msgstr ""
+msgstr "SolveMedia challenge Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/SolveMedia.py:92
 msgid "SolveMedia verify pattern not found"
-msgstr ""
+msgstr "SolveMedia verify Begriff nicht gefunden"
 
 #: src/pyload/plugins/anticaptchas/SolveMedia.py:96
 msgid "Captcha code was invalid"
@@ -1004,11 +1004,11 @@ msgstr "Captcha Code war ungültig"
 
 #: src/pyload/plugins/anticaptchas/SolveMedia.py:103
 msgid "SolveMedia max retries exceeded"
-msgstr ""
+msgstr "SolveMedia maximale Wiederholungen überschritten"
 
 #: src/pyload/plugins/anticaptchas/UlozTo.py:33
 msgid "Unable to decode audio captcha"
-msgstr ""
+msgstr "Audio Captcha kann nicht entschlüsselt werden"
 
 #: src/pyload/plugins/anticaptchas/UlozTo.py:34
 msgid ""
@@ -1018,15 +1018,15 @@ msgstr ""
 
 #: src/pyload/plugins/base/account.py:117
 msgid "Login user `{}`..."
-msgstr ""
+msgstr "Logge Benutzer `{}` ein..."
 
 #: src/pyload/plugins/base/account.py:119
 msgid "Relogin user `{}`..."
-msgstr ""
+msgstr "Erneuter Login von Benutzer `{}`..."
 
 #: src/pyload/plugins/base/account.py:133
 msgid "Skipped login user `{}`"
-msgstr ""
+msgstr "Einloggen von Benutzer `{}` übersprungen"
 
 #: src/pyload/plugins/base/account.py:141
 msgid "Could not login user `{}`"
@@ -1038,15 +1038,15 @@ msgstr ""
 
 #: src/pyload/plugins/base/account.py:251
 msgid "Error loading info for user `{}`"
-msgstr ""
+msgstr "Fehler beim Laden der Informationen für Benutzer `{}`"
 
 #: src/pyload/plugins/base/account.py:303
 msgid "Adding user `{}`..."
-msgstr "Füge Benutzer `{}`... hinzu"
+msgstr "Füge Benutzer `{}` hinzu..."
 
 #: src/pyload/plugins/base/account.py:307
 msgid "Error adding user `{}`"
-msgstr ""
+msgstr "Fehler beim hinzufügen von Benutzer `{}`"
 
 #: src/pyload/plugins/base/account.py:308
 msgid "User already exists"
@@ -1082,7 +1082,7 @@ msgstr "Benutzer existiert nicht"
 
 #: src/pyload/plugins/base/captcha.py:96
 msgid "Using OCR to decrypt captcha..."
-msgstr ""
+msgstr "Benutze OCR um Captcha zu entschlüsseln..."
 
 #: src/pyload/plugins/base/captcha.py:107
 msgid "No OCR result"
@@ -1133,7 +1133,7 @@ msgstr "{} Links"
 
 #: src/pyload/plugins/base/decrypter.py:117
 msgid "Save package `{name}` to folder: {folder}"
-msgstr ""
+msgstr "Speichere Paket `{name}` in Ordner: {folder}"
 
 #: src/pyload/plugins/base/downloader.py:100
 #: src/pyload/plugins/base/hoster.py:295
@@ -1218,19 +1218,19 @@ msgstr "Link Status: "
 
 #: src/pyload/plugins/base/hoster.py:235
 msgid "Grabbing link info..."
-msgstr ""
+msgstr "Suche Link info..."
 
 #: src/pyload/plugins/base/hoster.py:270
 msgid "Plugin is temporarily unavailable"
-msgstr ""
+msgstr "Plugin ist temporär nicht verfügbar"
 
 #: src/pyload/plugins/base/hoster.py:273
 msgid "Plugin may be unstable"
-msgstr ""
+msgstr "Plugin ist eventuell instabil"
 
 #: src/pyload/plugins/base/hoster.py:361
 msgid "Invalid wait time interval"
-msgstr ""
+msgstr "Ungültiges wait time Intervall"
 
 #: src/pyload/plugins/base/hoster.py:372
 msgid "Requiring reconnection..."
@@ -1282,7 +1282,7 @@ msgstr "Nummer {} geladen"
 
 #: src/pyload/plugins/base/multi_account.py:232
 msgid "{}s not overwritten: {}"
-msgstr ""
+msgstr "{}s nicht überschrieben: {}"
 
 #: src/pyload/plugins/base/multi_account.py:271
 #: src/pyload/plugins/base/simple_downloader.py:336
@@ -1414,11 +1414,11 @@ msgstr ""
 
 #: src/pyload/plugins/base/ocr.py:142
 msgid "OCR result: "
-msgstr "OCR Ergebnis:"
+msgstr "OCR Ergebnis: "
 
 #: src/pyload/plugins/base/plugin.py:115
 msgid "Path deleted: "
-msgstr "Datei gelöscht:"
+msgstr "Datei gelöscht: "
 
 #: src/pyload/plugins/base/sevenzip.py:118
 msgid "Header protected"
@@ -1641,7 +1641,7 @@ msgstr "Passwort fehlt"
 #: src/pyload/plugins/containers/DLC.py:127
 #: src/pyload/plugins/containers/RSDF.py:67
 msgid "Container is corrupted"
-msgstr ""
+msgstr "Container ist korrupt"
 
 #: src/pyload/plugins/containers/TXT.py:72
 msgid "Failed to flush list"
@@ -1714,11 +1714,11 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/FreetexthostCom.py:35
 msgid "Unable to extract links"
-msgstr ""
+msgstr "Linke konnten nicht extrahiert werden"
 
 #: src/pyload/plugins/decrypters/HearthisAtFolder.py:47
 msgid "Internal Id not found"
-msgstr ""
+msgstr "Interne ID nicht gefunden"
 
 #: src/pyload/plugins/decrypters/HoerbuchIn.py:61
 msgid "Bad URL"
@@ -1894,7 +1894,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/DataportCz.py:41
 msgid "free_download_form"
-msgstr ""
+msgstr "free_download_form"
 
 #: src/pyload/plugins/downloaders/DataportCz.py:46
 #: src/pyload/plugins/downloaders/FiledropperCom.py:39
@@ -1991,7 +1991,7 @@ msgstr "Download Url nicht gefunden"
 #: src/pyload/plugins/downloaders/FileSharkPl.py:106
 #: src/pyload/plugins/downloaders/TurbobitNet.py:92
 msgid "Captcha form not found"
-msgstr ""
+msgstr "Captcha Formular nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:112
 msgid "Captcha image not found"
@@ -2130,7 +2130,7 @@ msgstr "Free Download Formular nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FshareVn.py:76
 msgid "Expected JSON data"
-msgstr ""
+msgstr "JSON Daten erwartet"
 
 #: src/pyload/plugins/downloaders/FshareVn.py:83
 msgid "Unexpected response"
@@ -2401,7 +2401,7 @@ msgstr "Free Download Formular nicht gefunden"
 
 #: src/pyload/plugins/downloaders/OnlineTvRecorder.py:41
 msgid "Waiting in download queue"
-msgstr ""
+msgstr "Warte in Dwonloadschlange"
 
 #: src/pyload/plugins/downloaders/PornhubCom.py:99
 msgid "Player Javascript data not found"
@@ -3144,7 +3144,7 @@ msgstr "Dateimanager"
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:133
 #: src/pyload/webui/app/themes/pyplex/templates/logs.html:3
 msgid "Logs"
-msgstr "Protokoll"
+msgstr "Logs"
 
 #: src/pyload/webui/app/templates/base.html:98
 #: src/pyload/webui/app/templates/dashboard.html:60
@@ -4233,19 +4233,19 @@ msgstr "Zeilen pro Seite"
 msgid "Go"
 msgstr "Los"
 
+msgid "Config"
+msgstr "Einstellungen"
+
+msgid "pyLoad version"
+msgstr "pyLoad Version"
+
 #~ msgid "Home"
 #~ msgstr "Start"
-
-#~ msgid "Config"
-#~ msgstr "Einstellungen"
 
 #~ msgid "To reset your login data or add an user run:"
 #~ msgstr ""
 #~ "Um deine Login-Informationen zurückzusetzen oder einen Benutzer "
 #~ "hinzuzufügen, starte:"
-
-#~ msgid "Python:"
-#~ msgstr "Python:"
 
 #~ msgid "OS:"
 #~ msgstr "Betriebssystem:"

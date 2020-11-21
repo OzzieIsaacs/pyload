@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2020-11-01 13:58+0100\n"
-"PO-Revision-Date: 2020-11-21 10:00+0100\n"
+"PO-Revision-Date: 2020-11-21 10:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -3083,7 +3083,7 @@ msgstr "Bitte anmelden!"
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:118
 #: src/pyload/webui/app/themes/pyplex/templates/dashboard.html:14
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr "Übersicht"
 
 #: src/pyload/webui/app/templates/base.html:83
 #: src/pyload/webui/app/templates/dashboard.html:23

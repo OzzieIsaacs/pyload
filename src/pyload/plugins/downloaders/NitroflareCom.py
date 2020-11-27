@@ -45,7 +45,7 @@ class NitroflareCom(SimpleDownloader):
     @classmethod
     def api_info(cls, url):
         info = {}
-        file_id = re.search(cls.__pattern__, url).group("ID")
+        file_id = re.search(cls.__pattern__, url).group("ID").upper()
 
         data = json.loads(
             get_url(

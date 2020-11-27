@@ -348,7 +348,7 @@ class HTTPRequest:
         """
         writes response.
         """
-        if self.rep.tell() > 1_000_000 or self.abort:
+        if self.rep.tell() > 2_000_000 or self.abort:
             rep = self.get_response()
             if self.abort:
                 raise Abort

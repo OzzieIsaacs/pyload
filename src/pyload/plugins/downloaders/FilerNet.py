@@ -65,7 +65,7 @@ class FilerNet(SimpleDownloader):
                 self.temp_offline()
 
             else:
-                return SimpleHoster.check_download(self)
+                return SimpleDownloader.check_download(self)
 
         else:
-            return SimpleHoster.check_download(self)
+            return SimpleDownloader.check_download(self)

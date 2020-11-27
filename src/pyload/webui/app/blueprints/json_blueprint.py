@@ -374,24 +374,3 @@ def add_account():
         return jsonify(False), 500  #: Duplicate user
 
     return jsonify(True)
-
-@bp.route("/json/add_user", methods=["POST"], endpoint="add_user")
-# @apiver_check
-@login_required("ADMIN")
-# @fresh_login_required
-def add_account():
-    api = flask.current_app.config["PYLOAD_API"]
-
-    user = flask.request.form["new_user"]
-    password = flask.request.form["new_password"]
-    role = int(flask.request.form.get("new_role") == "on")
-    data = {}
-    for perm in permlist():
-        data[perm] = False
-    for perm in flask.request.form.getlist("new_perms"):
-        data[perm] = True
-
-    data = set_permission(data)
-
-    api.add_user(user, password, role, data)
-    return jsonify(True)

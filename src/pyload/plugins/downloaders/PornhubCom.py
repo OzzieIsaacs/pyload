@@ -43,7 +43,7 @@ class PornhubCom(SimpleDownloader):
     __version__ = "0.60"
     __status__ = "testing"
 
-    __pattern__ = r"https?://(?:www\.)?pornhub\.com/view_video\.php\?viewkey=\w+"
+    __pattern__ = r"https?://(?:\w+\.)?pornhub\.com/view_video\.php\?viewkey=\w+"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),

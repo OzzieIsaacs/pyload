@@ -92,6 +92,31 @@ $(function() {
         event.stopPropagation();
         event.preventDefault();
     });
+    $("#quit_box").on('click', '#quit_button', function () {
+        $.get("{{url_for('api.rpc', func='kill')}}", function() {
+            $('#quit_box').modal('hide');
+            $('#content').addClass("hidden");
+            $('#shutdown_msg').removeClass("hidden");
+        })
+        .fail(function () {
+            indicateFail("{{_('Error occurred')}}");
+        });
+    });
+
+    $("#restart_box").on('click', '#restart_button', function () {
+        $.get("{{url_for('api.rpc', func='restart')}}", function() {
+            $('#restart_box').modal('hide');
+            $('#content').addClass("hidden");
+            $('#restart_msg').removeClass("hidden");
+            setTimeout(function() {
+                window.location = "{{url_for('app.dashboard')}}";
+            }, 10000);
+        })
+        .fail(function () {
+            indicateFail("{{_('Error occurred')}}");
+        });
+    });
+
 });
 
 {% endautoescape %}

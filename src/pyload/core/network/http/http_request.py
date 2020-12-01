@@ -38,7 +38,7 @@ def myurlencode(data):
 
 
 BAD_STATUS_CODES = tuple(
-    chain((400,), (401,), range(403, 406), range(408, 418), range(500, 506))
+    chain((400,), (401,), range(403, 407), range(408, 418), range(500, 506))
 )
 
 

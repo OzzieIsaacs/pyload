@@ -6,7 +6,9 @@ import os
 import re
 import subprocess
 import time
+from datetime import timedelta
 import urllib.parse
+from urllib.parse import urlparse
 from functools import reduce
 from xml.dom.minidom import parseString as parse_xml
 
@@ -21,7 +23,7 @@ from pyload.core.network.exceptions import Abort, Skip
 
 def try_get(data, *path):
     def get_one(src, what):
-        if isinstance(src, dict) and isinstance(what, basestring):
+        if isinstance(src, dict) and isinstance(what, str):
             return src.get(what, None)
         elif isinstance(src, list) and type(what) is int:
             try:
@@ -105,8 +107,8 @@ class Ffmpeg:
         try:
             if os.name == "nt":
                 ffmpeg = (
-                    os.path.join(pypath, "lib", "ffmpeg.exe")
-                    if is_executable(os.path.join(pypath, "lib", "ffmpeg.exe"))
+                    os.path.join(PKGDIR, "lib", "ffmpeg.exe")
+                    if is_executable(os.path.join(PKGDIR, "lib", "ffmpeg.exe"))
                     else "ffmpeg.exe"
                 )
 
@@ -115,7 +117,7 @@ class Ffmpeg:
 
             cmd = which(ffmpeg) or ffmpeg
 
-            p = Popen(
+            p = subprocess.Popen(
                 [cmd, "-version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
             )
             out, err = (r.strip() if r else "" for r in p.communicate())
@@ -180,7 +182,7 @@ class Ffmpeg:
         )
 
         call = [self.CMD] + args + [self.output_filename]
-        p = Popen(call, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        p = subprocess.Popen(call, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         renice(p.pid, self.priority)
 
@@ -592,7 +594,7 @@ class YoutubeCom(BaseDownloader):
         #     player_url = json.loads(re.search(r'"assets":.+?"js":\s*("[^"]+")',self.data).group(1))
         # except (AttributeError, IndexError):
         #     self.fail(self._("Player URL not found"))
-        player_url = self.fixurl(player_config["assets"]["js"])
+        player_url = self.fixurl(self.player_config["assets"]["js"])
 
         if not player_url.endswith(".js"):
             self.fail(self._("Unsupported player type {}").format(player_url))
@@ -965,8 +967,9 @@ class YoutubeCom(BaseDownloader):
             dom = parse_xml(timedtext)
             body = dom.getElementsByTagName("body")[0]
             paras = body.getElementsByTagName("p")
+            subtitle_element = ""
             for para in paras:
-                subtitle_element = str(i) + "\n"
+                subtitle_element += str(i) + "\n"
                 try:
                     srt += (
                         _format_srt_time(int(para.attributes["t"].value))
@@ -1013,8 +1016,7 @@ class YoutubeCom(BaseDownloader):
                     subtitle["baseUrl"]
                 ).decode("unicode-escape")
                 + "&fmt=3",
-               subtitle["vssId"].startswith("a."),
-               subtitle["isTranslatable"])
+               subtitle["vssId"].startswith("a."), subtitle["isTranslatable"])
                 for subtitle in subs]
             }
             self.log_debug(
@@ -1051,7 +1053,7 @@ class YoutubeCom(BaseDownloader):
                             if subtitles_info[lang][2]:  #: Translatable?
                                 subtitle_url += "&tlang={}".format(subs_translate)
                             else:
-                                self.log_warning(self._("Skipped non translatable subtitle: {}").format(_lang))
+                                self.log_warning(self._("Skipped non translatable subtitle: {}").format(lang))
                                 continue  #: No, try next one
                         srt_filename = os.path.join(
                             self.pyload.config.get("general", "storage_folder"),
@@ -1087,16 +1089,16 @@ class YoutubeCom(BaseDownloader):
 
             else:
                 # Download any available subtitle
-                for subtitle in subtitles_info.items():
-                    if auto_subs is False and subtitle[1][1] is True:
-                        self.log_warning(self._("Skipped machine generated subtitle: {}").format(subtitle[0]))
+                for _subtitle in subtitles_info.items():
+                    if auto_subs is False and _subtitle[1][1] is True:
+                        self.log_warning(self._("Skipped machine generated subtitle: {}").format(_subtitle[0]))
                         continue
 
-                    subtitle_code = subtitle[0] if subs_translate == "" else subs_translate
+                    subtitle_code = _subtitle[0] if subs_translate == "" else subs_translate
 
-                    subtitle_url = subtitle[1][0]
+                    subtitle_url = _subtitle[1][0]
                     if subs_translate:
-                        if subtitle[1][2]:  #: Translatable?
+                        if _subtitle[1][2]:  #: Translatable?
                             subtitle_url += "&tlang={}".format(subs_translate)
                         else:
                             self.log_warning(self._("Skipped non translatable subtitle: {}").format(_subtitle[0]))
@@ -1106,7 +1108,7 @@ class YoutubeCom(BaseDownloader):
                         self.pyfile.package().folder,
                         os.path.splitext(self.file_name)[0]
                         + "."
-                        + subtitle[0]
+                        + _subtitle[0]
                         + ".srt",
                     )
 
@@ -1296,11 +1298,11 @@ class YoutubeCom(BaseDownloader):
         self.streams = []
 
         for path in [("args", "url_encoded_fmt_stream_map"),
-                     ("args", "adaptive_fmts")]:
+                     ("args", 'adaptive_fmts')]:
             item = try_get(self.player_config, *path)
             if item is not None:
-                streams = [urlparse.parse_qs(s) for s in item.split(",")]
-                streams = [dict((k, v[0]) for k,v in d.items()) for d in streams]
+                streams = [urlparse.parse_qs(_s) for _s in item.split(",")]
+                streams = [dict((k, v[0]) for k,v in _d.items()) for _d in streams]
                 self.streams.extend(streams)
 
         player_response = json.loads(self.player_config["args"]["player_response"])

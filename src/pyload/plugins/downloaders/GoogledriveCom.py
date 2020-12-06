@@ -5,6 +5,7 @@
 
 import re
 import json
+from urllib.parse import urlparse
 
 from pyload.core.network.http.exceptions import BadHeader
 

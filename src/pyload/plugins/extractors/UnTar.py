@@ -4,7 +4,7 @@ import os
 import sys
 import tarfile
 
-from .Extractor import ArchiveError, BaseExtractor, CRCError
+from pyload.plugins.base.extractor import ArchiveError, BaseExtractor, CRCError
 
 
 class UnTar(BaseExtractor):
@@ -34,7 +34,7 @@ class UnTar(BaseExtractor):
 
     def list(self, password=None):
         with tarfile.open(self.filename) as t:
-            self.files = [os.path.join(self.dest, f) for f in t.getnames()]
+            self.files = [os.path.join(self.dest, _f) for _f in t.getnames()]
         return self.files
 
     def verify(self, password=None):

@@ -7,21 +7,27 @@ from .plugin import BasePlugin
 
 
 class ArchiveError(Exception):
-    pass
+    """
+    raised when Archive error.
+    """
 
 
 class CRCError(Exception):
-    pass
+    """
+    raised when CRC error.
+    """
 
 
 class PasswordError(Exception):
-    pass
+    """
+    raised when password error.
+    """
 
 
 class BaseExtractor(BasePlugin):
     __name__ = "BaseExtractor"
-    __type__ = "extractor"
-    __version__ = "0.49"
+    __type__ = "base"
+    __version__ = "0.48"
     __status__ = "stable"
 
     __description__ = """Base extractor plugin"""
@@ -42,6 +48,7 @@ class BaseExtractor(BasePlugin):
     def archivetype(cls, filename):
         """
         Get archive default extension from filename
+
         :param filename: file name to test
         :return: Extension or None
         """
@@ -85,6 +92,7 @@ class BaseExtractor(BasePlugin):
     def get_targets(cls, files_ids):
         """
         Filter suited targets from list of filename id tuple list
+
         :param files_ids: List of filepathes
         :return: List of targets, id tuple list
         """
@@ -120,7 +128,7 @@ class BaseExtractor(BasePlugin):
         keepbroken=False,
     ):
         """
-        Initialize extractor for specific file.
+        Initialize extractor for specific file
         """
         self._init(pyfile.m.pyload)
 
@@ -175,6 +183,6 @@ class BaseExtractor(BasePlugin):
 
     def progress(self, x):
         """
-        Set extraction progress.
+        Set extraction progress
         """
         return self.pyfile.set_progress(int(x))

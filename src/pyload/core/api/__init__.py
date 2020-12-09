@@ -42,7 +42,7 @@ def permission(bits):
 
 
 urlmatcher = re.compile(
-    r"((?:(?:https?|ftps?|xdcc|sftp|magnet):(?://|\\\\)+[\w\-._~:/?#\[\]@!$&'()*+,;=]*))",
+    r"(?:(?:https?|ftps?|xdcc|sftp):(?://|\\\\)+[\w\-._~:/?#\[\]@!$&'()*+,;=]*)|magnet:\?.+",
     re.IGNORECASE,
 )
 
@@ -453,11 +453,11 @@ class Api:
         urls = []
 
         if html:
-            urls += [x[0] for x in urlmatcher.findall(html)]
+            urls += urlmatcher.findall(html)
 
         if url:
             page = get_url(url)
-            urls += [x[0] for x in urlmatcher.findall(page)]
+            urls += urlmatcher.findall(page)
 
         # remove duplicates
         return self.check_urls(set(urls))

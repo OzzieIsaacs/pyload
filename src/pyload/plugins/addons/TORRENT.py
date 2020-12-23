@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import re
 
 from ..base.addon import BaseAddon
@@ -12,15 +11,9 @@ class TORRENT(BaseAddon):
     __status__ = "testing"
 
     __config__ = [("activated", "bool", "Activated", False),
-                  ("torrent_plugin", "None;c:AlldebridComTorrent;"
-                                     "c:DebridlinkFrTorrent;"
-                                     "h:LinksnappyComTorrent;"
-                                     "c:RealdebridComTorrent;"
-                                     "h:ZbigzCom",
-                   "Associate torrents / magnets with plugin",
-                   "None"
-                   )
-                  ]
+                  ("torrent_plugin",
+                   "None;c:AlldebridComTorrent;c:DebridlinkFrTorrent;h:LinksnappyComTorrent;c:RealdebridComTorrent;h:ZbigzCom",
+                   "Associate torrents / magnets with plugin", "None")]
 
     __description__ = """Associate torrents / magnets with plugin"""
     __license__ = "GPLv3"
@@ -40,17 +33,14 @@ class TORRENT(BaseAddon):
 
     def plugins_updated(self, updated_plugins):
         if self.torrent_plugin != "None":
-            plugin_type, plugin_name = self.torrent_plugin.split(':')
-            plugin_type = "crypter" if plugin_type == "c" else "downloader"
+            plugin_type, plugin_name = self.torrent_plugin.split(":")
+            plugin_type = "decrypter" if plugin_type == "c" else "downloader"
             if (plugin_type, plugin_name) in updated_plugins:
                 self._remove_association(self.torrent_plugin)
                 self._associate(self.torrent_plugin)
 
     def config_changed(self, *args):
-        if args[3] == "plugin" \
-                and args[0] == "TORRENT" \
-                and args[1] == "torrent_plugin" \
-                and args[2] != self.torrent_plugin:
+        if args[3] == "plugin" and args[0] == "TORRENT" and args[1] == "torrent_plugin" and args[2] != self.torrent_plugin:
             self._remove_association(self.torrent_plugin)
             self.torrent_plugin = args[2]
             self._associate(self.torrent_plugin)
@@ -64,26 +54,27 @@ class TORRENT(BaseAddon):
 
     def _associate(self, plugin):
         if plugin != "None":
-            plugin_type, plugin_name = plugin.split(':')
-            plugin_type = "crypter" if plugin_type == "c" else "downloader"
+            plugin_type, plugin_name = plugin.split(":")
+            plugin_type = "decrypter" if plugin_type == "c" else "downloader"
 
-            dict = self.pyload.plugin_manager.plugins['container']['TORRENT']
-            dict['pattern'] = r'(?!file://).+\.(?:torrent|magnet)'
-            dict['re'] = re.compile(dict['pattern'])
+            dict = self.pyload.plugin_manager.plugins["container"]["TORRENT"]
+            dict["pattern"] = r"(?!file://).+\.(?:torrent|magnet)"
+            dict["re"] = re.compile(dict["pattern"])
 
             dict = self.pyload.plugin_manager.plugins[plugin_type][plugin_name]
-            dict['pattern'] = r'(?:file|https?)://.+\.torrent|magnet:\?.+'
-            dict['re'] = re.compile(dict['pattern'])
+            dict["pattern"] = r"(?:file|https?)://.+\.torrent|magnet:\?.+"
+            dict["re"] = re.compile(dict["pattern"])
 
     def _remove_association(self, plugin):
         if plugin != "None":
-            plugin_type, plugin_name = plugin.split(':')
-            plugin_type = "crypter" if plugin_type == "c" else "downloader"
+            plugin_type, plugin_name = plugin.split(":")
+            plugin_type = "decrypter" if plugin_type == "c" else "downloader"
 
             dict = self.pyload.plugin_manager.plugins[plugin_type][plugin_name]
-            dict['pattern'] = r'^unmatchable$'
-            dict['re'] = re.compile(dict['pattern'])
+            dict["pattern"] = r"^unmatchable$"
+            dict["re"] = re.compile(dict["pattern"])
 
-            dict = self.pyload.plugin_manager.plugins['container']['TORRENT']
-            dict['pattern'] = r'(?:file|https?)://.+\.torrent|magnet:\?.+|(?!file://).+\.(torrent|magnet)'
-            dict['re'] = re.compile(dict['pattern'])
+            dict = self.pyload.plugin_manager.plugins["container"]["TORRENT"]
+            dict["pattern"] = r"(?:file|https?)://.+\.torrent|magnet:\?.+|(?!file://).+\.(torrent|magnet)"
+            dict["re"] = re.compile(dict["pattern"])
+

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-import pycurl
+
 import json
 
+import pycurl
 from pyload.core.network.http.exceptions import BadHeader
+
 from ..base.multi_downloader import MultiDownloader
 
 
@@ -34,16 +36,16 @@ class RealdebridCom(MultiDownloader):
         ("GammaC0de", "nitzo2001[AT]yahoo[DOT]com"),
     ]
 
+    # See https://api.real-debrid.com/
     API_URL = "https://api.real-debrid.com/rest/1.0"
 
     def api_response(self, namespace, get={}, post={}):
         self.req.http.c.setopt(pycurl.USERAGENT, "pyLoad/{}".format(self.pyload.version))
-
         try:
             json_data = self.load(self.API_URL + namespace, get=get, post=post)
 
         except BadHeader as exc:
-                json_data = exc.content
+            json_data = exc.content
 
         return json.loads(json_data)
 
@@ -51,7 +53,7 @@ class RealdebridCom(MultiDownloader):
         self.chunk_limit = 3
 
     def handle_premium(self, pyfile):
-        user = self.account.accounts.keys()[0]
+        user = list(self.account.accounts.keys())[0]
         api_token = self.account.accounts[user]["api_token"]
 
         data = self.api_response(
@@ -70,7 +72,7 @@ class RealdebridCom(MultiDownloader):
                 self.account.relogin()
                 self.retry()
 
-            else:    
+            else:
             	self.fail("{} (code: {})".format(data["error"], data["error_code"]))
 
         else:
@@ -79,8 +81,3 @@ class RealdebridCom(MultiDownloader):
 
             pyfile.size = data["filesize"]
             self.link = data["download"]
-
-        # if self.get_config('ssl'):
-        #    self.link = self.link.replace("http://", "https://")
-        # else:
-        #    self.link = self.link.replace("https://", "http://")

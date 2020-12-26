@@ -7,9 +7,9 @@ import re
 from pyload.core.network.request_factory import get_url
 
 from ..anticaptchas.ReCaptcha import ReCaptcha
-from ..base.downloader import BaseDownloader
+from ..base.simple_downloader import SimpleDownloader
 
-class OboomCom(BaseDownloader):
+class OboomCom(SimpleDownloader):
     __name__ = "OboomCom"
     __type__ = "downloader"
     __version__ = "0.47"
@@ -34,7 +34,8 @@ class OboomCom(BaseDownloader):
 
     @classmethod
     def api_respond(cls, subdomain, method, args={}):
-        return json.loads(get_url(cls.API_URL % subdomain + method, args))
+        return json.loads(get_url(cls.API_URL % subdomain + method,
+                                  post=args))
 
     @classmethod
     def api_info(cls, url):
@@ -137,14 +138,16 @@ class OboomCom(BaseDownloader):
             self.retry(wait=res[2] + 60)
 
         else:
-            self.fail(_("Could not retrieve download ticket. Error %s: %s") % (res[0], res[1]))
+            self.fail(self._("Could not retrieve download ticket. Error %s: %s") % (res[0], res[1]))
 
-    def process(self, pyfile):
-        self.pyfile.url.replace(".com/#id=", ".com/#")
-        self.pyfile.url.replace(".com/#/", ".com/#")
+    def handle_free(self, pyfile):
         self.get_session_token()
         if not self.premium:
             self.handle_captcha()
         self.get_download_ticket()
         self.download("http://%s/1/dlh" % self.download_domain,
                       get={'ticket': self.download_ticket})
+
+    def handle_premium(self, pyfile):
+        self.handle_free(self, pyfile)
+

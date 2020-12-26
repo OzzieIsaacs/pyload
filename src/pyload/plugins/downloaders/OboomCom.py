@@ -7,9 +7,9 @@ import re
 from pyload.core.network.request_factory import get_url
 
 from ..anticaptchas.ReCaptcha import ReCaptcha
-from ..base.downloader import BaseDownloader
+from ..base.simple_downloader import SimpleDownloader
 
-class OboomCom(BaseDownloader):
+class OboomCom(SimpleDownloader):
     __name__ = "OboomCom"
     __type__ = "downloader"
     __version__ = "0.47"
@@ -138,7 +138,7 @@ class OboomCom(BaseDownloader):
             self.retry(wait=res[2] + 60)
 
         else:
-            self.fail(_("Could not retrieve download ticket. Error %s: %s") % (res[0], res[1]))
+            self.fail(self._("Could not retrieve download ticket. Error %s: %s") % (res[0], res[1]))
 
     def handle_free(self, pyfile):
         self.get_session_token()
@@ -150,3 +150,4 @@ class OboomCom(BaseDownloader):
 
     def handle_premium(self, pyfile):
         self.handle_free(self, pyfile)
+

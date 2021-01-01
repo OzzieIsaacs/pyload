@@ -49,7 +49,7 @@ class UploadedTo(SimpleDownloader):
 
     WAIT_PATTERN = r"Current waiting period: <span>(\d+)"
     DL_LIMIT_PATTERN = (
-        r"You have reached the max. number of possible free downloads for this hour"
+        rb"You have reached the max. number of possible free downloads for this hour"
     )
 
     @classmethod

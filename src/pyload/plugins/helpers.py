@@ -18,7 +18,7 @@ from base64 import b85decode, b85encode
 from collections.abc import Sequence
 from datetime import timedelta
 
-from ..core.utils.convert import to_str
+from ..core.utils.convert import to_bytes, to_str
 
 
 class Config:
@@ -194,6 +194,8 @@ def sign_string(message, pem_private, pem_passphrase="", sign_algo="SHA384"):
 
     if sign_algo not in ("MD5", "SHA1", "SHA256", "SHA384", "SHA512"):
         raise ValueError("Unsupported Signing algorithm")
+
+    message = to_bytes(message)
 
     priv_key = RSA.import_key(pem_private, passphrase=pem_passphrase)
     signer = PKCS1_v1_5.new(priv_key)
@@ -483,14 +485,16 @@ def parse_html_tag_attr_value(attr_name, tag):
     return m.group(2) if m else None
 
 
-def parse_html_form(attr_str, html, input_names={}):
+def parse_html_form(attr_filter, html, input_names={}):
+    attr_str = "" if callable(attr_filter) else attr_filter
     for form in re.finditer(
-        r"(?P<TAG><form[^>]*{}.*?>)(?P<CONTENT>.*?)</?(form|body|html).*?>".format(
-            attr_str
-        ),
+        rf"(?P<TAG><form[^>]*{attr_str}.*?>)(?P<CONTENT>.*?)</?(form|body|html).*?>",
         html,
         re.I | re.S,
     ):
+        if callable(attr_filter) and not attr_filter(form.group('TAG')):
+            continue
+
         inputs = {}
         action = parse_html_tag_attr_value("action", form.group("TAG"))
 

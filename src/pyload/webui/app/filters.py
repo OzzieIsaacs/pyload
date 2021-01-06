@@ -6,13 +6,12 @@ import os
 from pyload.core.utils import format
 from urllib.parse import quote_plus as _quote_plus, unquote_plus as _unquote_plus
 
-_QUOTECHAR = "::"
-_ESCAPED_SLASH = "%2F"
+_QUOTECHAR = "::%2F"
 
 
 def quotepath(path):
     try:
-        return path.replace("..", _QUOTECHAR).replace("/", _ESCAPED_SLASH)
+        return path.replace(".." + os.path.sep, _QUOTECHAR)
     except AttributeError:
         return path
     except Exception:
@@ -21,7 +20,7 @@ def quotepath(path):
 
 def unquotepath(path):
     try:
-        return path.replace(_QUOTECHAR, "..").replace(_ESCAPED_SLASH, "/")
+        return path.replace(_QUOTECHAR, ".." + os.path.sep)
     except AttributeError:
         return path
     except Exception:

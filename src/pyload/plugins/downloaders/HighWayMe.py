@@ -3,6 +3,7 @@
 import re
 
 from pyload.core.utils import seconds
+
 from ..base.multi_downloader import MultiDownloader
 
 

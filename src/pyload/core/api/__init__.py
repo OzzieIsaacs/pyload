@@ -21,6 +21,7 @@ from ..network.request_factory import get_url
 from ..utils.old.packagetools import parse_names
 from ..utils import seconds, fs
 
+import json
 from enum import IntFlag
 
 from ..datatypes.exceptions import *
@@ -1070,7 +1071,7 @@ class Api:
         if task:
             task.set_wating_for_user(exclusive=exclusive)
             data, type, result = task.get_captcha()
-            t = CaptchaTask(int(task.id), data, type, result)
+            t = CaptchaTask(int(task.id), json.dumps(data), type, result)
             return t
         else:
             return CaptchaTask(-1)
@@ -1414,15 +1415,3 @@ class Api:
     def set_user_permission(self, user, permission, role):
         self.pyload.db.set_permission(user, permission)
         self.pyload.db.set_role(user, role)
-
-    def add_user(self, user, newpw, role=0, perms=0):
-        """
-        adds new user.
-        """
-        return self.pyload.db.add_user(user, newpw, role, perms)
-
-    def remove_user(self, user):
-        """
-        adds new user.
-        """
-        return self.pyload.db.remove_user(user)

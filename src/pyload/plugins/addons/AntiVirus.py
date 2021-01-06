@@ -10,13 +10,13 @@ from ..helpers import exists
 try:
     import send2trash
 except ImportError:
-    pass
+    send2trash = None
 
 
 class AntiVirus(BaseAddon):
     __name__ = "AntiVirus"
     __type__ = "addon"
-    __version__ = "0.22"
+    __version__ = "0.21"
     __status__ = "broken"
 
     # TODO: add trash option (use Send2Trash lib)

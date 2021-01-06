@@ -35,13 +35,11 @@ class UptoboxCom(SimpleDownloader):
     OFFLINE_PATTERN = r"""(File not found|Access Denied|404 Not Found)"""
     TEMP_OFFLINE_PATTERN = r""">Service Unavailable"""
     WAIT_PATTERN = r"""data-remaining-time=["'](\d+)["']"""
-
     LINK_PATTERN = (
         r"""["'](https?://(?:obwp\d+\.uptobox\.com|\w+\.uptobox\.com/dl?)/.*?)["']"""
     )
 
     DL_LIMIT_PATTERN = r"""or you can wait (.+) to launch a new download"""
-
     URL_REPLACEMENTS = [("http://", "https://")]
 
     def setup(self):

@@ -90,32 +90,4 @@ $(function() {
     });
 });
 
-    $("#user_add").click(function(f) {
-        $("#new_user").val("");
-        $("#new_password").val("");
-        $("#new_role").val("off");
-        $("#new_perms").val([]);
-        $("#user_box").modal('show');
-        f.stopPropagation();
-        f.preventDefault();
-    });
-
-    $("#new_user_button").click( function(c) {
-        $(this).addClass("disabled");
-        $.ajax({
-            method: "post",
-            url: "{{url_for('json.add_user')}}",
-            async: true,
-            data: $("#user_add_form").serialize(),
-            success: function () {
-                return window.location.reload();
-            }
-        })
-        .fail(function() {
-            indicateFail("{{_('Error occurred')}}");
-        });
-        c.preventDefault();
-    });
-});
-
 {% endautoescape %}

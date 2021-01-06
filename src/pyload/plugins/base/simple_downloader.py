@@ -5,7 +5,6 @@ import re
 from pyload.core.network.http.exceptions import BadHeader
 from pyload.core.network.request_factory import get_url
 from pyload.core.utils import parse
-from pyload.core.utils.old import parse_name
 
 from ..helpers import replace_patterns, search_pattern
 from .downloader import BaseDownloader
@@ -194,7 +193,7 @@ class SimpleDownloader(BaseDownloader):
 
         if "N" in info["pattern"]:
             name = replace_patterns(info["pattern"]["N"], cls.NAME_REPLACEMENTS)
-            info["name"] = parse_name(name)
+            info["name"] = parse.name(name)
 
         if "S" in info["pattern"]:
             size = replace_patterns(

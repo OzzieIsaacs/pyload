@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from flask_babel import Babel
 from flask_caching import Cache
 from flask_themes2 import Themes as _Themes
 
@@ -13,18 +14,10 @@ class Themes(_Themes):
                                    theme_url_prefix=path_prefix + "/_themes")
 
 
-# babel = Babel()
+babel = Babel()
 cache = Cache()
 themes = Themes()
 
-EXTENSIONS = [cache]
+EXTENSIONS = [babel, cache]
 
 THEMES = [themes]
-
-# BABEL = [babel]
-
-'''@babel.localeselector
-def get_locale():
-    #return app.config["PYLOAD_API"]
-    #return self.pyload.config.get("general", "language")
-    return'''

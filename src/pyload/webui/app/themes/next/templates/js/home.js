@@ -51,7 +51,7 @@ function EntryManager(){
         {% endif %}
         {% endfor %}];
 
-        container = $('#LinksActive');
+        container = $('#Links_active');
 
         this.parseFromContent();
 

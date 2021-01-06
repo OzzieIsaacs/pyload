@@ -38,9 +38,6 @@ def local_check(func):
 @bp.after_request
 def add_cors(response):
     response.headers.update({
-        # 'Server' = 'AppWork GmbH HttpServer'
-        # 'Connection' = 'close'
-        # 'Content-Type' = 'text/html'
         'Access-Control-Max-Age': 1800,
         'Access-Control-Allow-Origin': "*",
         'Access-Control-Allow-Methods': "OPTIONS, GET, POST"

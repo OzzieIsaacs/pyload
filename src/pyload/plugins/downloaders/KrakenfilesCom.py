@@ -10,13 +10,13 @@ from ..base.simple_downloader import SimpleDownloader
 
 class KrakenfilesCom(SimpleDownloader):
     __name__ = "KrakenfilesCom"
-    __type__ = "hoster"
+    __type__ = "downloader"
     __version__ = "0.01"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?krakenfiles\.com/view/\w+/file.html"
     __config__ = [
-        ("activated", "bool", "Activated", True),
+        ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),
         ("fallback", "bool", "Fallback to free download if premium fails", True),
         ("chk_filesize", "bool", "Check file size", True),

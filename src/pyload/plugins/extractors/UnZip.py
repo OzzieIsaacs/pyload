@@ -22,6 +22,10 @@ class UnZip(BaseExtractor):
         sys.version_info[0], sys.version_info[1], sys.version_info[2]
     )
 
+    EXTENSIONS = [
+        "zip"
+    ]
+
     @classmethod
     def archivetype(cls, filename):
         try:
@@ -30,7 +34,7 @@ class UnZip(BaseExtractor):
         except IOError:
             return None
 
-    @classmethod
+    '''@classmethod
     def isarchive(cls, filename):
         #: zipfile only checks for 'End of archive' so we have to check ourselves for 'start of archive'
         try:
@@ -43,7 +47,7 @@ class UnZip(BaseExtractor):
                     return zipfile.is_zipfile(f)
 
         except IOError:
-            return False
+            return False'''
 
     @classmethod
     def find(cls):

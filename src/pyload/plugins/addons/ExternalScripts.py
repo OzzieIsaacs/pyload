@@ -9,7 +9,7 @@ from ..base.addon import BaseAddon, expose
 class ExternalScripts(BaseAddon):
     __name__ = "ExternalScripts"
     __type__ = "addon"
-    __version__ = "0.75"
+    __version__ = "0.74"
     __status__ = "testing"
 
     __config__ = [
@@ -75,16 +75,12 @@ class ExternalScripts(BaseAddon):
 
     def make_folders(self):
         for folder in self.folders:
-            dir = os.path.join("scripts", folder)
+            dir = os.path.join(self.pyload.userdir, "scripts", folder)
 
             if os.path.isdir(dir):
                 continue
 
-            try:
-                os.makedirs(dir)
-
-            except OSError as exc:
-                self.log_debug(exc, trace=True)
+            os.makedirs(dir, exist_ok=True)
 
     def periodical_task(self):
         self.make_folders()
@@ -145,7 +141,7 @@ class ExternalScripts(BaseAddon):
             + " ".join('"' + arg + '"' if " " in arg else arg for arg in call)
         )
 
-        p = Popen(call, bufsize=-1)  # @NOTE: output goes to pyload
+        p = subprocess.Popen(call)  # NOTE: output goes to pyload
 
         return p
 
@@ -175,7 +171,7 @@ class ExternalScripts(BaseAddon):
 
             else:
                 lock = kwargs.get("lock", None)
-                if lock is True or lock is None and not self.config.get("unlock"):
+                if lock is not False and not self.config.get("unlock"):
                     p.communicate()
 
     def pyload_updated(self, etag):
@@ -205,7 +201,7 @@ class ExternalScripts(BaseAddon):
 
     def download_finished(self, pyfile):
         file = pyfile.plugin.last_download
-        args = [pyfile.id, pyfile.name, file, pyfile.pluginname, pyfile.url, pyfile.package().name]
+        args = [pyfile.id, pyfile.name, file, pyfile.pluginname, pyfile.url]
         self.call_script("download_finished", *args)
 
     def download_processed(self, pyfile):

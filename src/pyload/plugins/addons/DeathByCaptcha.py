@@ -59,8 +59,7 @@ class DeathByCaptcha(BaseAddon):
 
     __description__ = """Send captchas to DeathByCaptcha.com"""
     __license__ = "GPLv3"
-    __authors__ = [("RaNaN", "RaNaN@pyload.net"),
-                   ("zoidberg", "zoidberg@mujmail.cz")]
+    __authors__ = [("RaNaN", "RaNaN@pyload.net"), ("zoidberg", "zoidberg@mujmail.cz")]
 
     API_URL = "http://api.dbcapi.me/api/"
 
@@ -142,7 +141,7 @@ class DeathByCaptcha(BaseAddon):
             data = (pycurl.FORM_FILE, captcha)
         else:
             multipart = False
-            with open(os.fsencode(captcha), mode="rb") as fp:
+            with open(captcha, mode="rb") as fp:
                 data = fp.read()
             data = "base64:" + base64.b64encode(data)
 
@@ -182,14 +181,14 @@ class DeathByCaptcha(BaseAddon):
             self.get_status()
             self.get_credits()
         except DeathByCaptchaException as exc:
-            self.log_error(exc.message)
+            self.log_error(exc)
             return False
 
         balance, rate = self.info["balance"], self.info["rate"]
         self.log_info(
             self._("Account balance"),
             self._("US${:.3f} ({} captchas left at {:.2f} cents each)").format(
-                balance / 100, balance // rate, rate
+                balance // 100, balance // rate, rate
             ),
         )
 
@@ -207,7 +206,7 @@ class DeathByCaptcha(BaseAddon):
                 )
 
             except DeathByCaptchaException as exc:
-                self.log_error(exc.message)
+                self.log_error(exc)
 
             except Exception as exc:
                 self.log_error(
@@ -223,7 +222,7 @@ class DeathByCaptcha(BaseAddon):
             ticket, result = self.submit(c)
         except DeathByCaptchaException as exc:
             task.error = exc.get_code()
-            self.log_error(exc.message)
+            self.log_error(exc)
             return
 
         task.data["ticket"] = ticket

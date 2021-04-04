@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import base64
 import uuid
-import os
 
 import pycurl
 from pyload.core.network.http.exceptions import BadHeader
@@ -24,8 +23,7 @@ class ExpertDecoders(BaseAddon):
 
     __description__ = """Send captchas to expertdecoders.com"""
     __license__ = "GPLv3"
-    __authors__ = [("RaNaN", "RaNaN@pyload.net"),
-                   ("zoidberg", "zoidberg@mujmail.cz")]
+    __authors__ = [("RaNaN", "RaNaN@pyload.net"), ("zoidberg", "zoidberg@mujmail.cz")]
 
     API_URL = "http://www.fasttypers.org/imagepost.ashx"
 
@@ -47,7 +45,7 @@ class ExpertDecoders(BaseAddon):
         task.data["ticket"] = ticket = uuid.uuid4()
         result = None
 
-        with open(os.fsencode(task.captcha_params["file"]), mode="rb") as fp:
+        with open(task.captcha_params["file"], mode="rb") as fp:
             data = fp.read()
 
         with get_request() as req:

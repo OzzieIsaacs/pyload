@@ -4,7 +4,6 @@ import base64
 import re
 import time
 import urllib.parse
-import os
 
 from pyload.core.network.http.exceptions import BadHeader
 
@@ -92,7 +91,7 @@ class Captcha9Kw(BaseAddon):
 
         else:
             try:
-                with open(os.fsencode(task.captcha_params["file"]), mode="rb") as fp:
+                with open(task.captcha_params["file"], mode="rb") as fp:
                     data = fp.read()
 
             except IOError as exc:
@@ -117,7 +116,10 @@ class Captcha9Kw(BaseAddon):
             "cpm": self.config.get("captchapermin"),
         }
 
-        for opt in [x for x in self.config.get("hoster_options", "").split("|") if x]:
+        for opt in self.config.get("hoster_options", "").split("|"):
+            if not opt:
+                continue
+
             details = (x.strip() for x in opt.split(";"))
 
             if not details or details[0].lower() != pluginname.lower():
@@ -182,7 +184,7 @@ class Captcha9Kw(BaseAddon):
 
         task.data["ticket"] = res
 
-        for _ in range(int(self.config.get("timeout") / 5)):
+        for _ in range(int(self.config.get("timeout") // 5)):
             result = self.load(
                 self.API_URL,
                 get={
@@ -212,7 +214,7 @@ class Captcha9Kw(BaseAddon):
         if task.is_interactive():
             if task.captcha_params[
                 "captcha_plugin"
-            ] != "ReCaptcha" or self.config.get("solve_interactive") is False:
+            ] != "ReCaptcha" or not self.config.get("solve_interactive"):
                 return
         else:
             if not task.is_textual() and not task.is_positional():
@@ -245,7 +247,10 @@ class Captcha9Kw(BaseAddon):
             self.log_error(self._("Too many captchas in queue"))
             return
 
-        for opt in [x for x in self.config.get("hoster_options", "").split("|") if x]:
+        for opt in self.config.get("hoster_options", "").split("|"):
+            if not opt:
+                continue
+
             details = (x.strip() for x in opt.split(":"))
 
             if not details or details[0].lower() != pluginname.lower():

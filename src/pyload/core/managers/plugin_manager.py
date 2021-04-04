@@ -265,7 +265,7 @@ class PluginManager:
             plugins.update(temp_plugins)
             configs.update(temp_configs)
 
-        return plugins , configs
+        return plugins, configs
 
     def parse_urls(self, urls):
         """

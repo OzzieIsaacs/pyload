@@ -34,7 +34,7 @@ class UnZip(BaseExtractor):
         except IOError:
             return None
 
-    '''@classmethod
+    @classmethod
     def isarchive(cls, filename):
         if os.path.splitext(filename)[1] != ".zip":
             return False
@@ -50,7 +50,7 @@ class UnZip(BaseExtractor):
                     return zipfile.is_zipfile(f)
 
         except IOError:
-            return False'''
+            return False
 
     @classmethod
     def find(cls):

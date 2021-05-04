@@ -56,11 +56,11 @@ class FilerNet(SimpleDownloader):
             pyfile.url, post={"g-recaptcha-response": response, "hash": inputs["hash"]}
         )
 
-    def check_download(self):
-        if self.scan_download({"html": re.compile(rb"\A\s*<!DOCTYPE html")}) == "html":
+        if self.scan_download({"html": re.compile(r"\A\s*<!DOCTYPE html")}) == "html":
             with open(self.last_download, "r") as f:
                 self.data = f.read()
             os.remove(self.last_download)
+
             if re.search(self.TEMP_OFFLINE_PATTERN, self.data) is not None:
                 self.temp_offline()
 

@@ -38,7 +38,7 @@ class ZDF(BaseDownloader):
 
             streams = json.loads(self.load("https://api.zdf.de/tmd/2/ngplayer_2_4/vod/ptmd/mediathek/" + stream_list))
             download_name = streams['priorityList'][0]['formitaeten'][0]['qualities'][0]['audio']['tracks'][0]['uri']
-            self.info['name'] = os.path.basename(id) + os.path.splitext(download_name)[1]
+            self.pyfile.name = os.path.basename(id) + os.path.splitext(download_name)[1]
             self.download(download_name)
         except Exception as e:
             self.log_error(e)

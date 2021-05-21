@@ -37,8 +37,6 @@ class OneFichierCom(SimpleDownloader):
         ("GammaC0de", "nitzo2001[AT]yahoo[DOT]com"),
     ]
 
-    DISPOSITION = False  # TODO: Remove disposition in 0.6.x
-
     URL_REPLACEMENTS = [
         (
             __pattern__ + ".*",
@@ -51,7 +49,7 @@ class OneFichierCom(SimpleDownloader):
 
     NAME_PATTERN = r">Filename :</td>\s*<td.*>(?P<N>.+?)<"
     SIZE_PATTERN = r">Size :</td>\s*<td.*>(?P<S>[\d.,]+) (?P<U>[\w^_]+)"
-    OFFLINE_PATTERN = r'(?:File not found !\s*<|>\s*The requested file (?:has been deleted|do(?:es)? not exist))'
+    OFFLINE_PATTERN = r"(?:File not found !\s*<|>\s*The requested file (?:has been deleted|do(?:es)? not exist))"
     LINK_PATTERN = r'<a href="(.+?)".*>Click here to download the file</a>'
     TEMP_OFFLINE_PATTERN = r"Without subscription, you can only download one file at|Our services are in maintenance"
     PREMIUM_ONLY_PATTERN = r"is not possible to unregistered users|need a subscription"
@@ -91,6 +89,4 @@ class OneFichierCom(SimpleDownloader):
             self.link = m.group(1)
 
     def handle_premium(self, pyfile):
-        self.download(
-            pyfile.url, post={"did": 0, "dl_no_ssl": "on"}
-        )
+        self.download(pyfile.url, post={"did": 0, "dl_no_ssl": "on"})

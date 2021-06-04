@@ -10,6 +10,7 @@ class XFileSharingFolder(XFSDecrypter):
     __type__ = "decrypter"
     __version__ = "0.26"
     __status__ = "testing"
+    __order__ = "99"
 
     __pattern__ = r"^unmatchable$"
     __config__ = [

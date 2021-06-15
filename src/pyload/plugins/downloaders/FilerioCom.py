@@ -9,7 +9,7 @@ class FilerioCom(XFSDownloader):
     __version__ = "0.14"
     __status__ = "testing"
 
-    __pattern__ = r"https?://(?:www\.)?(filerio\.(in|com)|filekeen\.com)/\w{12}"
+    __pattern__ = r"https?://(?:www\.)?filerio\.(in|com)/\w{12}"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),
@@ -22,9 +22,9 @@ class FilerioCom(XFSDownloader):
     __license__ = "GPLv3"
     __authors__ = [("zoidberg", "zoidberg@mujmail.cz")]
 
-    PLUGIN_DOMAIN = "filerio.com"
+    PLUGIN_DOMAIN = "filerio.in"
 
-    URL_REPLACEMENTS = [(r"filekeen\.com", "filerio.in")]
+    URL_REPLACEMENTS = [("http://", "https://")]
 
     OFFLINE_PATTERN = r">&quot;File Not Found|File has been removed"
 

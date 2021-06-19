@@ -12,7 +12,7 @@ from ..base.simple_downloader import SimpleDownloader
 class Keep2ShareCc(SimpleDownloader):
     __name__ = "Keep2ShareCc"
     __type__ = "downloader"
-    __version__ = "0.45"
+    __version__ = "0.46"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?(keep2share|k2s|keep2s)\.cc/file/(?P<ID>\w+)"
@@ -114,8 +114,10 @@ class Keep2ShareCc(SimpleDownloader):
                                 json_data["errorCode"] == 42
                             ):  #: ERROR_DOWNLOAD_NOT_AVAILABLE
                                 self.captcha.correct()
-                                self.retry(wait=json_data["errors"][0]["timeRemaining"])
-
+                                if "errors" in json_data:
+                                    self.retry(wait=json_data["errors"][0]["timeRemaining"])
+                                else:
+                                    self.fail(json_data["message"])
                             else:
                                 self.fail(json_data["message"])
 

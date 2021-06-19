@@ -15,7 +15,7 @@ class ZbigzCom(BaseDownloader):
     __version__ = "0.04"
     __status__ = "testing"
 
-    __pattern__ = r'^unmatchable$'
+    __pattern__ = r"^unmatchable$"
     __config__ = [("enabled", "bool", "Activated", False)]
 
     __description__ = """Zbigz.com downloader plugin"""

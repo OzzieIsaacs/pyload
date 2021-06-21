@@ -11,10 +11,10 @@ from ..base.xfs_downloader import XFSDownloader
 class NovafileCom(XFSDownloader):
     __name__ = "NovafileCom"
     __type__ = "downloader"
-    __version__ = "0.11"
+    __version__ = "0.12"
     __status__ = "testing"
 
-    __pattern__ = r"http://(?:www\.)?novafile\.com/\w{12}"
+    __pattern__ = r"https?://(?:www\.)?novafile\.com/\w{12}"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),
@@ -35,4 +35,4 @@ class NovafileCom(XFSDownloader):
     ERROR_PATTERN = r'class="alert.+?alert-separate".*?>\s*(?:<p>)?(.*?)\s*</'
     WAIT_PATTERN = r'<p>Please wait <span id="count".*?>(\d+)</span> seconds</p>'
 
-    LINK_PATTERN = r'<a href="(http://s\d+\.novafile\.com/.*?)" class="btn btn-green">Download File</a>'
+    LINK_PATTERN = r'<a href="(https://s\d+\.novafile\.com/.*?)" class="btn btn-green">Download File</a>'

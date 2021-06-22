@@ -5,11 +5,14 @@
 # http://novafile.com/vfun4z6o2cit
 # http://novafile.com/s6zrr5wemuz4
 
-from ..base.xfs_downloader import XFSDownloader
-from ..anticaptchas.HCaptcha import HCaptcha
-from ..helpers import search_pattern
-from pyload.core.utils import parse
 import re
+import urllib.parse
+
+import pycurl
+
+from ..anticaptchas.HCaptcha import HCaptcha
+from ..base.xfs_downloader import XFSDownloader
+
 
 class NovafileCom(XFSDownloader):
     __name__ = "NovafileCom"
@@ -40,50 +43,36 @@ class NovafileCom(XFSDownloader):
 
     LINK_PATTERN = r'<a href="(https://s\d+\.novafile\.com/.*?)" class="btn btn-green">Download File</a>'
 
-    def handle_free(self, pyfile):
-        #first handle the captcha
-        hcaptcha = HCaptcha(self.pyfile)
-        captcha_key = hcaptcha.detect_key()
-        if captcha_key is None:
-            self.fail(self._("captcha key not found"))
-        self.captcha = hcaptcha
-        post_data = hcaptcha.challenge(captcha_key)
-
-        # Post post command
-        values = re.search(r'"file_id": "(\d+)", rand: "(\w+)"', self.data)
-        post = {"op":"captcha1", "file_id": values.group(1), "rand": values.group(2), "g-recaptcha-response":post_data}
-        resp = self.load("https://novafile.com/ddl", post=post)
-        if resp != "OK":
-            self.fail(self._("Post request not accepted"))
-
-        # Wait time
-        m = search_pattern(self.WAIT_PATTERN, self.data)
+    def handle_captcha(self, inputs):
+        m = re.search(r'\$\.post\( "/ddl",\s*\{(.+?) \} \);', self.data)
         if m is not None:
-            try:
-                waitmsg = m.group(1).strip()
+            hcaptcha = HCaptcha(self.pyfile)
+            captcha_key = hcaptcha.detect_key()
+            if captcha_key:
+                self.captcha = hcaptcha
+                response = hcaptcha.challenge(captcha_key)
 
-            except (AttributeError, IndexError):
-                waitmsg = m.group(0).strip()
+                captcha_inputs = {}
+                for _i in m.group(1).split(","):
+                    _k, _v = _i.split(":", 1)
+                    _k = _k.strip('" ')
+                    if "g-recaptcha-response" in _v:
+                        _v = response
 
-            wait_time = parse.seconds(waitmsg)
-            self.set_wait(wait_time)
-            self.wait()
+                    captcha_inputs[_k] = _v.strip('" ')
 
-        # Get post data
-        action, inputs = self.parse_html_form(
-            input_names={"op": re.compile(r"^download")}
-        )
-        self.log_debug(inputs)
+                self.req.http.c.setopt(
+                    pycurl.HTTPHEADER, ["X-Requested-With: XMLHttpRequest"]
+                )
 
-        inputs['h-captcha-response'] = post_data
-        inputs['g-recaptcha-response'] = post_data
-        self.data = self.load(
-            pyfile.url,
-            post=inputs,
-            ref=self.pyfile.url,
-            redirect=False
-        )
+                html = self.load(
+                    urllib.parse.urljoin(self.pyfile.url, "/ddl"), post=captcha_inputs
+                )
 
-        m = re.search(self.LINK_FREE_PATTERN, self.data)
-        if m is not None:
-            self.link = m.group(1)
+                self.req.http.c.setopt(pycurl.HTTPHEADER, ["X-Requested-With:"])
+
+                if html == "OK":
+                    self.captcha.correct()
+
+                else:
+                    self.retry_captcha()

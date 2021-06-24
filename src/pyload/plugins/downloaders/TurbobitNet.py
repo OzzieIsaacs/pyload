@@ -5,6 +5,7 @@ import re
 import pycurl
 from pyload.core.utils.misc import eval_js
 
+from ..anticaptchas.HCaptcha import HCaptcha
 from ..anticaptchas.ReCaptcha import ReCaptcha
 from ..base.simple_downloader import SimpleDownloader
 
@@ -12,7 +13,7 @@ from ..base.simple_downloader import SimpleDownloader
 class TurbobitNet(SimpleDownloader):
     __name__ = "TurbobitNet"
     __type__ = "downloader"
-    __version__ = "0.37"
+    __version__ = "0.39"
     __status__ = "testing"
 
     __pattern__ = r'https?://(?:(?:www|m)\.)?(?:turbobit\.net|turbo?\.(?:to|cc))/(?:download/free/)?(?P<ID>\w+)'
@@ -88,18 +89,31 @@ class TurbobitNet(SimpleDownloader):
                 self.link = "https://turbobit.net{}".format(m.group(1))
 
     def solve_captcha(self):
-        action, inputs = self.parse_html_form("action='#'")
-        if not inputs:
+        action, inputs = self.parse_html_form("id='form-captcha'")
+        if inputs is None:
             self.fail(self._("Captcha form not found"))
 
-        if inputs["captcha_type"] == "recaptcha2":
-            self.captcha = ReCaptcha(self.pyfile)
-            inputs["g-recaptcha-response"], challenge = self.captcha.challenge()
-
         else:
-            self.fail(self._("Unknown captcha type"))
+            recaptcha = ReCaptcha(self.pyfile)
+            captcha_key = recaptcha.detect_key()
+            if captcha_key:
+                self.captcha = recaptcha
+                response, _ = recaptcha.challenge(captcha_key)
+                inputs["g-recaptcha-response"] = response
 
-        self.data = self.load(self.free_url, post=inputs)
+            else:
+                hcaptcha = HCaptcha(self.pyfile)
+                captcha_key = hcaptcha.detect_key()
+                if captcha_key:
+                    self.captcha = hcaptcha
+                    response = hcaptcha.challenge(captcha_key)
+                    inputs["g-recaptcha-response"] = inputs["h-captcha-response"] = response
+
+            if captcha_key:
+                self.data = self.load(self.free_url, post=inputs, ref=self.free_url)
+
+            else:
+                self.fail(self._("Could not detect captcha type"))
 
     def handle_premium(self, pyfile):
         m = re.search(self.LINK_PREMIUM_PATTERN, self.data)

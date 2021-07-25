@@ -232,7 +232,7 @@ $(function() {
         }
     });
 
-    $(".action_add").click(function() {
+    $("#action_add").click(function() {
         $("#add_form").trigger("reset");
     });
 

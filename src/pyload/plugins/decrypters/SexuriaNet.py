@@ -27,7 +27,7 @@ class SexuriaNet(BaseDecrypter):
     __authors__ = [("NETHead", "NETHead.AT.gmx.DOT.net")]
 
     PATTERN_TITLE = r"<h1>(?P<TITLE>.*)</h1>"
-    PATTERN_REDIRECT_LINKS = r'</h4>\s+<a target="_blank" href="(.*?)">' # 'disabled\'" href="(.*)" id'
+    PATTERN_REDIRECT_LINKS = r'<a target="_blank" href="(.*?)">' # 'disabled\'" href="(.*)" id'
 
 
     def decrypt(self, pyfile):

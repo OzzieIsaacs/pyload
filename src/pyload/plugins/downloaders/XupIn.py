@@ -12,7 +12,7 @@ class XupIn(XFSDownloader):
     __version__ = "0.01"
     __status__ = "testing"
 
-    __pattern__ = r"https?://xup.in/(?P<ID>\w+)"
+    __pattern__ = r"https?://(?:www\.)?xup.in/(?P<ID>\w+)"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("chk_filesize", "bool", "Check file size", True),

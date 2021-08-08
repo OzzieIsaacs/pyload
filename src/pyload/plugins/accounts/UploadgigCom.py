@@ -14,7 +14,7 @@ from ..helpers import parse_html_form
 class UploadgigCom(BaseAccount):
     __name__ = "UploadgigCom"
     __type__ = "account"
-    __version__ = "0.04"
+    __version__ = "0.05"
     __status__ = "testing"
 
     __description__ = """UploadgigCom account plugin"""

@@ -381,6 +381,15 @@ function set_captcha(a) {
             $("#cap_interactive").css("display", "block");
             interactiveCaptchaHandlerInstance.startInteraction(params.url, params);
         }
+    } else if (a.result_type === "invisible") {
+        $("#cap_box #cap_title").text("");
+        if(interactiveCaptchaHandlerInstance == null) {
+            interactiveCaptchaHandlerInstance = new interactiveCaptchaHandler("cap_interactive_iframe", "cap_invisible_loading", submit_interactive_captcha);
+        }
+        if(params.url !== undefined && params.url.indexOf("http") === 0) {
+            $("#cap_interactive").css("display", "block");
+            interactiveCaptchaHandlerInstance.startInteraction(params.url, params);
+        }
     }
     return true;
 }
@@ -407,6 +416,8 @@ function captcha_reset_default() {
     // $("#cap_box #cap_title").text("{{_('No Captchas to read.')}}");
     $("#cap_interactive_iframe").attr("src", "").css({display: "none", top: "", left: ""})
         .parent().css({height: "", width: ""});
+    $("#cap_interactive_loading").css("display", "none");
+    $("#cap_invisible_loading").css("display", "none");
     if(interactiveCaptchaHandlerInstance) {
         interactiveCaptchaHandlerInstance.clearEventlisteners();
         interactiveCaptchaHandlerInstance = null;
@@ -448,11 +459,11 @@ function submit_interactive_captcha(c) {
 
 function interactiveCaptchaHandler(iframeId, loadingid, captchaResponseCallback) {
     this._iframeId = iframeId;
-    this._loadingid = loadingid;
+    this._loadingId = loadingid;
     this._captchaResponseCallback = captchaResponseCallback;
     this._active = false; // true: link grabbing is running, false: standby
 
-    $("#" + this._loadingid).css("display", "block");
+    $("#" + this._loadingId).css("display", "block");
     $("#" + this._iframeId).on("load", this, this.iframeLoaded);
 
     // Register event listener for communication with iframe
@@ -491,7 +502,7 @@ interactiveCaptchaHandler.prototype.windowEventListener = function(e) {
         interactiveHandlerInstance.clearEventlisteners();
 
     } else if(requestMessage.actionCode === interactiveHandlerInstance.actionCodes.activated) {
-        $("#" + interactiveHandlerInstance._loadingid).css("display", "none");
+        $("#" + interactiveHandlerInstance._loadingId).css("display", "none");
         $("#" + interactiveHandlerInstance._iframeId).css("display", "block");
 
     } else if (requestMessage.actionCode === interactiveHandlerInstance.actionCodes.size)  {

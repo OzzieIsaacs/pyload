@@ -11,7 +11,7 @@ from ..base.simple_downloader import SimpleDownloader
 class NitroflareCom(SimpleDownloader):
     __name__ = "NitroflareCom"
     __type__ = "downloader"
-    __version__ = "0.33"
+    __version__ = "0.34"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?(?:nitro\.download|nitroflare\.com)/view/(?P<ID>[\w^_]+)"
@@ -63,7 +63,7 @@ class NitroflareCom(SimpleDownloader):
     def handle_free(self, pyfile):
         #: Used here to load the cookies which will be required later
         self.load(
-            "http://nitroflare.com/ajax/setCookie.php",
+            "https://nitroflare.com/ajax/setCookie.php",
             post={"fileId": self.info["pattern"]["ID"]},
         )
 
@@ -75,41 +75,39 @@ class NitroflareCom(SimpleDownloader):
         except (IndexError, ValueError):
             wait_time = 120
 
-        recaptcha = ReCaptcha(pyfile)
-        recaptcha_key = recaptcha.detect_key()
-        hcaptcha = HCaptcha(pyfile)
-        hcaptcha_key = hcaptcha.detect_key()
-
-        self.data = self.load(
-            "http://nitroflare.com/ajax/freeDownload.php",
+        self.load(
+            "https://nitroflare.com/ajax/freeDownload.php",
             post={"method": "startTimer", "fileId": self.info["pattern"]["ID"]},
         )
-
-        self.check_errors()
 
         self.set_wait(wait_time)
 
         inputs = {"method": "fetchDownload"}
 
+        recaptcha = ReCaptcha(pyfile)
+        recaptcha_key = recaptcha.detect_key()
         if recaptcha_key:
             self.captcha = recaptcha
             response = self.captcha.challenge(recaptcha_key)
             inputs["g-recaptcha-response"] = response
-        elif hcaptcha_key:
-            self.captcha = hcaptcha
-            response = self.captcha.challenge(hcaptcha_key)
-            inputs["g-recaptcha-response"] = inputs["h-captcha-response"] = response
         else:
-            response = self.captcha.decrypt(
-                "http://nitroflare.com/plugins/cool-captcha/captcha.php"
-            )
+            hcaptcha = HCaptcha(pyfile)
+            hcaptcha_key = hcaptcha.detect_key()
+            if hcaptcha_key:
+                self.captcha = hcaptcha
+                response = self.captcha.challenge(hcaptcha_key)
+                inputs["g-recaptcha-response"] = inputs["h-captcha-response"] = response
+            else:
+                response = self.captcha.decrypt(
+                    "https://nitroflare.com/plugins/cool-captcha/captcha.php"
+                )
 
         inputs["captcha"] = response
 
         self.wait()
 
         self.data = self.load(
-            "http://nitroflare.com/ajax/freeDownload.php", post=inputs
+            "https://nitroflare.com/ajax/freeDownload.php", post=inputs
         )
 
         if "The captcha wasn't entered correctly" in self.data:

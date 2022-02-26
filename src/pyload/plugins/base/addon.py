@@ -34,11 +34,9 @@ def expose(func):
 
 class BaseAddon(BasePlugin):
     __name__ = "BaseAddon"
-    __type__ = "addon"  # TODO: Change to `addon` in 0.6.x
+    __type__ = "addon"
     __version__ = "0.56"
     __status__ = "stable"
-
-    __threaded__ = []  # TODO: Remove in 0.6.x
 
     __description__ = """Base addon plugin"""
     __license__ = "GPLv3"
@@ -172,13 +170,6 @@ class BaseAddon(BasePlugin):
 
     def download_failed(self, pyfile):
         pass
-
-    #: Deprecated method, use `download_failed` instead (Remove in 0.6.x)
-    # def download_failed(self, pyfile):
-    #     if pyfile.has_status(
-    #         "failed"
-    #     ):  # NOTE: Check if "still" set as failed (Fix in 0.6.x)
-    #         return self.download_failed(pyfile)
 
     def package_processed(self, pypack):
         pass

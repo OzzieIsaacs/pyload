@@ -16,8 +16,10 @@ except ImportError:
     send2trash = None
 try:
     import magic
+
+    def guess_mime(filename):
+        return magic.from_file(filename, mime=True)
 except ImportError:
-    magic = None
     from filetype import guess_mime
 try:
     import zlib
@@ -102,10 +104,6 @@ def filesize(filename):
 
 
 def filetype(filename):
-    try:
-        return magic.from_file(filename, mime=True)
-    except AttributeError:
-        pass
     return guess_mime(filename)
 
 

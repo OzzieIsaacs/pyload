@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2020-11-01 13:58+0100\n"
-"PO-Revision-Date: 2020-11-21 10:03+0100\n"
+"PO-Revision-Date: 2022-04-10 13:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Crowdin-Language: de\n"
 "X-Crowdin-File: /pyLoad/django.pot\n"
 "X-Crowdin-File-ID: 42\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: src/pyload/__main__.py:122
 msgid "Killed from terminal"
@@ -78,7 +78,7 @@ msgstr ""
 
 #: src/pyload/core/managers/account_manager.py:87
 msgid "Account settings deleted, due to new config format."
-msgstr ""
+msgstr "Account Einstellungen gelöscht, da neues Config Format."
 
 #: src/pyload/core/managers/addon_manager.py:125
 msgid "Failed activating {}"
@@ -231,7 +231,7 @@ msgstr "Datenbank wurde von v2 nach v3 konvertiert."
 
 #: src/pyload/core/threads/database_thread.py:169
 msgid "Database was converted from v3 to v4."
-msgstr "Datenbank wurde von v3 nach v4 konvertiert"
+msgstr "Datenbank wurde von v3 nach v4 konvertiert."
 
 #: src/pyload/core/threads/database_thread.py:223
 msgid "Converting old Django DB"
@@ -296,7 +296,7 @@ msgstr "Laden der Info für {name} fehlgeschlagen | {err}"
 
 #: src/pyload/core/threads/plugin_thread.py:72
 msgid "Debug Report written to {}"
-msgstr "Debug Report nach {} geschrieben "
+msgstr "Debug Report nach {} geschrieben"
 
 #: src/pyload/plugins/helpers.py:146
 msgid "Error performing periodical task"
@@ -512,7 +512,7 @@ msgstr "Checksumme überprüft"
 #: src/pyload/plugins/addons/Checksum.py:221
 #: src/pyload/plugins/addons/Checksum.py:344
 msgid "{} checksum for file {} does not match ({} != {})"
-msgstr ""
+msgstr "{} Checksumme für Datei {} stimmt nicht überein ({} != {})"
 
 #: src/pyload/plugins/addons/Checksum.py:237
 #: src/pyload/plugins/addons/Checksum.py:358
@@ -596,7 +596,7 @@ msgstr "_preload() ist bereits für {} überschrieben"
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:277
 msgid "{} is missing _preload() function, cannot override!"
-msgstr ""
+msgstr "{} fehlt _preload() Funktion, überschreiben nicht möglich!"
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:292
 msgid "Owner plugin not found, cannot process"
@@ -875,7 +875,7 @@ msgstr "***  Neue pyLoad {} verfügabar  ***"
 
 #: src/pyload/plugins/addons/UpdateManager.py:200
 msgid "***  Get it here: https://github.com/pyload/pyload/releases  ***"
-msgstr ""
+msgstr "***  Hier runterladen: https://github.com/pyload/pyload/releases  ***"
 
 #: src/pyload/plugins/addons/UpdateManager.py:227
 msgid "*** Plugins updated ***"
@@ -1352,7 +1352,7 @@ msgstr "pyLoad wurde aktualisiert"
 
 #: src/pyload/plugins/base/notifier.py:59
 msgid "Restarting pyLoad"
-msgstr "pyLoad neustarten"
+msgstr "PyLoad neustarten"
 
 #: src/pyload/plugins/base/notifier.py:61
 msgid "Exiting pyLoad"
@@ -1402,11 +1402,11 @@ msgstr "Download fehlgeschlagen"
 
 #: src/pyload/plugins/base/notifier.py:106
 msgid "All downloads processed"
-msgstr ""
+msgstr "Alle Downloads verarbeitet"
 
 #: src/pyload/plugins/base/notifier.py:109
 msgid "All downloads finished"
-msgstr ""
+msgstr "Alle Downloads abgeschlossen"
 
 #: src/pyload/plugins/base/notifier.py:142
 msgid "Error sending notification"
@@ -1518,7 +1518,7 @@ msgstr "Transfervolumen überschritten"
 #: src/pyload/plugins/base/simple_decrypter.py:342
 #: src/pyload/plugins/base/simple_downloader.py:434
 msgid "Link expired"
-msgstr ""
+msgstr "Link abgelaufen"
 
 #: src/pyload/plugins/base/simple_decrypter.py:382
 #: src/pyload/plugins/base/simple_downloader.py:349
@@ -1586,7 +1586,7 @@ msgstr "Datei zu groß für Free Download"
 
 #: src/pyload/plugins/base/simple_downloader.py:491
 msgid "Free download not implemented"
-msgstr ""
+msgstr "Free Download nicht implentiert"
 
 #: src/pyload/plugins/base/simple_downloader.py:495
 msgid "Free download link not found"
@@ -1692,7 +1692,7 @@ msgstr "{} Alternativen gefunden"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:149
 msgid "Folder is password protected"
-msgstr ""
+msgstr "Ordner ist passwortgeschützt"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:155
 msgid "Please enter the password in package section and try again"
@@ -1700,7 +1700,7 @@ msgstr ""
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:187
 msgid "Unknown captcha found, retrying"
-msgstr ""
+msgstr "Unbekanntes captcha gefunden, wiederhole"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:191
 msgid "No captcha found"
@@ -1870,7 +1870,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:107
 msgid "FREE_URL_PATTERN not found"
-msgstr ""
+msgstr "FREE_URL_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:129
 msgid "Form"
@@ -2164,11 +2164,13 @@ msgstr "Tageslimit erreicht"
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:56
 msgid "Hoster temporarily unavailable, waiting 1 minute and retry"
 msgstr ""
+"Hoster ist zeitweise nicht verfügbar, es wird 1 Minute gewartet und erneut "
+"versucht"
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:55
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:58
 msgid "Hoster is temporarily unavailable"
-msgstr ""
+msgstr "Hoster ist zeitweise nicht verfügbar"
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:67
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:71
@@ -2335,7 +2337,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/MegasharesCom.py:133
 msgid "{} download URL"
-msgstr ""
+msgstr "{} Download URL"
 
 #: src/pyload/plugins/downloaders/MultishareCz.py:56
 msgid "Not enough credit left to download file"
@@ -2386,7 +2388,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/OboomCom.py:147
 msgid "Connection limit exceeded"
-msgstr ""
+msgstr "Verbindungslimit überschritten"
 
 #: src/pyload/plugins/downloaders/OboomCom.py:150
 msgid "Could not retrieve download ticket. Error code: {}"
@@ -2409,7 +2411,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/PornhubCom.py:105
 msgid "`qualityItems` variable no found"
-msgstr ""
+msgstr "Variable `qualityItems` nicht gefunden"
 
 #: src/pyload/plugins/downloaders/PornovkaCz.py:30
 msgid "Data url not found"
@@ -2431,7 +2433,7 @@ msgstr "Benutzer nicht eingeloggt"
 
 #: src/pyload/plugins/downloaders/QuickshareCz.py:65
 msgid "File not found or plugin defect"
-msgstr ""
+msgstr "Datei nicht gefunden oder Plugin defekt"
 
 #: src/pyload/plugins/downloaders/QuickshareCz.py:92
 msgid "Error {}"
@@ -2443,7 +2445,7 @@ msgstr ""
 
 #: src/pyload/plugins/downloaders/RPNetBiz.py:93
 msgid "Something went wrong, not supposed to enter here"
-msgstr ""
+msgstr "Etwas ist schief gegangen, der Zugriff ist hier nicht vorgesehen"
 
 #: src/pyload/plugins/downloaders/RapideoPl.py:99
 msgid ""
@@ -2746,11 +2748,11 @@ msgstr "Frage Info zu Paket #{} an"
 
 #: src/pyload/plugins/downloaders/XDCC.py:527
 msgid "XDCC Bot '{}' did not answer"
-msgstr ""
+msgstr "XDCC Bot '{}' antwortete nicht"
 
 #: src/pyload/plugins/downloaders/XDCC.py:603
 msgid "Invalid hostname for IRC Server: {}"
-msgstr ""
+msgstr "Ungültiger Hostname für IRC Server: {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:645
 msgid "Cannot join channel"
@@ -3316,7 +3318,7 @@ msgstr "Gib den Text aus dem Captcha ein."
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:30
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:30
 msgid "Your browser does not support iframes."
-msgstr ""
+msgstr "Der Browser unterstützt keine iframes."
 
 #: src/pyload/webui/app/templates/captcha.html:32
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:34
@@ -4233,11 +4235,11 @@ msgstr "Zeilen pro Seite"
 msgid "Go"
 msgstr "Los"
 
-msgid "Config"
-msgstr "Einstellungen"
+#~ msgid "Config"
+#~ msgstr "Einstellungen"
 
-msgid "pyLoad version"
-msgstr "pyLoad Version"
+#~ msgid "pyLoad version"
+#~ msgstr "pyLoad Version"
 
 #~ msgid "Home"
 #~ msgstr "Start"

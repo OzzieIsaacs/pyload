@@ -15,13 +15,20 @@ if (!String.prototype.startsWith) {
 
 SettingsUI = (function() {
     function a() {
-        var c, e, b, d;
+        let c, e, b, d;
 
-        var activeTab = sessionStorage.getItem('activeTab');
+        let activeTab = sessionStorage.getItem('activeTab');
         if (activeTab) {
             sessionStorage.removeItem('activeTab');
             $('#toptabs a[href="' + activeTab + '"]').tab('show');
         }
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(event) {
+            if (event.target !== event.relatedTarget && $(event.target).attr("href") === "#accounts") {
+                $('#account_form input[type=checkbox]').each(function() {
+                    $(this).prop("checked", false);
+                })
+            }
+        });
 
         generalPanel = $("#core_form_content");
         pluginPanel = $("#plugin_form_content");
@@ -37,7 +44,7 @@ SettingsUI = (function() {
         $("#account_add").click(function() {
             $("#add_account_form").trigger("reset");
         });
-        
+
         this.initPluginSearch();
         this.initPathcooser();
     }
@@ -203,8 +210,8 @@ SettingsUI = (function() {
         path_p.text(iframe.cwd);
         path_p.prop("title", iframe.cwd);
         $("#chooser_confirm_button").attr("disabled", !iframe.submit);
-        $("#path_type0").attr("checked", !iframe.isabsolute);
-        $("#path_type1").attr("checked", iframe.isabsolute);
+        $("#path_type0").prop("checked", !iframe.isabsolute);
+        $("#path_type1").prop("checked", iframe.isabsolute);
     };
     return a;
 })();

@@ -1,12 +1,13 @@
 var root = this;
 
+
 function PackageUI (url, type){
     var packages = [];
     var thisObject;
     this.initialize = function(url, type) {
-        thisObject = this;
         this.url = url;
         this.type = type;
+        thisObject = this;
 
         $("#del_finished").click(this.deleteFinished);
         $("#restart_failed").click(this.restartFailed);
@@ -15,25 +16,25 @@ function PackageUI (url, type){
     };
 
     this.parsePackages = function () {
-       $("#package-list").children("li").each(function(ele) {
+       var $packageList = $("#package-list");
+       $packageList.children("li").each(function(ele) {
             var id = this.id.match(/[0-9]+/);
             packages.push(new Package(thisObject, id, this));
         });
-        $("#package-list").sortable({
+        $packageList.sortable({
             handle: ".progress",
             axis: "y",
             cursor: "grabbing",
-            start: function(e, ui) {
+            start: function(event, ui) {
                 $(this).attr('data-previndex', ui.item.index());
             },
             stop: function(event, ui) {
-                var newIndex = ui.item.index();
-                var oldIndex = $(this).attr('data-previndex');
+                let newIndex = ui.item.index();
+                let oldIndex = $(this).attr('data-previndex');
                 $(this).removeAttr('data-previndex');
-                if (newIndex == oldIndex) {
+                if (newIndex === oldIndex) {
                     return false;
                 }
-                var order = ui.item.data('pid') + '|' + newIndex;
                 indicateLoad();
                 $.get({
                     url: "{{url_for('json.package_order')}}",
@@ -179,14 +180,14 @@ function Package (ui, id, ele){
             var html = "<span class='child_status'><span style='margin-right: 2px;' class='" + link.icon + "'></span></span>\n" +
                        "<span style='font-size: 16px; font-weight: bold;'><a href='" + link.url + "'>" + link.name + "</a></span><br/>" +
                        "<div class='child_secrow' style='margin-left: 21px; margin-bottom: 7px; background-color: #dcdcdc;'>" +
-                       "<span class='child_status' style='font-size: 12px; color:#555'>" + link.statusmsg + "</span>&nbsp;" + link.error + "&nbsp;" +
-                       "<span class='child_status' style='font-size: 12px; color:#555'>" + link.format_size + "</span>" +
-                       "<span class='child_status' style='font-size: 12px; color:#555'> " + link.plugin + "</span>&nbsp;&nbsp;" +
+                       "<span class='child_status' style='font-size: 12px; color:#555;'>" + link.statusmsg + "</span>&nbsp;" + link.error + "&nbsp;" +
+                       "<span class='child_status' style='font-size: 12px; color:#555;'>" + link.format_size + "</span>" +
+                       "<span class='child_status' style='font-size: 12px; color:#555;'> " + link.plugin + "</span>&nbsp;&nbsp;" +
                        "<span class='glyphicon glyphicon-trash' title='{{_('Delete Link')}}' style='cursor: pointer;  font-size: 12px; color:#333;' ></span>&nbsp;&nbsp;" +
                        "<span class='glyphicon glyphicon-repeat' title='{{_('Restart Link')}}' style='cursor: pointer; font-size: 12px; color:#333;' ></span></div>";
 
             var div = document.createElement("div");
-            $(div).attr("id","file_" + link.id);
+            $(div).attr("id", "file_" + link.id);
             $(div).css("padding-left", "30px");
             $(div).css("cursor", "grab");
             $(div).addClass("child");
@@ -220,7 +221,7 @@ function Package (ui, id, ele){
                 $.get("{{url_for('api.rpc', func='restart_file')}}/" + lid, function () {
                     var ele1 = $('#file_' + lid);
                     var imgs1 = $(ele1).find(".glyphicon");
-                    $(imgs1[0]).attr( "class","glyphicon glyphicon-time text-info");
+                    $(imgs1[0]).attr( "class", "glyphicon glyphicon-time text-info");
                     var spans = $(ele1).find(".child_status");
                     $(spans[1]).html("{{_('queued')}}");
                     indicateSuccess();
@@ -242,7 +243,7 @@ function Package (ui, id, ele){
                 var newIndex = ui.item.index();
                 var oldIndex = $(this).attr('data-previndex');
                 $(this).removeAttr('data-previndex');
-                if (newIndex == oldIndex) {
+                if (newIndex === oldIndex) {
                     return false;
                 }
                 indicateLoad();
@@ -254,18 +255,18 @@ function Package (ui, id, ele){
                         indicateFinish();
                         return true;
                     }
-                } ).fail(function () {
+                }).fail(function () {
                     indicateFail();
                     return false;
                 });
-          }
+            }
         });
     };
 
     this.toggle = function () {
         var icon = $(ele).find('.packageicon');
         var child = $(ele).find('.children');
-        if (child.css('display') == "block") {
+        if (child.css('display') === "block") {
             $(child).fadeOut();
             icon.removeClass('glyphicon-folder-open');
             icon.addClass('glyphicon-folder-close');
@@ -362,8 +363,7 @@ function Package (ui, id, ele){
     this.editPackage = function(event) {
         event.stopPropagation();
         event.preventDefault();
-        $("#pack_form").off("submit");
-        $("#pack_form").submit(thisObject.savePackage);
+        $("#pack_form").off("submit").submit(thisObject.savePackage);
 
         $("#pack_id").val(id[0]);
         $("#pack_name").val(name.text());

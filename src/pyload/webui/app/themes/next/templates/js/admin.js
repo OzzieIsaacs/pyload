@@ -3,12 +3,10 @@
 var root;
 root = this;
 $(function() {
-    var f, c, b, e, a, d;
-    $("#password_box").on('click', '#login_password_button', function (j) {
-        var h, i, g;
-        i = $("#login_new_password").val();
-        g = $("#login_new_password2").val();
-        if (i === g) {
+    $("#password_box").on('click', '#login_password_button', function (event) {
+        let passwd = $("#login_new_password").val();
+        let passwdConfirm = $("#login_new_password2").val();
+        if (passwd === passwdConfirm) {
             $.ajax({
                 method: "post",
                 url: "{{url_for('json.change_password')}}",
@@ -18,15 +16,15 @@ $(function() {
                     indicateSuccess("{{_('Settings saved')}}");
                 }
             })
-            .fail(function() {
+            .fail(function () {
                 indicateFail("{{_('Error occurred')}}");
             });
             $('#password_box').modal('hide');
         } else {
             alert("{{_('Passwords did not match.')}}")
         }
-        j.stopPropagation();
-        j.preventDefault();
+        event.stopPropagation();
+        event.preventDefault();
     });
     $(".is_admin").each(function () {
         let userName = $(this).attr("name").split("|")[0];
@@ -40,8 +38,8 @@ $(function() {
         });
     });
     $(".change_password").each(function () {
-        var userName = $(this).attr("id").split("|")[1];
-        $(this).bind("click",{userName:userName}, function(g) {
+        let userName = $(this).attr("id").split("|")[1];
+        $(this).bind("click", {userName: userName}, function (event) {
             $("#password_form").trigger("reset");
             $("#password_box #user_login").val(userName);
         });
@@ -53,8 +51,8 @@ $(function() {
         $("#user_add_form").trigger("reset");
     });
     $("#new_role").change(function (event) {
-        var checked = $(this).is(":checked");
-        var permsList = $("#new_perms");
+        let checked = $(this).is(":checked");
+        let permsList = $("#new_perms");
         permsList.attr('disabled', checked);
         if (checked) {
             permsList.val([]);
@@ -62,14 +60,14 @@ $(function() {
     });
     $("#new_user_button").click(function (event) {
         $(this).attr('disabled', true);
-        var $userForm = $("#user_add_form");
-        var $userName = $("#new_user");
+        let $userForm = $("#user_add_form");
+        let $userName = $("#new_user");
         if ($userName.val().trim() === "") {
             alert("{{_('Username must be filled out')}}");
         } else {
             $userName.val($userName.val().trim());
-            var passwd = $("#new_password").val();
-            var passwdConfirm = $("#new_password2").val();
+            let passwd = $("#new_password").val();
+            let passwdConfirm = $("#new_password2").val();
             if (passwd === passwdConfirm) {
                 $.ajax({
                     method: "post",

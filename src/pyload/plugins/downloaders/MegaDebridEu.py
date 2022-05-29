@@ -42,7 +42,7 @@ class MegaDebridEu(MultiDownloader):
 
         # Better use pyLoad User-Agent so we don't get blocked
         self.req.http.c.setopt(
-            pycurl.USERAGENT, "pyLoad/{}".format(self.pyload.version)
+            pycurl.USERAGENT, "pyLoad/{}".format(self.pyload.version).encode()
         )
 
         json_data = self.load(self.API_URL, get=get, post=post)

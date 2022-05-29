@@ -62,8 +62,6 @@ class TXT(BaseContainer):
 
                 packages[cur_pack].append(link)
 
-        txt.close()
-
         #: Empty packages fix
         for key, value in packages.items():
             if not value:

@@ -109,10 +109,8 @@ class Keep2ShareCc(SimpleDownloader):
                                 json_data["errorCode"] == 42
                             ):  #: ERROR_DOWNLOAD_NOT_AVAILABLE
                                 self.captcha.correct()
-                                if "errors" in json_data:
-                                    self.retry(wait=json_data["errors"][0]["timeRemaining"])
-                                else:
-                                    self.fail(json_data["message"])
+                                self.retry(wait=json_data["errors"][0]["timeRemaining"])
+
                             else:
                                 self.fail(json_data["message"])
 
@@ -138,13 +136,13 @@ class Keep2ShareCc(SimpleDownloader):
                 )
 
                 if json_data["code"] == 200:
-                    self.download(json_data['url'])
+                    self.link = json_data["url"]
 
             else:
                 raise
 
         else:
-            self.download(json_data['url'])
+            self.link = json_data["url"]
 
     def handle_premium(self, pyfile):
         file_id = self.info["pattern"]["ID"]

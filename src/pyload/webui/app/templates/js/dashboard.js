@@ -28,7 +28,7 @@ var EntryManager = new Class({
         {% endfor %}];
 
         this.entries = [];
-        this.container = $('Links_active');
+        this.container = $('LinksAktiv');
 
         this.parseFromContent();
 

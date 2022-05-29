@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
+
+
+from ..base.simple_downloader import SimpleDownloader
+
 #
 # Test links:
 #   http://www.solidfiles.com/d/609cdb4b1b
 
 import re
-from ..base.simple_downloader import SimpleDownloader
+
 
 class SolidfilesCom(SimpleDownloader):
     __name__ = "SolidfilesCom"

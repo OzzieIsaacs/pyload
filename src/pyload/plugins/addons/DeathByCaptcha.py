@@ -4,7 +4,6 @@ import base64
 import json
 import re
 import time
-import os
 
 import pycurl
 from pyload.core.network.http.exceptions import BadHeader

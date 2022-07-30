@@ -111,12 +111,30 @@ hr {
   user-select: none;
 }
 
-.modal-dialog {
+/*.modal-dialog {
     display: flex;
     width: initial;
     justify-content: center;
+}*/
+
+.modal-body {
+  overflow: auto;
+  background-color: #282828;
 }
 
+.modal-content {
+  background-color: #282828;
+}
+
+.modal-header {
+  overflow: auto;
+  border-bottom: 1px solid #212121;
+}
+
+.modal-footer {
+  padding: 6px 12px;
+  border-top: none;
+}
 
 .text-ellipsis {
   width: 100%;
@@ -139,4 +157,3 @@ hr {
 fieldset[disabled] .btn {
   pointer-events: auto;
 }
-

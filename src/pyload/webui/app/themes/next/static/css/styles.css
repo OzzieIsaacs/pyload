@@ -119,16 +119,12 @@ hr {
 
 .modal-body {
   overflow: auto;
-  background-color: #282828;
 }
 
-.modal-content {
-  background-color: #282828;
-}
 
 .modal-header {
   overflow: auto;
-  border-bottom: 1px solid #212121;
+  border-bottom: 1px solid;
 }
 
 .modal-footer {

@@ -5,6 +5,7 @@ import os
 import re
 import sys
 from ast import literal_eval
+from importlib.abc import MetaPathFinder
 from itertools import chain
 from collections import OrderedDict
 
@@ -12,7 +13,7 @@ from collections import OrderedDict
 from pyload import APPID, PKGDIR
 
 
-class PluginManager:
+class PluginManager(MetaPathFinder):
     ROOT = "pyload.plugins."
     USERROOT = "plugins."
     TYPES = (
@@ -26,18 +27,27 @@ class PluginManager:
         "base",
     )
 
-    _PATTERN = re.compile(r'\s*__pattern__\s*=\s*r?(?:"|\')([^"\']+)')
-    _VERSION = re.compile(r'\s*__version__\s*=\s*(?:"|\')([\d.]+)')
-    _ORDER = re.compile(r'\s*__order__\s*=\s*(?:"|\')([\d.]+)')
-    # _PYLOAD_VERSION = re.compile(r'\s*__pyload_version__\s*=\s*(?:"|\')([\d.]+)')
-    _CONFIG = re.compile(r"\s*__config__\s*=\s*(\[[^\]]+\])", re.MULTILINE)
-    _DESC = re.compile(r'\s*__description__\s*=\s*(?:"|"""|\')([^"\']+)', re.MULTILINE)
+    _RE_PATTERN = re.compile(r'\s*__pattern__\s*=\s*r?["\']([^"\']+)')
+    _RE_VERSION = re.compile(r'\s*__version__\s*=\s*["\']([\d.]+)')
+    _RE_ORDER = re.compile(r'\s*__order__\s*=\s*(?:"|\')([\d.]+)')
+    # _RE_PYLOAD_VERSION = re.compile(r'\s*__pyload_version__\s*=\s*(?:"|\')([\d.]+)')
+    _RE_CONFIG = re.compile(r"\s*__config__\s*=\s*(\[[^\]]+\])", re.MULTILINE)
+    _RE_DESC = re.compile(r'\s*__description__\s*=\s*(?:"|"""|\')([^"\']+)', re.MULTILINE)
 
     def __init__(self, core):
         self.pyload = core
         self._ = core._
 
         self.plugins = {}
+        self.account_plugins = []
+        self.addon_plugins = []
+        self.anticaptcha_plugins = []
+        self.container_plugins = []
+        self.decrypter_plugins = []
+        self.downloader_plugins = []
+        self.extractor_plugins = []
+        self.internal_plugins = []
+
         self.create_index()
 
         # save generated config
@@ -78,28 +88,28 @@ class PluginManager:
         except Exception:
             pass
 
-        self.crypter_plugins, config = self.parse("decrypters", pattern=True)
-        self.plugins["decrypter"] = self.crypter_plugins
+        self.decrypter_plugins, config = self.parse("decrypters", pattern=True)
+        self.plugins["decrypter"] = self.decrypter_plugins
         default_config = config
 
         self.container_plugins, config = self.parse("containers", pattern=True)
         self.plugins["container"] = self.container_plugins
         merge(default_config, config)
 
-        self.hoster_plugins, config = self.parse("downloaders", pattern=True)
-        self.plugins["downloader"] = self.hoster_plugins
+        self.downloader_plugins, config = self.parse("downloaders", pattern=True)
+        self.plugins["downloader"] = self.downloader_plugins
         merge(default_config, config)
 
         self.addon_plugins, config = self.parse("addons")
         self.plugins["addon"] = self.addon_plugins
         merge(default_config, config)
 
-        self.captcha_plugins, config = self.parse("anticaptchas")
-        self.plugins["anticaptcha"] = self.captcha_plugins
+        self.anticaptcha_plugins, config = self.parse("anticaptchas")
+        self.plugins["anticaptcha"] = self.anticaptcha_plugins
         merge(default_config, config)
 
-        self.extract_plugins, config = self.parse("extractors")
-        self.plugins["extractor"] = self.extract_plugins
+        self.extractor_plugins, config = self.parse("extractors")
+        self.plugins["extractor"] = self.extractor_plugins
         merge(default_config, config)
 
         self.account_plugins, config = self.parse("accounts")
@@ -157,7 +167,7 @@ class PluginManager:
                 if name[-1] == ".":
                     name = name[:-4]
 
-                # m_pyver = self._PYLOAD_VERSION.search(content)
+                # m_pyver = self._RE_PYLOAD_VERSION.search(content)
                 # if m_pyver is None:
                 #     self.pyload.log.debug(
                 #         f"__pyload_version__ not found in plugin {name}"
@@ -183,14 +193,14 @@ class PluginManager:
                 #         )
                 #         continue
 
-                m_ver = self._VERSION.search(content)
+                m_ver = self._RE_VERSION.search(content)
                 if m_ver is None:
                     self.pyload.log.debug(f"__version__ not found in plugin {name}")
                     version = 0
                 else:
                     version = float(m_ver.group(1))
 
-                m_order = self._ORDER.search(content)
+                m_order = self._RE_ORDER.search(content)
                 if m_order is None:
                     order = 0
                 else:
@@ -213,7 +223,7 @@ class PluginManager:
                 plugins[name]["order"] = order
 
                 if pattern:
-                    m_pat = self._PATTERN.search(content)
+                    m_pat = self._RE_PATTERN.search(content)
                     pattern = r"^unmachtable$" if m_pat is None else m_pat.group(1)
 
                     plugins[name]["pattern"] = pattern
@@ -230,10 +240,10 @@ class PluginManager:
                     self.pyload.config.delete_config(name)
                     continue
 
-                m_desc = self._DESC.search(content)
+                m_desc = self._RE_DESC.search(content)
                 desc = "" if m_desc is None else m_desc.group(1)
 
-                config = self._CONFIG.findall(content)
+                config = self._RE_CONFIG.findall(content)
                 if not config:
                     new_config = {"enabled": ["bool", "Activated", False], "desc": desc}
                     configs[name] = new_config
@@ -271,7 +281,7 @@ class PluginManager:
         parse plugins for given list of urls.
         """
         last = (None, {})
-        res = []  #: tupels of (url, plugin)
+        res = []  #: tuples of (url, plugin)
 
         for url in urls:
             if type(url) not in (
@@ -288,8 +298,8 @@ class PluginManager:
                 continue
 
             for name, value in chain(
-                    OrderedDict(sorted(self.crypter_plugins.items(), key=lambda t: t[1]['order'])).items(),
-                    OrderedDict(sorted(self.hoster_plugins.items(), key=lambda t: t[1]['order'])).items(),
+                    OrderedDict(sorted(self.decrypter_plugins.items(), key=lambda t: t[1]['order'])).items(),
+                    OrderedDict(sorted(self.downloader_plugins.items(), key=lambda t: t[1]['order'])).items(),
                     OrderedDict(sorted(self.container_plugins.items(), key=lambda t: t[1]['order'])).items()
             ):
                 if value["re"].match(url):
@@ -317,7 +327,7 @@ class PluginManager:
 
         if not plugin:
             self.pyload.log.warning(self._("Plugin {} not found").format(name))
-            plugin = self.hoster_plugins["DefaultPlugin"]
+            plugin = self.downloader_plugins["DefaultPlugin"]
 
         if "new_module" in plugin and not original:
             return plugin["new_module"]
@@ -382,10 +392,10 @@ class PluginManager:
         return list(self.account_plugins.keys())
 
     def find_module(self, fullname, path=None):
-        # redirecting imports if necesarry
+        # redirecting imports if necessary
         if fullname.startswith(self.ROOT) or fullname.startswith(
             self.USERROOT
-        ):  #: os.seperate pyload plugins
+        ):  #: os.separate pyload plugins
             if fullname.startswith(self.USERROOT):
                 user = 1
             else:
@@ -400,13 +410,13 @@ class PluginManager:
                 # userplugin is a newer version
                 if not user and self.plugins[type][name]["user"]:
                     return self
-                # imported from userdir, but pyloads is newer
+                # imported from userplugins dir, but pyload's version is newer
                 if user and not self.plugins[type][name]["user"]:
                     return self
 
     def reload_plugins(self, type_plugins):
         """
-        reloads and reindexes plugins.
+        reloads and reindex plugins.
         """
 
         def merge(dst, src, overwrite=False):
@@ -435,7 +445,7 @@ class PluginManager:
             else:
                 as_dict[t] = [n]
 
-        # we do not reload addons or internals, would cause to much side effects
+        # we do not reload addons or internals, would cause too much side effects
         if "addon" in as_dict or "base" in as_dict:
             return False
 
@@ -447,27 +457,27 @@ class PluginManager:
                         importlib.reload(self.plugins[type][plugin][APPID])
 
         # index creation
-        self.crypter_plugins, config = self.parse("decrypters", pattern=True)
-        self.plugins["decrypter"] = self.crypter_plugins
+        self.decrypter_plugins, config = self.parse("decrypters", pattern=True)
+        self.plugins["decrypter"] = self.decrypter_plugins
         default_config = config
 
         self.container_plugins, config = self.parse("containers", pattern=True)
         self.plugins["container"] = self.container_plugins
         merge(default_config, config)
 
-        self.hoster_plugins, config = self.parse("downloaders", pattern=True)
-        self.plugins["downloader"] = self.hoster_plugins
+        self.downloader_plugins, config = self.parse("downloaders", pattern=True)
+        self.plugins["downloader"] = self.downloader_plugins
         merge(default_config, config)
 
         temp, config = self.parse("addons")
         merge(default_config, config)
 
-        self.captcha_plugins, config = self.parse("anticaptchas")
-        self.plugins["anticaptcha"] = self.captcha_plugins
+        self.anticaptcha_plugins, config = self.parse("anticaptchas")
+        self.plugins["anticaptcha"] = self.anticaptcha_plugins
         merge(default_config, config)
 
-        self.extract_plugins, config = self.parse("extractors")
-        self.plugins["extractor"] = self.extract_plugins
+        self.extractor_plugins, config = self.parse("extractors")
+        self.plugins["extractor"] = self.extractor_plugins
         merge(default_config, config)
 
         self.account_plugins, config = self.parse("accounts")

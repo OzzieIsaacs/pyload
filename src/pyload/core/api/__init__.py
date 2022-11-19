@@ -27,6 +27,9 @@ from ..utils.old.packagetools import parse_names
 # unlisted functions are for admins only
 perm_map = {}
 
+# contains function names mapped to their legacy name
+legacy_map = {}
+
 
 # decorator only called on init, never initialized, so has no effect on runtime
 def permission(bits):
@@ -38,19 +41,28 @@ def permission(bits):
     return Wrapper
 
 
+def legacy(legacy_name):
+    class Wrapper:
+        def __new__(cls, func, *args, **kwargs):
+            legacy_map[func.__name__] = legacy_name
+            return func
+
+    return Wrapper
+
+
 urlmatcher = re.compile(
-    r"(?:(?:https?|ftps?|xdcc|sftp):(?://|\\\\)+[\w\-._~:/?#\[\]@!$&'()*+,;=]*)|magnet:\?.+",
+    r"(?:https?|ftps?|xdcc|sftp):(?://|\\\\)+[\w\-._~:/?#\[\]@!$&'()*+,;=]*|magnet:\?.+",
     re.IGNORECASE,
 )
 
 
 class Perms(IntFlag):
-    ALL = 0  #: requires no permission, but login
+    ANY = 0  #: requires no permission, but login
     ADD = 1  #: can add packages
     DELETE = 2  #: can delete packages
     STATUS = 4  #: see and change server status
     LIST = 16  #: see queue and collector
-    MODIFY = 32  #: moddify some attribute of downloads
+    MODIFY = 32  #: modify some attribute of downloads
     DOWNLOAD = 64  #: can download from webinterface
     SETTINGS = 128  #: can access settings
     ACCOUNTS = 256  #: can access accounts
@@ -65,15 +77,6 @@ class Role(IntFlag):
 def has_permission(userperms, perms):
     # bitwise or perms before if needed
     return perms == (userperms & perms)
-
-
-def legacy(legacy_name):
-    class Wrapper:
-        def __new__(cls, func, *args, **kwargs):
-            setattr(func, "__legacy__", legacy_name)
-            return func
-
-    return Wrapper
 
 
 # API VERSION
@@ -98,14 +101,14 @@ class Api:
         obj = super(Api, cls).__new__(cls)
 
         # add methods specified by the @legacy decorator
-        for func_name in dir(obj):
-            if func_name[0] == "_":
-                continue
-
+        # also set legacy method permissions according to the @permissions decorator
+        for func_name, legacy_name in legacy_map.items():
             func = getattr(obj, func_name)
-            if callable(func) and hasattr(func, "__legacy__"):
-                legacy_name = getattr(func, "__legacy__")
-                setattr(obj, legacy_name, func)
+            setattr(obj, legacy_name, func)
+
+            permissions = perm_map.get(func_name)
+            if permissions is not None:
+                perm_map[legacy_name] = permissions
 
         return obj
 
@@ -306,7 +309,7 @@ class Api:
         return fs.free_space(self.pyload.config.get("general", "storage_folder"))
 
     @legacy("getServerVersion")
-    @permission(Perms.ALL)
+    @permission(Perms.ANY)
     def get_server_version(self):
         """
         pyLoad Core version.
@@ -1176,7 +1179,7 @@ class Api:
         return accounts
 
     @legacy("getAccountTypes")
-    @permission(Perms.ALL)
+    @permission(Perms.ANY)
     def get_account_types(self):
         """
         All available account types.
@@ -1204,7 +1207,7 @@ class Api:
         """
         self.pyload.account_manager.remove_account(plugin, account)
 
-    @permission(Perms.ALL)
+    @permission(Perms.ANY)
     def login(self, username, password):
         """
         Login into pyLoad, this **must** be called when using rpc before any methods can
@@ -1212,7 +1215,6 @@ class Api:
 
         :param username:
         :param password:
-        :param remoteip: Omit this argument, its only used internal
         :return: bool indicating login was successful
         """
         return True if self.check_auth(username, password) else False
@@ -1224,7 +1226,6 @@ class Api:
 
         :param username:
         :param password:
-        :param remoteip:
         :return: dict with info, empty when login is incorrect
         """
         return self.pyload.db.check_auth(username, password)
@@ -1247,18 +1248,16 @@ class Api:
         else:
             return False
 
-    # remove?
     @permission(Perms.SETTINGS)
     def get_userdir(self):
         return os.path.realpath(self.pyload.userdir)
 
-    # remove?
     @permission(Perms.SETTINGS)
     def get_cachedir(self):
         return os.path.realpath(self.pyload.tempdir)
 
     #: Old API
-    @permission(Perms.ALL)
+    @permission(Perms.ANY)
     def getUserData(self, username, password):
         """
         similar to `check_auth` but returns UserData thrift type.
@@ -1275,7 +1274,7 @@ class Api:
         else:
             return OldUserData()
 
-    @permission(Perms.ALL)
+    @permission(Perms.ANY)
     def get_userdata(self, username, password):
         """
         similar to `check_auth` but returns UserData thrift type.

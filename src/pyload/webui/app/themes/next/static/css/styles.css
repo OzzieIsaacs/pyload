@@ -111,20 +111,9 @@ hr {
   user-select: none;
 }
 
-/*.modal-dialog {
-    display: flex;
-    width: initial;
-    justify-content: center;
-}*/
-
-.modal-body {
-  overflow: auto;
-}
-
-
+.modal-body,
 .modal-header {
   overflow: auto;
-  border-bottom: 1px solid;
 }
 
 .modal-footer {

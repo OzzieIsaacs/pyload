@@ -9,7 +9,7 @@ class FastfileCcFolder(SimpleDecrypter):
     __version__ = "0.01"
     __status__ = "testing"
 
-    __pattern__ = r"https?://(?:www\.)?(fastfile\.cc)/users/\w+/\d{4}"
+    __pattern__ = r"https?://(?:www\.)?(fastfile\.cc)/users/\w+"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),
@@ -26,5 +26,5 @@ class FastfileCcFolder(SimpleDecrypter):
     __license__ = "GPLv3"
     __authors__ = [("OzzieIsaacs", "Ozzie.Fernandez.Isaacs@googlemail.com")]
 
-    LINK_FREE_PATTERN = r'<div class="link"><a href="(https:\/\/fastfile.cc\/\w{12})'
-    NAME_PATTERN = r'style="color:#118bb6"><b>(?P<N>.+?)</b></a>'
+    LINK_PATTERN = r'<div class="lft sec">\s+<a href="(https:\/\/fastfile.cc\/\w{12})'
+    # NAME_PATTERN = r'style="color:#118bb6"><b>(?P<N>.+?)</b></a>'

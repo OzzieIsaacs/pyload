@@ -178,7 +178,7 @@ function Package (ui, id, ele){
                 link.icon = 'glyphicon glyphicon-cloud-download text-primary';
 
             var html = "<span class='child_status'><span style='margin-right: 2px;' class='" + link.icon + "'></span></span>\n" +
-                       "<span style='font-size: 16px; font-weight: bold;'><a href='" + link.url + "'>" + link.name + "</a></span><br/>" +
+                       "<span style='font-size: 16px; font-weight: bold;'><a onclick='return false' href='" + link.url + "'>" + link.name + "</a></span><br/>" +
                        "<div class='child_secrow' style='margin-left: 21px; margin-bottom: 7px; background-color: #dcdcdc;'>" +
                        "<span class='child_status' style='font-size: 12px; color:#555;'>" + link.statusmsg + "</span>&nbsp;" + link.error + "&nbsp;" +
                        "<span class='child_status' style='font-size: 12px; color:#555;'>" + link.format_size + "</span>" +

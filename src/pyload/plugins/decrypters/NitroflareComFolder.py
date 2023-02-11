@@ -29,19 +29,25 @@ class NitroflareComFolder(SimpleDecrypter):
     __authors__ = [("Walter Purcaro", "vuolter@gmail.com")]
 
     def get_links(self):
-        html = self.load(
-            "http://nitroflare.com/ajax/folder.php",
-            post={
-                "userId": self.info["pattern"]["USER"],
-                "folder": self.info["pattern"]["ID"],
-                "page": 1,
-                "perPage": 10000,
-            },
-        )
-        res = json.loads(html)
+        i = 1
+        links = list()
+        while i: 
+            html = self.load("http://nitroflare.com/ajax/folder.php",
+                             post={"userId": self.info["pattern"]["USER"],
+                                   "folder": self.info["pattern"]["ID"],
+                                   "page": i,
+                                   "perPage": 100,
+                                   },
+                             )
+            res = json.loads(html)
+            if "files" in res:
+                links.extend([link["url"] for link in res["files"]])
+            if res["total"] > i*100:
+                i += 1
+            else:
+                break
         if res["name"]:
-            self.pyfile.name = res["name"]
+             self.pyfile.name = res["name"]
         else:
-            self.offline()
-
-        return [link["url"] for link in res["files"]] if "files" in res else None
+             self.offline()
+        return links if links else None

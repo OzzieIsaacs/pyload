@@ -43,8 +43,8 @@
                 {{_("Please install the <a href='https://tampermonkey.net/' target='_blank'>Tampermonkey</a> add-on in your browser and add the ")}}<a href="{{url_for('static', filename='js/captcha-interactive.user.js')}}">{{_("pyload userscript")}}</a>.
               </p>
             </div>
-          <button class="btn btn-primary pull-right" id="cap_submit" type="submit" style="margin-left: 5px;">{{_('Submit')}}</button>
-          <div class="btn btn-default pull-right" data-dismiss="modal" id="cap_reset" >{{_('Close')}}</div>
+          <button class="btn btn-primary pull-right" id="cap_submit" type="submit">{{_('Submit')}}</button>
+          <div class="btn btn-default pull-left" data-dismiss="modal" id="cap_reset" >{{_('Close')}}</div>
           </div>
         </form>
       </div>

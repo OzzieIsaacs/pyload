@@ -20,7 +20,6 @@ from .extensions import EXTENSIONS, THEMES
 from .filters import TEMPLATE_FILTERS
 from .globals import TEMPLATE_GLOBALS
 from .handlers import ERROR_HANDLERS
-from .helpers import JSONEncoder
 from .processors import CONTEXT_PROCESSORS
 
 from flask_babel import Babel
@@ -74,7 +73,13 @@ class App:
 
     @classmethod
     def _configure_json_encoding(cls, app):
-        app.json_encoder = JSONEncoder
+        try:
+            from .helpers import JSONProvider
+            app.json = JSONProvider(app)
+
+        except ImportError:
+            from .helpers import JSONEncoder
+            app.json_encoder = JSONEncoder
 
     @classmethod
     def _configure_templating(cls, app):

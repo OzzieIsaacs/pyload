@@ -49,29 +49,3 @@ class XupIn(XFSDownloader):
             self.wait(wait.group(1))
 
             self.download("https:" + link.group(1), post={"vid":vid.group(1), "vtime":vtime.group(1)})
-
-
-
-'''
-Knopf zum übetragen
-value="4" -> bedeutet 4 Sekunden warten
-<li class="nolist"><input size="1" value="4" id="xupctr" /> <button type="submit" class="upbut" id="ddl"> <b>Download</b> </button></li>
-
-# Dateigröße
-<li class="iclist">File Size: 0.62 Mbyte</li>
-
-# Dateiname
-<legend> <h1 itemprop="headline">Download: fvgvtzguhnuijnujp.rar</h1> </legend>
-
-
-Durch Druck auf den Knopf gibt es ein :
-
-https://www1.xup.in/exec/xddl.php?fid=18041049&fname=fvgvtzguhnuijnujp.rar&uid=0&key=
-
-mit folgenden Daten: vid=v131612a547f4e165142f56af4b2bd7e77&vtime=1687513933
-
-Findet man im html unter:
-<form action="//www1.xup.in/exec/xddl.php?fid=18041049&fname=fvgvtzguhnuijnujp.rar&uid=0&key=" method="post">
-<input type="hidden" value="v1a238a34ae2a9a407e33b149b280e0b41" name="vid" />
-<input type="hidden" value="1687512526" name="vtime" />
-'''

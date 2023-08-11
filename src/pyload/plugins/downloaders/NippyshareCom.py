@@ -9,7 +9,7 @@ class NippyshareCom(XFSDownloader):
     __version__ = "0.01"
     __status__ = "testing"
 
-    __pattern__ = r"https?://(?:nippyshare|nippyspace)\.com/v/\w{5,6}"
+    __pattern__ = r"https?://(?:nippyshare|nippyspace)\.(?:com|me)/v/\w{5,6}"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("chk_filesize", "bool", "Check file size", True),

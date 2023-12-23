@@ -12,7 +12,7 @@ from ..helpers import search_pattern, set_cookie
 class RapidcloudCc(XFSDownloader):
     __name__ = "RapidcloudCc"
     __type__ = "downloader"
-    __version__ = "0.01"
+    __version__ = "0.02"
     __status__ = "testing"
 
     __pattern__ = r"https?://rapidcloud\.cc/(?P<ID>\w+)"
@@ -31,6 +31,7 @@ class RapidcloudCc(XFSDownloader):
     NAME_PATTERN = r'<h4 style="color:#5b5b5b">(?P<N>.+?)</h4>'
     SIZE_PATTERN = r'<span>Size (?P<S>[\d.,]+) (?P<U>[\w^_]+)</span>'
     WAIT_PATTERN = r'<span class="seconds">(\d+)</span> Seconds'
+    ERROR_PATTERN = r'<div class="alert alert-danger">\s+<strong>Oops!</strong>(.*)\s+</div>'
     ADD_WAIT_PATTERN = r"<div class='alert alert-danger'>You have to wait (\d+) minutes, (\d+) seconds till next download<br><br>Download files instantly with <a href='https://rapidcloud.cc/premium/'>Premium-account</a></div>"
 
     def handle_free(self, pyfile):
@@ -56,12 +57,14 @@ class RapidcloudCc(XFSDownloader):
                 self.link = self.last_header.get("location")
                 break
 
+            m = search_pattern(self.ERROR_PATTERN, self.data)
+            if m is not None:
+                self.fail(m.group(1))
+
             m = search_pattern(self.LINK_PATTERN, self.data, flags=re.S)
             if m is not None:
                 self.link = m.group(1)
                 break
-        else:
-            self.error(self._("Too many OPs"))
         self.req.options['ssl_verify'] = False
 
     def _post_parameters(self):

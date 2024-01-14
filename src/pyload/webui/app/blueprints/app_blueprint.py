@@ -54,12 +54,13 @@ def login():
         password = flask.request.form["password"]
         user_info = api.check_auth(user, password)
 
+        sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
         if not user_info:
-            log.error(f"Login failed for user '{user}'")
+            log.error(f"Login failed for user '{sanitized_user}'")
             return render_template("login.html", next=next, errors=True)
 
         set_session(user_info)
-        log.info(f"User '{user}' successfully logged in")
+        log.info(f"User '{sanitized_user}' successfully logged in")
         flask.flash("Logged in successfully")
 
     if is_authenticated():
@@ -251,7 +252,7 @@ def settings():
 
 @bp.route("/pathchooser/", endpoint="pathchooser")
 @bp.route("/filechooser/", endpoint="filechooser")
-@login_required("STATUS")
+@login_required("SETTINGS")
 def pathchooser():
     browse_for = "folder" if flask.request.endpoint == "app.pathchooser" else "file"
     path = os.path.normpath(flask.request.args.get('path', ""))
@@ -452,7 +453,7 @@ def info():
         "os": " ".join((os.name, sys.platform) + extra),
         "version": api.get_server_version(),
         "folder": PKGDIR,
-        "config": api.get_userdir(),
+        "config_folder": api.get_userdir(),
         "download": conf["general"]["storage_folder"]["value"],
         "freespace": format.size(api.free_space()),
         "webif": conf["webui"]["port"]["value"],

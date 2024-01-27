@@ -404,7 +404,7 @@ class Core:
             self.log.debug("*** pyLoad is up and running ***")
             # self.evm.fire('pyload:started')
 
-            self.thm.pause = False  # NOTE: Recheck...
+            self.thm.pause = True  # NOTE: Recheck...
 
             if self._dry_run:
                 raise Exit

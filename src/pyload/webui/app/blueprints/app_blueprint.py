@@ -140,17 +140,26 @@ def files():
 
     for entry in sorted(os.listdir(root)):
         if os.path.isdir(os.path.join(root, entry)):
-            folder = {"name": entry, "path": entry, "files": []}
-            files = os.listdir(os.path.join(root, entry))
-            for file in sorted(files):
+            sub_folder = {"name": entry, "path": entry, "files": [], "folder": []}
+            sub_entry = os.listdir(os.path.join(root, entry))
+            # sub_folder = {"files": [], "folder": []}
+            for ent in sorted(sub_entry):
                 try:
-                    if os.path.isfile(os.path.join(root, entry, file)):
-                        folder["files"].append(file)
+                    if os.path.isdir(os.path.join(root, entry, ent)):
+                        sub_sub_folder = {"name": ent, "path": os.path.join(entry, ent), "files": []}
+                        sub_e = os.listdir(os.path.join(root, entry, ent))
+                        for e in sorted(sub_e):
+                            try:
+                                if os.path.isfile(os.path.join(root, entry, ent, e)):
+                                    sub_sub_folder["files"].append(e)
+                            except Exception:
+                                pass
+                        sub_folder["folder"].append(sub_sub_folder)
+                    elif os.path.isfile(os.path.join(root, entry, ent)):
+                        sub_folder["files"].append(ent)
                 except Exception:
                     pass
-
-            data["folder"].append(folder)
-
+            data["folder"].append(sub_folder)
         elif os.path.isfile(os.path.join(root, entry)):
             data["files"].append(entry)
 

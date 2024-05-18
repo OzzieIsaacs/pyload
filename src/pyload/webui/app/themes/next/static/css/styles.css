@@ -142,3 +142,8 @@ hr {
 fieldset[disabled] .btn {
   pointer-events: auto;
 }
+
+
+#cap_textual_img:hover, #cap_textual_img:active{
+  filter: brightness(51%) contrast(6400%) grayscale(100%);
+}

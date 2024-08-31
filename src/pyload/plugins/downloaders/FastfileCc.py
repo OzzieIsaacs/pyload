@@ -30,4 +30,4 @@ class FastfileCc(XFSDownloader):
 
     SIZE_PATTERN = r'</b> \(((?P<S>[\d.,]+) (?P<U>[\w^_]+)\)</h2>)'
     NAME_PATTERN = r'<h2>Download File<br><b>(?P<N>.+?)</b>'
-    WAIT_PATTERN = '<span id="countdown"><br>Wait <span class="seconds">(\d+)</span> seconds<br'
+    WAIT_PATTERN = r'<span id="countdown"><br>Wait <span class="seconds">(\d+)</span> seconds<br'

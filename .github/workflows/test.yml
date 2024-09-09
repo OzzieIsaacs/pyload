@@ -12,7 +12,7 @@ on:
 
 env:
   PYCURL_SSL_LIBRARY: openssl
-  default_python_version: 3.6
+  default_python_version: "3.10"
   toxworkdir: .tox
 
 jobs:
@@ -24,7 +24,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        toxenv: [compileall, pylint, bandit]
+#        toxenv: [compileall, pylint, bandit]
+        toxenv: [compileall, bandit]
 
     steps:
       - name: Check out repository

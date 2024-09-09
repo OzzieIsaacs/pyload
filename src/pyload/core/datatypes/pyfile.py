@@ -124,7 +124,7 @@ class PyFile:
 
     def get_status_name(self):
         if self.status not in (13, 14) or not self.statusname:
-            return self.m.status_msg[self.status]
+            return self._(self.m.status_msg[self.status])
         else:
             return self.statusname
 

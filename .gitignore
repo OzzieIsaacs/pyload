@@ -27,7 +27,7 @@
 *.code-workspace
 
 # pyCharm IDE project files
-/.idea
+.idea/
 
 # Local History for Visual Studio Code
 .history/

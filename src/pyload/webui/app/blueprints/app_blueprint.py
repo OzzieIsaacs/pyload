@@ -135,8 +135,14 @@ def collector():
 @bp.route("/files", endpoint="files")
 @login_required("DOWNLOAD")
 def files():
+    def decode_name(filename):
+        try:
+            return filename.decode("utf-8")
+        except UnicodeDecodeError:
+            return filename.decode("iso-8859-1")
+
     api = flask.current_app.config["PYLOAD_API"]
-    root = api.get_config_value("general", "storage_folder")
+    root = os.fsencode(api.get_config_value("general", "storage_folder"))
 
     if not os.path.isdir(root):
         messages = ["Download directory not found."]
@@ -145,28 +151,28 @@ def files():
 
     for entry in sorted(os.listdir(root)):
         if os.path.isdir(os.path.join(root, entry)):
-            sub_folder = {"name": entry, "path": entry, "files": [], "folder": []}
+            sub_folder = {"name": decode_name(entry), "path": decode_name(entry), "files": [], "folder": []}
             sub_entry = os.listdir(os.path.join(root, entry))
             # sub_folder = {"files": [], "folder": []}
             for ent in sorted(sub_entry):
                 try:
                     if os.path.isdir(os.path.join(root, entry, ent)):
-                        sub_sub_folder = {"name": ent, "path": os.path.join(entry, ent), "files": []}
+                        sub_sub_folder = {"name": decode_name(ent), "path": decode_name(os.path.join(entry, ent)), "files": []}
                         sub_e = os.listdir(os.path.join(root, entry, ent))
                         for e in sorted(sub_e):
                             try:
                                 if os.path.isfile(os.path.join(root, entry, ent, e)):
-                                    sub_sub_folder["files"].append(e)
+                                    sub_sub_folder["files"].append(decode_name(e))
                             except Exception:
                                 pass
-                        sub_folder["folder"].append(sub_sub_folder)
+                        sub_folder["folder"].append(decode_name(sub_sub_folder))
                     elif os.path.isfile(os.path.join(root, entry, ent)):
-                        sub_folder["files"].append(ent)
+                        sub_folder["files"].append(decode_name(ent))
                 except Exception:
                     pass
-            data["folder"].append(sub_folder)
+            data["folder"].append(decode_name(sub_folder))
         elif os.path.isfile(os.path.join(root, entry)):
-            data["files"].append(entry)
+            data["files"].append(decode_name(entry))
 
     return render_template("files.html", files=data)
 

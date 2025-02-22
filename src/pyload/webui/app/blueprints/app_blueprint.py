@@ -140,6 +140,8 @@ def files():
             return filename.decode("utf-8")
         except UnicodeDecodeError:
             return filename.decode("iso-8859-1")
+        except AttributeError as e:
+            log.error(f"Attribute error '{e}'")
 
     api = flask.current_app.config["PYLOAD_API"]
     root = os.fsencode(api.get_config_value("general", "storage_folder"))
@@ -165,12 +167,12 @@ def files():
                                     sub_sub_folder["files"].append(decode_name(e))
                             except Exception:
                                 pass
-                        sub_folder["folder"].append(decode_name(sub_sub_folder))
+                        sub_folder["folder"].append(sub_sub_folder)
                     elif os.path.isfile(os.path.join(root, entry, ent)):
                         sub_folder["files"].append(decode_name(ent))
                 except Exception:
                     pass
-            data["folder"].append(decode_name(sub_folder))
+            data["folder"].append(sub_folder)
         elif os.path.isfile(os.path.join(root, entry)):
             data["files"].append(decode_name(entry))
 

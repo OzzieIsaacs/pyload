@@ -9,8 +9,8 @@ from urllib.parse import unquote
 import flask
 from flask.json import jsonify
 from pyload import APPID
+from ..cw_login import current_user, login_user
 
-# from ..helpers import clear_session, set_session
 
 bp = flask.Blueprint("api", __name__)
 log = getLogger(APPID)
@@ -24,30 +24,26 @@ log = getLogger(APPID)
 def rpc(func, args=""):
     api = flask.current_app.config["PYLOAD_API"]
 
-    if flask.request.authorization:
+    if not current_user.is_authenticated:
         user = flask.request.authorization.get("username", "")
         password = flask.request.authorization.get("password", "")
-    else:
-        user = flask.request.form.get("u", "")
-        password = flask.request.form.get("p", "")
+    #else:
+    #    user = flask.request.form.get("u", "")
+    #    password = flask.request.form.get("p", "")
 
-    sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
-    if user:
-        user_info = api.check_auth(user, password)
-        if user_info:
-            s = set_session(user_info)
-        else:
-            log.error(f"API access failed for user '{sanitized_user}'")
-            return jsonify({'error': "Unauthorized"}), 401
+        sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
+        if user:
+            user_info = api.check_auth(user, password)
+            if user_info:
+                s = login_user(user_info)
+            else:
+                log.error(f"API access failed for user '{sanitized_user}'")
+                return jsonify({'error': "Unauthorized"}), 401
 
-    else:
-        s = flask.session
+        #else:
+        #    s = flask.session
 
-    if (
-            "role" not in s or
-            "perms" not in s or
-            not api.is_authorized(func, {"role": s["role"], "permission": s["perms"]})
-    ):
+    if not api.is_authorized(func, {"role": current_user.role, "permission": current_user.permission}):
         log.error(f"API access failed for user '{sanitized_user}'")
         return jsonify({'error': "Unauthorized"}), 401
 

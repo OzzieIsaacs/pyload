@@ -168,3 +168,7 @@ class User():
     @property
     def is_authenticated(self):
         return self.is_active
+
+    @property
+    def is_admin(self):
+        return self.role == 0,

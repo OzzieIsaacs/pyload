@@ -2,13 +2,12 @@
 
 import flask
 
-from .helpers import parse_permissions, parse_userdata
+from .helpers import parse_permissions
 from .cw_login import current_user
 
 
 #: do we really need this?!
 def pre_processor():
-    # current_user = parse_userdata()
     perms = parse_permissions()
     status = {}
     captcha = False
@@ -18,6 +17,7 @@ def pre_processor():
     api = flask.current_app.config["PYLOAD_API"]
 
     if current_user.is_authenticated:
+        perms = parse_permissions(current_user)
         status = api.status_server()
         captcha = api.is_captcha_waiting()
 

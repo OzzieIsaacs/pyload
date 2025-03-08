@@ -1451,6 +1451,18 @@ class Api:
         """
         return self.pyload.db.remove_user(user)
 
+    def load_user(self, user_id):
+        """
+        loads a single user.
+        """
+        return self.pyload.db.load_user(user_id)
+
+    '''def load_user_by_name(self, user_name):
+        """
+        loads a single user by name.
+        """
+        return self.pyload.db.load_user_by_name(user_name)'''
+
     @legacy("changePassword")
     def change_password(self, user, oldpw, newpw):
         """

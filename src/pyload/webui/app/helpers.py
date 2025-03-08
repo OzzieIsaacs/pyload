@@ -8,7 +8,7 @@ import flask
 import flask_themes2
 import werkzeug.routing
 from pyload.core.api import Perms, Role, has_permission
-
+from .cw_login import current_user
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -59,10 +59,10 @@ def render_base(messages):
     return render_template("base.html", messages=messages)
 
 
-def clear_session(session=flask.session, permanent=True):
+'''def clear_session(session=flask.session, permanent=True):
     session.permanent = bool(permanent)
     session.clear()
-    # session.modified = True
+    # session.modified = True'''
 
 
 def current_theme_id():
@@ -90,21 +90,21 @@ def render_template(template, **context):
     return flask_themes2.render_theme_template(themeid, template, **context)
 
 
-def parse_permissions(session=flask.session):
+def parse_permissions(user=None):
     perms = {x.name: False for x in Perms}
     perms["ADMIN"] = False
     perms["is_admin"] = False
 
-    if not session.get("authenticated", False):
+    if user is None:
         return perms
 
     perms["ANY"] = True
-    if session.get("role") == Role.ADMIN:
+    if user.permission == Role.ADMIN:
         for key in perms.keys():
             perms[key] = True
 
-    elif session.get("perms"):
-        p = session.get("perms")
+    elif user.permission:
+        p = user.permission
         perms.update(get_permission(p))
 
     return perms
@@ -143,7 +143,7 @@ def set_permission(perms):
     return permission
 
 
-def set_session(user_info, session=flask.session, permanent=True):
+'''def set_session(user_info, session=flask.session, permanent=True):
     session.permanent = bool(permanent)
     session.update(
         {
@@ -156,7 +156,7 @@ def set_session(user_info, session=flask.session, permanent=True):
         }
     )
     # session.modified = True
-    return session
+    return session'''
 
 
 # TODO: Recheck...
@@ -189,24 +189,21 @@ def is_authenticated(session=flask.session):
     return authenticated and api.user_exists(user)
 
 
-def login_required(perm):
+def permission_required(perm):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            s = flask.session
+            # s = flask.session
             #: already authenticated?
-            if is_authenticated(s):
-                perms = parse_permissions(s)
+            if current_user.is_authenticated is True:
+                perms = parse_permissions(current_user)
                 if perm not in perms or not perms[perm]:
                     response = "Forbidden", 403
                 else:
                     response = func(*args, **kwargs)
-
             else:
-                clear_session(s)
                 if flask.request.headers.get("X-Requested-With") == "XMLHttpRequest":
                     response = "Forbidden", 403
-
                 else:
                     location = flask.url_for(
                         "app.login",

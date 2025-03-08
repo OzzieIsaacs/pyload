@@ -14,9 +14,10 @@ import flask
 from pyload import APPID, PKGDIR
 from pyload.core.utils import format
 
-from ..helpers import (
-    clear_session, get_permission, get_redirect_url, is_authenticated, login_required, permlist, render_base,
-    render_template, set_session, static_file_url)
+from ..usermanagement import login_required
+from ..cw_login import login_user, logout_user, current_user
+from ..helpers import (permission_required,
+    get_permission, get_redirect_url, permlist, render_base, render_template, static_file_url)
 
 _RE_LOGLINE = re.compile(r"\[([\d\-]+) ([\d:]+)\] +([A-Z]+) +(.+?) (.*)")
 
@@ -49,10 +50,20 @@ def login():
 
     next_url = get_redirect_url(fallback="app.dashboard")
 
+    api = flask.current_app.config["PYLOAD_API"]
+
+    if api.get_config_value("webui", "autologin"):
+        allusers = api.get_all_userdata()
+        if len(allusers) == 1:  # TODO: check if localhost
+            user_info = list(allusers.values())[0]
+            login_user(user_info, remember=remember)
+            # NOTE: Double-check authentication here because if session[name] is empty,
+            #       next login_required redirects here again and all loop out.
+            return flask.redirect(next_url)
+
     if flask.request.method == "POST":
         user = flask.request.form["username"]
         password = flask.request.form["password"]
-        user_info = api.check_auth(user, password)
 
         if flask.request.headers.get("X-Forwarded-For"):
             client_ip = flask.request.headers.get("X-Forwarded-For").split(',')[0].strip()
@@ -60,44 +71,40 @@ def login():
             client_ip = flask.request.remote_addr
 
         sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
+        user_info = api.check_auth(sanitized_user, password)
+        # user_info = api.login_user_by_name(sanitized_user)
         if not user_info:
             log.error(f"Login failed for user '{sanitized_user}' [CLIENT: {client_ip}]")
             return render_template("login.html", errors=True)
 
-        set_session(user_info)
+        # set_session(user_info)
+        login_user(user_info, remember=True)
         log.info(f"User '{sanitized_user}' successfully logged in [CLIENT: {client_ip}]")
         flask.flash("Logged in successfully")
-
-    if is_authenticated():
         return flask.redirect(next_url)
-
-    if api.get_config_value("webui", "autologin"):
-        allusers = api.get_all_userdata()
-        if len(allusers) == 1:  # TODO: check if localhost
-            user_info = list(allusers.values())[0]
-            set_session(user_info)
-            # NOTE: Double-check authentication here because if session[name] is empty,
-            #       next login_required redirects here again and all loop out.
-            if is_authenticated():
-                return flask.redirect(next_url)
 
     return render_template("login.html")
 
 
 @bp.route("/logout", endpoint="logout")
 def logout():
-    s = flask.session
-    user = s.get("name")
-    clear_session(s)
-    if user:
-        log.info(f"User '{user}' logged out")
+    if current_user is not None and current_user.is_authenticated:
+        # ub.delete_user_session(current_user.id, flask_session.get('_id', ""))
+        log.info(f"User '{current_user.name}' logged out")
+        logout_user()
+    # log.debug("User logged out")
+
+    #s = flask.session
+    #user = s.get("name")
+    #clear_session(s)
+    # if user:
     return render_template("logout.html")
 
 
 @bp.route("/", endpoint="index")
 @bp.route("/home", endpoint="home")
 @bp.route("/dashboard", endpoint="dashboard")
-@login_required("LIST")
+@permission_required("LIST")
 def dashboard():
     api = flask.current_app.config["PYLOAD_API"]
     links = api.status_downloads()
@@ -112,7 +119,7 @@ def dashboard():
 
 
 @bp.route("/queue", endpoint="queue")
-@login_required("LIST")
+@permission_required("LIST")
 def queue():
     api = flask.current_app.config["PYLOAD_API"]
     queue = api.get_queue()
@@ -122,7 +129,7 @@ def queue():
 
 
 @bp.route("/collector", endpoint="collector")
-@login_required("LIST")
+@permission_required("LIST")
 def collector():
     api = flask.current_app.config["PYLOAD_API"]
     queue = api.get_collector()
@@ -133,7 +140,7 @@ def collector():
 
 
 @bp.route("/files", endpoint="files")
-@login_required("DOWNLOAD")
+@permission_required("DOWNLOAD")
 def files():
     def decode_name(filename):
         try:
@@ -180,7 +187,7 @@ def files():
 
 
 @bp.route("/files/get/<path:path>", endpoint="get_file")
-@login_required("DOWNLOAD")
+@permission_required("DOWNLOAD")
 def get_file(path):
     api = flask.current_app.config["PYLOAD_API"]
     path = unquote(path).replace("..", "")
@@ -189,7 +196,7 @@ def get_file(path):
 
 
 @bp.route("/settings", endpoint="settings")
-@login_required("SETTINGS")
+@permission_required("SETTINGS")
 def settings():
     api = flask.current_app.config["PYLOAD_API"]
     conf = api.get_config()
@@ -274,7 +281,7 @@ def settings():
 
 @bp.route("/pathchooser/", endpoint="pathchooser")
 @bp.route("/filechooser/", endpoint="filechooser")
-@login_required("SETTINGS")
+@permission_required("SETTINGS")
 def pathchooser():
     browse_for = "folder" if flask.request.endpoint == "app.pathchooser" else "file"
     path = os.path.normpath(flask.request.args.get('path', ""))
@@ -357,7 +364,7 @@ def pathchooser():
 
 @bp.route("/logs", methods=["GET", "POST"], endpoint="logs")
 @bp.route("/logs/<int:start_line>", methods=["GET", "POST"], endpoint="logs")
-@login_required("LOGS")
+@permission_required("LOGS")
 def logs(start_line=-1):
     s = flask.session
     api = flask.current_app.config["PYLOAD_API"]
@@ -458,13 +465,13 @@ def logs(start_line=-1):
 
 
 @bp.route("/filemanager", endpoint="filemanager")
-@login_required("MODIFY")
+@permission_required("MODIFY")
 def filemanager(path):
     return render_template("filemanager.html")
 
 
 @bp.route("/info", endpoint="info")
-@login_required("STATUS")
+@permission_required("STATUS")
 def info():
     api = flask.current_app.config["PYLOAD_API"]
     conf = api.get_config_dict()

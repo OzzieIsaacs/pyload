@@ -10,7 +10,7 @@ import flask
 from flask.json import jsonify
 from pyload import APPID
 
-from ..helpers import clear_session, set_session
+# from ..helpers import clear_session, set_session
 
 bp = flask.Blueprint("api", __name__)
 log = getLogger(APPID)
@@ -113,9 +113,10 @@ def login():
 @bp.route("/api/logout", endpoint="logout")
 # @apiver_check
 def logout():
-    s = flask.session
-    user = s.get("name")
-    clear_session(s)
-    if user:
-        log.info(f"User '{user}' logged out")
+    lm.logout()
+    #s = flask.session
+    #user = s.get("name")
+    #clear_session(s)
+    #if user:
+    #    log.info(f"User '{user}' logged out")
     return jsonify(True)

@@ -14,6 +14,7 @@ import flask
 import jinja2
 from werkzeug.serving import WSGIRequestHandler
 
+
 from .blueprints import BLUEPRINTS
 from .config import get_default_config
 from .extensions import EXTENSIONS, THEMES
@@ -21,9 +22,15 @@ from .filters import TEMPLATE_FILTERS
 from .globals import TEMPLATE_GLOBALS
 from .handlers import ERROR_HANDLERS
 from .processors import CONTEXT_PROCESSORS
+from .MyLoginManager import MyLoginManager
 
 from flask_babel import Babel
 from pyload import APPID
+
+
+
+lm = MyLoginManager()
+
 
 #: flask app singleton?
 class App:
@@ -112,14 +119,16 @@ class App:
         os.makedirs(cache_path, exist_ok=True)
 
         app.config["SESSION_FILE_DIR"] = cache_path
-        app.config["SESSION_TYPE"] = "filesystem"
+        #app.config["SESSION_TYPE"] = "filesystem"
         app.config["SESSION_COOKIE_NAME"] = "pyload_session_" + str(app.config["PYLOAD_API"].get_config_value("webui", "port"))
+        app.config["REMEMBER_COOKIE_NAME"] = "pyload_session_remember_token"
         app.config["SESSION_COOKIE_SAMESITE"] = "Strict"
-        app.config["SESSION_COOKIE_SECURE"] = app.config["PYLOAD_API"].get_config_value("webui", "use_ssl")
-        app.config["SESSION_PERMANENT"] = False
+        app.config["REMEMBER_COOKIE_SAMESITE"] = "Strict"
+        #app.config["SESSION_COOKIE_SECURE"] = app.config["PYLOAD_API"].get_config_value("webui", "use_ssl")
+        #app.config["SESSION_PERMANENT"] = False
 
         session_lifetime = max(app.config["PYLOAD_API"].get_config_value("webui", "session_lifetime"), 1) * 60
-        app.config["PERMANENT_SESSION_LIFETIME"] = session_lifetime
+        #app.config["PERMANENT_SESSION_LIFETIME"] = session_lifetime
 
     @classmethod
     def _configure_api(cls, app, pycore):
@@ -132,6 +141,9 @@ class App:
 
     def __new__(cls, pycore, develop=False, path_prefix=None, locale="en"):
         app = flask.Flask(__name__)
+        lm.login_view = 'app.login'
+        lm.session_protection = "basic"
+        lm.init_app(app)
 
         cls._configure_logging(app, pycore)
         cls._configure_api(app, pycore)
@@ -141,6 +153,7 @@ class App:
         cls._configure_session(app)
         cls._configure_blueprints(app, path_prefix)
         Babel(app, default_domain=APPID, default_locale=locale)
+
         cls._configure_extensions(app)
         cls._configure_themes(app, path_prefix or "")
         cls._configure_handlers(app)
@@ -148,3 +161,8 @@ class App:
         WSGIRequestHandler.protocol_version = "HTTP/1.1"
 
         return app
+
+@lm.user_loader
+def load_user(user_id, random, session_key):
+    api = flask.current_app.config["PYLOAD_API"]
+    return api.load_user(user_id) # so gehts nicht

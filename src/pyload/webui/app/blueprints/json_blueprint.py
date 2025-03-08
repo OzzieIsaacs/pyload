@@ -8,14 +8,15 @@ from pyload import PKGDIR
 from pyload.core.api import Role
 from pyload.core.utils import format
 
-from ..helpers import get_permission, login_required, permlist, render_template, set_permission
+from ..usermanagement import login_required
+from ..helpers import get_permission, permlist, render_template, set_permission, permission_required
 
 bp = flask.Blueprint("json", __name__)
 
 
 @bp.route("/json/status", methods=["GET", "POST"], endpoint="status")
 # @apiver_check
-@login_required("LIST")
+@permission_required("LIST")
 def status():
     api = flask.current_app.config["PYLOAD_API"]
     data = api.status_server()
@@ -24,7 +25,7 @@ def status():
 
 @bp.route("/json/links", methods=["GET", "POST"], endpoint="links")
 # @apiver_check
-@login_required("LIST")
+@permission_required("LIST")
 def links():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -54,7 +55,7 @@ def links():
 
 @bp.route("/json/packages", endpoint="packages")
 # @apiver_check
-@login_required("LIST")
+@permission_required("LIST")
 def packages():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -73,7 +74,7 @@ def packages():
 
 @bp.route("/json/package", endpoint="package")
 # @apiver_check
-@login_required("LIST")
+@permission_required("LIST")
 def package():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -91,7 +92,7 @@ def package():
 
 @bp.route("/json/package_order", endpoint="package_order")
 # @apiver_check
-@login_required("ADD")
+@permission_required("ADD")
 def package_order():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -106,7 +107,7 @@ def package_order():
 
 @bp.route("/json/abort_link", endpoint="abort_link")
 # @apiver_check
-@login_required("DELETE")
+@permission_required("DELETE")
 def abort_link():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -120,7 +121,7 @@ def abort_link():
 
 @bp.route("/json/link_order", endpoint="link_order")
 # @apiver_check
-@login_required("ADD")
+@permission_required("ADD")
 def link_order():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -135,7 +136,7 @@ def link_order():
 
 @bp.route("/json/add_package", methods=["POST"], endpoint="add_package")
 # @apiver_check
-@login_required("ADD")
+@permission_required("ADD")
 def add_package():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -171,7 +172,7 @@ def add_package():
 
 @bp.route("/json/move_package", endpoint="move_package")
 # @apiver_check
-@login_required("MODIFY")
+@permission_required("MODIFY")
 def move_package():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -186,7 +187,7 @@ def move_package():
 
 @bp.route("/json/edit_package", methods=["POST"], endpoint="edit_package")
 # @apiver_check
-@login_required("MODIFY")
+@permission_required("MODIFY")
 def edit_package():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -207,7 +208,7 @@ def edit_package():
 
 @bp.route("/json/set_captcha", methods=["GET", "POST"], endpoint="set_captcha")
 # @apiver_check
-@login_required("ADD")
+@permission_required("ADD")
 def set_captcha():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -232,7 +233,7 @@ def set_captcha():
 
 @bp.route("/json/load_config", endpoint="load_config")
 # @apiver_check
-@login_required("SETTINGS")
+@permission_required("SETTINGS")
 def load_config():
     category = flask.request.args.get('category')
     section = flask.request.args.get('section')
@@ -258,7 +259,7 @@ def load_config():
 
 @bp.route("/json/save_config", methods=["POST"], endpoint="save_config")
 # @apiver_check
-@login_required("SETTINGS")
+@permission_required("SETTINGS")
 def save_config():
     api = flask.current_app.config["PYLOAD_API"]
     category = flask.request.args.get('category')
@@ -278,8 +279,7 @@ def save_config():
 
 @bp.route("/json/add_account", methods=["POST"], endpoint="add_account")
 # @apiver_check
-@login_required("ACCOUNTS")
-# @fresh_login_required
+@permission_required("ACCOUNTS")
 def add_account():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -297,8 +297,7 @@ def add_account():
 
 @bp.route("/json/update_accounts", methods=["POST"], endpoint="update_accounts")
 # @apiver_check
-@login_required("ACCOUNTS")
-# @fresh_login_required
+@permission_required("ACCOUNTS")
 def update_accounts():
     deleted = []  #: don't update deleted accounts, or they will be created again
     updated = {}
@@ -340,9 +339,7 @@ def update_accounts():
 
 
 @bp.route("/json/change_password", methods=["POST"], endpoint="change_password")
-# @apiver_check
-# @fresh_login_required
-@login_required("ACCOUNTS")
+@permission_required("ACCOUNTS")
 def change_password():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -357,9 +354,7 @@ def change_password():
     return jsonify(True)
 
 @bp.route("/json/add_user", methods=["POST"], endpoint="add_user")
-# @apiver_check
-@login_required("ADMIN")
-# @fresh_login_required
+@permission_required("ADMIN")
 def add_user():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -381,9 +376,7 @@ def add_user():
     return jsonify(True)
 
 @bp.route("/json/update_users", methods=["POST"], endpoint="update_users")
-# @apiver_check
-# @fresh_login_required
-@login_required("ADMIN")
+@permission_required("ADMIN")
 def update_users():
     api = flask.current_app.config["PYLOAD_API"]
 

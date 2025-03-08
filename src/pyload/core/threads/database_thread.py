@@ -186,6 +186,9 @@ class DatabaseThread(Thread):
         self.c.execute(
             'CREATE TABLE IF NOT EXISTS "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "name" TEXT NOT NULL, "email" TEXT DEFAULT "" NOT NULL, "password" TEXT NOT NULL, "role" INTEGER DEFAULT 0 NOT NULL, "permission" INTEGER DEFAULT 0 NOT NULL, "template" TEXT DEFAULT "default" NOT NULL)'
         )
+        self.c.execute(   # ToDo!!!
+            'CREATE TABLE IF NOT EXISTS "user_sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "userid" INTEGER DEFAULT 1 NOT NULL, "session_key" TEXT DEFAULT "" NOT NULL, "random" TEXT DEFAULT "" NOT NULL, "expiry" TEXT DEFAULT "" NOT NULL)'
+        )
 
         self.c.execute(
             'CREATE VIEW IF NOT EXISTS "pstats" AS \

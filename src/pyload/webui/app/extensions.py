@@ -3,7 +3,7 @@
 from flask_babel import Babel
 from flask_caching import Cache
 from flask_compress import Compress
-from flask_session import Session
+# from flask_session import Session
 from flask_themes2 import Themes as _Themes
 from pyload import APPID
 
@@ -18,9 +18,9 @@ class Themes(_Themes):
 babel = Babel()
 cache = Cache()
 compress = Compress()
-session = Session()
+# session = Session()
 themes = Themes()
 
-EXTENSIONS = [babel, cache, compress, session]
+EXTENSIONS = [babel, cache, compress]
 
 THEMES = [themes]

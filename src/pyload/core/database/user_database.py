@@ -38,6 +38,28 @@ class UserDatabaseMethods:
         if not _check_password(stored_password, password):
             return {}
 
+        return User(r[0], r[1], r[2], r[3], r[4], r[5], r[6])
+
+    @style.queue
+    def load_user(self, user_id):
+        self.c.execute(
+            "SELECT id, name, password, role, permission, template, email FROM users WHERE id=?",
+            (user_id,),
+        )
+        r = self.c.fetchone()
+        if not r:
+            return {}
+        return User(r[0], r[1], r[2], r[3], r[4], r[5], r[6])
+
+    '''@style.queue
+    def load_user_by_name(self, user_name):
+        self.c.execute(
+            "SELECT id, name, password, role, permission, template, email FROM users WHERE name=?",
+            (user_name,),
+        )
+        r = self.c.fetchone()
+        if not r:
+            return {}
         return {
             "id": r[0],
             "name": r[1],
@@ -45,7 +67,7 @@ class UserDatabaseMethods:
             "permission": r[4],
             "template": r[5],
             "email": r[6],
-        }
+        }'''
 
     @style.queue
     def add_user(self, user, password, role=0, perms=0, reset=False):
@@ -123,3 +145,26 @@ class UserDatabaseMethods:
     @style.queue
     def remove_user(self, user):
         self.c.execute("DELETE FROM users WHERE name=?", (user,))
+
+
+class User():
+
+    def __init__(self, id, name, password, role, permission, template, email):
+        self.id = id
+        self.name = name
+        self.password = password
+        self.role = role
+        self.permission = permission
+        self.template = template
+        self.email = email
+
+    @property
+    def is_active(self):
+        return True
+
+    def get_id(self):
+        return str(self.id)
+
+    @property
+    def is_authenticated(self):
+        return self.is_active

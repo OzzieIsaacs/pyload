@@ -27,6 +27,7 @@ $(function() {
 {% autoescape true %}
 
 <ul id="package-list" style="list-style: none; padding-left: 0; margin-top: -10px;">
+{% set has_extract = has_service("ExtractArchive.extract_package") %}
 {% for package in content %}
     <li id="package_{{package.pid}}" class="left width100">
       <div class="left width100">
@@ -41,6 +42,9 @@ $(function() {
             <span class="glyphicon glyphicon-pencil" title="{{_('Edit Package')}}" style="cursor: pointer; height:12px;" ></span>
             <span class="glyphicon glyphicon-transfer" title="{{_('Move Package To ')}}{% if target %}{{_('Collector')}}{% else %}{{_('Queue')}}{% endif %}" style="cursor: pointer; height:12px;" ></span>
             <span class="glyphicon glyphicon-sort" title="{{_('Reverse Entries')}}" style="cursor: pointer; height:12px;" ></span>
+            {% if has_extract %}
+            <span class="glyphicon glyphicon-fullscreen" title="{{_('Extract Package')}}" style="cursor: pointer; height:12px;" ></span>
+            {% endif %}            
           </span>
          </div>
         {% set progress = (package.linksdone * 100) / package.linkstotal %}

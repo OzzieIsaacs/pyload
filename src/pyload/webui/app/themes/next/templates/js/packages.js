@@ -48,7 +48,7 @@ function PackageUI (url, type){
                     indicateFail();
                     return false;
                 });
-          }
+            }
         });
     };
 
@@ -133,6 +133,7 @@ function Package (ui, id, ele){
         $(imgs[5]).click(this.editPackage);
         $(imgs[6]).click(this.movePackage);
         $(imgs[7]).click(this.editOrder);
+        $(imgs[8]).click(this.extractPackage);
 
         $(ele).find('.packagename').click(this.toggle);
     };
@@ -272,7 +273,9 @@ function Package (ui, id, ele){
             icon.addClass('glyphicon-folder-close');
         } else {
             if (!linksLoaded) {
-                thisObject.loadLinks();
+                if (!thisObject.loadLinks()) {
+                    return;
+                }
             } else {
                 $(child).fadeIn();
             }
@@ -306,9 +309,21 @@ function Package (ui, id, ele){
         event.preventDefault();
     };
 
+    this.extractPackage = function (event) {
+        indicateLoad();
+        $.get("{{url_for('api.rpc', func='service_call')}}/'ExtractArchive.extract_package', [" + id + "]", function () {
+            thisObject.close();
+            indicateSuccess();
+        }).fail(function () {
+            indicateFail();
+        });
+        event.stopPropagation();
+        event.preventDefault();
+    };
+
     this.close = function () {
         var child = $(ele).find('.children');
-        if (child.css('display') == "block") {
+        if (child.css('display') === "block") {
             $(child).fadeOut();
             var icon = $(ele).find('.packageicon');
             icon.removeClass('glyphicon-folder-open');

@@ -57,8 +57,6 @@ def login():
         if len(allusers) == 1:  # TODO: check if localhost
             user_info = list(allusers.values())[0]
             login_user(user_info, remember=remember)
-            # NOTE: Double-check authentication here because if session[name] is empty,
-            #       next login_required redirects here again and all loop out.
             return flask.redirect(next_url)
 
     if flask.request.method == "POST":
@@ -72,12 +70,10 @@ def login():
 
         sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
         user_info = api.check_auth(sanitized_user, password)
-        # user_info = api.login_user_by_name(sanitized_user)
         if not user_info:
             log.error(f"Login failed for user '{sanitized_user}' [CLIENT: {client_ip}]")
             return render_template("login.html", errors=True)
 
-        # set_session(user_info)
         login_user(user_info, remember=True)
         log.info(f"User '{sanitized_user}' successfully logged in [CLIENT: {client_ip}]")
         flask.flash("Logged in successfully")
@@ -89,15 +85,8 @@ def login():
 @bp.route("/logout", endpoint="logout")
 def logout():
     if current_user is not None and current_user.is_authenticated:
-        # ub.delete_user_session(current_user.id, flask_session.get('_id', ""))
         log.info(f"User '{current_user.name}' logged out")
         logout_user()
-    # log.debug("User logged out")
-
-    #s = flask.session
-    #user = s.get("name")
-    #clear_session(s)
-    # if user:
     return render_template("logout.html")
 
 
@@ -162,7 +151,6 @@ def files():
         if os.path.isdir(os.path.join(root, entry)):
             sub_folder = {"name": decode_name(entry), "path": decode_name(entry), "files": [], "folder": []}
             sub_entry = os.listdir(os.path.join(root, entry))
-            # sub_folder = {"files": [], "folder": []}
             for ent in sorted(sub_entry):
                 try:
                     if os.path.isdir(os.path.join(root, entry, ent)):

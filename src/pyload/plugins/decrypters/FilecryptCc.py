@@ -25,7 +25,7 @@ from ..helpers import replace_patterns
 class FilecryptCc(BaseDecrypter):
     __name__ = "FilecryptCc"
     __type__ = "decrypter"
-    __version__ = "0.50"
+    __version__ = "0.51"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?filecrypt\.(?:cc|co)/Container/\w+"
@@ -45,7 +45,7 @@ class FilecryptCc(BaseDecrypter):
     URL_REPLACEMENTS = [(r"filecrypt.co", "filecrypt.cc")]
 
     DLC_LINK_PATTERN = r'onclick="DownloadDLC\(\'(.+)\'\);">'
-    WEBLINK_PATTERN = r"<button onclick=\"[\w\-]+?/\*\d+?\*/\('([\w/-]+?)',"
+    WEBLINK_PATTERN = r"<button id=\"\w+\" onclick=\"openLink\(this\.getAttribute\('data-\w+'\), this\);\" data-\w+=\"([\w/-]+?)\" class"
     MIRROR_PAGE_PATTERN = r'"[\w]*" href="(https?://(?:www\.)?filecrypt.cc/Container/\w+\.html\?mirror=\d+)">'
 
     CAPTCHA_PATTERN = r"<h2>Security prompt</h2>"
@@ -99,9 +99,8 @@ class FilecryptCc(BaseDecrypter):
         ):
             handle()
             if self.urls:
-                self.packages = [
-                    (pyfile.package().name, self.urls, pyfile.package().name)
-                ]
+                self.packages = [(pyfile.package().name, links, pyfile.package().name)
+                 for links in self.urls]
                 return
 
     def handle_mirror_pages(self):
@@ -292,10 +291,10 @@ class FilecryptCc(BaseDecrypter):
             links = re.findall(self.WEBLINK_PATTERN, self.site_with_links)
 
             for link in links:
-                link = "https://filecrypt.cc/Link/{}.html".format(link)
+                link = "https://www.filecrypt.cc/Link/{}.html".format(link)
                 for i in range(5):
                     self.data = self._filecrypt_load_url(link)
-                    m = re.search(r'https://filecrypt\.cc/index\.php\?Action=Go&id=\w+', self.data)
+                    m = re.search(r'https://www.filecrypt\.cc/index\.php\?Action=Go&id=\w+', self.data)
                     if m is not None:
                         headers = self._filecrypt_load_url(m.group(0), just_header=True)
                         self.urls.append(headers["location"])

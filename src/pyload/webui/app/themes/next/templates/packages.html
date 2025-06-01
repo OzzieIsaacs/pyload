@@ -5,9 +5,9 @@
 {% block footer %}
 <script type="text/javascript" src="{{theme_template('js/packages.js')}}"></script>
 <script type="text/javascript">
-$(function() {
-    var pUI = new PackageUI("url", {{ target }});
-});
+  $(function() {
+      var pUI = new PackageUI("url", {{ target }});
+  });
 </script>
 {% endblock %}
 
@@ -44,15 +44,15 @@ $(function() {
             <span class="glyphicon glyphicon-sort" title="{{_('Reverse Entries')}}" style="cursor: pointer; height:12px;" ></span>
             {% if has_extract %}
             <span class="glyphicon glyphicon-fullscreen" title="{{_('Extract Package')}}" style="cursor: pointer; height:12px;" ></span>
-            {% endif %}            
+            {% endif %}
           </span>
          </div>
         {% set progress = (package.linksdone * 100) / package.linkstotal %}
 
-    	<div id="progress" class="progress col-xs-4 col-sm-4 noPadding" style="margin-top: -5px; color:#fff; font-weight: 700; font-size:12px; cursor:grab; margin-bottom: 15px;">
-            <div class="progress-bar" role="progressbar" style="width: {{ progress }}%; height: 100%; position: relative; z-index: 1; text-align:left;"> </div>
-            <label style="left:10px; line-height: 20px; position: absolute; z-index: 2; color: #000;">{{ package.linksdone }} / {{ package.linkstotal }}</label>
-            <label class="hidden-xs" style="line-height: 20px; right: 30px; position: absolute; z-index: 2; color:#000;">{{ package.sizedone|formatsize }} / {{ package.sizetotal|formatsize }}</label>
+        <div id="progress" class="progress col-xs-4 col-sm-4 noPadding" style="margin-top: -5px; color:#fff; font-weight: 700; font-size:12px; cursor: grab; margin-bottom: 15px;">
+            <div class="progress-bar" role="progressbar" style="width: {{progress}}%; height: 100%; position: relative; z-index: 1; text-align:left;"> </div>
+            <label style="left:10px; line-height: 20px; position: absolute; z-index: 2; color: #000;">{{package.linksdone}} / {{package.linkstotal}}</label>
+            <label class="hidden-xs" style="line-height: 20px; right: 30px; position: absolute; z-index: 2; color:#000;">{{package.sizedone|formatsize}} / {{package.sizetotal|formatsize}}</label>
         </div>
 
         <div id="children_{{package.pid}}" style="display: none; margin-bottom: 15px;" class="children clear">
@@ -74,10 +74,10 @@ $(function() {
   <div class="modal-dialog modal-sm">
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header bg-info text-center" style="padding: 5px" >{{_("Edit Package")}}</div>
+      <div class="modal-header bg-info text-center" style="padding: 5px" >{{_('Edit Package')}}</div>
         <div class="modal-body" style="margin-bottom: 30px;">
         <form id="pack_form" class="from-group" action="{{url_for('json.edit_package')}}" method="POST" enctype="multipart/form-data" style="margin-bottom: 40px;">
-          <p>{{_("Edit the package detais below")}}</p>
+          <p>{{_('Edit the package detais below')}}</p>
             <input name="pack_id" id="pack_id" type="hidden" value=""/>
             <div class="form-group">
                 <label for="pack_name">{{_('Name')}}</label>

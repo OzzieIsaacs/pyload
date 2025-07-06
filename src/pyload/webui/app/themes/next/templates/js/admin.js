@@ -13,11 +13,11 @@ $(function() {
                 data: $("#password_form").serialize(),
                 async: true,
                 success: function () {
-                    indicateSuccess("{{_('Settings saved')}}");
+                    uiHandler.indicateSuccess("{{_('Settings saved')}}");
                 }
             })
             .fail(function () {
-                indicateFail("{{_('Error occurred')}}");
+                uiHandler.indicateFail("{{_('Error occurred')}}");
             });
             $('#password_box').modal('hide');
         } else {
@@ -79,7 +79,7 @@ $(function() {
                     }
                 })
                 .fail(function () {
-                    indicateFail("{{_('Error occurred')}}");
+                    uiHandler.indicateFail("{{_('Error occurred')}}");
                 });
                 $('#user_box').modal('hide');
             } else {
@@ -97,7 +97,7 @@ $(function() {
             $('#shutdown_msg').removeClass("hidden");
         })
         .fail(function () {
-            indicateFail("{{_('Error occurred')}}");
+            uiHandler.indicateFail("{{_('Error occurred')}}");
         });
     });
 
@@ -111,7 +111,7 @@ $(function() {
             }, 10000);
         })
         .fail(function () {
-            indicateFail("{{_('Error occurred')}}");
+            uiHandler.indicateFail("{{_('Error occurred')}}");
         });
     });
 

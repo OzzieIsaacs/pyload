@@ -1,4 +1,3 @@
-{% autoescape true %}
 
 $(() => new EntryManager());
 
@@ -41,14 +40,14 @@ class LinkEntry {
       const status = $('<td>').html('&nbsp;').addClass('hidden-xs');
       const statusspan = $('<span>').html(item.statusmsg).addClass(`label ${labelColor(item.status)} lbl_status`);
       const name = $('<td>').html(item.name);
-      const hoster = $('<td>').html(item.plugin);
+      const hoster = $('<td>').html(item.plugin).addClass('hidden-xs');
       const info = $('<td>').html(item.info);
       const bleft = $('<td>').html(humanFileSize(item.size)).addClass('hidden-xs');
       const percent = $('<span>').html(`${item.percent}% / ${humanFileSize(item.size - item.bleft)}`).addClass('hidden-xs');
       const remove = $('<span>').addClass('glyphicon glyphicon-remove').css({ 'margin-left': '3px', 'cursor': 'pointer' });
       const pgbTr = $('<tr>').css('border-top-color', '#fff');
-      const progress = $('<div>').addClass('progress').css({ 'margin-bottom': '0px', 'margin-left': '4px' });
-      const pgb = $('<div>').html(`${item.percent}%`).attr('role', 'progress').addClass('progress-bar progress-bar-success progress-bar-striped active').css({ 'height': '35px', 'width': `${item.percent}%` });
+      const progress = $('<div>').addClass('progress').addClass('progress progressani aqua').css({ 'margin-bottom': '0px', 'margin-left': '4px' });
+      const pgb = $('<div>').html(`${item.percent}%`).attr('role', 'progress').addClass('progress-bar').data('aria-valuenow', '0').data('aria-valuemin', '0').data('aria-valuemax', '100').css({ 'height': '35px', 'width': `${item.percent}%` });
 
       this.elements = {
         tr,
@@ -184,4 +183,3 @@ class EntryManager {
   }
 }
 
-{% endautoescape %}

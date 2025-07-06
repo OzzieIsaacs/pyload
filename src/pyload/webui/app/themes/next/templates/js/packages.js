@@ -395,9 +395,7 @@ class Package {
       });
   }
 
-  editPackage(event) {
-    event.stopPropagation();
-    event.preventDefault();
+  editPackage() {
     $("#pack_form").off("submit").submit((e) => this.savePackage(e));
 
     $("#pack_id").val(this.id[0]);

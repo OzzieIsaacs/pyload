@@ -218,6 +218,17 @@
     {% endblock %}
 </div>
 {% block dialog %}
+  <div id="yesno_box" class="modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div id="modal_question" class="modal-header bg-info text-center" style="padding: 5px"></div>
+        <div class="modal-body" style="margin-bottom: 30px;">
+          <button class="btn btn-primary pull-left" id="okButton" type="submit">{{_('Ok')}}</button>
+          <button class="btn btn-default pull-right" data-dismiss="modal" id="cancelButton" type="reset">{{_('Cancel')}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% include theme('window.html') %}
@@ -228,7 +239,7 @@
 <script type="text/javascript" src="{{theme_static('vendor/jQuery/jQuery UI/jquery-ui.min.js')}}"></script>
 <script type="text/javascript" src="{{theme_static('vendor/mdtoast/js/mdtoast.min.js')}}"></script>
 <script type="text/javascript" src="{{theme_static('vendor/Bootstrap/js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{theme_template('js/base.js')}}" nopoll={{no_status_polling}}></script>
+<script type="text/javascript" src="{{theme_template('js/base.js')}}" nopoll="{{no_status_polling}}"></script>
 
 {% block footer %}
 {% endblock %}

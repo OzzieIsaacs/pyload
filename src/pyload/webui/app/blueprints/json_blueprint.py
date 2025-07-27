@@ -7,6 +7,7 @@ import flask
 from flask.json import jsonify
 from pyload import PKGDIR
 from pyload.core.api import Role
+from pyload.core import Core
 from pyload.core.utils import format
 
 from ..usermanagement import login_required
@@ -44,7 +45,7 @@ def links():
                 link["percent"] = 0
                 link["size"] = 0
                 link["bleft"] = 0
-                link["info"] = api._("waiting {}").format(link["format_wait"])
+                link["info"] = api.pyload._("waiting") + (" {}").format(link["format_wait"])
             else:
                 link["info"] = ""
 

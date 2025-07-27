@@ -183,7 +183,7 @@ class PyFile:
                 "size": self.get_size(),
                 "format_size": self.format_size(),
                 "status": self.status,
-                "statusmsg": self.get_status_name(),
+                "statusmsg": self.m.pyload._(self.get_status_name()),            # ToDo: Da Klemmts
                 "package": self.packageid,
                 "error": self.error,
                 "order": self.order,

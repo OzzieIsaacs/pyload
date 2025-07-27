@@ -1043,6 +1043,7 @@ class Api:
         Restarts all failed failes.
         """
         self.pyload.files.restart_failed()
+        return []
 
     @legacy("getPackageOrder")
     @permission(Perms.LIST)

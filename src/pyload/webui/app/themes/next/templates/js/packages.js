@@ -124,7 +124,7 @@ class Package {
 
     $(imgs[3]).click(() => this.deletePackage());
     $(imgs[4]).click(() => this.restartPackage());
-    $(imgs[5]).click(() => this.editPackage());
+    $(imgs[5]).click((e) => this.editPackage(e));
     $(imgs[6]).click(() => this.movePackage());
     $(imgs[7]).click(() => this.editOrder());
     $(imgs[8]).click(() => this.extractPackage());
@@ -397,7 +397,9 @@ class Package {
       });
   }
 
-  editPackage() {
+  editPackage(event) {
+    event.stopPropagation();
+    event.preventDefault();
     $("#pack_form").off("submit").submit((e) => this.savePackage(e));
 
     $("#pack_id").val(this.id[0]);

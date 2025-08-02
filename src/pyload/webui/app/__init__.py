@@ -127,7 +127,7 @@ class App:
         os.makedirs(cache_path, exist_ok=True)
 
         app.config["SESSION_FILE_DIR"] = cache_path
-        #app.config["SESSION_TYPE"] = "filesystem"
+        # app.config["SESSION_TYPE"] = "filesystem"
         app.config["SESSION_COOKIE_NAME"] = "pyload_session_" + str(app.config["PYLOAD_API"].get_config_value("webui", "port"))
         app.config["REMEMBER_COOKIE_NAME"] = "pyload_session_remember_token"
         app.config["SESSION_COOKIE_SAMESITE"] = "Lax"

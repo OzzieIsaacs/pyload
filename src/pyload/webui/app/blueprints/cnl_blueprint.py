@@ -136,7 +136,7 @@ def addcrypted2():
     )
     decryptor = cipher.decryptor()
     decrypted = decryptor.update(crypted) + decryptor.finalize()
-    urls = to_str(decrypted).replace("\x00", "").replace("\r", "").split("\n")
+    urls = to_str(decrypted).replace("\x00", "").replace("\r", "").replace("\x10", "").split("\n")
     urls = [url for url in urls if url.strip()]
 
     api = flask.current_app.config["PYLOAD_API"]

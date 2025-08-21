@@ -99,10 +99,10 @@ def dashboard():
     links = api.status_downloads()
 
     for link in links:
-        if link["status"] == 12:
-            current_size = link["size"] - link["bleft"]
-            formatted_speed = format.speed(link["speed"])
-            link["info"] = f"{current_size} KiB @ {formatted_speed}"
+        if link.status == 12:
+            current_size = link.size - link.bleft
+            formatted_speed = format.speed(link.speed)
+            link.info = f"{current_size} KiB @ {formatted_speed}"
 
     return render_template("dashboard.html", res=links)
 
@@ -112,7 +112,7 @@ def dashboard():
 def queue():
     api = flask.current_app.config["PYLOAD_API"]
     queue = api.get_queue()
-    queue.sort(key=operator.attrgetter("order"))
+    queue.sort(key=lambda x: x.order)
 
     return render_template("packages.html", content=queue, target=1)
 
@@ -122,8 +122,7 @@ def queue():
 def collector():
     api = flask.current_app.config["PYLOAD_API"]
     queue = api.get_collector()
-
-    queue.sort(key=operator.attrgetter("order"))
+    queue.sort(key=lambda x: x.order)
 
     return render_template("packages.html", content=queue, target=0)
 
@@ -251,9 +250,9 @@ def settings():
     all_users = api.get_all_userdata()
     users = {}
     for userdata in all_users.values():
-        name = userdata["name"]
-        users[name] = {"perms": get_permission(userdata["permission"])}
-        users[name]["perms"]["admin"] = userdata["role"] == 0
+        name = userdata.name
+        users[name] = {"perms": get_permission(userdata.permission)}
+        users[name]["perms"]["admin"] = userdata.role == 0
 
     admin_menu = {
         "permlist": permlist(),

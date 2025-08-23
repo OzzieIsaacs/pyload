@@ -11,10 +11,10 @@ from ..base.simple_downloader import SimpleDownloader
 class NitroflareCom(SimpleDownloader):
     __name__ = "NitroflareCom"
     __type__ = "downloader"
-    __version__ = "0.42"
+    __version__ = "0.43"
     __status__ = "testing"
 
-    __pattern__ = r"https?://(?:www\.)?(?:nitro\.download|nitroflare\.com)/view/(?P<ID>[\w^_]+)"
+    __pattern__ = r"https?://(?:www\.)?(?:nitro\.download|nitroflare\.com)/(?:view|watch)/(?P<ID>[\w^_]+)"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),

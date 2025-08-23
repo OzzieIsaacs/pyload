@@ -25,7 +25,7 @@ from ..helpers import replace_patterns
 class FilecryptCc(BaseDecrypter):
     __name__ = "FilecryptCc"
     __type__ = "decrypter"
-    __version__ = "0.51"
+    __version__ = "0.52"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?filecrypt\.(?:cc|co)/Container/\w+"
@@ -48,7 +48,7 @@ class FilecryptCc(BaseDecrypter):
     WEBLINK_PATTERN = r"<button id=\"\w+\" onclick=\"openLink\(this\.getAttribute\('data-\w+'\), this\);\" data-\w+=\"([\w/-]+?)\" class"
     MIRROR_PAGE_PATTERN = r'"[\w]*" href="(https?://(?:www\.)?filecrypt.cc/Container/\w+\.html\?mirror=\d+)">'
 
-    CAPTCHA_PATTERN = r"<h2>Security prompt</h2>"
+    CAPTCHA_PATTERN = r"<h2>Security Check</h2>"
     INTERNAL_CAPTCHA_PATTERN = r'<img id="nc" .* src="(.+?)"'
     CIRCLE_CAPTCHA_PATTERN = r'<input type="image" src="(.+?)"'
     KEY_CAPTCHA_PATTERN = r"<script language=JavaScript src='(http://backs\.keycaptcha\.com/swfs/cap\.js)'"
@@ -288,13 +288,15 @@ class FilecryptCc(BaseDecrypter):
 
     def handle_weblinks(self):
         try:
+            #with open("/home/matthias/test.txt", "r") as f:
+            #    self.site_with_links = f.read()
             links = re.findall(self.WEBLINK_PATTERN, self.site_with_links)
 
             for link in links:
                 link = "https://www.filecrypt.cc/Link/{}.html".format(link)
                 for i in range(5):
                     self.data = self._filecrypt_load_url(link)
-                    m = re.search(r'https://www.filecrypt\.cc/index\.php\?Action=Go&id=\w+', self.data)
+                    m = re.search(r'https://www.filecrypt\.cc/Go/\w+\.html', self.data)
                     if m is not None:
                         headers = self._filecrypt_load_url(m.group(0), just_header=True)
                         self.urls.append(headers["location"])

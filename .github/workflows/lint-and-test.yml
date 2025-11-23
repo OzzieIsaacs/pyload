@@ -75,13 +75,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       toxenv: py
-    continue-on-error: ${{ startsWith(matrix.os,'ubuntu') }}
 
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-        os: [ubuntu-latest, macos-13, windows-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - name: Check out repository
@@ -133,7 +132,8 @@ jobs:
       - name: Test OpenAPI spec generator
         if: startsWith(matrix.os, 'ubuntu') && matrix.python-version == '3.13'
         run: |
-          tox -e api_spec --sitepackages --workdir ${{ env.toxworkdir }}
+          python3 -m pip install -e .
+          python3 -m pyload --generate-api-spec
 
       - name: Check diff in generated OpenAPI spec
         if: startsWith(matrix.os, 'ubuntu') && matrix.python-version == '3.13'

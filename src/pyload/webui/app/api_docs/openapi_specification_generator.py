@@ -7,6 +7,7 @@
 #  \_______\    /_______|_|   |__/________________________/
 #           \  /
 #            \/
+
 import inspect
 import sys
 from collections.abc import Hashable
@@ -32,8 +33,8 @@ This will build an OpenAPI specification based on the existing api functions
 * Descriptions are parsed from the docstring
 * Data models are registered as components via Pydantic's inbuilt conversion
 To conform with OpenAPI standards, the following logic is used to determine the appropriate REST method:
-* Functions requiring no parameters will use a GET method
-* Functions with primitive parameters will use a POST method with query params
+* Functions that do not have any side effects on the server's state, will use a GET method
+* Functions with primitive parameters will use a method with query params
 * Functions with non-primitive parameters (e.g. arrays) will use a POST method with json request body
 * File uploads will use a POST method with multipart request body
 """
@@ -43,81 +44,24 @@ class OpenAPISpecificationGenerator:
         self.spec: dict[str, Any] = {
             "info": {
                 "title": "pyLoad API Documentation - OpenAPI",
-                "version": "1.0.0"
+                "version": "1.1.0"
             },
             "openapi": "3.1.1",
             "tags": [{
-                "name": "pyLoad Authentication",
-                "description": ""
-            }, {
                 "name": "pyLoad REST",
                 "description": ""
             }],
-            "paths": {
-                "/api/login": {
-                    "post": {
-                        "security": [],
-                        "summary": "Login into pyLoad, this must be called when using rpc before any methods can be used.",
-                        "tags": [
-                            "pyLoad Authentication"
-                        ],
-                        "requestBody": {
-                            "required": True,
-                            "content": {
-                                "application/x-www-form-urlencoded": {
-                                    "schema": {
-                                        "type": "object",
-                                        "properties": {
-                                            "username": {
-                                                "type": "string",
-                                                "default": "pyload"
-                                            },
-                                            "password": {
-                                                "type": "string",
-                                                "default": "pyload"
-                                            }
-                                        },
-                                        "required": [
-                                            "username",
-                                            "password"
-                                        ]
-                                    }
-                                }
-                            }
-                        },
-                        "responses": {
-                            "200": {
-                                "description": "Session data if successful, False otherwise",
-                            }
-                        }
-                    }
-                },
-                "/api/logout": {
-                    "get": {
-                        "security": [],
-                        "summary": "Logout current user, clear session data",
-                        "tags": [
-                            "pyLoad Authentication"
-                        ],
-                        "responses": {
-                            "200": {
-                                "description": "",
-                            }
-                        }
-                    }
-                }
-            },
+            "paths": {},
             "components": {
                 "schemas": {},
                 "securitySchemes": {
-                    "cookieAuth": {
-                        "type": "apiKey",
-                        "in": "cookie",
-                        "name": "pyload_session_" + str(api.get_config_value("webui", "port"))
+                    "basicAuth": {
+                        "type": "http",
+                        "scheme": "basic",
                     }
                 }
             },
-            "security": [{"cookieAuth": []}]
+            "security": [{"basicAuth": []}]
         }
 
     def generate_openapi_json(self) -> dict[str, Any]:
@@ -130,7 +74,8 @@ class OpenAPISpecificationGenerator:
             return self.spec
 
         for name, method in inspect.getmembers(self.api, predicate=inspect.ismethod):
-            if name.startswith('_') or name in legacy_map.values() or name == "login":
+            rest_method = self.api._required_http_method_for_api(name)
+            if name.startswith('_') or name in legacy_map.values() or rest_method is None:
                 continue
 
             docstring = inspect.getdoc(method) or "No documentation available"
@@ -143,31 +88,31 @@ class OpenAPISpecificationGenerator:
                 "description": summary,
                 "tags": ["pyLoad REST"]
             }
-            rest_method = "post"
 
             method_params = dict(inspect.signature(method).parameters)
             method_params.pop("self", None)
 
-            if not method_params:
-                rest_method = "get"
-            elif all(self._is_primitive_type(param_type.annotation) for param_type in method_params.values()):
-                query_params = self._build_post_request_with_query_params(docstring_lines, method_params)
-                operation.update({
-                    "parameters": query_params,
-                })
-            else:
-                request_body = self._build_post_request_with_request_body(docstring_lines, method_params)
-                operation.update(request_body)
+            if method_params:
+                if all(self._is_primitive_type(param_type.annotation) for param_type in method_params.values()):
+                    query_params = self._build_request_with_query_params(docstring_lines, method_params)
+                    operation.update({
+                        "parameters": query_params,
+                    })
+                elif rest_method == "POST":
+                    request_body = self._build_post_request_with_request_body(docstring_lines, method_params)
+                    operation.update(request_body)
+                else:
+                    raise ValueError(f"REST method {name}() with non primitive types, POST method expected but {rest_method} specified")
 
             response = self._build_response(docstring_lines, method)
             operation.update({
                 "responses": {"200": response}
             })
-            self.spec["paths"][f"/api/{name}"] = {rest_method: operation}
+            self.spec["paths"][f"/api/{name}"] = {rest_method.lower(): operation}
 
         return self.spec
 
-    def _build_post_request_with_query_params(self, docstring_lines, method_params) -> list[dict[str, Any]]:
+    def _build_request_with_query_params(self, docstring_lines, method_params) -> list[dict[str, Any]]:
         query_params = []
         for param_name, param in method_params.items():
             param_info: dict[str, Any] = {

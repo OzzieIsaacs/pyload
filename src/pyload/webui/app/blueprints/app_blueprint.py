@@ -11,13 +11,15 @@ from logging import getLogger
 from urllib.parse import unquote
 
 import flask
+
 from pyload import APPID, PKGDIR
 from pyload.core.utils import format
 
 from ..usermanagement import login_required
 from ..cw_login import login_user, logout_user, current_user
 from ..helpers import (permission_required,
-    get_permission, get_redirect_url, permlist, render_base, render_template, static_file_url)
+    csrf_exempt, get_permission, get_redirect_url, permlist,
+    render_base, render_template, static_file_url)
 
 _RE_LOGLINE = re.compile(r"\[([\d\-]+) ([\d:]+)\] +([A-Z]+) +(.+?) (.*)")
 
@@ -31,7 +33,7 @@ def favicon():
     return flask.redirect(location)
 
 
-@bp.route("/render/<path:filename>", endpoint="render")
+@bp.route("/web/<path:filename>", endpoint="web")
 def render(filename):
     mimetype = mimetypes.guess_type(filename)[0] or "text/html"
     data = render_template(filename)
@@ -45,6 +47,8 @@ def robots():
 
 # TODO: Rewrite login route using flask-login
 @bp.route("/login", methods=["GET", "POST"], endpoint="login")
+@bp.route("/login", methods=["GET", "POST"], endpoint="login")
+@csrf_exempt
 def login():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -63,15 +67,12 @@ def login():
         user = flask.request.form["username"]
         password = flask.request.form["password"]
 
-        if flask.request.headers.get("X-Forwarded-For"):
-            client_ip = flask.request.headers.get("X-Forwarded-For").split(',')[0].strip()
-        else:
-            client_ip = flask.request.remote_addr
+        client_ip = flask.request.headers.get("X-Forwarded-For", "").split(',')[0].strip() or flask.request.remote_addr
 
         sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
         user_info = api.check_auth(sanitized_user, password)
         if not user_info:
-            log.error(f"Login failed for user '{sanitized_user}' [CLIENT: {client_ip}]")
+            log.error(f"Login failed for user '{sanitized_user}' using Web Client [CLIENT: {client_ip}]")
             return render_template("login.html", errors=True)
 
         login_user(user_info, remember=True)
@@ -146,29 +147,39 @@ def files():
         return render_base(messages)
     data = {"folder": [], "files": []}
 
-    for entry in sorted(os.listdir(root)):
-        if os.path.isdir(os.path.join(root, entry)):
-            sub_folder = {"name": decode_name(entry), "path": decode_name(entry), "files": [], "folder": []}
-            sub_entry = os.listdir(os.path.join(root, entry))
-            for ent in sorted(sub_entry):
-                try:
-                    if os.path.isdir(os.path.join(root, entry, ent)):
-                        sub_sub_folder = {"name": decode_name(ent), "path": decode_name(os.path.join(entry, ent)), "files": []}
-                        sub_e = os.listdir(os.path.join(root, entry, ent))
-                        for e in sorted(sub_e):
-                            try:
-                                if os.path.isfile(os.path.join(root, entry, ent, e)):
-                                    sub_sub_folder["files"].append(decode_name(e))
-                            except Exception:
-                                pass
-                        sub_folder["folder"].append(sub_sub_folder)
-                    elif os.path.isfile(os.path.join(root, entry, ent)):
-                        sub_folder["files"].append(decode_name(ent))
-                except Exception:
-                    pass
-            data["folder"].append(sub_folder)
-        elif os.path.isfile(os.path.join(root, entry)):
-            data["files"].append(decode_name(entry))
+    try:
+        for entry in sorted(os.listdir(root)):
+            try:
+                if os.path.isdir(os.path.join(root, entry)):
+                    sub_folder = {"name": decode_name(entry), "path": decode_name(entry), "files": [], "folder": []}
+                    sub_entry = os.listdir(os.path.join(root, entry))                
+                    for ent in sorted(sub_entry):
+                        try:
+                            if os.path.isdir(os.path.join(root, entry, ent)):
+                                sub_sub_folder = {"name": decode_name(ent), "path": decode_name(os.path.join(entry, ent)), "files": []}
+                                sub_e = os.listdir(os.path.join(root, entry, ent))
+                                for e in sorted(sub_e):
+                                    try:
+                                        if os.path.isfile(os.path.join(root, entry, ent, e)):
+                                            sub_sub_folder["files"].append(decode_name(e))
+                                    except OSError as exc:
+                                        log.debug("Failed to list files in folder '%s': %s", decode_name(entry), exc)
+
+                                sub_folder["folder"].append(sub_sub_folder)
+                            elif os.path.isfile(os.path.join(root, entry, ent)):
+                                sub_folder["files"].append(decode_name(ent))
+                        except OSError as exc:
+                            # log.debug("Failed to list files in folder '%s': %s", decode_name(entry), exc)
+                            pass
+                    data["folder"].append(sub_folder)
+                elif os.path.isfile(os.path.join(root, entry)):
+                    data["files"].append(decode_name(entry))
+
+            except OSError as exc:
+                log.debug("Failed to access entry '%s': %s", decode_name(entry), exc)
+
+    except OSError as exc:
+        log.debug("Failed to list download directory '{}': {}".format(os.fsdecode(root), exc))
 
     return render_template("files.html", files=data)
 

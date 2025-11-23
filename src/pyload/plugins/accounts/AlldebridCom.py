@@ -9,7 +9,7 @@ from ..base.multi_account import MultiAccount
 class AlldebridCom(MultiAccount):
     __name__ = "AlldebridCom"
     __type__ = "account"
-    __version__ = "0.46"
+    __version__ = "0.47"
     __status__ = "testing"
 
     __config__ = [
@@ -33,9 +33,9 @@ class AlldebridCom(MultiAccount):
     ]
 
     # See https://docs.alldebrid.com/
-    API_URL = "https://api.alldebrid.com/v4/"
+    API_URL = "https://api.alldebrid.com/v4.1/"
 
-    def api_request(self, method, get={}, post={}, multipart=False):
+    def api_request(self, method, get=None, post=None, multipart=False):
         get.update({"agent": "pyLoad", "version": self.pyload.version})
         json_data = json.loads(
             self.load(self.API_URL + method, get=get, post=post, multipart=multipart)

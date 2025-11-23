@@ -61,7 +61,7 @@ class SettingsUI {
   }
 
   restartPyload() {
-    $.get("{{url_for('api.rpc', func='restart')}}")
+    $.post("{{url_for('api.rpc', func='restart')}}")
       .done(() => {
         $('#restart_box').modal('hide');
         $('#content').addClass("hidden");
@@ -76,7 +76,7 @@ class SettingsUI {
   };
 
   quitPyload() {
-    $.get("{{url_for('api.rpc', func='kill')}}")
+    $.post("{{url_for('api.rpc', func='kill')}}")
       .done(() => {
         $('#quit_box').modal('hide');
         $('#content').addClass("hidden");
@@ -129,6 +129,7 @@ class SettingsUI {
         $("#password_box #user_login").val(userName);
       });
     });
+
     $('#password_box').on('shown.bs.modal', () => {
       $('#login_current_password').focus();
     });
@@ -317,6 +318,7 @@ class SettingsUI {
       }
       return false;
     });
+
     $("#path_chooser").on("show.bs.modal", (e) => {
       const chooserIfrm = $(e.currentTarget).find("#chooser_ifrm");
       const browseFor = $(e.relatedTarget).data('browsefor');
@@ -335,6 +337,7 @@ class SettingsUI {
         }
       }
     });
+
     $("#chooser_confirm_button").click((event) => {
       const dialog = $("#path_chooser");
       const targetInput = dialog.data('targetinput');

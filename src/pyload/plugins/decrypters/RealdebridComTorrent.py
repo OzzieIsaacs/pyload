@@ -11,7 +11,7 @@ from pyload.core.network.http.exceptions import BadHeader
 
 from ..base.simple_decrypter import SimpleDecrypter
 from ..helpers import exists
-from pyload.core.utils.old import safejoin
+from pyload.core.utils.fs import safejoin
 from pyload.core.utils.purge import uniquify
 
 class RealdebridComTorrent(SimpleDecrypter):
@@ -39,7 +39,7 @@ class RealdebridComTorrent(SimpleDecrypter):
     # See https://api.real-debrid.com/
     API_URL = "https://api.real-debrid.com/rest/1.0"
 
-    def api_request(self, method, get={}, post={}):
+    def api_request(self, method, get=None, post=None):
         self.req.http.c.setopt(pycurl.USERAGENT, "pyLoad/{}".format(self.pyload.version))
 
         for _i in range(2):

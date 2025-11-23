@@ -6,7 +6,7 @@ import time
 import urllib.request
 
 from pyload.core.network.http.http_request import FormFile
-from pyload.core.utils.old import safejoin
+from pyload.core.utils.fs import safejoin
 
 from ..base.simple_decrypter import SimpleDecrypter
 from ..helpers import exists
@@ -15,7 +15,7 @@ from ..helpers import exists
 class AlldebridComTorrent(SimpleDecrypter):
     __name__ = "AlldebridComTorrent"
     __type__ = "decrypter"
-    __version__ = "0.02"
+    __version__ = "0.03"
     __status__ = "testing"
 
     __pattern__ = r'^unmatchable$'
@@ -29,9 +29,9 @@ class AlldebridComTorrent(SimpleDecrypter):
     __authors__ = [("GammaC0de", "nitzo2001[AT}yahoo[DOT]com")]
 
     # See https://docs.alldebrid.com/
-    API_URL = "https://api.alldebrid.com/v4/"
+    API_URL = "https://api.alldebrid.com/v4.1/"
 
-    def api_request(self, method, get={}, post={}, multipart=False):
+    def api_request(self, method, get=None, post=None, multipart=False):
         get.update({"agent": "pyLoad",
                     "version": self.pyload.version})
         json_data = json.loads(self.load(self.API_URL + method, get=get, post=post, multipart=multipart))

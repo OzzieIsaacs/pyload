@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 import traceback
 from ast import literal_eval
 from itertools import chain
@@ -11,21 +10,33 @@ import flask
 from flask.json import jsonify
 
 from pyload import APPID
+
 from ..api_docs.openapi_specification_generator import OpenAPISpecificationGenerator
 from ..cw_login import current_user, login_user
-from ..helpers import render_template
+from ..helpers import apikey_auth, csrf_exempt, is_authenticated, render_template
 
 bp = flask.Blueprint("api", __name__)
 log = getLogger(APPID)
 
 
 # accepting positional arguments, as well as kwargs via post and get
-# @bottle.route(
 @bp.route("/api/<func>", methods=["GET", "POST"], endpoint="rpc")
 @bp.route("/api/<func>/<args>", methods=["GET", "POST"], endpoint="rpc")
 # @apiver_check
+@apikey_auth
 def rpc(func, args=""):
+    if func.startswith("_"):
+        flask.flash(f"Invalid API call '{func}'")
+        return jsonify({'error': "Forbidden"}), 403
+
     api = flask.current_app.config["PYLOAD_API"]
+
+    # Enforce HTTP method for the API method
+    expected = api._required_http_method_for_api(func)
+    actual = flask.request.method
+    if actual != expected:
+        err_message = f"Method not allowed in API {func}(): Expected {expected}, got {actual}"
+        log.error(err_message)
 
     if not current_user.is_authenticated:
         user = flask.request.authorization.get("username", "")
@@ -40,13 +51,10 @@ def rpc(func, args=""):
                 log.error(f"API access failed for user '{sanitized_user}'")
                 return jsonify({'error': "Unauthorized"}), 401
 
+    # Check permissions
     if not api.is_authorized(func, {"role": current_user.role, "permission": current_user.permission}):
         log.error(f"API access failed for user '{sanitized_user}'")
-        return jsonify({'error': "Unauthorized"}), 401
-
-    if func.startswith("_"):
-        flask.flash(f"Invalid API call '{func}'")
-        return jsonify({'error': "Forbidden"}), 403
+        return jsonify({'error': "Unauthorized - Insufficient permissions"}), 401
 
     # get path parameters
     args = args.split(",")
@@ -101,39 +109,21 @@ def api_docs():
     openapi_spec = OpenAPISpecificationGenerator(api=flask.current_app.config["PYLOAD_API"]).generate_openapi_json()
     return openapi_spec
 
-@bp.route("/api/docs", methods=["GET"])
+
+@bp.route("/api", methods=["GET"], strict_slashes=False)
 def swagger_ui():
     """Serve Swagger UI with the API documentation"""
     return render_template("swagger.html")
 
 
 @bp.route("/api/login", methods=["POST"], endpoint="login")
+@csrf_exempt
 # @apiver_check
 def login():
-    user = flask.request.form["username"]
-    password = flask.request.form["password"]
-
-    api = flask.current_app.config["PYLOAD_API"]
-    user_info = api.check_auth(user, password)
-
-    if flask.request.headers.get("X-Forwarded-For"):
-        client_ip = flask.request.headers.get("X-Forwarded-For").split(',')[0].strip()
-    else:
-        client_ip = flask.request.remote_addr
-
-    sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
-    if not user_info:
-        log.error(f"Login failed for user '{sanitized_user}' [CLIENT: {client_ip}]")
-        return jsonify(False)
-
-    s = set_session(user_info)
-    log.info(f"User '{sanitized_user}' successfully logged in [CLIENT: {client_ip}]")
-    flask.flash("Logged in successfully")
-
-    return jsonify(s)
+    return "Obsolete API", 404
 
 
 @bp.route("/api/logout", endpoint="logout")
 # @apiver_check
 def logout():
-    return jsonify(True)
+    return "Obsolete API", 404

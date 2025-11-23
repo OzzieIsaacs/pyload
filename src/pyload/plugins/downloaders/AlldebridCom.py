@@ -10,7 +10,7 @@ from ..base.multi_downloader import MultiDownloader
 class AlldebridCom(MultiDownloader):
     __name__ = "AlldebridCom"
     __type__ = "downloader"
-    __version__ = "0.66"
+    __version__ = "0.67"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:\w+\.)?(?:alldebrid\.com|debrid\.it|alld\.io)/(?:dl|f)/[\w^_]+"
@@ -51,9 +51,9 @@ class AlldebridCom(MultiDownloader):
     ]
 
     # See https://docs.alldebrid.com/
-    API_URL = "https://api.alldebrid.com/v4/"
+    API_URL = "https://api.alldebrid.com/v4.1/"
 
-    def api_request(self, method, get={}, post={}, multipart=False):
+    def api_request(self, method, get=None, post=None, multipart=False):
         get.update({"agent": "pyLoad", "version": self.pyload.version})
         json_data = json.loads(
             self.load(self.API_URL + method, get=get, post=post, multipart=multipart)

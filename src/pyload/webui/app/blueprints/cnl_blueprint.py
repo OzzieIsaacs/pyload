@@ -5,20 +5,22 @@ from base64 import standard_b64decode
 from functools import wraps
 from urllib.parse import unquote
 
+import flask
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from werkzeug.utils import secure_filename
 
-import flask
-from flask.json import jsonify
 from pyload.core.api import Destination
 from pyload.core.utils.convert import to_str
 from pyload.core.utils.misc import eval_js
+
+from ..helpers import csrf_exempt
 
 #: url_prefix here is intentional since it should not be affected by path prefix
 bp = flask.Blueprint("flash", __name__, url_prefix="/")
 
 
-#: decorator
+#: decorators
 def local_check(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -26,14 +28,33 @@ def local_check(func):
         http_host = flask.request.environ.get("HTTP_HOST", "0")
 
         if remote_addr in ("127.0.0.1", "::ffff:127.0.0.1", "::1", "localhost") or http_host in (
-            "127.0.0.1:9666",
-            "[::1]:9666",
+                "127.0.0.1:9666",
+                "[::1]:9666",
         ):
             return func(*args, **kwargs)
         else:
             return "Forbidden", 403
 
     return wrapper
+
+
+def config_check(config_key: list[str], not_found_msg: str = "Not Found"):
+    """
+    Decorator factory: Checks [config_key] config value and aborts with 404 if False.
+
+    :param config_key: The config key to check (e.g., ["ClickNLoad", "enabled", "plugin"]).
+    :param not_found_msg: Custom message for the 404 response.
+    :return: A decorator to wrap view functions.
+    """
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            api = flask.current_app.config["PYLOAD_API"]
+            if not api.get_config_value(*config_key):
+                return not_found_msg, 404
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
 
 
 @bp.after_request
@@ -48,13 +69,17 @@ def add_cors(response):
 
 @bp.route("/flash/", methods=["GET", "POST"], endpoint="index")
 @bp.route("/flash/<id>", methods=["GET", "POST"], endpoint="index")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def index(id="0"):
     return "JDownloader\r\n"
 
 
 @bp.route("/flash/add", methods=["POST"], endpoint="add")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def add():
     package = flask.request.form.get(
         "package", flask.request.form.get("source", flask.request.form.get("referer"))
@@ -82,7 +107,9 @@ def add():
 
 
 @bp.route("/flash/addcrypted", methods=["POST"], endpoint="addcrypted")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def addcrypted():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -90,11 +117,10 @@ def addcrypted():
         "package", flask.request.form.get("source", flask.request.form.get("referer"))
     )
     dl_path = api.get_config_value("general", "storage_folder")
-    dlc_filename = package.replace("/", "").replace("\\", "").replace(":", "") + ".dlc"
-    dlc_path = os.path.join(dl_path, dlc_filename)
-    dlc_path = os.path.normpath(dlc_path)
+    dlc_filename = secure_filename(package) + ".dlc"
+    dlc_path = os.path.abspath(os.path.join(dl_path, dlc_filename))
     # Ensure dlc_path is within dl_path
-    if not os.path.abspath(dlc_path).startswith(os.path.abspath(dl_path) + os.sep):
+    if not dlc_path.startswith(os.path.abspath(dl_path) + os.sep):
         return "failed: invalid package name\r\n", 400
     dlc = flask.request.form["crypted"].replace(" ", "+")
     with open(dlc_path, mode="wb") as fp:
@@ -114,7 +140,9 @@ def addcrypted():
 
 
 @bp.route("/flash/addcrypted2", methods=["POST"], endpoint="addcrypted2")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def addcrypted2():
     package = flask.request.form.get(
         "package", flask.request.form.get("source", flask.request.form.get("referer"))
@@ -156,7 +184,9 @@ def addcrypted2():
 
 @bp.route("/flashgot", methods=["POST"], endpoint="flashgot")
 @bp.route("/flashgot_pyload", methods=["POST"], endpoint="flashgot")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def flashgot():
     if flask.request.referrer not in (
         "http://localhost:9666/flashgot",
@@ -177,7 +207,9 @@ def flashgot():
 
 
 @bp.route("/crossdomain.xml", endpoint="crossdomain")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def crossdomain():
     rep = '<?xml version="1.0"?>\n'
     rep += '<!DOCTYPE cross-domain-policy SYSTEM "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd">\n'
@@ -188,7 +220,9 @@ def crossdomain():
 
 
 @bp.route("/flash/checkSupportForUrl", methods=["POST"], endpoint="checksupport")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def checksupport():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -200,7 +234,9 @@ def checksupport():
 
 
 @bp.route("/jdcheck.js", endpoint="jdcheck")
+@config_check(["ClickNLoad", "enabled", "plugin"], "Click'N'Load is disabled")
 @local_check
+@csrf_exempt
 def jdcheck():
     rep = "jdownloader=true;\r\n"
     rep += "var version='42707';\r\n"

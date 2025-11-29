@@ -315,7 +315,7 @@ class Package {
     uiHandler.yesNoDialog("{{_('Are you sure you want to delete this package?')}}", (answer) => {
       if (answer) {
         uiHandler.indicateLoad();
-        $.get(`{{url_for('api.rpc', func='delete_packages')}}/[${this.id}]`)
+        $.post(`{{url_for('api.rpc', func='delete_packages')}}/[${this.id}]`)
           .done(() => {
             $(this.ele).remove();
             uiHandler.indicateFinish();

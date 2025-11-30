@@ -61,7 +61,7 @@ class PackageUI {
 
   deleteFinished() {
     uiHandler.indicateLoad();
-    $.get("{{url_for('api.rpc', func='delete_finished')}}")
+    $.post("{{url_for('api.rpc', func='delete_finished')}}")
       .done((data) => {
         if (data.length > 0) {
           window.location.reload();
@@ -77,7 +77,7 @@ class PackageUI {
 
   restartFailed() {
     uiHandler.indicateLoad();
-    $.get("{{url_for('api.rpc', func='restart_failed')}}")
+    $.post("{{url_for('api.rpc', func='restart_failed')}}")
       .done((data) => {
         if (data.length > 0) {
           window.location.reload();
@@ -264,7 +264,7 @@ class Package {
     uiHandler.yesNoDialog("{{_('Are you sure you want to delete this link?')}}", (answer) => {
       if (answer) {
         uiHandler.indicateLoad();
-        $.get(`{{url_for('api.rpc', func='delete_files')}}/[${lid}]`)
+        $.post(`{{url_for('api.rpc', func='delete_files')}}/[${lid}]`)
           .done(() => {
             $(`#file_${lid}`).remove();
             uiHandler.indicateFinish();
@@ -277,7 +277,7 @@ class Package {
   }
 
   restartLink(lid) {
-    $.get(`{{url_for('api.rpc', func='restart_file')}}/${lid}`)
+    $.post(`{{url_for('api.rpc', func='restart_file')}}/${lid}`)
       .done(() => {
         const ele1 = $(`#file_${lid}`);
         const imgs1 = $(ele1).find(".glyphicon");
@@ -331,7 +331,7 @@ class Package {
     event.stopPropagation();
     event.preventDefault();
     uiHandler.indicateLoad();
-    $.get(`{{url_for('api.rpc', func='restart_package')}}/${this.id}`)
+    $.post(`{{url_for('api.rpc', func='restart_package')}}/${this.id}`)
       .done(() => {
         this.close();
         uiHandler.indicateSuccess();
@@ -345,7 +345,7 @@ class Package {
     event.stopPropagation();
     event.preventDefault();
     uiHandler.indicateLoad();
-    $.get(`{{url_for('api.rpc', func='service_call')}}/'ExtractArchive.extract_package', [${this.id}]`)
+    $.post(`{{url_for('api.rpc', func='service_call')}}/'ExtractArchive.extract_package', [${this.id}]`)
       .done(() => {
         this.close();
         uiHandler.indicateSuccess();

@@ -168,7 +168,7 @@ def addcrypted2():
     )
     decryptor = cipher.decryptor()
     decrypted = decryptor.update(crypted) + decryptor.finalize()
-    decrypted = decrypted.replace(b"\x00", b"").replace(b"\r", b"").replace(b"\x10",b "")
+    decrypted = decrypted.replace(b"\x00", b"").replace(b"\r", b"").replace(b"\x10",b"")
     try:
         decrypted = to_str(decrypted).strip()
     except UnicodeDecodeError:
@@ -178,7 +178,7 @@ def addcrypted2():
         )
         decryptor = cipher.decryptor()
         decrypted = decryptor.update(crypted[16:]) + decryptor.finalize()
-        decrypted = decrypted.replace(b"\x00", b"").replace(b"\r", b"").replace(b"\x10",b "")
+        decrypted = decrypted.replace(b"\x00", b"").replace(b"\r", b"").replace(b"\x10",b"")
         try:
             decrypted = to_str(decrypted).strip()
         except UnicodeDecodeError:

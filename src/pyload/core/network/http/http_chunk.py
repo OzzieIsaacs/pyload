@@ -78,6 +78,13 @@ class ChunkInfo:
             else:
                 fh.close()
                 raise WrongFormat
+            save_folder = os.path.dirname(name)
+            if (
+                not os.path.exists(save_folder)
+                and not os.path.isdir(save_folder)
+                or save_folder != os.path.dirname(fs_name)
+            ):
+                raise IOError
             ci = ChunkInfo(name)
             ci.loaded = True
             ci.set_size(size)
@@ -91,6 +98,9 @@ class ChunkInfo:
                     range = range[6:].split("-")
                 else:
                     raise WrongFormat
+
+                if save_folder != os.path.dirname(name):
+                    raise IOError
 
                 ci.add_chunk(name, (int(range[0]), int(range[1])))
 
@@ -186,6 +196,8 @@ class HTTPChunk(HTTPRequest):
 
         fs_name = self.p.info.get_chunk_filename(self.id)
         if self.resume:
+            if not os.path.exists(fs_name):
+                raise pycurl.error(33)  #: simulate cannot resume
             self.fp = open(fs_name, mode="ab")
             self.arrived = self.fp.tell()
             if not self.arrived:

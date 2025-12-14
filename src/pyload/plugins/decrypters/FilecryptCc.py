@@ -47,6 +47,7 @@ class FilecryptCc(BaseDecrypter):
     DLC_LINK_PATTERN = r'onclick="DownloadDLC\(\'(.+)\'\);">'
     WEBLINK_PATTERN = r"<button id=\"\w+\" onclick=\"openLink\(this\.getAttribute\('data-\w+'\), this\);\" data-\w+=\"([\w/-]+?)\" class"
     MIRROR_PAGE_PATTERN = r'"[\w]*" href="(https?://(?:www\.)?filecrypt.cc/Container/\w+\.html\?mirror=\d+)">'
+    OFFLINE_PATTERN = r">Not Found<"
 
     CAPTCHA_PATTERN = r"<h2>Security Check</h2>"
     INTERNAL_CAPTCHA_PATTERN = r'<img id="nc" .* src="(.+?)"'
@@ -73,11 +74,7 @@ class FilecryptCc(BaseDecrypter):
 
         self.data = self._filecrypt_load_url(pyfile.url)
 
-        # @NOTE: "content notfound" is NOT a typo
-        if (
-            "content notfound" in self.data
-            or ">File <strong>not</strong> found<" in self.data
-        ):
+        if re.search(self.OFFLINE_PATTERN, self.data):
             self.offline()
 
         self.handle_password_protection()

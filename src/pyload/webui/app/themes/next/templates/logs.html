@@ -41,6 +41,14 @@
     <input style="display: inline-block; float: left; margin-left: 5px;" class="btn btn-default" type="submit" value="{{_("Go")}}" />
   </form>
 </div>
-<!--<div style="clear: both;"></div>-->
 
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="{{theme_template('js/packages.js')}}"></script>
+<script type="text/javascript">
+  $(function() {
+      const pUI = new PackageUI({{ target }});
+  });
+</script>
 {% endblock %}

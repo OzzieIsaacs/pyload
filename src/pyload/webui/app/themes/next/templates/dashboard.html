@@ -1,6 +1,12 @@
 {% extends theme('base.html') %}
 {% block footer %}
 <script type="text/javascript" src="{{theme_template('js/dashboard.js')}}"></script>
+<script type="text/javascript" src="{{theme_template('js/packages.js')}}"></script>
+<script type="text/javascript">
+  $(function() {
+      const pUI = new PackageUI({{ target }});
+  });
+</script>
 {% endblock %}
 
 {% block title %}pyLoad - {{_('Dashboard')}}{% endblock %}

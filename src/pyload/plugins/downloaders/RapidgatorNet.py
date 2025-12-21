@@ -8,6 +8,7 @@ from pyload.core.network.http.exceptions import BadHeader
 from pyload.core.utils import seconds
 
 from ..anticaptchas.ReCaptcha import ReCaptcha
+from ..anticaptchas.Turnstile import Turnstile
 from ..anticaptchas.SolveMedia import SolveMedia
 from ..base.simple_downloader import SimpleDownloader
 
@@ -15,7 +16,7 @@ from ..base.simple_downloader import SimpleDownloader
 class RapidgatorNet(SimpleDownloader):
     __name__ = "RapidgatorNet"
     __type__ = "downloader"
-    __version__ = "0.59"
+    __version__ = "0.60"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?(?:rapidgator\.(?:net|asia|)|rg\.to)/file/(?P<ID>\w+)"
@@ -168,6 +169,10 @@ class RapidgatorNet(SimpleDownloader):
                 response = captcha.challenge()
                 post_params = {"g-recaptcha-response": response}
 
+            if isinstance(captcha, Turnstile):
+                response = captcha.challenge()
+                post_params = {"cf-turnstile-response": response}
+
             elif isinstance(captcha, SolveMedia):
                 response, challenge = captcha.challenge()
                 post_params = {
@@ -188,7 +193,7 @@ class RapidgatorNet(SimpleDownloader):
                     self.download(m.group(1), referrer=url)
 
     def handle_captcha(self):
-        for klass in (ReCaptcha, SolveMedia):
+        for klass in (ReCaptcha, SolveMedia, Turnstile):
             captcha = klass(self.pyfile)
             if captcha.detect_key():
                 self.captcha = captcha

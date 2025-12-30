@@ -6,8 +6,11 @@ from ..base.downloader import BaseDownloader
 
 
 def quality_fallback(desired, available):
-    result = available.get(desired, None)
-    if result is None:
+    for entry in available:
+        if entry['quality'] == desired:
+            return entry['url']
+
+    '''if result is None:
         if desired == "720p":
             return quality_fallback("480p", available)
         elif desired == "480p":
@@ -16,7 +19,7 @@ def quality_fallback(desired, available):
             # Return the entry starting with the lowest digit (shoud be 240p)
             (quality, result) = sorted(
                 available.items(), key=lambda x: x[0], reverse=True
-            )[0]
+            )[0]'''
 
     return result
 
@@ -59,16 +62,16 @@ class XHamsterCom(BaseDownloader):
         """
         if not self.data:
             self.download_html()
-
-        video_data_re = r'(?ms)<script\s+id="initials-script"\s*>.*?window\.initials\s*=\s*({.*?});\s*<\/script>'
+        video_data_re = r'(?ms)<script\s+id=\'initials-script\'\s*>.*?window\.initials\s*=\s*({.*?});\s*<\/script>'
         video_data_search = re.search(video_data_re, self.data)
 
         if not video_data_search:
             self.error(self._("video data not found"))
+        test = video_data_search.group(1).replace('"{"','{"')
+        test = test.replace('}"}', "}}")
+        video_data = json.loads(test)
 
-        video_data = json.loads(video_data_search.group(1))
-
-        video_model = video_data.get("videoModel", None)
+        video_model = video_data.get("xplayerSettings", None)
         if video_model is None:
             self.error(self._("Could not find video model!"))
 
@@ -76,11 +79,15 @@ class XHamsterCom(BaseDownloader):
         if sources is None:
             self.error(self._("Could not find sources!"))
 
-        mp4_sources = sources.get("mp4", None)
+        mp4_sources = sources.get("standard", None)
         if mp4_sources is None:
             self.error(self._("Could not find mp4 sources!"))
 
-        long_url = quality_fallback(self.desired_quality, mp4_sources)
+        h264 = mp4_sources.get("h264", None)
+        if h264 is None:
+            self.error(self._("Could not find h264 sources!"))
+
+        long_url = quality_fallback(self.desired_quality, h264)
 
         return long_url
 

@@ -7,12 +7,12 @@ from pyload.core.utils import parse
 
 from ..base.xfs_downloader import XFSDownloader
 from ..anticaptchas.HCaptcha import HCaptcha
-from ..helpers import search_pattern, set_cookie
+from ..helpers import search_pattern
 
 class RapidcloudCc(XFSDownloader):
     __name__ = "RapidcloudCc"
     __type__ = "downloader"
-    __version__ = "0.02"
+    __version__ = "0.03"
     __status__ = "testing"
 
     __pattern__ = r"https?://rapidcloud\.cc/(?P<ID>\w+)"
@@ -48,7 +48,7 @@ class RapidcloudCc(XFSDownloader):
             self.data = self.load(
                 pyfile.url,
                 post=self._post_parameters(),
-                ref=self.pyfile.url,
+                referrer=self.pyfile.url,
                 redirect=False
                 # options={"ssl_verify": 0}
             )

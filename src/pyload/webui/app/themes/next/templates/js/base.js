@@ -307,6 +307,8 @@ class UIHandler {
             const re = new RegExp(`/${queue}/?$`, "i");
             if (window.location.toString().match(re)) {
               window.location.reload();
+            } else {
+                $("#add_form").trigger("reset");
             }
           },
           error: () => {
@@ -318,9 +320,9 @@ class UIHandler {
       }
     });
 
-    $(".action_add").click(() => {
+    /*$("#action_add").click(() => {
       $("#add_form").trigger("reset");
-    });
+    });*/
 
     $("#action_play").click(() => {
       $.post("{{url_for('api.rpc', func='unpause_server')}}", () => {

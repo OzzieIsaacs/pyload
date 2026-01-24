@@ -6,7 +6,7 @@ from ..base.simple_decrypter import SimpleDecrypter
 class FastfileCcFolder(SimpleDecrypter):
     __name__ = "FastfileCcFolder"
     __type__ = "decrypter"
-    __version__ = "0.01"
+    __version__ = "0.02"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?(fastfile\.cc)/users/\w+"
@@ -26,5 +26,5 @@ class FastfileCcFolder(SimpleDecrypter):
     __license__ = "GPLv3"
     __authors__ = [("OzzieIsaacs", "Ozzie.Fernandez.Isaacs@googlemail.com")]
 
-    LINK_PATTERN = r'<div class="lft sec">\s+<a href="(https:\/\/fastfile.cc\/\w{12})'
+    LINK_PATTERN = r'<a class="f-title" href="(https:\/\/fastfile.cc\/\w{12})'
     # NAME_PATTERN = r'style="color:#118bb6"><b>(?P<N>.+?)</b></a>'

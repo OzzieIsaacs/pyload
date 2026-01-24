@@ -37,6 +37,7 @@ def rpc(func, args=""):
     if actual != expected:
         err_message = f"Method not allowed in API {func}(): Expected {expected}, got {actual}"
         log.error(err_message)
+        return jsonify({'error': err_message}), 405        
 
     if not current_user.is_authenticated:
         user = flask.request.authorization.get("username", "")
@@ -53,7 +54,7 @@ def rpc(func, args=""):
 
     # Check permissions
     if not api.is_authorized(func, {"role": current_user.role, "permission": current_user.permission}):
-        log.error(f"API access failed for user '{sanitized_user}'")
+        log.error(f"API access denied for function '{func}'")
         return jsonify({'error': "Unauthorized - Insufficient permissions"}), 401
 
     # get path parameters
@@ -64,8 +65,7 @@ def rpc(func, args=""):
     # get query parameters
     kwargs = {}
     for x, y in chain(flask.request.args.items(), flask.request.form.items()):
-        if x not in ("u", "p"):
-            kwargs[x] = unquote(y)
+        kwargs[x] = unquote(y)
 
     try:
         if flask.request.mimetype == "application/json":

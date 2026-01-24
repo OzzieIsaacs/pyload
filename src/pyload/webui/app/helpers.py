@@ -259,8 +259,6 @@ def apikey_auth(func):
             # Verify API credentials
             user_info = api.check_auth(user, password)
             if user_info:
-                # Log successful API authentication and store user info
-                log.debug(f"API authentication successful for user '{sanitized_user}' using {auth_method} [CLIENT: {client_ip}]")
                 flask.g.user_info = user_info
                 return decorated(*args, **kwargs)
 
@@ -270,7 +268,14 @@ def apikey_auth(func):
 
         # No API auth - still use the decorated function but rely on session auth
         csrf.protect()
-        return decorated(*args, **kwargs)
+        if current_user.is_authenticated:
+            return decorated(*args, **kwargs)
+        else:
+            user = current_user.name
+            # Sanitize username for logging
+            sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r") if user else "unknown"
+            log.error(f"API authentication failed for user '{sanitized_user}' using session [CLIENT: {client_ip}]")
+            return flask.json.jsonify({"error": "Invalid API credentials"}), 401
 
     return decorated_function
 

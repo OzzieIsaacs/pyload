@@ -12,10 +12,10 @@ from ..helpers import search_pattern
 class RapidcloudCc(XFSDownloader):
     __name__ = "RapidcloudCc"
     __type__ = "downloader"
-    __version__ = "0.03"
+    __version__ = "0.04"
     __status__ = "testing"
 
-    __pattern__ = r"https?://rapidcloud\.cc/(?P<ID>\w+)"
+    __pattern__ = r"https?://rapidcloud\.cc/(?P<ID>\w{11,})"    # folder have 10 https://rapidcloud.cc/cC6GfFsuXF/
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),

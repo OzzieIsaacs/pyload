@@ -1579,9 +1579,7 @@ class Api:
         """
         deletes a user login.
         """
-        self.pyload.db.remove_user(user)
-        # TODO: fix db method to return bool
-        return True
+        return self.pyload.db.remove_user(user)
 
     def load_user(self, user_id):
         """

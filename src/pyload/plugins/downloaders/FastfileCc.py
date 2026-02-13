@@ -6,7 +6,7 @@ from ..base.xfs_downloader import XFSDownloader
 class FastfileCc(XFSDownloader):
     __name__ = "FastfileCc"
     __type__ = "downloader"
-    __version__ = "0.14"
+    __version__ = "0.15"
     __status__ = "testing"
 
     __pattern__ = r"https?://(?:www\.)?(fastfile\.cc)/\w{12}"
@@ -30,4 +30,4 @@ class FastfileCc(XFSDownloader):
 
     SIZE_PATTERN = r'</b> \(((?P<S>[\d.,]+) (?P<U>[\w^_]+)\)</h2>)'
     NAME_PATTERN = r'<h2>Download File<br><b>(?P<N>.+?)</b>'
-    WAIT_PATTERN = r'<span id="countdown"><br>Wait <span class="seconds">(\d+)</span> seconds<br'
+    WAIT_PATTERN = r'<span id="countdown">Wait <span class="seconds">(\d+)</span> seconds</span>'

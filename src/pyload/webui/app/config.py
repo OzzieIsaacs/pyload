@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 
 from pyload.core.utils.misc import random_string

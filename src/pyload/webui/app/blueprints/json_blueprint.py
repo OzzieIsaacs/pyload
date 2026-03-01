@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 from werkzeug.utils import secure_filename
 
@@ -352,7 +350,7 @@ def change_password():
 
     done = api.change_password(user, oldpw, newpw)
     if not done:
-        return jsonify(False), 500  #: Wrong password
+        return jsonify(False), 403  #: Wrong password
 
     return jsonify(True)
 
@@ -392,13 +390,15 @@ def update_users():
         name = userdata.name
         users[name] = {"perms": get_permission(userdata.permission)}
         users[name]["perms"]["admin"] = userdata.role == 0
+        users[name]["role"] = userdata.role
 
     s = flask.session
     for name in list(users):
         data = users[name]
         if flask.request.form.get(f"{name}|delete"):
-            api.remove_user(name)
-            del users[name]
+            if name != s["name"]:
+                api.remove_user(name)
+                del users[name]
             continue
         if flask.request.form.get(f"{name}|admin"):
             data["role"] = 0

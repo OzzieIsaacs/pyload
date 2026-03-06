@@ -33,13 +33,13 @@ def rpc(func, args=""):
     # Enforce HTTP method for the API method
     expected = api._required_http_method_for_api(func)
     if expected is None:
-        return jsonify({'error': "Forbidden"}), 403
+        return jsonify({'error': "Not Found"}), 404
 
     actual = flask.request.method
     if actual != expected:
         err_message = f"Method not allowed in API {func}(): Expected {expected}, got {actual}"
         log.error(err_message)
-        return jsonify({'error': err_message}), 405        
+        return jsonify({'error': err_message}), 405
 
     if not current_user.is_authenticated:
         user = flask.request.authorization.get("username", "")
@@ -52,12 +52,12 @@ def rpc(func, args=""):
                 s = login_user(user_info)
             else:
                 log.error(f"API access failed for user '{sanitized_user}'")
-                return jsonify({'error': "Unauthorized"}), 401
+                return jsonify({'error': "Login required"}), 401
 
     # Check permissions
     if not api.is_authorized(func, {"role": current_user.role, "permission": current_user.permission}):
         log.error(f"API access denied for function '{func}'")
-        return jsonify({'error': "Unauthorized - Insufficient permissions"}), 401
+        return jsonify({'error': "Access denied"}), 401
 
     # get path parameters
     args = args.split(",")
@@ -87,7 +87,10 @@ def rpc(func, args=""):
                 **{x: _parse_parameter(y) for x, y in kwargs.items()},
             ))
     except Exception as exc:
-        response = jsonify(error=str(exc), traceback=traceback.format_exc()), 500
+        resp = {'error': str(exc)}
+        if api.pyload.debug > 2:
+            resp["traceback"] = traceback.print_exc()
+        response = jsonify(resp), 500
 
     return response
 

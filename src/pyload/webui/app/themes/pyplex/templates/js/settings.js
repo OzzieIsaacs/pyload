@@ -48,7 +48,7 @@ class SettingsUI {
       }
     });
 
-    $("#core-menu li").click(this.menuClick.bind(this));
+    $("#core-menu").on('click', 'li', this.menuClick.bind(this));
     $("#core_submit").click(this.configSubmit.bind(this));
     $("#plugin_submit").click(this.configSubmit.bind(this));
     $("#account_add_button").click(this.addAccount.bind(this));
@@ -162,7 +162,7 @@ class SettingsUI {
             data: $userForm.serialize(),
             success: () => {
               sessionStorage.setItem("activeTab", "#users");
-              window.location.assign(window.location.href);
+              window.location.assign(window.location.origin + window.location.pathname + window.location.search);
             }
           }).fail(() => {
             uiHandler.indicateFail("{{_('Error occurred')}}");
@@ -195,7 +195,7 @@ class SettingsUI {
         results = pluginList;
       }
 
-      pluginListPanel.empty();
+      pluginListPanel.empty().on('click', 'li', this.menuClick.bind(this));
 
       if (results.length) {
         const $fragment = $(document.createDocumentFragment());
@@ -267,7 +267,7 @@ class SettingsUI {
       data: $("#add_account_form").serialize(),
       success: () => {
         sessionStorage.setItem("activeTab", "#accounts");
-        window.location.reload();
+        window.location.assign(window.location.origin + window.location.pathname + window.location.search);
       }
     }).fail(() => {
       uiHandler.indicateFail("{{_('Error occurred')}}");
@@ -284,7 +284,7 @@ class SettingsUI {
       async: true,
       success: () => {
         sessionStorage.setItem("activeTab", "#users");
-        window.location.reload();
+        window.location.assign(window.location.origin + window.location.pathname + window.location.search);
       }
     }).fail(() => {
       uiHandler.indicateFail("{{_('Error occurred')}}");
@@ -301,7 +301,7 @@ class SettingsUI {
       async: true,
       success: () => {
         sessionStorage.setItem("activeTab", "#accounts");
-        window.location.reload();
+        window.location.assign(window.location.origin + window.location.pathname + window.location.search);
       }
     }).fail(() => {
       uiHandler.indicateFail("{{_('Error occurred')}}");

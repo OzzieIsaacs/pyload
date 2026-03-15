@@ -185,8 +185,6 @@ class SettingsUI {
     const searchInput = $('#query-text');
     const pluginList = $('#plugins-list').data('plugin');
 
-    pluginListPanel.on("click", ".plugin-row", this.menuClick.bind(this));
-
     const search = (query) => {
       let results = [];
       if (query) {
@@ -195,19 +193,17 @@ class SettingsUI {
         results = pluginList;
       }
 
-      pluginListPanel.empty().on('click', 'li', this.menuClick.bind(this));
+      pluginListPanel.empty();
 
       if (results.length) {
-        const $fragment = $(document.createDocumentFragment());
         results.forEach(p => {
           resultTemplate.clone().find('.plugin-row')
             .attr('id', `plugin|${p[0]}`)
             .text(p[1])
             .removeAttr('class')
-            .end()
-            .appendTo($fragment);
+            .click(this.menuClick.bind(this))
+            .end().appendTo(pluginListPanel);
         });
-        pluginListPanel.append($fragment);
       } else {
         pluginListPanel.append(noresultTemplate);
       }

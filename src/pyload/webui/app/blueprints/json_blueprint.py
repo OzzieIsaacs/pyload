@@ -1,22 +1,56 @@
 import os
-from werkzeug.utils import secure_filename
+import sys
+from functools import wraps
 
 import flask
 from flask.json import jsonify
+from werkzeug.utils import secure_filename
+
 from pyload import PKGDIR
 from pyload.core.api import Role
 from pyload.core import Core
 from pyload.core.utils import format
 
-from ..usermanagement import login_required
-from ..helpers import get_permission, permlist, render_template, set_permission, permission_required
+from ..usermanagement import login_required as user_login_required
+from ..helpers import get_permission, permlist, render_template, set_permission, login_required
 
 bp = flask.Blueprint("json", __name__)
 
 
+def expect_json(f):
+    """Decorator: parses JSON and passes it as named arguments"""
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        if not flask.request.is_json:
+            return jsonify({
+                "success": False,
+                "error": "Request must be JSON"
+            }), 415
+
+        params = flask.request.get_json()
+        if params is None:
+            return jsonify({
+                "success": False,
+                "error": "Invalid or empty JSON"
+            }), 400
+
+        try:
+            return f(**params)
+        except TypeError:
+            if sys.exc_info()[2].tb_next is None:
+                return jsonify({
+                    "success": False,
+                    "error": "Invalid Parameters"
+                }), 400
+            else:
+                raise
+
+    return wrapper
+
+
 @bp.route("/json/status", methods=["GET", "POST"], endpoint="status")
 # @apiver_check
-@permission_required("LIST")
+@login_required("LIST")
 def status():
     api = flask.current_app.config["PYLOAD_API"]
     data = api.status_server()
@@ -25,7 +59,7 @@ def status():
 
 @bp.route("/json/links", methods=["GET", "POST"], endpoint="links")
 # @apiver_check
-@permission_required("LIST")
+@login_required("LIST")
 def links():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -55,7 +89,7 @@ def links():
 
 @bp.route("/json/packages", endpoint="packages")
 # @apiver_check
-@permission_required("LIST")
+@login_required("LIST")
 def packages():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -74,7 +108,7 @@ def packages():
 
 @bp.route("/json/package", endpoint="package")
 # @apiver_check
-@permission_required("LIST")
+@login_required("LIST")
 def package():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -90,9 +124,9 @@ def package():
         return jsonify(False), 500
 
 
-@bp.route("/json/package_order", endpoint="package_order")
+@bp.route("/json/package_order", methods=["POST"], endpoint="package_order")
 # @apiver_check
-@permission_required("ADD")
+@login_required("ADD")
 def package_order():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -105,9 +139,9 @@ def package_order():
         return jsonify(False), 500
 
 
-@bp.route("/json/abort_link", endpoint="abort_link")
+@bp.route("/json/abort_link", methods=["POST"], endpoint="abort_link")
 # @apiver_check
-@permission_required("DELETE")
+@login_required("DELETE")
 def abort_link():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -119,9 +153,9 @@ def abort_link():
         return jsonify(False), 500
 
 
-@bp.route("/json/link_order", endpoint="link_order")
+@bp.route("/json/link_order", methods=["POST"], endpoint="link_order")
 # @apiver_check
-@permission_required("ADD")
+@login_required("ADD")
 def link_order():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -136,7 +170,7 @@ def link_order():
 
 @bp.route("/json/add_package", methods=["POST"], endpoint="add_package")
 # @apiver_check
-@permission_required("ADD")
+@login_required("ADD")
 def add_package():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -153,9 +187,9 @@ def add_package():
                 package_name = file.filename
 
             safe_filename = secure_filename(file.filename)
-            file_path = os.path.join(
-                api.get_config_value("general", "storage_folder"), "tmp_" + safe_filename
-            )
+            upload_path = os.path.join(api.get_cachedir(), "upload")
+            os.makedirs(upload_path, exist_ok=True)
+            file_path = os.path.join(upload_path, safe_filename)
             file.save(file_path)
             links.insert(0, file_path)
 
@@ -171,24 +205,24 @@ def add_package():
     return jsonify(True)
 
 
-@bp.route("/json/move_package", endpoint="move_package")
+@bp.route("/json/move_package", methods=["POST"], endpoint="move_package")
 # @apiver_check
-@permission_required("MODIFY")
+@login_required("MODIFY")
 def move_package():
     api = flask.current_app.config["PYLOAD_API"]
     try:
-        id = int(flask.request.args.get('id'))
-        dest = int(flask.request.args.get('dest'))
+        id = int(flask.request.form.get('id'))
+        dest = int(flask.request.form.get('dest'))
         api.move_package(dest, id)
         return jsonify(response="success")
 
-    except Exception:
+    except Exception as e:
         return jsonify(False), 500
 
 
 @bp.route("/json/edit_package", methods=["POST"], endpoint="edit_package")
 # @apiver_check
-@permission_required("MODIFY")
+@login_required("MODIFY")
 def edit_package():
     api = flask.current_app.config["PYLOAD_API"]
     try:
@@ -209,7 +243,7 @@ def edit_package():
 
 @bp.route("/json/set_captcha", methods=["GET", "POST"], endpoint="set_captcha")
 # @apiver_check
-@permission_required("ADD")
+@login_required("ADD")
 def set_captcha():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -234,7 +268,7 @@ def set_captcha():
 
 @bp.route("/json/load_config", endpoint="load_config")
 # @apiver_check
-@permission_required("SETTINGS")
+@login_required("SETTINGS")
 def load_config():
     category = flask.request.args.get('category')
     section = flask.request.args.get('section')
@@ -260,7 +294,7 @@ def load_config():
 
 @bp.route("/json/save_config", methods=["POST"], endpoint="save_config")
 # @apiver_check
-@permission_required("SETTINGS")
+@login_required("SETTINGS")
 def save_config():
     api = flask.current_app.config["PYLOAD_API"]
     category = flask.request.args.get('category')
@@ -280,7 +314,7 @@ def save_config():
 
 @bp.route("/json/add_account", methods=["POST"], endpoint="add_account")
 # @apiver_check
-@permission_required("ACCOUNTS")
+@login_required("ACCOUNTS")
 def add_account():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -298,7 +332,7 @@ def add_account():
 
 @bp.route("/json/update_accounts", methods=["POST"], endpoint="update_accounts")
 # @apiver_check
-@permission_required("ACCOUNTS")
+@login_required("ACCOUNTS")
 def update_accounts():
     deleted = []  #: don't update deleted accounts, or they will be created again
     updated = {}
@@ -340,7 +374,7 @@ def update_accounts():
 
 
 @bp.route("/json/change_password", methods=["POST"], endpoint="change_password")
-@permission_required("ACCOUNTS")
+@login_required("ACCOUNTS")
 def change_password():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -355,7 +389,7 @@ def change_password():
     return jsonify(True)
 
 @bp.route("/json/add_user", methods=["POST"], endpoint="add_user")
-@permission_required("ADMIN")
+@login_required("ADMIN")
 def add_user():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -377,7 +411,7 @@ def add_user():
     return jsonify(True)
 
 @bp.route("/json/update_users", methods=["POST"], endpoint="update_users")
-@permission_required("ADMIN")
+@login_required("ADMIN")
 def update_users():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -419,3 +453,25 @@ def update_users():
         api.set_user_permission(name, data["permission"], data["role"])
 
     return jsonify(True)
+
+@bp.route("/json/get_apikeys", methods=["POST"], endpoint="get_apikeys")
+@login_required("ADMIN")
+@expect_json
+def get_apikeys(*, user=None):
+    api = flask.current_app.config["PYLOAD_API"]
+    user = user or flask.session["name"]
+    return jsonify(api.get_apikeys(user))
+
+@bp.route("/json/generate_apikey", methods=["POST"], endpoint="generate_apikey")
+@login_required("ADMIN")
+@expect_json
+def generate_apikey(*, user, password, name, expires):
+    api = flask.current_app.config["PYLOAD_API"]
+    return jsonify(api.generate_apikey(user, password, name, expires))
+
+@bp.route("/json/delete_apikey", methods=["POST"], endpoint="delete_apikey")
+@login_required("ADMIN")
+@expect_json
+def delete_apikey(*, user, key):
+    api = flask.current_app.config["PYLOAD_API"]
+    return jsonify(api.delete_apikey(user, key))

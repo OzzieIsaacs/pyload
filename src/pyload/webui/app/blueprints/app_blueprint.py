@@ -13,9 +13,9 @@ import flask
 from pyload import APPID, PKGDIR
 from pyload.core.utils import format
 
-from ..usermanagement import login_required
+# from ..usermanagement import login_required
 from ..cw_login import login_user, logout_user, current_user
-from ..helpers import (permission_required,
+from ..helpers import (login_required,
     csrf_exempt, get_permission, get_redirect_url, permlist,
     render_base, render_template, static_file_url)
 
@@ -45,8 +45,6 @@ def robots():
 
 # TODO: Rewrite login route using flask-login
 @bp.route("/login", methods=["GET", "POST"], endpoint="login")
-@bp.route("/login", methods=["GET", "POST"], endpoint="login")
-@csrf_exempt
 def login():
     api = flask.current_app.config["PYLOAD_API"]
 
@@ -92,7 +90,7 @@ def logout():
 @bp.route("/", endpoint="index")
 @bp.route("/home", endpoint="home")
 @bp.route("/dashboard", endpoint="dashboard")
-@permission_required("LIST")
+@login_required("LIST")
 def dashboard():
     api = flask.current_app.config["PYLOAD_API"]
     links = api.status_downloads()
@@ -107,7 +105,7 @@ def dashboard():
 
 
 @bp.route("/queue", endpoint="queue")
-@permission_required("LIST")
+@login_required("LIST")
 def queue():
     api = flask.current_app.config["PYLOAD_API"]
     queue = api.get_queue()
@@ -117,7 +115,7 @@ def queue():
 
 
 @bp.route("/collector", endpoint="collector")
-@permission_required("LIST")
+@login_required("LIST")
 def collector():
     api = flask.current_app.config["PYLOAD_API"]
     queue = api.get_collector()
@@ -127,7 +125,7 @@ def collector():
 
 
 @bp.route("/files", endpoint="files")
-@permission_required("DOWNLOAD")
+@login_required("DOWNLOAD")
 def files():
     def decode_name(filename):
         try:
@@ -183,7 +181,7 @@ def files():
 
 
 @bp.route("/files/get/<path:path>", endpoint="get_file")
-@permission_required("DOWNLOAD")
+@login_required("DOWNLOAD")
 def get_file(path):
     api = flask.current_app.config["PYLOAD_API"]
     path = unquote(path).replace("..", "")
@@ -192,7 +190,7 @@ def get_file(path):
 
 
 @bp.route("/settings", endpoint="settings")
-@permission_required("SETTINGS")
+@login_required("SETTINGS")
 def settings():
     api = flask.current_app.config["PYLOAD_API"]
     conf = api.get_config()
@@ -277,7 +275,7 @@ def settings():
 
 @bp.route("/pathchooser/", endpoint="pathchooser")
 @bp.route("/filechooser/", endpoint="filechooser")
-@permission_required("SETTINGS")
+@login_required("SETTINGS")
 def pathchooser():
     browse_for = "folder" if flask.request.endpoint == "app.pathchooser" else "file"
     path = os.path.normpath(flask.request.args.get('path', ""))
@@ -360,7 +358,7 @@ def pathchooser():
 
 @bp.route("/logs", methods=["GET", "POST"], endpoint="logs")
 @bp.route("/logs/<int:start_line>", methods=["GET", "POST"], endpoint="logs")
-@permission_required("LOGS")
+@login_required("LOGS")
 def logs(start_line=-1):
     s = flask.session
     api = flask.current_app.config["PYLOAD_API"]
@@ -461,13 +459,13 @@ def logs(start_line=-1):
 
 
 @bp.route("/filemanager", endpoint="filemanager")
-@permission_required("MODIFY")
+@login_required("MODIFY")
 def filemanager(path):
     return render_template("filemanager.html")
 
 
 @bp.route("/info", endpoint="info")
-@permission_required("STATUS")
+@login_required("STATUS")
 def info():
     api = flask.current_app.config["PYLOAD_API"]
     conf = api.get_config_dict()

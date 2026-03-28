@@ -1,4 +1,5 @@
 import json
+import time
 from functools import wraps
 from urllib.parse import urljoin, urlparse
 
@@ -8,6 +9,7 @@ import werkzeug.routing
 
 from pyload.core.api import Perms, Role, has_permission
 from .cw_login import current_user
+from pyload.core.utils.web.check import is_loopback_address
 
 from .extensions import csrf
 
@@ -191,7 +193,41 @@ def is_authenticated(session=flask.session):
     return authenticated and api.user_exists(user)
 
 
-def permission_required(perm):
+def config_check(config_key: list[str], not_found_msg: str = "Not Found"):
+    """
+    Decorator factory: Checks [config_key] config value and aborts with 404 if False.
+
+    :param config_key: The config key to check (e.g., ["ClickNLoad", "enabled", "plugin"]).
+    :param not_found_msg: Custom message for the 404 response.
+    :return: A decorator to wrap view functions.
+    """
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            api = flask.current_app.config["PYLOAD_API"]
+            if not api.get_config_value(*config_key):
+                return not_found_msg, 404
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
+def is_loopback_request(request=flask.request, check_source=True):
+    if check_source:
+        if any(
+            request.headers.get(header)
+            for header in ("X-Forwarded-For", "X-Real-IP", "Forwarded")
+        ):
+            return False
+
+    remote_addr = request.remote_addr
+    if not remote_addr:
+        return False
+
+    return is_loopback_address(remote_addr)
+
+
+def login_required(perm):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -232,6 +268,7 @@ def apikey_auth(func):
 
     Note: This decorator automatically makes the endpoint CSRF exempt to allow API access.
     """
+
     # Apply CSRF exemption at decoration time
     decorated = csrf_exempt(func)
 
@@ -243,26 +280,38 @@ def apikey_auth(func):
         # Get client IP, safely handling X-Forwarded-For
         client_ip = flask.request.headers.get("X-Forwarded-For", "").split(",")[0].strip() or flask.request.remote_addr
 
-        # Check for API authentication
-        auth = flask.request.authorization
-        if auth:
-            # Extract credentials from Basic Auth header
-            user = auth.username
-            password = auth.password
-            auth_method = "Basic auth"
+        # Check for API key in header
+        api_key = flask.request.headers.get("X-API-Key")
+        if api_key and api_key.startswith("pl_"):
+            # Look up the API key in the database
+            key_info = api.check_apikey(api_key)
+            if key_info["success"]:
+                # Get user info from the user_id in the key
+                user_id = key_info["data"]["user_id"]
+                key_name = key_info["data"]["name"]
+                user_data = api.pyload.db.get_all_user_data().get(user_id)
+                if user_data:
+                    now = int(time.time() * 1000)
+                    last_used = key_info["data"]["last_used"]
+                    user_info = {
+                        "id": user_id,
+                        "name": user_data["name"],
+                        "role": user_data["role"],
+                        "permission": user_data["permission"],
+                    }
+                    flask.g.user_info = user_info
+                    # Log if it has not been used for more than 1 hour
+                    if now >= last_used + 3_600_000:
+                        log.info(f"API authentication successful for user {user_info['name']} using the '{key_name}' API key [CLIENT: {client_ip}]")
+                    return decorated(*args, **kwargs)
 
-            # Sanitize username for logging
-            sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r") if user else "unknown"
-
-            # Verify API credentials
-            user_info = api.check_auth(user, password)
-            if user_info:
-                flask.g.user_info = user_info
-                return decorated(*args, **kwargs)
-
-            # Log failed API authentication
-            log.error(f"API authentication failed for user '{sanitized_user}' using {auth_method} [CLIENT: {client_ip}]")
-            return flask.json.jsonify({"error": "Invalid API credentials"}), 401
+            else:
+                # Log failed API key authentication
+                log_api_key = f"{api_key[:4]}********{api_key[-4:]}"
+                if len(api_key) <= 8:
+                    log_api_key = "*" * 8
+                log.error(f"API authentication failed using API key {log_api_key} [CLIENT: {client_ip}]")
+                return flask.json.jsonify({"error": key_info["error"]}), 401
 
         # No API auth - still use the decorated function but rely on session auth
         csrf.protect()

@@ -46,7 +46,7 @@ class OneFichierCom(SimpleDownloader):
     SIZE_PATTERN = r"<span .*>(?P<S>[\d.,]+) (?P<U>[\w^_]+)</span></td>"
     OFFLINE_PATTERN = r"(?:File not found !\s*<|>\s*The requested file (?:has been deleted|do(?:es)? not exist))"
     LINK_PATTERN = r'<a href="(.+?)".*>Start your download</a>'
-    TEMP_OFFLINE_PATTERN = r"Without subscription, you can only download one file at|Our services are in maintenance|Free download is temporarily limited due to high demand."
+    TEMP_OFFLINE_PATTERN = r"Without subscription, you can only download one file at|Our services are in maintenance|temporarily limited due to high demand"
     PREMIUM_ONLY_PATTERN = r"is not possible to unregistered users|need a subscription"
 
     WAIT_PATTERN = r">You must wait \d+ minutes"
@@ -86,3 +86,15 @@ class OneFichierCom(SimpleDownloader):
 
     def handle_premium(self, pyfile):
         self.download(pyfile.url, post={"did": 0, "dl_no_ssl": "on"})
+
+    def check_errors(self, data=None):
+        data = data or self.data
+        super().check_errors(data=data)
+
+        if re.search(self.TEMP_OFFLINE_PATTERN, data) is not None:
+            self.retry(
+                attempts=5,
+                wait=5 * 60,
+                msg=self._("download is temporarily limited due to high demand"),
+                msgfail=self._("download is temporarily limited due to high demand")
+            )

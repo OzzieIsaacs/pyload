@@ -130,8 +130,8 @@ def package():
 def package_order():
     api = flask.current_app.config["PYLOAD_API"]
     try:
-        pid = int(flask.request.args.get('pid'))
-        pos = int(flask.request.args.get('pos'))
+        pid = int(flask.request.form.get('pid'))
+        pos = int(flask.request.form.get('pos'))
         api.order_package(pid, pos)
         return jsonify(response="success")
 
@@ -145,7 +145,7 @@ def package_order():
 def abort_link():
     api = flask.current_app.config["PYLOAD_API"]
     try:
-        id = int(flask.request.args.get('id'))
+        id = int(flask.request.form.get('id'))
         api.stop_downloads([id])
         return jsonify(response="success")
 
@@ -159,8 +159,8 @@ def abort_link():
 def link_order():
     api = flask.current_app.config["PYLOAD_API"]
     try:
-        fid = int(flask.request.args.get('fid'))
-        pos = int(flask.request.args.get('pos'))
+        fid = int(flask.request.form.get('fid'))
+        pos = int(flask.request.form.get('pos'))
         api.order_file(fid, pos)
         return jsonify(response="success")
 
@@ -297,7 +297,7 @@ def load_config():
 @login_required("SETTINGS")
 def save_config():
     api = flask.current_app.config["PYLOAD_API"]
-    category = flask.request.args.get('category')
+    category = flask.request.form.get('category')
     if category not in ("core", "plugin"):
         return jsonify(False), 500
 

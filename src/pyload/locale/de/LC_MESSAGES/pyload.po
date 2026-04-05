@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-04-05 19:29+0200\n"
-"PO-Revision-Date: 2026-04-05 20:49+0200\n"
+"PO-Revision-Date: 2026-04-05 21:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -21,7 +21,7 @@ msgstr "Von Konsole beendet"
 #: src/pyload/core/__init__.py:206
 #, python-brace-format
 msgid "Successfully reset default login credentials `{}|{}`"
-msgstr ""
+msgstr "Die Standard-Anmeldedaten wurden erfolgreich zurückgesetzt. `{}|{}`"
 
 #: src/pyload/core/__init__.py:247
 msgid "Unable to change gid"
@@ -68,7 +68,7 @@ msgstr "pyLoad startet neu..."
 
 #: src/pyload/core/__init__.py:491
 msgid "Received Quit signal"
-msgstr ""
+msgstr "Quit-Signal empfangen"
 
 #: src/pyload/core/__init__.py:496
 msgid "Received Terminate signal"
@@ -81,7 +81,7 @@ msgstr "Pyload wird beendet..."
 #: src/pyload/core/api/__init__.py:269 src/pyload/core/api/__init__.py:283
 #, python-brace-format
 msgid "Writing config value {}/{} requires Admin role"
-msgstr ""
+msgstr "Zum Schreiben des Konfigurationswerts {}/{} ist die Administratorrolle erforderlich"
 
 #: src/pyload/core/api/__init__.py:575
 #, python-brace-format
@@ -91,7 +91,7 @@ msgstr "Paket {name} mit {count:d} Links hinzugefügt"
 #: src/pyload/core/api/__init__.py:971
 #, python-brace-format
 msgid "Added {count:d} links to package #{package:d} "
-msgstr "{count:d} Links zum Paket #{package:d} hinzugefügt"
+msgstr "{count:d} Links zum Paket #{package:d} hinzugefügt "
 
 #: src/pyload/core/managers/account_manager.py:89
 msgid "Account settings deleted, due to new config format."
@@ -121,7 +121,7 @@ msgstr "Aktivierung fehlgeschlagen {}"
 #: src/pyload/core/managers/addon_manager.py:158
 #, python-brace-format
 msgid "Activated addons: {}"
-msgstr ""
+msgstr "Aktivierte Add-ons: {}"
 
 #: src/pyload/core/managers/addon_manager.py:161
 #, python-brace-format
@@ -131,7 +131,7 @@ msgstr "Add-ons deaktivieren: {}"
 #: src/pyload/core/managers/addon_manager.py:342
 #, python-brace-format
 msgid "Error calling event handler {}: {}, {}, {}"
-msgstr ""
+msgstr "Fehler beim Aufruf des Ereignishandlers {}: {}, {}, {}"
 
 #: src/pyload/core/managers/captcha_manager.py:53
 msgid "Unable to create captcha task"
@@ -272,7 +272,7 @@ msgstr "Remoteinterface Fehler: {}"
 
 #: src/pyload/core/threads/database_thread.py:138
 msgid "Database was deleted due to incompatible version."
-msgstr ""
+msgstr "Die Datenbank wurde aufgrund einer inkompatiblen Version gelöscht."
 
 #: src/pyload/core/threads/database_thread.py:151
 #, python-brace-format
@@ -289,7 +289,7 @@ msgstr "Datenbank wurde von v3 nach v4 konvertiert."
 
 #: src/pyload/core/threads/database_thread.py:175
 msgid "Database was converted from v4 to v5."
-msgstr ""
+msgstr "Die Datenbank wurde von Version 4 auf Version 5 konvertiert."
 
 #: src/pyload/core/threads/decrypter_thread.py:35
 #, python-brace-format
@@ -396,7 +396,7 @@ msgstr "Account Information konnte nicht erhalten werden"
 
 #: src/pyload/plugins/accounts/DebridlinkFr.py:58
 msgid "You have to use GetDebridlinkToken.py to authorize pyLoad: https://github.com/pyload/pyload/files/9353788/GetDebridlinkToken.zip"
-msgstr ""
+msgstr "Sie müssen GetDebridlinkToken.py verwenden, um pyLoad zu autorisieren: https://github.com/pyload/pyload/files/9353788/GetDebridlinkToken.zip"
 
 #: src/pyload/plugins/accounts/ExtmatrixCom.py:35
 #: src/pyload/plugins/accounts/OboomIo.py:38
@@ -441,7 +441,7 @@ msgstr "API-Fehler"
 
 #: src/pyload/plugins/accounts/FikperCom.py:63
 msgid "username for fikper.com should be your fikper.com email"
-msgstr ""
+msgstr "Ihr Benutzername für fikper.com sollte Ihre fikper.com-E-Mail-Adresse sein"
 
 #: src/pyload/plugins/accounts/FileboomMe.py:69
 #: src/pyload/plugins/accounts/FileboomMe.py:70
@@ -537,11 +537,11 @@ msgstr "Ungültiger Header {}"
 
 #: src/pyload/plugins/accounts/TorboxApp.py:88
 msgid "Username for TorboxApp should be your torbox.app email"
-msgstr ""
+msgstr "Der Benutzername für TorboxApp sollte Ihre E-Mail-Adresse von torbox.app sein"
 
 #: src/pyload/plugins/accounts/TorboxApp.py:92
 msgid "Password for TorboxApp should be your torbox.app API token"
-msgstr "Das Passwort für TorboxApp sollte Ihr Torbox.app-API-Token sein."
+msgstr "Das Passwort für TorboxApp sollte Ihr Torbox.app-API-Token sein"
 
 #: src/pyload/plugins/accounts/TurbobitNet.py:48
 #: src/pyload/plugins/accounts/UlozTo.py:58
@@ -590,7 +590,7 @@ msgstr "Ungültige Url"
 #: src/pyload/plugins/addons/Captcha9Kw.py:221
 #, python-brace-format
 msgid "Captcha result for ticket {}: {}"
-msgstr ""
+msgstr "Captcha-Ergebnis für Ticket {}: {}"
 
 #: src/pyload/plugins/addons/AntiCaptcha.py:185
 msgid "Your captcha anti-captcha.com account has not enough credits"
@@ -623,7 +623,7 @@ msgstr "Überprüfe auf Viren"
 
 #: src/pyload/plugins/addons/AntiVirus.py:94
 msgid "Delete/Quarantine task skipped in folder scan mode"
-msgstr ""
+msgstr "Lösch-/Quarantäne-Aufgabe im Ordner-Scanmodus übersprungen"
 
 #: src/pyload/plugins/addons/AntiVirus.py:98
 msgid "Infected file"
@@ -646,11 +646,11 @@ msgstr "Datei konnte nicht in den Papierkorb verschoben werden: {}, wird stattde
 
 #: src/pyload/plugins/addons/AppriseNotify.py:40
 msgid "Cannot send notification: apprise is not installed."
-msgstr ""
+msgstr "Benachrichtigung kann nicht gesendet werden: Apprise ist nicht installiert."
 
 #: src/pyload/plugins/addons/AppriseNotify.py:41
 msgid "Install apprise by issuing 'pip install apprise' command."
-msgstr ""
+msgstr "Installieren Sie apprise mit dem Befehl 'pip install apprise'."
 
 #: src/pyload/plugins/addons/BypassCaptcha.py:92
 msgid "Could not send response"
@@ -674,7 +674,7 @@ msgstr "Fehlerhafte Anfrage: {}"
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:246
 msgid "Your captcha 9kw.eu account has not enough credits"
-msgstr "Ihr 9kw.eu-Konto verfügt nicht über genügend Guthaben."
+msgstr "Ihr 9kw.eu-Konto verfügt nicht über genügend Guthaben"
 
 #: src/pyload/plugins/addons/Captcha9Kw.py:261
 msgid "Too many captchas in queue"
@@ -698,7 +698,7 @@ msgstr "Überprüfe Checksumme"
 #: src/pyload/plugins/addons/Checksum.py:329
 #, python-brace-format
 msgid "File integrity of \"{}\" verified by {} checksum ({})"
-msgstr ""
+msgstr "Dateiintegrität von \"{}\" durch Prüfsumme {} verifiziert ({})"
 
 #: src/pyload/plugins/addons/Checksum.py:212
 #: src/pyload/plugins/addons/Checksum.py:334
@@ -771,12 +771,12 @@ msgstr "Proxy lauscht auf {}:{}"
 #: src/pyload/plugins/addons/ClickNLoad.py:196
 #, python-brace-format
 msgid "Connection from invalid/unsupported host {} ignored"
-msgstr ""
+msgstr "Verbindung von ungültigem/nicht unterstütztem Host {} wird ignoriert"
 
 #: src/pyload/plugins/addons/ClickNLoad.py:223
 #, python-brace-format
 msgid "Connection from unauthorized host {} ignored"
-msgstr ""
+msgstr "Verbindung von nicht autorisiertem Host {} ignoriert"
 
 #: src/pyload/plugins/addons/ClickNLoad.py:241
 #, python-brace-format
@@ -801,7 +801,7 @@ msgstr "Die DDoS-Schutzseite von Cloudflare wurde erkannt"
 #: src/pyload/plugins/addons/CloudFlareDdos.py:147
 #: src/pyload/plugins/addons/CloudFlareDdos.py:166
 msgid "Unable to parse CloudFlare's DDoS protection page"
-msgstr "Die DDoS-Schutzseite von Cloudflare konnte nicht analysiert werden."
+msgstr "Die DDoS-Schutzseite von Cloudflare konnte nicht analysiert werden"
 
 #: src/pyload/plugins/addons/CloudFlareDdos.py:190
 msgid "Detected CloudFlare's security check page"
@@ -862,7 +862,7 @@ msgstr "Downloadserver wird gestoppt. (Laufende Downloads werden abgebrochen.)"
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:100
 msgid "Stopping download server. (Running downloads will not be aborted.)"
-msgstr ""
+msgstr "Downloadserver wird gestoppt. (Laufende Downloads werden nicht abgebrochen.)"
 
 #: src/pyload/plugins/addons/DownloadScheduler.py:112
 #, python-brace-format
@@ -1058,7 +1058,7 @@ msgstr "Account Guthaben: ${}"
 
 #: src/pyload/plugins/addons/ImageTyperz.py:140
 msgid "Bad captcha solution received, requested refund"
-msgstr ""
+msgstr "Fehlerhafte Captcha-Lösung erhalten, Rückerstattung beantragt"
 
 #: src/pyload/plugins/addons/ImageTyperz.py:143
 msgid "Bad captcha solution received, refund request failed"
@@ -1072,7 +1072,7 @@ msgstr "Entferne Links von Plugin: {}"
 #: src/pyload/plugins/addons/LinkFilter.py:58
 #, python-brace-format
 msgid "Whitelist filter removed {} {} not containing ({})"
-msgstr ""
+msgstr "Whitelist-Filter entfernt {} {} enthält nicht ({})"
 
 #: src/pyload/plugins/addons/LogMarker.py:33
 msgid "------------------- DAY MARK -------------------"
@@ -1119,7 +1119,7 @@ msgstr "Torrents/Magnet-Links sind mit keinem Plugin verknüpft"
 #: src/pyload/plugins/addons/TORRENT.py:50
 #, python-brace-format
 msgid "Using {} to handle torrents / magnets"
-msgstr ""
+msgstr "Verwendung von {} zur Verarbeitung von Torrents / Magnet-Links"
 
 #: src/pyload/plugins/addons/UnSkipOnFail.py:19
 #, python-brace-format
@@ -1129,7 +1129,7 @@ msgstr "Suche nach übersprungenen Duplikaten von: {} (pid:{})"
 #: src/pyload/plugins/addons/UnSkipOnFail.py:25
 #, python-brace-format
 msgid "Queue found duplicate: {} (pid:{})"
-msgstr ""
+msgstr "Duplikat in der Warteschlange gefunden: {} (pid:{})"
 
 #: src/pyload/plugins/addons/UnSkipOnFail.py:45
 msgid "No duplicates found"
@@ -1145,7 +1145,7 @@ msgstr "pyLoad Neustart geplant"
 
 #: src/pyload/plugins/addons/UpdateManager.py:166
 msgid "Downloads are active, pyLoad restart postponed once the download is done"
-msgstr "Die Downloads sind aktiv, der Neustart von pyLoad wird nach Abschluss des Downloads verschoben."
+msgstr "Die Downloads sind aktiv, der Neustart von pyLoad wird nach Abschluss des Downloads verschoben"
 
 #: src/pyload/plugins/addons/UpdateManager.py:182
 msgid "pyLoad is up to date!"
@@ -1185,7 +1185,7 @@ msgstr "Fehler beim updaten des plugins: {} {}"
 
 #: src/pyload/plugins/addons/UpdateManager.py:346
 msgid "Bad version number on the server"
-msgstr ""
+msgstr "Falsche Serverversionsnummer"
 
 #: src/pyload/plugins/addons/UpdateManager.py:371
 msgid "URL not found"
@@ -1360,7 +1360,7 @@ msgstr "Benutzer existiert bereits"
 #: src/pyload/plugins/base/account.py:369
 #, python-brace-format
 msgid "Updating account info for user `{}`..."
-msgstr ""
+msgstr "Aktualisiere die Kontoinformationen für Benutzer `{}`..."
 
 #: src/pyload/plugins/base/account.py:395
 #, python-brace-format
@@ -1375,12 +1375,12 @@ msgstr "Ungültiges Zeitformat `{}` für Konto `{}`, verwenden Sie 1:22-3:44"
 #: src/pyload/plugins/base/account.py:439
 #, python-brace-format
 msgid "Not using account `{}` because the account has no traffic left"
-msgstr ""
+msgstr "Konto `{}` wird nicht verwendet, da auf diesem Konto kein Traffic mehr vorhanden ist"
 
 #: src/pyload/plugins/base/account.py:448
 #, python-brace-format
 msgid "Not using account `{}` because the account has expired"
-msgstr "Das Konto `{}` wird nicht verwendet, da es abgelaufen ist."
+msgstr "Das Konto `{}` wird nicht verwendet, da es abgelaufen ist"
 
 #: src/pyload/plugins/base/account.py:481
 #, python-brace-format
@@ -1461,7 +1461,7 @@ msgstr "FEHLER: Ungültige Link-ID {}"
 
 #: src/pyload/plugins/base/chat_bot.py:146
 msgid "ERROR: Link doesn't exists."
-msgstr ""
+msgstr "FEHLER: Der Link existiert nicht."
 
 #: src/pyload/plugins/base/chat_bot.py:149
 #, python-brace-format
@@ -1470,7 +1470,7 @@ msgstr "LINK #{}: {} ({}) [{}][{}]"
 
 #: src/pyload/plugins/base/chat_bot.py:161
 msgid "ERROR: Use packinfo like this: packinfo <name|id>"
-msgstr ""
+msgstr "FEHLER: Verwenden Sie packinfo folgendermaßen: packinfo <name|id>"
 
 #: src/pyload/plugins/base/chat_bot.py:168
 msgid "ERROR: Package doesn't exists."
@@ -1488,15 +1488,15 @@ msgstr "INFO: Downloads werden gestartet."
 #: src/pyload/plugins/base/chat_bot.py:211
 #: src/pyload/plugins/base/chat_bot.py:217
 msgid "INFO: No new downloads will be started."
-msgstr ""
+msgstr "INFO: No new downloads will be started."
 
 #: src/pyload/plugins/base/chat_bot.py:222
 msgid "ERROR: Add links like this: \"add <name|id> link(s)\". "
-msgstr ""
+msgstr "FEHLER: Fügen Sie Links wie folgt hinzu: \"add <name|id> link(s)\". "
 
 #: src/pyload/plugins/base/chat_bot.py:223
 msgid "This will add the link <link> to to the package name <name> / the package with id <id>!"
-msgstr ""
+msgstr "Dadurch wird der Link <link> zum Paketnamen <name> / dem Paket mit der ID <id> hinzugefügt!"
 
 #: src/pyload/plugins/base/chat_bot.py:234
 #, python-brace-format
@@ -1506,7 +1506,7 @@ msgstr "INFO: Neues Paket {} [#{}] mit {} Links erstellt."
 #: src/pyload/plugins/base/chat_bot.py:241
 #, python-brace-format
 msgid "INFO: Added {} links to Package {} [#{}]"
-msgstr ""
+msgstr "INFO: {} Links zum Paket {} hinzugefügt [#{}]"
 
 #: src/pyload/plugins/base/chat_bot.py:249
 msgid "ERROR: Use del command like this: del -p|-l <id> [...]"
@@ -1524,16 +1524,16 @@ msgstr "-l bedeutet, dass die IDs von Links stammen"
 #: src/pyload/plugins/base/chat_bot.py:256
 #, python-brace-format
 msgid "INFO: Deleted {} packages!"
-msgstr ""
+msgstr "INFO: {} Pakete gelöscht!"
 
 #: src/pyload/plugins/base/chat_bot.py:260
 #, python-brace-format
 msgid "INFO: Deleted {} links!"
-msgstr ""
+msgstr "INFO: {} Links gelöscht!"
 
 #: src/pyload/plugins/base/chat_bot.py:264
 msgid "ERROR: Use del command like this: del <-p|-l> <id> [...]"
-msgstr ""
+msgstr "FEHLER: Verwenden Sie den Befehl del wie folgt: del <-p|-l> <id> [...]"
 
 #: src/pyload/plugins/base/chat_bot.py:265
 msgid "-p indicates that the ids are from packages,"
@@ -1541,7 +1541,7 @@ msgstr "-p zeigt an, dass die IDs aus Paketen stammen,"
 
 #: src/pyload/plugins/base/chat_bot.py:276
 msgid "Push package to queue like this: push <package id>"
-msgstr ""
+msgstr "Das Paket wird folgendermaßen in die Warteschlange eingereiht: push <package id>"
 
 #: src/pyload/plugins/base/chat_bot.py:280
 #: src/pyload/plugins/base/chat_bot.py:302
@@ -1562,12 +1562,12 @@ msgstr "INFO: Paket #{} wurde in die Warteschlange gestellt."
 
 #: src/pyload/plugins/base/chat_bot.py:298
 msgid "Pull package from queue like this: pull <package id>"
-msgstr ""
+msgstr "Paket aus der Warteschlange abrufen: pull <package id>"
 
 #: src/pyload/plugins/base/chat_bot.py:308
 #, python-brace-format
 msgid "INFO: Pulled package #{} from queue to collector."
-msgstr ""
+msgstr "INFO: Paket #{} wurde aus der Warteschlange zum Collector gezogen."
 
 #: src/pyload/plugins/base/chat_bot.py:315
 msgid "ERROR: Captcha ID missing."
@@ -1576,7 +1576,7 @@ msgstr "FEHLER: Captcha-ID fehlt."
 #: src/pyload/plugins/base/chat_bot.py:319
 #, python-brace-format
 msgid "ERROR: Captcha Task with ID {} does not exists."
-msgstr ""
+msgstr "FEHLER: Captcha-Aufgabe mit der ID {} ​​existiert nicht."
 
 #: src/pyload/plugins/base/chat_bot.py:322
 #, python-brace-format
@@ -1586,7 +1586,7 @@ msgstr "INFO: Ergebnis {} gespeichert."
 #: src/pyload/plugins/base/chat_bot.py:326
 #, python-brace-format
 msgid "INFO: Free space is {}."
-msgstr ""
+msgstr "INFO: Freier Speicherplatz: {}"
 
 #: src/pyload/plugins/base/chat_bot.py:330
 msgid "INFO: Done."
@@ -1594,7 +1594,7 @@ msgstr "INFO: Fertig."
 
 #: src/pyload/plugins/base/chat_bot.py:334
 msgid "INFO: Restarting all failed downloads."
-msgstr ""
+msgstr "INFO: Alle fehlgeschlagenen Downloads werden neu gestartet."
 
 #: src/pyload/plugins/base/chat_bot.py:343
 msgid "Use restartfile command like this: pull <package id>"
@@ -1631,7 +1631,7 @@ msgstr "INFO: Paket {} (#{}) neu starten."
 #: src/pyload/plugins/base/chat_bot.py:368
 #, python-brace-format
 msgid "INFO: Deleted package ids: {}."
-msgstr ""
+msgstr "INFO: Gelöschte Paket-IDs: {}."
 
 #: src/pyload/plugins/base/container.py:42
 #: src/pyload/plugins/base/decrypter.py:44
@@ -1640,11 +1640,11 @@ msgstr "Kein Link gefunden"
 
 #: src/pyload/plugins/base/dead_decrypter.py:23
 msgid "Decrypter is no longer available"
-msgstr ""
+msgstr "Der Entschlüsseler ist nicht mehr verfügbar"
 
 #: src/pyload/plugins/base/dead_downloader.py:23
 msgid "Downloader is no longer available"
-msgstr "Der Downloader ist nicht mehr verfügbar."
+msgstr "Der Downloader ist nicht mehr verfügbar"
 
 #: src/pyload/plugins/base/decrypter.py:88
 #, python-brace-format
@@ -1711,7 +1711,7 @@ msgstr "Datei ist OK"
 #: src/pyload/plugins/downloaders/LinksnappyCom.py:76
 #, python-brace-format
 msgid "Filesize: {}"
-msgstr ""
+msgstr "Dateigröße: {}"
 
 #: src/pyload/plugins/base/downloader.py:424
 #: src/pyload/plugins/downloaders/LinksnappyCom.py:77
@@ -1797,12 +1797,12 @@ msgstr "Captcha erneut versuchen"
 
 #: src/pyload/plugins/base/multi_account.py:93
 msgid "Multi-downloader feature will be deactivated due missing plugin reference"
-msgstr "Die Funktion für mehrere Downloads wird aufgrund eines fehlenden Plugin-Verweises deaktiviert."
+msgstr "Die Funktion für mehrere Downloads wird aufgrund eines fehlenden Plugin-Verweises deaktiviert"
 
 #: src/pyload/plugins/base/multi_account.py:145
 #, python-brace-format
 msgid "Error loading downloader list for user `{}`"
-msgstr ""
+msgstr "Fehler beim Laden der Downloaderliste für Benutzer `{}`"
 
 #: src/pyload/plugins/base/multi_account.py:212
 #, python-brace-format
@@ -1827,7 +1827,7 @@ msgstr "Keine Hoster Liste erhalten"
 
 #: src/pyload/plugins/base/multi_account.py:328
 msgid "Could not reload hoster list - invalid account, retry in 5 minutes"
-msgstr ""
+msgstr "Hosterliste konnte nicht neu geladen werden – ungültiges Konto, erneuter Versuch in 5 Minuten"
 
 #: src/pyload/plugins/base/multi_account.py:335
 msgid "Could not load hoster list - invalid account, retry in 5 minutes"
@@ -1843,19 +1843,19 @@ msgstr "Hosterliste konnte nicht geladen werden – ungültiges Konto, wird deak
 
 #: src/pyload/plugins/base/multi_account.py:367
 msgid "Could not reload hoster list - login failed, retry in 5 minutes"
-msgstr ""
+msgstr "Hosterliste konnte nicht neu geladen werden – Anmeldung fehlgeschlagen, erneuter Versuch in 5 Minuten"
 
 #: src/pyload/plugins/base/multi_account.py:374
 msgid "Could not load hoster list - login failed, retry in 5 minutes"
-msgstr ""
+msgstr "Hosterliste konnte nicht geladen werden – Anmeldung fehlgeschlagen, erneuter Versuch in 5 Minuten"
 
 #: src/pyload/plugins/base/multi_account.py:384
 msgid "Could not reload hoster list - login failed, deactivating"
-msgstr ""
+msgstr "Hosterliste konnte nicht neu geladen werden – Anmeldung fehlgeschlagen, Deaktivierung"
 
 #: src/pyload/plugins/base/multi_account.py:391
 msgid "Could not load hoster list - login failed, deactivating"
-msgstr ""
+msgstr "Hosterliste konnte nicht geladen werden – Anmeldung fehlgeschlagen, Deaktivierung"
 
 #: src/pyload/plugins/base/multi_account.py:407
 #, python-brace-format
@@ -1869,15 +1869,15 @@ msgstr "Hosterliste für Benutzer `{}` konnte nicht geladen werden, Deaktivierun
 
 #: src/pyload/plugins/base/multi_account.py:434
 msgid "Reverting back to default hosters"
-msgstr ""
+msgstr "Rückkehr zu den Standardhostern"
 
 #: src/pyload/plugins/base/multi_downloader.py:92
 msgid "Revert to original downloader plugin"
-msgstr ""
+msgstr "Zum ursprünglichen Downloader-Plugin zurückkehren"
 
 #: src/pyload/plugins/base/multi_downloader.py:105
 msgid "MultiDownloader download failed"
-msgstr ""
+msgstr "MultiDownloader-Download fehlgeschlagen"
 
 #: src/pyload/plugins/base/notifier.py:54
 msgid "pyLoad updated"
@@ -1994,11 +1994,11 @@ msgstr "Premium-Link entschlüsselt gefunden"
 
 #: src/pyload/plugins/base/simple_decrypter.py:248
 msgid "Decrypting as premium link..."
-msgstr ""
+msgstr "Entschlüsselung als Premium-Link..."
 
 #: src/pyload/plugins/base/simple_decrypter.py:252
 msgid "Decrypting as free link..."
-msgstr ""
+msgstr "Entschlüsselung als kostenloser Link..."
 
 #: src/pyload/plugins/base/simple_decrypter.py:278
 #: src/pyload/plugins/base/simple_downloader.py:328
@@ -2015,24 +2015,24 @@ msgstr "Keine Captchas verfügbar"
 #: src/pyload/plugins/base/simple_decrypter.py:286
 #: src/pyload/plugins/base/simple_downloader.py:336
 msgid "No check on binary data"
-msgstr ""
+msgstr "Keine Prüfung von Binärdaten"
 
 #: src/pyload/plugins/base/simple_decrypter.py:290
 #: src/pyload/plugins/base/simple_decrypter.py:330
 #: src/pyload/plugins/base/simple_downloader.py:340
 #: src/pyload/plugins/base/simple_downloader.py:405
 msgid "Connection from your current IP address is not allowed"
-msgstr ""
+msgstr "Eine Verbindung von Ihrer aktuellen IP-Adresse ist nicht zulässig"
 
 #: src/pyload/plugins/base/simple_decrypter.py:294
 #: src/pyload/plugins/base/simple_decrypter.py:356
 msgid "Link can be decrypted by premium users only"
-msgstr ""
+msgstr "Der Link kann nur von Premium-Nutzern entschlüsselt werden"
 
 #: src/pyload/plugins/base/simple_decrypter.py:297
 #: src/pyload/plugins/base/simple_decrypter.py:343
 msgid "Link list too large for free decrypt"
-msgstr ""
+msgstr "Die Linkliste ist zu groß für eine kostenlose Entschlüsselung"
 
 #: src/pyload/plugins/base/simple_decrypter.py:326
 #: src/pyload/plugins/base/simple_downloader.py:369
@@ -2060,7 +2060,7 @@ msgstr "Ich suche einen direkten Download-Link..."
 
 #: src/pyload/plugins/base/simple_downloader.py:260
 msgid "Direct download link detected"
-msgstr ""
+msgstr "Direkter Download-Link erkannt"
 
 #: src/pyload/plugins/base/simple_downloader.py:262
 msgid "Direct download link not found"
@@ -2068,7 +2068,7 @@ msgstr "Direkter Downloadlink nicht gefunden"
 
 #: src/pyload/plugins/base/simple_downloader.py:276
 msgid "Processing as premium download..."
-msgstr ""
+msgstr "Verarbeitung als Premium-Download..."
 
 #: src/pyload/plugins/base/simple_downloader.py:280
 msgid "Processing as free download..."
@@ -2083,7 +2083,7 @@ msgstr "Datei wird heruntergeladen..."
 
 #: src/pyload/plugins/base/simple_downloader.py:292
 msgid "Checking file (with built-in rules)..."
-msgstr ""
+msgstr "Datei wird geprüft (mit integrierten Regeln)..."
 
 #: src/pyload/plugins/base/simple_downloader.py:305
 #: src/pyload/plugins/downloaders/Http.py:109
@@ -2104,7 +2104,7 @@ msgstr "Datei wird geprüft (mit benutzerdefinierten Regeln)..."
 #: src/pyload/plugins/downloaders/Keep2ShareCc.py:138
 #: src/pyload/plugins/downloaders/UploadgigCom.py:67
 msgid "File can be downloaded by premium users only"
-msgstr ""
+msgstr "Die Datei kann nur von Premium-Nutzern heruntergeladen werden"
 
 #: src/pyload/plugins/base/simple_downloader.py:347
 #: src/pyload/plugins/base/simple_downloader.py:418
@@ -2122,7 +2122,7 @@ msgstr "Freedownloadlink nicht gefunden"
 
 #: src/pyload/plugins/base/simple_downloader.py:486
 msgid "Premium download not implemented"
-msgstr ""
+msgstr "Premium-Download nicht implementiert"
 
 #: src/pyload/plugins/base/simple_downloader.py:491
 msgid "Premium download link not found"
@@ -2132,7 +2132,7 @@ msgstr "Premiumdownloadlink nicht gefunden"
 #: src/pyload/plugins/base/xfs_decrypter.py:51
 #: src/pyload/plugins/base/xfs_downloader.py:86
 msgid "Missing PLUGIN DOMAIN"
-msgstr ""
+msgstr "Fehlende Plugin-Domäne"
 
 #: src/pyload/plugins/base/xfs_downloader.py:127
 msgid "Too many OPs"
@@ -2141,7 +2141,7 @@ msgstr "Zu viele Operationen"
 #: src/pyload/plugins/base/xfs_downloader.py:146
 #: src/pyload/plugins/downloaders/RapidcloudCc.py:90
 msgid "TEXTAREA F1 not found"
-msgstr ""
+msgstr "TEXTAREA F1 nicht gefunden"
 
 #: src/pyload/plugins/base/xfs_downloader.py:157
 #: src/pyload/plugins/downloaders/CloudzillaTo.py:36
@@ -2158,24 +2158,24 @@ msgstr "Container ist korrupt"
 #: src/pyload/plugins/containers/NZB.py:43
 #: src/pyload/plugins/containers/NZB.py:46
 msgid "No plugin is associated with nzb"
-msgstr ""
+msgstr "Es ist kein Plugin mit nzb verknüpft"
 
 #: src/pyload/plugins/containers/NZB.py:44
 msgid "Please go to plugin settings -> NZB and select your preferred plugin"
-msgstr ""
+msgstr "Bitte gehen Sie zu den Plugin-Einstellungen -> NZB und wählen Sie Ihr bevorzugtes Plugin aus"
 
 #: src/pyload/plugins/containers/NZB.py:77
 msgid "Error parsing NZB file"
-msgstr ""
+msgstr "Fehler beim Parsen der NZB-Datei"
 
 #: src/pyload/plugins/containers/TORRENT.py:46
 #: src/pyload/plugins/containers/TORRENT.py:49
 msgid "No plugin is associated with torrents / magnets"
-msgstr ""
+msgstr "Es ist kein Plugin mit Torrents/Magnet-Links verknüpft"
 
 #: src/pyload/plugins/containers/TORRENT.py:47
 msgid "Please go to plugin settings -> TORRENT and select your preferred plugin"
-msgstr ""
+msgstr "Bitte gehen Sie zu den Plugin-Einstellungen -> TORRENT und wählen Sie Ihr bevorzugtes Plugin aus"
 
 #: src/pyload/plugins/containers/TXT.py:75
 msgid "Failed to flush list"
@@ -2188,7 +2188,7 @@ msgstr "Fehler beim aktualisieren der Liste"
 #: src/pyload/plugins/downloaders/LinksnappyComTorrent.py:62
 #: src/pyload/plugins/downloaders/ZbigzCom.py:72
 msgid "Torrent file does not exist"
-msgstr ""
+msgstr "Die Torrent-Datei existiert nicht."
 
 #: src/pyload/plugins/decrypters/AlldebridComTorrent.py:92
 #: src/pyload/plugins/decrypters/DebridlinkFrTorrent.py:135
@@ -2203,7 +2203,7 @@ msgstr "Illegale Url"
 #: src/pyload/plugins/decrypters/AlldebridComTorrent.py:195
 #: src/pyload/plugins/decrypters/AlldebridComTorrent.py:199
 msgid "This plugin requires an active Alldebrid.com account"
-msgstr ""
+msgstr "Dieses Plugin erfordert ein aktives Alldebrid.com-Konto"
 
 #: src/pyload/plugins/decrypters/ChipDe.py:34
 msgid "Failed to find the URL"
@@ -2213,15 +2213,15 @@ msgstr "Fehler beim Finden der Url"
 #: src/pyload/plugins/decrypters/CloudMailRuFolder.py:48
 #, python-brace-format
 msgid "API failure, status code {}"
-msgstr ""
+msgstr "API-Fehler, Statuscode {}"
 
 #: src/pyload/plugins/decrypters/CriptTo.py:112
 msgid "Could not detect Solvemedia captcha key"
-msgstr ""
+msgstr "Solvemedia-Captcha-Schlüssel konnte nicht erkannt werden"
 
 #: src/pyload/plugins/decrypters/CriptTo.py:128
 msgid "Could not detect ReCaptcha captcha key"
-msgstr "Der ReCaptcha-Captcha-Schlüssel konnte nicht erkannt werden."
+msgstr "Der ReCaptcha-Captcha-Schlüssel konnte nicht erkannt werden"
 
 #: src/pyload/plugins/decrypters/CriptTo.py:132
 msgid "Captcha Not found"
@@ -2251,13 +2251,13 @@ msgstr "Falsches Passwort"
 
 #: src/pyload/plugins/decrypters/CriptTo.py:215
 msgid "Could not parse weblink (bot)"
-msgstr ""
+msgstr "Weblink konnte nicht analysiert werden (Bot)"
 
 #: src/pyload/plugins/decrypters/CzshareComFolder.py:36
 #: src/pyload/plugins/decrypters/QuickshareCzFolder.py:36
 #: src/pyload/plugins/decrypters/UlozToFolder.py:40
 msgid "FOLDER_PATTERN not found"
-msgstr ""
+msgstr "FOLDER_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/decrypters/DailymotionComFolder.py:98
 #: src/pyload/plugins/decrypters/YoutubeComFolder.py:147
@@ -2280,7 +2280,7 @@ msgstr "Ordner ist passwortgeschützt"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:129
 msgid "Please enter the password in package section and try again"
-msgstr ""
+msgstr "Bitte geben Sie das Passwort im Paketbereich ein und versuchen Sie es erneut"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:161
 msgid "Unknown captcha found, retrying"
@@ -2292,7 +2292,7 @@ msgstr "Kein Captcha gefunden"
 
 #: src/pyload/plugins/decrypters/FilecryptCc.py:302
 msgid "Weblink could not be found"
-msgstr ""
+msgstr "Der Weblink konnte nicht gefunden werden"
 
 #: src/pyload/plugins/decrypters/FreetexthostCom.py:34
 msgid "Unable to extract links"
@@ -2301,7 +2301,7 @@ msgstr "Linke konnten nicht extrahiert werden"
 #: src/pyload/plugins/decrypters/GofileIoFolder.py:51
 #, python-brace-format
 msgid "accounts API failed | {}"
-msgstr ""
+msgstr "Fehler in der Konten-API | {}"
 
 #: src/pyload/plugins/decrypters/GofileIoFolder.py:95
 #, python-brace-format
@@ -2369,7 +2369,7 @@ msgstr "Dieses Plugin erfordert ein aktives Realdebrid.com-Konto"
 
 #: src/pyload/plugins/decrypters/SafelinkingNet.py:64
 msgid "Couldn't find forwarded Link"
-msgstr "Weitergeleiteter Link konnte nicht gefunden werden."
+msgstr "Weitergeleiteter Link konnte nicht gefunden werden"
 
 #: src/pyload/plugins/decrypters/SafelinkingNet.py:107
 msgid "Invalid JSON response"
@@ -2409,27 +2409,27 @@ msgstr "Download abgelaufen"
 #: src/pyload/plugins/downloaders/OneFichierCom.py:74
 #: src/pyload/plugins/downloaders/TenluaVn.py:90
 msgid "Download is password protected"
-msgstr ""
+msgstr "Der Download ist passwortgeschützt"
 
 #: src/pyload/plugins/decrypters/SwisstransferComFolder.py:67
 msgid "Authorized number of downloads has been reached."
-msgstr ""
+msgstr "Die zulässige Anzahl an Downloads wurde erreicht."
 
 #: src/pyload/plugins/decrypters/TorboxAppNzb.py:84
 msgid "Usenet file does not exist"
-msgstr ""
+msgstr "Die Usenet-Datei existiert nicht"
 
 #: src/pyload/plugins/decrypters/TorboxAppNzb.py:196
 #: src/pyload/plugins/decrypters/TorboxAppNzb.py:200
 #: src/pyload/plugins/decrypters/TorboxAppTorrent.py:200
 #: src/pyload/plugins/decrypters/TorboxAppTorrent.py:204
 msgid "This plugin requires an active Torbox.app account"
-msgstr ""
+msgstr "Dieses Plugin erfordert ein aktives Torbox.app-Konto"
 
 #: src/pyload/plugins/decrypters/UlozToFolder.py:37
 #, python-brace-format
 msgid "Fetching links from page {}"
-msgstr ""
+msgstr "Links von Seite {} abrufen"
 
 #: src/pyload/plugins/decrypters/UlozToFolder.py:49
 msgid "Limit of 99 pages reached, aborting"
@@ -2490,7 +2490,7 @@ msgstr "Downloadlimit erreicht"
 #: src/pyload/plugins/downloaders/CzshareCom.py:63
 #, python-brace-format
 msgid "Premium download for {} KiB of Credit"
-msgstr ""
+msgstr "Premium-Download für {} KiB Guthaben"
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:68
 #, python-brace-format
@@ -2500,7 +2500,7 @@ msgstr "Benutzer {} hat {} KiB übrig"
 #: src/pyload/plugins/downloaders/CzshareCom.py:74
 #, python-brace-format
 msgid "Not enough credit to download file: {}"
-msgstr ""
+msgstr "Nicht genügend Guthaben zum Herunterladen der Datei: {}"
 
 #: src/pyload/plugins/downloaders/CzshareCom.py:102
 msgid "FREE_URL_PATTERN not found"
@@ -2520,7 +2520,7 @@ msgstr "Datei nicht verfügbar - versuche es später erneut"
 
 #: src/pyload/plugins/downloaders/DailymotionCom.py:112
 msgid "Failed to get any streams."
-msgstr ""
+msgstr "Es konnten keine Streams abgerufen werden."
 
 #: src/pyload/plugins/downloaders/DataportCz.py:40
 msgid "free_download_form"
@@ -2569,7 +2569,7 @@ msgstr "LINK_FREE_PATTERN nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FastshareCz.py:78
 msgid "Parallel download"
-msgstr ""
+msgstr "Paralleler Download"
 
 #: src/pyload/plugins/downloaders/FastshareCz.py:80
 msgid "Paralell download"
@@ -2577,11 +2577,11 @@ msgstr "Parallele Downloads"
 
 #: src/pyload/plugins/downloaders/FastshareCz.py:83
 msgid "Wrong captcha"
-msgstr ""
+msgstr "Falsches Captcha"
 
 #: src/pyload/plugins/downloaders/FastshareCz.py:88
 msgid "Out of credit"
-msgstr ""
+msgstr "Kein Guthaben mehr"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:60
 msgid "Another download already run"
@@ -2589,7 +2589,7 @@ msgstr "Ein anderer Download läuft gerade"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:68
 msgid "Only connections from Polish IP are allowed"
-msgstr "Es sind nur Verbindungen von polnischen IP-Adressen zulässig."
+msgstr "Es sind nur Verbindungen von polnischen IP-Adressen zulässig"
 
 #: src/pyload/plugins/downloaders/FileSharkPl.py:71
 msgid "No free download slots available"
@@ -2623,7 +2623,7 @@ msgstr "Captcha-Bild nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FileStoreTo.py:59
 msgid "Temporary server error, retrying..."
-msgstr ""
+msgstr "Vorübergehender Serverfehler, erneuter Versuch..."
 
 #: src/pyload/plugins/downloaders/FileStoreTo.py:72
 #: src/pyload/plugins/downloaders/FileStoreTo.py:87
@@ -2632,7 +2632,7 @@ msgstr "DID Begriff nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FileStoreTo.py:101
 msgid "No free slot available"
-msgstr ""
+msgstr "Kein freier Platz verfügbar"
 
 #: src/pyload/plugins/downloaders/FileboomMe.py:67
 #: src/pyload/plugins/downloaders/FileboomMe.py:145
@@ -2646,7 +2646,7 @@ msgstr "requestUrl nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilecloudIo.py:53
 msgid "post parameters pattern not found"
-msgstr ""
+msgstr "Parametermuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilefactoryCom.py:63
 msgid "All free slots are busy"
@@ -2659,29 +2659,29 @@ msgstr "Parallele Downloads"
 #: src/pyload/plugins/downloaders/FilejokerNet.py:52
 #: src/pyload/plugins/downloaders/FilejokerNet.py:55
 msgid "Missing Pillow lib"
-msgstr ""
+msgstr "Pillow Lib fehlt"
 
 #: src/pyload/plugins/downloaders/FilejokerNet.py:53
 msgid "Please install python's Pillow library"
-msgstr ""
+msgstr "Bitte installieren Sie die Pillow-Bibliothek von Python"
 
 #: src/pyload/plugins/downloaders/FilejokerNet.py:203
 #: src/pyload/plugins/downloaders/FilejokerNet.py:204
 msgid "xCaptcha | pics not found"
-msgstr ""
+msgstr "xCaptcha | Bilder nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilejokerNet.py:216
 msgid "xCaptcha | prefix pattern not found"
-msgstr ""
+msgstr "xCaptcha | Präfixmuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilejokerNet.py:217
 msgid "xCaptcha | prefix pattern  not found"
-msgstr ""
+msgstr "xCaptcha | Präfixmuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilejokerNet.py:224
 #: src/pyload/plugins/downloaders/FilejokerNet.py:225
 msgid "xCaptcha | example pic pattern not found"
-msgstr ""
+msgstr "xCaptcha | Beispielbildmuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FilejokerNet.py:232
 #: src/pyload/plugins/downloaders/FilejokerNet.py:233
@@ -2694,11 +2694,11 @@ msgstr "Unbekannter Captcha Typ"
 
 #: src/pyload/plugins/downloaders/FilerNet.py:85
 msgid "Free account downloads are unsupported"
-msgstr ""
+msgstr "Downloads für kostenlose Konten werden nicht unterstützt"
 
 #: src/pyload/plugins/downloaders/FilerNet.py:127
 msgid "Concurrent download limit reached"
-msgstr ""
+msgstr "Gleichzeitiges Downloadlimit erreicht"
 
 #: src/pyload/plugins/downloaders/FilerNet.py:129
 msgid "No download server available"
@@ -2707,7 +2707,7 @@ msgstr "Kein Download-Server verfügbar"
 #: src/pyload/plugins/downloaders/FilesMailRu.py:95
 #, python-brace-format
 msgid "There was HTML Code in the Downloaded File ({})...redirect error? The Download will be restarted"
-msgstr ""
+msgstr "Die heruntergeladene Datei enthielt HTML-Code ({})...Weiterleitungsfehler? Der Download wird neu gestartet"
 
 #: src/pyload/plugins/downloaders/FileuploadNet.py:40
 msgid "download form not found"
@@ -2715,7 +2715,7 @@ msgstr "Downloadformular nicht gefunden"
 
 #: src/pyload/plugins/downloaders/FlyFilesNet.py:44
 msgid "Could not get the download URL. Please wait 10 minutes"
-msgstr ""
+msgstr "Die Download-URL konnte nicht abgerufen werden. Bitte warten Sie 10 Minuten"
 
 #: src/pyload/plugins/downloaders/FshareVn.py:126
 msgid "Free Download form not found"
@@ -2747,7 +2747,7 @@ msgstr "Track ID konnte nicht gefunden werden"
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:43
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:44
 msgid "Reached maximum connctions"
-msgstr ""
+msgstr "Maximale Verbindungen erreicht"
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:44
 msgid "Reached daily limit"
@@ -2766,7 +2766,7 @@ msgstr "Hoster ist zeitweise nicht verfügbar"
 #: src/pyload/plugins/downloaders/HighWayMe.py:65
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:69
 msgid "Unable to get API data, waiting 1 minute and retry"
-msgstr ""
+msgstr "API-Daten konnten nicht abgerufen werden. Bitte warten Sie 1 Minute und versuchen Sie es erneut"
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:66
 #: src/pyload/plugins/downloaders/SimplyPremiumCom.py:70
@@ -2775,11 +2775,11 @@ msgstr "API Daten konnten nicht geholt werden"
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:74
 msgid "Name pattern not found"
-msgstr ""
+msgstr "Namensmuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/HighWayMe.py:80
 msgid "Size pattern not found"
-msgstr ""
+msgstr "Größenmuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/HitfileNet.py:58
 msgid "minLimit pattern not found"
@@ -2804,7 +2804,7 @@ msgstr "Nicht autorisiert"
 #: src/pyload/plugins/downloaders/Keep2ShareCc.py:102
 #, python-brace-format
 msgid "Handling error code: {}"
-msgstr ""
+msgstr "Fehlerbehandlungscode: {}"
 
 #: src/pyload/plugins/downloaders/KingfilesNet.py:61
 msgid "Random key not found"
@@ -2823,12 +2823,12 @@ msgstr "Hash-Muster nicht gefunden"
 #: src/pyload/plugins/downloaders/LinksnappyCom.py:86
 #, python-brace-format
 msgid "Could not determine traffic usage for host {}"
-msgstr ""
+msgstr "Die Traffic-Nutzung für Host {} konnte nicht ermittelt werden."
 
 #: src/pyload/plugins/downloaders/LinksnappyComTorrent.py:176
 #: src/pyload/plugins/downloaders/LinksnappyComTorrent.py:180
 msgid "This plugin requires an active Linksnappy.com account"
-msgstr ""
+msgstr "Dieses Plugin erfordert ein aktives Linksnappy.com-Konto"
 
 #: src/pyload/plugins/downloaders/MediafireCom.py:86
 #: src/pyload/plugins/downloaders/UlozTo.py:227
@@ -2838,7 +2838,7 @@ msgstr "Kein Password gefunden"
 #: src/pyload/plugins/downloaders/MediafireCom.py:89
 #, python-brace-format
 msgid "Password protected link, trying: {}"
-msgstr ""
+msgstr "Passwortgeschützter Link, Versuch: {}"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:307
 msgid "Server busy"
@@ -2857,12 +2857,12 @@ msgstr "Datei entschlüsselt"
 #: src/pyload/plugins/downloaders/MegaCoNz.py:428
 #, python-brace-format
 msgid "File integrity of \"{}\" verified by CBC-MAC checksum ({})"
-msgstr ""
+msgstr "Dateiintegrität von \"{}\" durch CBC-MAC-Prüfsumme ({}) verifiziert"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:434
 #, python-brace-format
 msgid "CBC-MAC checksum for file \"{}\" does not match ({} != {})"
-msgstr ""
+msgstr "Die CBC-MAC-Prüfsumme für die Datei \"{}\" stimmt nicht überein ({} != {})"
 
 #: src/pyload/plugins/downloaders/MegaCoNz.py:439
 msgid "Checksums do not match"
@@ -2910,7 +2910,7 @@ msgstr "Passwort wird reaktivert {}: {} {}"
 
 #: src/pyload/plugins/downloaders/MegasharesCom.py:94
 msgid "Failed to reactivate passport"
-msgstr ""
+msgstr "Reaktivierung des passport fehlgeschlagen"
 
 #: src/pyload/plugins/downloaders/MegasharesCom.py:105
 #: src/pyload/plugins/downloaders/MegasharesCom.py:123
@@ -2929,7 +2929,7 @@ msgstr "Download Pass: {}"
 #: src/pyload/plugins/downloaders/MegasharesCom.py:117
 #, python-brace-format
 msgid "Data left: {} {} ({} MiB needed)"
-msgstr ""
+msgstr "Verbleibende Daten: {} {} ({} MiB benötigt)"
 
 #: src/pyload/plugins/downloaders/MegasharesCom.py:129
 #, python-brace-format
@@ -2947,12 +2947,12 @@ msgstr "Funktionsaufruf „deobfuscate“ nicht gefunden"
 #: src/pyload/plugins/downloaders/MegaupNet.py:69
 #: src/pyload/plugins/downloaders/VimeoCom.py:79
 msgid "Unexpected response, expected JSON data"
-msgstr ""
+msgstr "Unerwartete Antwort, erwartet wurden JSON-Daten"
 
 #: src/pyload/plugins/downloaders/MyfastfileCom.py:42
 #: src/pyload/plugins/downloaders/SimplydebridCom.py:48
 msgid "Unable to unrestrict link"
-msgstr ""
+msgstr "Link konnte nicht freigegeben werden"
 
 #: src/pyload/plugins/downloaders/MystoreTo.py:43
 msgid "File-ID not found"
@@ -2978,12 +2978,12 @@ msgstr "Unbekannter Fehler (Code: {})"
 #: src/pyload/plugins/downloaders/NoPremiumPl.py:91
 #, python-brace-format
 msgid "Download from {} is possible only using NoPremium.pl website  directly"
-msgstr ""
+msgstr "Der Download von {} ist nur über die Webseite NoPremium.pl direkt möglich"
 
 #: src/pyload/plugins/downloaders/OneFichierCom.py:98
 #: src/pyload/plugins/downloaders/OneFichierCom.py:99
 msgid "download is temporarily limited due to high demand"
-msgstr ""
+msgstr "Der Download ist aufgrund der hohen Nachfrage vorübergehend eingeschränkt."
 
 #: src/pyload/plugins/downloaders/OnlineTvRecorder.py:38
 msgid "Waiting in download queue"
@@ -2995,11 +2995,11 @@ msgstr "name Begriff nicht gefunden"
 
 #: src/pyload/plugins/downloaders/PornhostCom.py:42
 msgid "link pattern not found"
-msgstr ""
+msgstr "Link Muster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/PornhubCom.py:56
 msgid "Player Javascript data not found"
-msgstr ""
+msgstr "Player-JavaScript-Daten nicht gefunden"
 
 #: src/pyload/plugins/downloaders/PornhubCom.py:62
 msgid "`qualityItems` variable no found"
@@ -3021,7 +3021,7 @@ msgstr "Video-URL nicht gefunden"
 #: src/pyload/plugins/downloaders/PremiumTo.py:61
 #, python-brace-format
 msgid "API error {} - {}"
-msgstr ""
+msgstr "API-Fehler {} - {}"
 
 #: src/pyload/plugins/downloaders/PromptfileCom.py:36
 msgid "CHASH_PATTERN not found"
@@ -3108,11 +3108,11 @@ msgstr "Die Verarbeitungsfunktion des Javascripts konnten nicht erkannt werden"
 
 #: src/pyload/plugins/downloaders/SoundcloudCom.py:66
 msgid "Failed to find js_url"
-msgstr ""
+msgstr "Fehler beim Auffinden der js_url"
 
 #: src/pyload/plugins/downloaders/SoundcloudCom.py:71
 msgid "client_id not found"
-msgstr ""
+msgstr "Client-ID nicht gefunden"
 
 #: src/pyload/plugins/downloaders/TurbobitNet.py:123
 msgid "Could not detect captcha type"
@@ -3125,11 +3125,11 @@ msgstr "Herunterladen von {} ist nur direkt von der TwojLimit.pl Webseite mögli
 
 #: src/pyload/plugins/downloaders/UlozTo.py:76
 msgid "Adult content confirmation needed"
-msgstr ""
+msgstr "Bestätigung für Inhalte für Erwachsene erforderlich"
 
 #: src/pyload/plugins/downloaders/UlozTo.py:107
 msgid "Free download button not found"
-msgstr ""
+msgstr "Kostenloser Download-Button nicht gefunden"
 
 #: src/pyload/plugins/downloaders/UlozTo.py:174
 msgid "CAPTCHA form changed"
@@ -3141,7 +3141,7 @@ msgstr "Premium-Link nicht gefunden"
 
 #: src/pyload/plugins/downloaders/UlozTo.py:217
 msgid "Password protected link, trying "
-msgstr "Passwortgeschützter Link, Versuch"
+msgstr "Passwortgeschützter Link, Versuch "
 
 #: src/pyload/plugins/downloaders/UlozTo.py:248
 msgid "Wrong captcha code"
@@ -3177,7 +3177,7 @@ msgstr "f Muster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/UploadgigCom.py:63
 msgid "Max downloads for this hour reached"
-msgstr ""
+msgstr "Die maximale Anzahl an Downloads in dieser Stunde wurde erreicht"
 
 #: src/pyload/plugins/downloaders/UploadgigCom.py:80
 #: src/pyload/plugins/downloaders/UploadgigCom.py:83
@@ -3190,7 +3190,7 @@ msgstr "Wait Begriff nicht gefunden"
 
 #: src/pyload/plugins/downloaders/UpstoreNet.py:64
 msgid "captcha key not found"
-msgstr ""
+msgstr "Captcha-Schlüssel nicht gefunden"
 
 #: src/pyload/plugins/downloaders/VeehdCom.py:54
 msgid "Video title not found"
@@ -3232,35 +3232,35 @@ msgstr "Verbinde mit: {}:{}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:150
 msgid "TLS via STARTTLS supported, attempting connection upgrade"
-msgstr ""
+msgstr "TLS über STARTTLS wird unterstützt, Verbindungs-Upgrade wird versucht"
 
 #: src/pyload/plugins/downloaders/XDCC.py:159
 #, python-brace-format
 msgid "STARTTLS handshake failed with {} {}"
-msgstr ""
+msgstr "STARTTLS-Handshake fehlgeschlagen mit {} {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:167
 msgid "TLS via STARTTLS unsupported, disconnecting"
-msgstr ""
+msgstr "TLS über STARTTLS wird nicht unterstützt, Verbindung wird getrennt"
 
 #: src/pyload/plugins/downloaders/XDCC.py:173
 msgid "Attempting TLS handshake.."
-msgstr ""
+msgstr "TLS-Handshake wird versucht.."
 
 #: src/pyload/plugins/downloaders/XDCC.py:184
 #, python-brace-format
 msgid "TLS handshake successful - Cipher:{}, Version:{}, Bits:{}"
-msgstr ""
+msgstr "TLS-Handshake erfolgreich - Verschlüsselung:{}, Version:{}, Bits:{}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:189
 #, python-brace-format
 msgid "certificate verification failed {}"
-msgstr ""
+msgstr "Zertifikatsprüfung fehlgeschlagen {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:193
 #, python-brace-format
 msgid "TLS handshake failed {}"
-msgstr ""
+msgstr "TLS-Handshake fehlgeschlagen {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:224
 #, python-brace-format
@@ -3275,17 +3275,17 @@ msgstr "Ungültiger Nickname: {}"
 #: src/pyload/plugins/downloaders/XDCC.py:235
 #, python-brace-format
 msgid "Nickname {} is already in use"
-msgstr ""
+msgstr "Der Nickname {} ist bereits in Verwendung"
 
 #: src/pyload/plugins/downloaders/XDCC.py:239
 #, python-brace-format
 msgid "Connection to {}:{} failed"
-msgstr ""
+msgstr "Verbindung zu {}:{} fehlgeschlagen"
 
 #: src/pyload/plugins/downloaders/XDCC.py:246
 #, python-brace-format
 msgid "Disconnecting from {}:{}"
-msgstr ""
+msgstr "Verbindung zu {}:{} wird getrennt"
 
 #: src/pyload/plugins/downloaders/XDCC.py:254
 msgid "Not connected to server, cannot disconnect"
@@ -3298,17 +3298,17 @@ msgstr "Abfrage der Serverfunktionen"
 #: src/pyload/plugins/downloaders/XDCC.py:275
 #, python-brace-format
 msgid "Querying server for {} capability"
-msgstr ""
+msgstr "Abfrage des Servers nach der {}-Funktion"
 
 #: src/pyload/plugins/downloaders/XDCC.py:291
 #, python-brace-format
 msgid "Server capabilities: {}"
-msgstr ""
+msgstr "Serverfunktionen: {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:295
 #, python-brace-format
 msgid "Server capability {}: {}"
-msgstr ""
+msgstr "Serverfähigkeit {}: {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:332
 #, python-brace-format
@@ -3341,7 +3341,7 @@ msgstr "Authentifiziere Benutzername"
 
 #: src/pyload/plugins/downloaders/XDCC.py:426
 msgid "Server does not seems to support nickserv commands"
-msgstr ""
+msgstr "Der Server scheint die Nickserv-Befehle nicht zu unterstützen"
 
 #: src/pyload/plugins/downloaders/XDCC.py:450
 #: src/pyload/plugins/downloaders/XDCC.py:494
@@ -3360,7 +3360,7 @@ msgstr "'{}' hat nicht auf die Anfrage geantwortet"
 #: src/pyload/plugins/downloaders/XDCC.py:463
 #, python-brace-format
 msgid "Sending invite request for #{} to '{}'"
-msgstr ""
+msgstr "Sende Einladungsanfrage für #{} an '{}'"
 
 #: src/pyload/plugins/downloaders/XDCC.py:466
 msgid "Cannot send invite request"
@@ -3391,7 +3391,7 @@ msgstr "Abbruch XDCC Anfrage"
 
 #: src/pyload/plugins/downloaders/XDCC.py:564
 msgid "No XDCC request pending, cannot cancel"
-msgstr ""
+msgstr "Keine XDCC-Anfrage ausstehend, Stornierung nicht möglich"
 
 #: src/pyload/plugins/downloaders/XDCC.py:569
 msgid "Requesting XDCC remove from queue"
@@ -3399,29 +3399,29 @@ msgstr "XDCC aus der Warteschlange entfernen"
 
 #: src/pyload/plugins/downloaders/XDCC.py:575
 msgid "No XDCC request pending, cannot remove from queue"
-msgstr ""
+msgstr "Keine XDCC-Anfrage ausstehend, kann nicht aus der Warteschlange entfernt werden"
 
 #: src/pyload/plugins/downloaders/XDCC.py:581
 msgid "Requesting XDCC queue status"
-msgstr ""
+msgstr "Anfrage des XDCC-Warteschlangenstatus"
 
 #: src/pyload/plugins/downloaders/XDCC.py:587
 msgid "No XDCC request pending, cannot query queue status"
-msgstr ""
+msgstr "Keine XDCC-Anfrage ausstehend, Warteschlangenstatus kann nicht abgefragt werden"
 
 #: src/pyload/plugins/downloaders/XDCC.py:596
 #, python-brace-format
 msgid "Requesting XDCC resume of '{}' at position {}"
-msgstr ""
+msgstr "Anforderung des XDCC-Resumes von '{}' an Position {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:646
 #, python-brace-format
 msgid "Bot '{}' acknowledged resume at position {}"
-msgstr ""
+msgstr "Bot '{}' hat das Fortsetzen an Position {} bestätigt."
 
 #: src/pyload/plugins/downloaders/XDCC.py:655
 msgid "Timeout while waiting for resume acknowledge, not resuming"
-msgstr ""
+msgstr "Zeitüberschreitung beim Warten auf die Bestätigung der Wiederaufnahme, Fortsetzung wird nicht fortgesetzt"
 
 #: src/pyload/plugins/downloaders/XDCC.py:659
 msgid "No XDCC request pending, cannot resume"
@@ -3466,18 +3466,18 @@ msgstr "XDCC Bot antwortete nicht"
 #: src/pyload/plugins/downloaders/XDCC.py:1057
 #, python-brace-format
 msgid "Failed due to socket errors. Code: {}"
-msgstr ""
+msgstr "Fehler aufgrund von Socket-Fehlern. Code: {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1065
 #: src/pyload/plugins/downloaders/XDCC.py:1068
 #, python-brace-format
 msgid "Failed due to socket errors: '{}'"
-msgstr ""
+msgstr "Fehler aufgrund von Socket-Fehlern: '{}'"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1071
 #: src/pyload/plugins/downloaders/XDCC.py:1072
 msgid "Server blocked our ip, retry again later manually"
-msgstr ""
+msgstr "Der Server hat unsere IP-Adresse blockiert. Bitte versuchen Sie es später manuell erneut"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1113
 #: src/pyload/plugins/downloaders/XDCC.py:1114
@@ -3491,29 +3491,29 @@ msgstr "Ungültige Paketnummer"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1132
 msgid "Received **PASSIVE** XDCC SEND (unsecured) request"
-msgstr ""
+msgstr "**PASSIVE** XDCC SEND (ungesichert) Anfrage empfangen"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1135
 msgid "Passive XDCC is disabled"
-msgstr ""
+msgstr "Passives XDCC ist deaktiviert"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1141
 msgid "Received XDCC SEND (unsecured) request"
-msgstr ""
+msgstr "XDCC SEND (ungesichert)-Anfrage empfangen"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1154
 msgid "Received XDCC SSEND (Secure) request"
-msgstr ""
+msgstr "XDCC SSEND (Secure)-Anfrage empfangen"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1161
 #, python-brace-format
 msgid "Got queued at position {}"
-msgstr ""
+msgstr "An Position {} in die Warteschlange gestellt"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1168
 #, python-brace-format
 msgid "Waiting in the queue for about {}, current position {}, estimated remaining wait time: {}"
-msgstr ""
+msgstr "Wartezeit in der Warteschlange seit etwa {}, aktuelle Position {}, geschätzte verbleibende Wartezeit: {}"
 
 #: src/pyload/plugins/downloaders/XDCC.py:1207
 #, python-brace-format
@@ -3529,7 +3529,7 @@ msgstr "{name} als {newname} gespeichert"
 #: src/pyload/plugins/downloaders/XDCC.py:1271
 #, python-brace-format
 msgid "DOWNLOAD passive XDCC '{}' from bot {} (token {})"
-msgstr ""
+msgstr "DOWNLOAD passive XDCC '{}' vom Bot {} (Token {})"
 
 #: src/pyload/plugins/downloaders/XHamsterCom.py:68
 msgid "video data not found"
@@ -3549,7 +3549,7 @@ msgstr "MP4 Quellen konnten nicht gefunden werden!"
 
 #: src/pyload/plugins/downloaders/XHamsterCom.py:87
 msgid "Could not find h264 sources!"
-msgstr ""
+msgstr "Es konnten keine H264-Quellen gefunden werden!"
 
 #: src/pyload/plugins/downloaders/YesPornPleaseCom.py:32
 msgid "Iframe url not found"
@@ -3565,7 +3565,7 @@ msgstr "Absoluter Pfadname konnte nicht gefunden werdeen"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:612
 msgid "Signature decode function name not found"
-msgstr ""
+msgstr "Name der Signaturdekodierungsfunktion nicht gefunden"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:637
 msgid "Signature decode failed"
@@ -3574,26 +3574,26 @@ msgstr "Entschlüsselung der Signatur fehlgeschlagen"
 #: src/pyload/plugins/downloaders/YoutubeCom.py:694
 #, python-brace-format
 msgid "VIDEO ITAG {} unknown, using default"
-msgstr ""
+msgstr "VIDEO ITAG {} unbekannt, Standardeinstellung verwendet"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:712
 msgid "No available video stream meets your preferences"
-msgstr ""
+msgstr "Kein verfügbarer Videostream entspricht Ihren Präferenzen"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:798
 #: src/pyload/plugins/downloaders/YoutubeCom.py:905
 #, python-brace-format
 msgid "Download skipped: {} due to {}"
-msgstr ""
+msgstr "Download übersprungen: {} aufgrund von {}"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:811
 #, python-brace-format
 msgid "AUDIO ITAG {} unknown, using default"
-msgstr ""
+msgstr "AUDIO ITAG {} unbekannt, standardmäßig verwendet"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:836
 msgid "No available audio stream meets your preferences"
-msgstr ""
+msgstr "Kein verfügbarer Audiostream entspricht Ihren Präferenzen"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1019
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1070
@@ -3605,7 +3605,7 @@ msgstr "Maschinell generierte Untertitel übersprungen: {}"
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1084
 #, python-brace-format
 msgid "Skipped non translatable subtitle: {}"
-msgstr ""
+msgstr "Übersprungener, nicht übersetzbarer Untertitel: {}"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1169
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1199
@@ -3614,15 +3614,15 @@ msgstr "ffmpeg Error"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1247
 msgid "Playability status pattern not found"
-msgstr ""
+msgstr "Spielbarkeitsstatusmuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1275
 msgid "Player config pattern not found"
-msgstr ""
+msgstr "Spielerkonfigurationsmuster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1281
 msgid "Player URL pattern not found"
-msgstr ""
+msgstr "Player-URL-Muster nicht gefunden"
 
 #: src/pyload/plugins/downloaders/YoutubeCom.py:1286
 #, python-brace-format
@@ -3644,20 +3644,20 @@ msgstr "Datei kann nicht geöffnet werden"
 #: src/pyload/webui/webserver_thread.py:59
 #, python-brace-format
 msgid "Cannot use HTTPS: {}"
-msgstr ""
+msgstr "HTTPS kann nicht verwendet werden: {}"
 
 #: src/pyload/webui/webserver_thread.py:86
 msgid "Development mode does not support HTTPS, please disable development mode to use HTTPS"
-msgstr ""
+msgstr "Der Entwicklungsmodus unterstützt kein HTTPS. Bitte deaktivieren Sie den Entwicklungsmodus, um HTTPS zu verwenden"
 
 #: src/pyload/webui/webserver_thread.py:92
 #, python-brace-format
 msgid "Starting webserver: {scheme}://{host}:{port}"
-msgstr ""
+msgstr "Webserver wird gestartet: {scheme}://{host}:{port}"
 
 #: src/pyload/webui/webserver_thread.py:114
 msgid "** FATAL ERROR ** Could not start web server - Address Already in Use | Exiting pyLoad"
-msgstr ""
+msgstr "** SCHWERWIEGENDER FEHLER ** Webserver konnte nicht gestartet werden – Adresse wird bereits verwendet | pyLoad wird beendet"
 
 #: src/pyload/webui/app/templates/files.html:3
 #: src/pyload/webui/app/templates/files.html:6
@@ -3850,7 +3850,7 @@ msgstr "aus"
 #: src/pyload/webui/app/themes/modern/templates/base.html:166
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:166
 msgid "Proxy:"
-msgstr ""
+msgstr "Proxy:"
 
 #: src/pyload/webui/app/themes/modern/templates/base.html:167
 #: src/pyload/webui/app/themes/next/templates/base.html:168
@@ -3880,7 +3880,7 @@ msgstr "Aktiv"
 #: src/pyload/webui/app/themes/next/templates/base.html:170
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:169
 msgid "Queued"
-msgstr "Warteschlange"
+msgstr "In der Warteschlange"
 
 #: src/pyload/webui/app/themes/modern/templates/base.html:169
 #: src/pyload/webui/app/themes/next/templates/base.html:170
@@ -3916,7 +3916,7 @@ msgstr "Nach oben"
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:234
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:453
 msgid "Don't ask again"
-msgstr ""
+msgstr "Frag nicht noch einmal"
 
 #: src/pyload/webui/app/themes/modern/templates/base.html:236
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:456
@@ -4004,7 +4004,7 @@ msgstr "Das Laden des Captchas kann einige Sekunden dauern."
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:35
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:41
 msgid "Note: to solve this interactive captcha"
-msgstr ""
+msgstr "Hinweis: Um dieses interaktive Captcha zu lösen"
 
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:36
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:43
@@ -4013,27 +4013,27 @@ msgstr ""
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:36
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:42
 msgid "Please install the <a href='https://tampermonkey.net/' target='_blank'>Tampermonkey</a> add-on in your browser and add the "
-msgstr ""
+msgstr "Bitte installieren Sie das <a href='https://tampermonkey.net/' target='_blank'>Tampermonkey</a>-Add-on in Ihrem Browser und fügen Sie die "
 
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:36
 msgid "pyload userscript</p></div>"
-msgstr ""
+msgstr "pyload-Benutzerskript</p></div>"
 
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:40
 #: src/pyload/webui/app/themes/next/templates/captcha.html:39
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:39
 msgid "Invisible captcha is in background progress,"
-msgstr ""
+msgstr "Das unsichtbare Captcha wird im Hintergrund verarbeitet,"
 
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:41
 #: src/pyload/webui/app/themes/next/templates/captcha.html:40
 #: src/pyload/webui/app/themes/pyplex/templates/captcha.html:40
 msgid "this window will automatically close, please wait."
-msgstr ""
+msgstr "Dieses Fenster schließt sich automatisch. Bitte warten Sie."
 
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:42
 msgid "Note: to solve this invisible captcha"
-msgstr ""
+msgstr "Hinweis: Um dieses unsichtbare Captcha zu lösen"
 
 #: src/pyload/webui/app/themes/modern/templates/captcha.html:43
 #: src/pyload/webui/app/themes/next/templates/captcha.html:36
@@ -4367,7 +4367,7 @@ msgstr "Reihenfolge umkehren"
 #: src/pyload/webui/app/themes/next/templates/packages.html:46
 #: src/pyload/webui/app/themes/pyplex/templates/packages.html:48
 msgid "Extract Package"
-msgstr ""
+msgstr "Paket entpacken"
 
 #: src/pyload/webui/app/themes/modern/templates/packages.html:62
 #: src/pyload/webui/app/themes/next/templates/packages.html:60
@@ -4589,7 +4589,7 @@ msgstr "Wichtig:"
 #: src/pyload/webui/app/themes/next/templates/settings.html:159
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:153
 msgid "Admin user have always all permissions!"
-msgstr "Wichtig: Admin User haben immer alle Berechtigungen!"
+msgstr "Admin Benutzer haben immer alle Berechtigungen!"
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:162
 #: src/pyload/webui/app/themes/modern/templates/settings.html:426
@@ -4932,7 +4932,7 @@ msgstr "Passwort (wiederholen)"
 #: src/pyload/webui/app/themes/next/templates/settings.html:430
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:424
 msgid "Please repeat the password."
-msgstr "Bitte wiederhole das Passwort"
+msgstr "Bitte wiederhole das Passwort."
 
 #: src/pyload/webui/app/themes/modern/templates/settings.html:428
 #: src/pyload/webui/app/themes/next/templates/admin.html:107
@@ -5051,7 +5051,7 @@ msgstr "Ein Fehler ist aufgetreten"
 #: src/pyload/webui/app/themes/next/templates/js/base.js:339
 #: src/pyload/webui/app/themes/pyplex/templates/js/base.js:337
 msgid "Are you sure you want to abort all downloads?"
-msgstr ""
+msgstr "Möchten Sie wirklich alle Downloads abbrechen?"
 
 #: src/pyload/webui/app/themes/modern/templates/js/base.js:420
 #: src/pyload/webui/app/themes/next/templates/js/base.js:426
@@ -5111,13 +5111,13 @@ msgstr "Möchten Sie diesen Link wirklich löschen?"
 #: src/pyload/webui/app/themes/next/templates/js/packages.js:322
 #: src/pyload/webui/app/themes/pyplex/templates/js/packages.js:318
 msgid "Are you sure you want to delete this package?"
-msgstr ""
+msgstr "Möchten Sie dieses Paket wirklich löschen?"
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:39
 #: src/pyload/webui/app/themes/next/templates/js/settings.js:39
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:39
 msgid "Are you really sure you want to quit pyLoad?"
-msgstr ""
+msgstr "Sind Sie sich wirklich sicher, dass Sie pyLoad beenden möchten?"
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:47
 #: src/pyload/webui/app/themes/next/templates/js/settings.js:47
@@ -5130,7 +5130,7 @@ msgstr "Sicher, dass du pyLoad neustarten willst?"
 #: src/pyload/webui/app/themes/next/templates/js/settings.js:110
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:110
 msgid "Password successfully changed"
-msgstr ""
+msgstr "Passwort erfolgreich geändert"
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:119
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:208
@@ -5146,13 +5146,13 @@ msgstr "Passwörter stimmen nicht überein."
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:154
 #, python-brace-format
 msgid "Are you sure you want to delete the user {}?"
-msgstr ""
+msgstr "Möchten Sie den Benutzer {} wirklich löschen?"
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:190
 #: src/pyload/webui/app/themes/next/templates/js/settings.js:190
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:190
 msgid "Username must be filled out"
-msgstr ""
+msgstr "Der Benutzername muss ausgefüllt werden"
 
 #: src/pyload/webui/app/themes/modern/templates/js/settings.js:250
 #: src/pyload/webui/app/themes/next/templates/js/settings.js:250
@@ -5182,7 +5182,7 @@ msgstr "Verzeichnis auswählen"
 #: src/pyload/webui/app/themes/next/templates/js/settings.js:415
 #: src/pyload/webui/app/themes/pyplex/templates/js/settings.js:415
 msgid "Are you sure you want to delete this API key?"
-msgstr ""
+msgstr "Sind Sie sicher, dass Sie diesen API-Schlüssel löschen möchten?"
 
 #: src/pyload/webui/app/themes/next/templates/admin.html:11
 msgid "Administrate"
@@ -5200,7 +5200,7 @@ msgstr "ändern"
 #: src/pyload/webui/app/themes/next/templates/settings.html:444
 #: src/pyload/webui/app/themes/pyplex/templates/settings.html:438
 msgid "Permissions for the new user"
-msgstr ""
+msgstr "Berechtigungen für den neuen Benutzer"
 
 #: src/pyload/webui/app/themes/next/templates/admin.html:119
 #: src/pyload/webui/app/themes/next/templates/packages.html:99
@@ -5219,7 +5219,7 @@ msgstr "Fertige löschen"
 
 #: src/pyload/webui/app/themes/next/templates/filemanager.html:19
 msgid "FileManager"
-msgstr ""
+msgstr "Dateimanager"
 
 #: src/pyload/webui/app/themes/next/templates/filemanager.html:29
 #: src/pyload/webui/app/themes/next/templates/filemanager.html:44

@@ -87,10 +87,12 @@ def rpc(func, args=""):
                 **{x: _parse_parameter(y) for x, y in kwargs.items()},
             ))
     except Exception as exc:
-        resp = {'error': str(exc)}
-        if api.pyload.debug > 2:
-            resp["traceback"] = traceback.print_exc()
-        response = jsonify(resp), 500
+        api.pyload.log.error(f"API error in '{func}'",
+            exc_info=api.pyload.debug > 1,
+            stack_info=api.pyload.debug > 2
+        )
+
+        response = jsonify({"error": "Internal server error"}), 500
 
     return response
 

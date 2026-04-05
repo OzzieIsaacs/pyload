@@ -13,11 +13,13 @@ import secrets
 import time
 from enum import IntFlag
 from typing import Any, Callable, Optional
+from urllib.parse import urlparse
 
 import flask
 from werkzeug.utils import secure_filename
 
 from pyload import PKGDIR
+from pyload.core.utils.web.check import is_global_host
 
 from ..datatypes.data import (
     AccountInfo, CaptchaTask, ConfigItem, ConfigSection, DownloadInfo, EventInfo, FileData, OldUserData, OnlineCheck,
@@ -43,7 +45,7 @@ method_map = {}
 
 
 RE_URLMATCH = re.compile(
-    r"(?:https?|ftps?|xdcc|sftp):(?://|\\\\)+[\w\-._~:/?#\[\]@!$&'()*+,;=]*|magnet:\?.+",
+    r"(?:https?|ftps?|xdccs?|sftp):(?://|\\\\)+[\w\-._~:/?#\[\]@!$&'()*+,;=]*|magnet:\?.+",
     re.IGNORECASE,
 )
 
@@ -221,17 +223,34 @@ class Api:
         :param value: new config value
         :param section: 'plugin' or 'core
         """
+        try:
+            try:
+                user_info = flask.g.user_info
+            except AttributeError:
+                user_info = flask.session
 
-        ADMIN_ONLY_OPTIONS = {
-            ("reconnect", "script"),
-            ("webui", "host"),
-            ("webui", "use_ssl"),
-            ("webui", "ssl_cert"),
-            ("webui", "ssl_key"),
+        # Attempt to access outside an active Flask request
+        except RuntimeError:
+            user_info = {"role": Role.ADMIN}
+        is_admin = user_info.get("role") == Role.ADMIN
+
+        ADMIN_ONLY_CORE_OPTIONS = {
+            ("general", "storage_folder"),
             ("log", "syslog_host"),
             ("log", "syslog_port"),
-            ("proxy", "username"),
             ("proxy", "password"),
+            ("proxy", "username"),
+            ("reconnect", "script"),
+            ("webui", "host"),
+            ("webui", "ssl_certfile"),
+            ("webui", "ssl_keyfile"),
+            ("webui", "ssl_certchain"),
+            ("webui", "use_ssl"),
+        }
+
+        ADMIN_ONLY_PLUGIN_OPTIONS = {
+            ("AntiVirus", "avfile"),
+            ("AntiVirus", "avargs"),
         }
 
         if section == "core":
@@ -246,19 +265,9 @@ class Api:
                     return
 
             # Require ADMIN role for security-critical settings
-            try:
-                try:
-                    user_info = flask.g.user_info
-                except AttributeError:
-                    user_info = flask.session
-
-                if (category, option) in ADMIN_ONLY_OPTIONS and user_info.get("role") != Role.ADMIN:
-                    self.pyload.log.error(self._("Writing config value {}/{} requires Admin role").format(category, option))
-                    return
-
-            # Attempt to access outside an active Flask request
-            except RuntimeError:
-                pass
+            if (category, option) in ADMIN_ONLY_CORE_OPTIONS and not is_admin:
+                self.pyload.log.error(self._("Writing config value {}/{} requires Admin role").format(category, option))
+                return
 
             self.pyload.config.set(category, option, value)
 
@@ -269,6 +278,11 @@ class Api:
                 self.pyload.request_factory.update_bucket()
 
         elif section == "plugin":
+            # Require ADMIN role for security-critical settings
+            if (category, option) in ADMIN_ONLY_PLUGIN_OPTIONS and not is_admin:
+                self.pyload.log.error(self._("Writing config value {}/{} requires Admin role").format(category, option))
+                return
+
             self.pyload.config.set_plugin(category, option, value)
 
         self.pyload.addon_manager.dispatch_event(
@@ -585,8 +599,11 @@ class Api:
             urls.update(RE_URLMATCH.findall(html))
 
         if url:
-            page = get_url(url)
-            urls.update(RE_URLMATCH.findall(page))
+            urlp = urlparse(url)
+            hostname = urlp.hostname
+            if urlp.scheme in ("http", "https") and hostname and is_global_host(hostname):
+                page = get_url(url)
+                urls.update(RE_URLMATCH.findall(page))
 
         return self.check_urls(list(urls))
 
@@ -595,7 +612,7 @@ class Api:
     @post
     def check_urls(self, urls: list[str]) -> dict[str, list[str]]:
         """
-        Gets urls and returns pluginname mapped to list of matched urls.
+        Gets urls and returns plugin name mapped to list of matched urls.
 
         :param urls:
         :return: {plugin: urls}
@@ -659,7 +676,7 @@ class Api:
         os.makedirs(upload_path, exist_ok=True)
 
         container = "tmp_" + secure_filename(os.path.basename(container))
-        with open(os.path.join(upload_path, container), "wb") as th:
+        with open(fs.safejoin(upload_path, container), "wb") as th:
             th.write(data)
 
         return self.check_online_status(urls + [th.name])
@@ -1099,7 +1116,7 @@ class Api:
         os.makedirs(upload_path, exist_ok=True)
 
         filename = "tmp_" + secure_filename(os.path.basename(filename))
-        with open(os.path.join(upload_path, filename), "wb") as th:
+        with open(fs.safejoin(upload_path, filename), "wb") as th:
             th.write(data)
 
         self.add_package(th.name, [th.name], Destination.COLLECTOR)

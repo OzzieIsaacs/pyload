@@ -33,7 +33,6 @@ lm = MyLoginManager()
 
 #: flask app singleton?
 class App:
-
     JINJA_TEMPLATE_GLOBALS = TEMPLATE_GLOBALS
     JINJA_TEMPLATE_FILTERS = TEMPLATE_FILTERS
     JINJA_CONTEXT_PROCESSORS = CONTEXT_PROCESSORS
@@ -41,7 +40,6 @@ class App:
     FLASK_BLUEPRINTS = BLUEPRINTS
     FLASK_EXTENSIONS = EXTENSIONS
     FLASK_THEMES = THEMES
-
 
     @classmethod
     def _configure_config(cls, app, develop):
@@ -73,8 +71,14 @@ class App:
             app.register_error_handler(exc, fn)
 
         @app.after_request
-        def deny_iframe(response):
+        def set_security_headers(response):
             response.headers["Content-Security-Policy"] = "frame-ancestors 'self';"
+            response.headers["X-Content-Type-Options"] = "nosniff"
+            response.headers["X-Frame-Options"] = "SAMEORIGIN"
+            response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+            response.headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()"
+            if app.config["PYLOAD_API"].get_config_value("webui", "use_ssl"):
+                response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
             return response
 
         # Dynamically set SESSION_COOKIE_SECURE according to the value of X-Forwarded-Proto
@@ -82,7 +86,10 @@ class App:
         @app.before_request
         def set_session_cookie_secure():
             x_forwarded_proto = flask.request.headers.get("X-Forwarded-Proto", "")
-            is_secure = x_forwarded_proto.split(',')[0].strip() == "https"
+            is_secure = (
+                x_forwarded_proto.split(',')[0].strip() == "https" or
+                app.config["PYLOAD_API"].get_config_value("webui", "use_ssl")
+            )
             flask.current_app.config['SESSION_COOKIE_SECURE'] = is_secure
 
     @classmethod

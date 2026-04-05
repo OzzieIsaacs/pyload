@@ -3,7 +3,7 @@ import random
 import re
 import time
 
-from ...network.request_factory import get_url
+from .convert import host_to_ip
 
 
 def is_ipv4_address(value):
@@ -100,6 +100,21 @@ def is_global_address(value):
         return False
 
 
+def is_global_host(value):
+    """
+    Check whether the provided host address resolves to a globally routable IP address.
+
+    Parameters:
+    - value (str): The input host to check.
+
+    Returns:
+    - bool: True if the value is a global (publicly routable) host,
+      False for non-global addresses or if the input is invalid.
+    """
+    ips = host_to_ip(value)
+    return ips and all((is_global_address(ip) for ip in ips))
+
+
 def is_port(value):
     """
     Validate whether an integer is a valid TCP/UDP port number.
@@ -121,6 +136,7 @@ def get_public_address(addr_type="ipv4"):
     - str: The public IPv4 or IPv6 address as returned by the external service, or
       an empty string if all attempts fail.
     """
+    from ...network.request_factory import get_url
     if addr_type == "ipv4":
         services = [
             ("https://ipv4.icanhazip.com/", r"(\S+)"),

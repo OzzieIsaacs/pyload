@@ -295,9 +295,8 @@ class UIHandler {
         $this[0].reportValidity();
         return false;
       } else {
-        $.ajax({
+        $.post({
           url: "{{url_for('json.add_package')}}",
-          method: "POST",
           data: formData,
           processData: false,
           contentType: false,
@@ -496,6 +495,30 @@ class UIHandler {
 }
 
 var uiHandler = new UIHandler();
+
+const formToObject = (form) => {
+  const obj = {};
+
+  $(form).find("input, select, textarea").each(function() {
+    let value;
+    const $el = $(this);
+    const name = $el.attr("name");
+    if (!name || $el.prop("disabled")) return;
+
+    if ($el.is('input[type="checkbox"]')) {
+      value = $el.prop("checked") ? true : false;
+    }
+    else {
+      value = $el.val();
+    }
+
+    if (!value) return;
+
+    obj[name] = value
+  });
+
+  return obj;
+};
 
 const humanFileSize = (f) => {
   const d = ["B", "KiB", "MiB", "GiB", "TiB", "PiB"];

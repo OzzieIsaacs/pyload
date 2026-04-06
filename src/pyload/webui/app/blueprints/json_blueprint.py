@@ -224,7 +224,7 @@ def move_package(pack_id, dest):
 # @apiver_check
 @login_required("MODIFY")
 @expect_json
-def edit_package(pack_id, pack_name, pack_folder, pack_pwd):
+def edit_package(pack_id, pack_name, pack_folder, pack_pwd=""):
     api = flask.current_app.config["PYLOAD_API"]
     try:
         pack_folder = secure_filename(pack_folder)

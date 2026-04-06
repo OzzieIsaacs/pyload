@@ -322,8 +322,7 @@ class UIHandler {
 
     $("#action_play").click(() => {
       $.post("{{url_for('api.rpc', func='unpause_server')}}", () => {
-        $.ajax({
-          method: "post",
+        $.post({
           url: "{{url_for('json.status')}}",
           dataType: 'json',
           contentType: 'application/json',
@@ -344,8 +343,7 @@ class UIHandler {
 
     $("#action_stop").click(() => {
       $.post("{{url_for('api.rpc', func='pause_server')}}", () => {
-        $.ajax({
-          method: "post",
+        $.post({
           url: "{{url_for('json.status')}}",
           dataType: 'json',
           contentType: 'application/json',
@@ -358,8 +356,7 @@ class UIHandler {
 
     $("#toggle_queue").click(() => {
       $.post("{{url_for('api.rpc', func='toggle_pause')}}", () => {
-        $.ajax({
-          method: "post",
+        $.post({
           url: "{{url_for('json.status')}}",
           dataType: 'json',
           data: '{}',
@@ -372,8 +369,7 @@ class UIHandler {
 
     $("#toggle_proxy").click(() => {
       $.post("{{url_for('api.rpc', func='toggle_proxy')}}", () => {
-        $.ajax({
-          method: "post",
+        $.post({
           url: "{{url_for('json.status')}}",
           dataType: 'json',
           contentType: 'application/json',
@@ -386,8 +382,7 @@ class UIHandler {
 
     $("#toggle_reconnect").click(() => {
       $.post("{{url_for('api.rpc', func='toggle_reconnect')}}", () => {
-        $.ajax({
-          method: "post",
+        $.post({
           url: "{{url_for('json.status')}}",
           dataType: 'json',
           contentType: 'application/json',
@@ -579,8 +574,7 @@ $(() => {
   uiHandler.initUI()
 
   if (thisScript.getAttribute('nopoll') !== "1") {
-    $.ajax({
-      method: "post",
+    $.post({
       url: "{{url_for('json.status')}}",
       dataType: 'json',
       contentType: 'application/json',
@@ -590,8 +584,7 @@ $(() => {
     });
 
     const statusInterval = setInterval(() => {
-      $.ajax({
-        method: "post",
+      $.post({
         url: "{{url_for('json.status')}}",
         dataType: 'json',
         contentType: 'application/json',

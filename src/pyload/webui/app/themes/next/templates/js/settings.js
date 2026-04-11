@@ -97,6 +97,8 @@ class SettingsUI {
 
   initUsersAdmin() {
     $("#password_box").on('click', '#login_password_button', (event) => {
+      event.stopPropagation();
+      event.preventDefault();
       const passwd = $("#user_newpw").val();
       const $passwdConfirm = $("#user_confpw");
       const passwdConfirm = $passwdConfirm.prop('disabled', true).val();
@@ -118,8 +120,6 @@ class SettingsUI {
       } else {
         alert("{{_('Passwords did not match.')}}");
       }
-      event.stopPropagation();
-      event.preventDefault();
     });
 
     $(document).on("change", ".is_admin", (event) => {

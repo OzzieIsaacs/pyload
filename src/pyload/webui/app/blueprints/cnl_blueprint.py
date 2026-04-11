@@ -262,4 +262,4 @@ def checksupport():
 def jdcheck():
     rep = "jdownloader=true;\r\n"
     rep += "var version='42707';\r\n"
-    return rep
+    return flask.Response(rep, mimetype="text/javascript")

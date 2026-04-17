@@ -1,4 +1,5 @@
 import json
+import os
 import time
 from functools import wraps
 from urllib.parse import urljoin, urlparse, urlsplit
@@ -48,8 +49,8 @@ def is_safe_url(location):
     # This mitigates CVE-2023-24329 and similar parser bypasses
     location = location.lstrip(" \t\n\r\x0b\x0c")
 
-    # Handle empty or obviously bad input
-    if not location:
+    # Handle empty or obviously bad input like protocol-relative
+    if not location or location.startswith('//'):
         return False
 
     # Use urljoin against the current host_url to resolve relatives
@@ -65,23 +66,27 @@ def is_safe_url(location):
     test_split = urlsplit(test_url)
 
     # Strict checks:
-    # 1. Scheme must be http or https (or empty for relative)
+    # 1. Scheme must be http or https (or empty for relative) and match the original scheme
     # 2. Netloc (host + port) must match the application's host
-    # 3. Reject protocol-relative URLs (//evil.com) explicitly if desired
     if test_parsed.scheme not in ('', 'http', 'https'):
+        return False
+
+    # If there's a protocol (scheme) but no host (netloc), it's likely malformed
+    if test_split.scheme and not test_split.netloc:
         return False
 
     # Reject if netloc differs (this catches absolute external URLs)
     if test_parsed.netloc and test_parsed.netloc != base_parsed.netloc:
         return False
 
-    # Optional: explicitly reject protocol-relative (starts with //)
-    if location.lstrip().startswith('//'):
-        return False
+    if test_split.scheme:
+        # Extra hardening: ensure the final path doesn't contain dangerous schemes in edge cases
+        if test_split.scheme not in ('http', 'https'):
+            return False
 
-    # Extra hardening: ensure the final path doesn't contain dangerous schemes in edge cases
-    if test_split.scheme and test_split.scheme not in ('http', 'https'):
-        return False
+        # Reject if scheme differs (this catches explicit cross protocol)
+        if test_split.scheme != base_parsed.scheme:
+            return False
 
     return True
 
@@ -105,6 +110,36 @@ def render_base(messages):
     session.permanent = bool(permanent)
     session.clear()
     # session.modified = True'''
+
+
+def clear_all_user_sessions(username):
+    session_dir = flask.current_app.config['SESSION_FILE_DIR']
+    sessions_cleared = 0
+
+    def _read_session_file(filepath):
+        session_data = {}
+
+        if os.path.exists(filepath):
+            with open(filepath, 'rb') as f:
+                timeout_bytes = f.read(4)  # Read the 4-byte timeout header
+                if len(timeout_bytes) == 4:
+                    # timeout = struct.unpack("I", timeout_bytes)[0]   # little-endian unsigned int
+                    session_data = flask.current_app.session_interface.serializer.decode(f.read())
+
+        return session_data
+
+    if os.path.exists(session_dir):
+        for filename in os.listdir(session_dir):
+            filepath = os.path.join(session_dir, filename)
+            try:
+                session_info = _read_session_file(filepath)
+                if isinstance(session_info, dict) and session_info.get("name") == username:
+                    os.remove(filepath)
+                    sessions_cleared += 1
+            except Exception:
+                continue
+
+    return sessions_cleared
 
 
 def current_theme_id():
@@ -319,46 +354,49 @@ def apikey_auth(func):
         client_ip = flask.request.headers.get("X-Forwarded-For", "").split(",")[0].strip() or flask.request.remote_addr
 
         # Check for API key in header
-        api_key = flask.request.headers.get("X-API-Key")
-        if api_key and api_key.startswith("pl_"):
-            # Look up the API key in the database
-            key_info = api.check_apikey(api_key)
-            if key_info["success"]:
-                # Get user info from the user_id in the key
-                user_id = key_info["data"]["user_id"]
-                key_name = key_info["data"]["name"]
-                user_data = api.pyload.db.get_all_user_data().get(user_id)
-                if user_data:
-                    now = int(time.time() * 1000)
-                    last_used = key_info["data"]["last_used"]
-                    user_info = {
-                        "id": user_id,
-                        "name": user_data["name"],
-                        "role": user_data["role"],
-                        "permission": user_data["permission"],
-                    }
-                    flask.g.user_info = user_info
-                    # Log if it has not been used for more than 1 hour
-                    if now >= last_used + 3_600_000:
-                        log.info(f"API authentication successful for user '{user_info['name']}' using the '{key_name}' API key [CLIENT: {client_ip}]")
-                    return decorated(*args, **kwargs)
+        api_key = flask.request.headers.get("X-API-Key", None)
+        if api_key is not None:
+            error = "Invalid API key"
+            if api_key.startswith("pl_"):
+	            # Look up the API key in the database
+	            key_info = api.check_apikey(api_key)
+	            if key_info["success"]:
+	                # Get user info from the user_id in the key
+	                user_id = key_info["data"]["user_id"]
+	                key_name = key_info["data"]["name"]
+	                user_data = api.pyload.db.get_all_user_data().get(user_id)
+	                if user_data:
+	                    now = int(time.time() * 1000)
+	                    last_used = key_info["data"]["last_used"]
+	                    user_info = {
+	                        "id": user_id,
+	                        "name": user_data["name"],
+	                        "role": user_data["role"],
+	                        "permission": user_data["permission"],
+	                    }
+	                    flask.g.user_info = user_info
+	                    # Log if it has not been used for more than 1 hour
+	                    if now >= last_used + 3_600_000:
+	                        log.info(f"API authentication successful for user '{user_info['name']}' using the '{key_name}' API key [CLIENT: {client_ip}]")
+	                    return decorated(*args, **kwargs)
+                else:
+                    error = key_info["error"]
 
-            else:
-                # Log failed API key authentication
-                log_api_key = f"{api_key[:4]}********{api_key[-4:]}" if len(api_key) > 8 else "*" * 8
-                log.error(f"API authentication failed using API key {log_api_key} [CLIENT: {client_ip}]")
-                return flask.json.jsonify({"error": key_info["error"]}), 401
-
-        # No API auth - still use the decorated function but rely on session auth
-        csrf.protect()
-        if current_user.is_authenticated:
-            return decorated(*args, **kwargs)
+            # Log failed API key authentication
+            log_api_key = f"{api_key[:4]}********{api_key[-4:]}" if len(api_key) > 8 else "*" * 8
+            log.error(f"API authentication failed using API key {log_api_key} [CLIENT: {client_ip}]")
+            return flask.json.jsonify({"error": key_info["error"]}), 401
         else:
-            user = current_user.name
-            # Sanitize username for logging
-            sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r") if user else "unknown"
-            log.error(f"API authentication failed for user '{sanitized_user}' using session [CLIENT: {client_ip}]")
-            return flask.json.jsonify({"error": "Invalid API credentials"}), 401
+	        # No API auth - still use the decorated function but rely on session auth
+			csrf.protect()		        
+	        if current_user.is_authenticated:        
+	            return decorated(*args, **kwargs)
+	        else:
+	            user = current_user.name
+	            # Sanitize username for logging
+	            sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r") if user else "unknown"
+	            log.error(f"API authentication failed for user '{sanitized_user}' using session [CLIENT: {client_ip}]")
+	            return flask.json.jsonify({"error": "Invalid API credentials"}), 401
 
     return decorated_function
 

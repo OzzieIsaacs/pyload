@@ -358,27 +358,27 @@ def apikey_auth(func):
         if api_key is not None:
             error = "Invalid API key"
             if api_key.startswith("pl_"):
-	            # Look up the API key in the database
-	            key_info = api.check_apikey(api_key)
-	            if key_info["success"]:
-	                # Get user info from the user_id in the key
-	                user_id = key_info["data"]["user_id"]
-	                key_name = key_info["data"]["name"]
-	                user_data = api.pyload.db.get_all_user_data().get(user_id)
-	                if user_data:
-	                    now = int(time.time() * 1000)
-	                    last_used = key_info["data"]["last_used"]
-	                    user_info = {
-	                        "id": user_id,
-	                        "name": user_data["name"],
-	                        "role": user_data["role"],
-	                        "permission": user_data["permission"],
-	                    }
-	                    flask.g.user_info = user_info
-	                    # Log if it has not been used for more than 1 hour
-	                    if now >= last_used + 3_600_000:
-	                        log.info(f"API authentication successful for user '{user_info['name']}' using the '{key_name}' API key [CLIENT: {client_ip}]")
-	                    return decorated(*args, **kwargs)
+                # Look up the API key in the database
+                key_info = api.check_apikey(api_key)
+                if key_info["success"]:
+                    # Get user info from the user_id in the key
+                    user_id = key_info["data"]["user_id"]
+                    key_name = key_info["data"]["name"]
+                    user_data = api.pyload.db.get_all_user_data().get(user_id)
+                    if user_data:
+                        now = int(time.time() * 1000)
+                        last_used = key_info["data"]["last_used"]
+                        user_info = {
+                            "id": user_id,
+                            "name": user_data["name"],
+                            "role": user_data["role"],
+                            "permission": user_data["permission"],
+                        }
+                        flask.g.user_info = user_info
+                        # Log if it has not been used for more than 1 hour
+                        if now >= last_used + 3_600_000:
+                            log.info(f"API authentication successful for user '{user_info['name']}' using the '{key_name}' API key [CLIENT: {client_ip}]")
+                        return decorated(*args, **kwargs)
                 else:
                     error = key_info["error"]
 
@@ -387,16 +387,16 @@ def apikey_auth(func):
             log.error(f"API authentication failed using API key {log_api_key} [CLIENT: {client_ip}]")
             return flask.json.jsonify({"error": key_info["error"]}), 401
         else:
-	        # No API auth - still use the decorated function but rely on session auth
-			csrf.protect()		        
-	        if current_user.is_authenticated:        
-	            return decorated(*args, **kwargs)
-	        else:
-	            user = current_user.name
-	            # Sanitize username for logging
-	            sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r") if user else "unknown"
-	            log.error(f"API authentication failed for user '{sanitized_user}' using session [CLIENT: {client_ip}]")
-	            return flask.json.jsonify({"error": "Invalid API credentials"}), 401
+            # No API auth - still use the decorated function but rely on session auth
+            csrf.protect()
+            if current_user.is_authenticated:
+                return decorated(*args, **kwargs)
+            else:
+                user = current_user.name
+                # Sanitize username for logging
+                sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r") if user else "unknown"
+                log.error(f"API authentication failed for user '{sanitized_user}' using session [CLIENT: {client_ip}]")
+                return flask.json.jsonify({"error": "Invalid API credentials"}), 401
 
     return decorated_function
 

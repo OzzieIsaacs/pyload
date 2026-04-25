@@ -224,10 +224,7 @@ class Api:
         :param section: 'plugin' or 'core'
         """
         try:
-            try:
-                user_info = flask.g.user_info
-            except AttributeError:
-                user_info = flask.session
+            user_info = self.pyload.db.get_all_user_data().get(int(flask.session['_user_id']))
 
         # Attempt to access outside an active Flask request
         except RuntimeError:

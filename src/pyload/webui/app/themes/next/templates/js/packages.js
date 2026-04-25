@@ -253,8 +253,9 @@ class Package {
         uiHandler.indicateLoad();
         $.post({
           url: "{{url_for('json.link_order')}}",
-          data: { fid: ui.item.data('lid'), pos: newIndex },
-          traditional: true,
+          dataType: 'json',
+          contentType: 'application/json',
+          data: JSON.stringify({ file_id: ui.item.data('lid'), pos: newIndex }),
           success: () => {
             uiHandler.indicateFinish();
             return true;

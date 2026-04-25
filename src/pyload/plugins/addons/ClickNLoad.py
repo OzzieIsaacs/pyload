@@ -4,7 +4,9 @@ import ssl
 import threading
 import time
 
+from pyload import g
 from pyload.core.utils.struct.lock import lock
+from pyload.core.utils.web.convert import host_to_ip
 
 from ..base.addon import BaseAddon, threaded
 
@@ -48,7 +50,7 @@ class ClickNLoad(BaseAddon):
         if self.pyload.config.get("webui", "enabled"):
             web_host = self.pyload.config.get("webui", "host")
             web_port = self.pyload.config.get("webui", "port")
-            if web_host == "0.0.0.0":
+            if web_host in ("0.0.0.0", ""):
                 web_host = "127.0.0.1"
             elif web_host == "::":
                 web_host = "::1"

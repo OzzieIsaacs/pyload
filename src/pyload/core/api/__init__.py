@@ -235,10 +235,15 @@ class Api:
         is_admin = user_info.get("role") == Role.ADMIN
 
         ADMIN_ONLY_CORE_OPTIONS = {
+            ("general", "ssl_verify"),
             ("general", "storage_folder"),
             ("log", "syslog_host"),
             ("log", "syslog_port"),
+            ("proxy", "enabled"),
+            ("proxy", "host"),
             ("proxy", "password"),
+            ("proxy", "socks_resolve_dns"),
+            ("proxy", "type"),
             ("proxy", "username"),
             ("reconnect", "script"),
             ("webui", "host"),

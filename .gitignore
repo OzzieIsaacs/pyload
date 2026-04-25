@@ -145,6 +145,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+**/.pyload_test_data/
 
 # Translations
 

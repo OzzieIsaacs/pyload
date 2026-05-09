@@ -123,7 +123,7 @@ class App:
         webui_port = api.get_config_value("webui", "port")
         cookie_prefix = f"{'' if use_ssl is False else '__Host-' if path_prefix == r'/' else '__Secure-'}"
         session_cookie_name = f"{cookie_prefix}pyload_session_{webui_port}"
-        session_storage_path = os.path.join(api.get_cachedir(), "flask")
+        session_storage_path = os.path.join(api.get_userdir(), "data", "flask")
         os.makedirs(session_storage_path, exist_ok=True)
         
         # tempdir = app.config["PYLOAD_API"].get_cachedir()

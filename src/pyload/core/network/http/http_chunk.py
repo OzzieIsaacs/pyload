@@ -6,12 +6,9 @@ import time
 import pycurl
 
 from ...utils import web
+from .exceptions import WrongFormat
 from .http_headers import HttpHeaders
 from .http_request import HTTPRequest
-
-
-class WrongFormat(Exception):
-    pass
 
 
 class ChunkInfo:
@@ -70,7 +67,7 @@ class ChunkInfo:
                 size = size[5:]
             else:
                 fh.close()
-                raise WrongFormat
+                raise WrongFormat()
             save_folder = os.path.dirname(name)
             if (
                 not os.path.exists(save_folder)
@@ -90,7 +87,7 @@ class ChunkInfo:
                     name = name[5:]
                     range = range[6:].split("-")
                 else:
-                    raise WrongFormat
+                    raise WrongFormat()
 
                 if save_folder != os.path.dirname(name):
                     raise IOError
@@ -128,6 +125,7 @@ class HTTPChunk(HTTPRequest):
 
         self.code = 0  #: last http code, set by parent
 
+        self.http_proxy_host = None
         self.allow_private_ip = False
         self.aborted = False  # indicates that the chunk aborted gracefully
 

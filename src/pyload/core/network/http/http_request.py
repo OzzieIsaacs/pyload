@@ -72,6 +72,7 @@ class HTTPRequest:
     def __init__(self, cookies=None, options=None, limit=2_000_000):
         self.exception = None
         self.limit = limit
+        self.http_proxy_host = None
         self.allow_private_ip = True
 
         self.c = pycurl.Curl()
@@ -158,17 +159,18 @@ class HTTPRequest:
             self.c.setopt(pycurl.INTERFACE, interface)
 
         if proxy:
-            if proxy["type"] == "http":
+            proxy_type = proxy["type"]
+            if proxy_type == "http":
                 self.c.setopt(pycurl.PROXYTYPE, pycurl.PROXYTYPE_HTTP)
-            elif proxy["type"] == "https":
+            elif proxy_type == "https":
                 self.c.setopt(pycurl.PROXYTYPE, pycurl.PROXYTYPE_HTTPS)
                 self.c.setopt(pycurl.PROXY_SSL_VERIFYPEER, 0)
-            elif proxy["type"] == "socks4":
+            elif proxy_type == "socks4":
                 self.c.setopt(
                     pycurl.PROXYTYPE,
                     pycurl.PROXYTYPE_SOCKS4A if proxy["socks_resolve_dns"] else pycurl.PROXYTYPE_SOCKS4
                 )
-            elif proxy["type"] == "socks5":
+            elif proxy_type == "socks5":
                 self.c.setopt(
                     pycurl.PROXYTYPE,
                     pycurl.PROXYTYPE_SOCKS5_HOSTNAME if proxy["socks_resolve_dns"] else pycurl.PROXYTYPE_SOCKS5
@@ -176,6 +178,8 @@ class HTTPRequest:
 
             self.c.setopt(pycurl.PROXY, proxy["host"])
             self.c.setopt(pycurl.PROXYPORT, int(proxy["port"]))
+            if proxy_type in ("http", "https"):
+                self.http_proxy_host = (proxy["host"], int(proxy["port"]))
 
             if proxy["username"]:
                 user = proxy["username"]
@@ -595,8 +599,11 @@ class HTTPRequest:
         Called after TCP/TLS connection is established, before request is sent.
         This runs for the initial request AND every redirect follow.
         """
-        if not self.allow_private_ip and not is_global_address(conn_primary_ip):
-            return pycurl.PREREQFUNC_ABORT  # Aborts the entire transfer
+        if not self.allow_private_ip:
+            is_proxy_ip = self.http_proxy_host and self.http_proxy_host == (conn_primary_ip, conn_primary_port)
+
+            if not is_global_address(conn_primary_ip) and not is_proxy_ip:
+                return pycurl.PREREQFUNC_ABORT
 
         return pycurl.PREREQFUNC_OK
 

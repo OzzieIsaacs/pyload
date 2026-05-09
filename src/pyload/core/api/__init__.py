@@ -258,12 +258,8 @@ class Api:
         if section == "core":
             if category == "general" and option == "storage_folder":
                 # Forbid setting the download folder inside dangerous locations
-                correct_case = lambda x: x.lower() if os.name == "nt" else x
-                directories = [
-                    correct_case(os.path.join(os.path.realpath(d), ""))
-                    for d in [value, PKGDIR, self.pyload.userdir]
-                ]
-                if any(directories[0].startswith(d) for d in directories[1:]):
+                blocked_dirs = [PKGDIR, self.pyload.userdir]
+                if any(fs.is_within_directory(d, value) for d in blocked_dirs):
                     return
 
             # Require ADMIN role for security-critical settings
@@ -556,17 +552,8 @@ class Api:
         else:
             folder = ""
 
-        folder = (
-            folder.replace("http://", "")
-            .replace("https://", "")
-            .replace("../", "_")
-            .replace("..\\", "_")
-            .replace(":", "")
-            .replace("/", "_")
-            .replace("\\", "_")
-            .replace("\r", "_")
-            .replace("\n", "_")
-        )
+        folder = folder.replace("http://", "").replace("https://", "")
+        folder = secure_filename(folder)
 
         sanitized_name = name.replace("\n", "\\n").replace("\r", "\\r")
         package_id = self.pyload.files.add_package(sanitized_name, folder, Destination(dest))
@@ -1165,6 +1152,8 @@ class Api:
         for key, value in data.items():
             if key == "id":
                 continue
+            elif key == "_folder":
+                value = secure_filename(value)
             setattr(p, key, value)
 
         p.sync()

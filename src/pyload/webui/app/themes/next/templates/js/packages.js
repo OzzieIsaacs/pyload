@@ -164,7 +164,7 @@ class Package {
     data.links.forEach(link => {
       const $li = $("<li>").css("margin-left", 0).data("lid", link.fid);
 
-      const $firstRow = $('<div>').append(
+      const $firstRow1 = //$('').append(
         // Icon
         $('<span>', {
           class: `child_status`
@@ -173,14 +173,14 @@ class Package {
             class: this.getLinkIcon(link.status),
             style: 'margin-right: 2px; color: #337ab7;'
           })
-        ),
+        );
         // Link
-        $('<span>', {
+        const $firstRow2 = $('<span>', {
           style: 'font-size: 16px; font-weight: bold;'
         }).append(
           $('<a>', {href: link.url}).text(link.name || '').click((e) => {e.preventDefault();})
-        )
-      );
+        );
+      // );
 
       const $secondRow = $('<div>', {
         class: 'child_secrow',
@@ -240,7 +240,7 @@ class Package {
           "padding-left": "30px",
           "cursor": "grab"
         })
-        .addClass("child").append($firstRow, '<br>', $secondRow);
+        .addClass("child").append($firstRow1, $firstRow2, '<br>', $secondRow);
 
       $li.append($container);
       $ul.append($li);

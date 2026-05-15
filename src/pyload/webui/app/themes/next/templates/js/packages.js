@@ -158,14 +158,66 @@ class Package {
   }
 
   createLinks(data) {
-    const ul = $(`#sort_children_${this.id}`);
-    ul.html("");
+    const $ul = $(`#sort_children_${this.id}`);
+    const nbsp = '\u00A0';
+    $ul.html("");
     data.links.forEach(link => {
-      link.id = link.fid;
-      const li = document.createElement("li");
-      $(li).css("margin-left", 0);
+      const $li = $("<li>").css("margin-left", 0).data("lid", link.fid);
 
-      link.icon = this.getLinkIcon(link.status);
+      const $firstRow = $('<div>').append(
+        // Icon
+        $('<span>', {
+          class: `child_status`
+        }).append(
+          $('<span>', {
+            class: this.getLinkIcon(link.status),
+            style: 'margin-right: 2px; color: #337ab7;'
+          })
+        ),
+        // Link
+        $('<span>', {
+          style: 'font-size: 16px; font-weight: bold;'
+        }).append(
+          $('<a>', {href: link.url}).text(link.name || '').click((e) => {e.preventDefault();})
+        )
+      );
+
+      const $secondRow = $('<div>', {
+        class: 'child_secrow',
+        style: 'margin-left: 21px; margin-bottom: 7px; border-radius: 4px;'
+      }).append(
+        // Status
+        $('<span>', {
+          class: 'child_status',
+          style: 'font-size: 12px; color:#555; padding-left: 5px;'
+        }).text((link.statusmsg || '') + nbsp),
+        // Error
+        $('<span>').text((link.error || '') + nbsp),
+        // Size
+        $('<span>', {
+          class: 'child_status',
+          style: 'font-size: 12px; color:#555;'
+        }).text(link.format_size || ''),
+        // Plugin
+        $('<span>', {
+          class: 'child_status',
+          style: 'font-size: 12px; color:#555;'
+        }).text(` ${link.plugin || ''}${nbsp}${nbsp}`),
+        // Delete Button
+        $('<span>', {
+          class: 'glyphicon glyphicon-trash',
+          title: 'Delete Link',
+          style: 'cursor: pointer; font-size: 12px; color:#333;'
+        }),
+        `${nbsp}${nbsp}`,
+        // Restart Button
+        $('<span>', {
+          class: 'glyphicon glyphicon-repeat',
+          title: 'Restart Link',
+          style: 'cursor: pointer; font-size: 12px; color:#333;'
+        })
+      );
+      /*link.icon = this.getLinkIcon(link.status);
 
       const html = `
         <span class='child_status'>
@@ -180,18 +232,18 @@ class Package {
            <span class='child_status' style='font-size: 12px; color:#555;'> ${link.plugin}</span>&nbsp;&nbsp;
            <span class='glyphicon glyphicon-trash' title='{{_('Delete Link')}}' style='cursor: pointer;  font-size: 12px; color:#333;'></span>&nbsp;&nbsp;
            <span class='glyphicon glyphicon-repeat' title='{{_('Restart Link')}}' style='cursor: pointer; font-size: 12px; color:#333;'></span>
-          </div>`;
+          </div>`;*/
 
-      const div = document.createElement("div");
-      $(div).attr("id", `file_${link.id}`);
-      $(div).css("padding-left", "30px");
-      $(div).css("cursor", "grab");
-      $(div).addClass("child");
-      $(div).html(html);
+      const $container = $('<div>')
+        .attr("id", `file_${link.fid}`)
+        .css({
+          "padding-left": "30px",
+          "cursor": "grab"
+        })
+        .addClass("child").append($firstRow, '<br>', $secondRow);
 
-      jQuery.data(li, "lid", link.id);
-      li.appendChild(div);
-      ul[0].appendChild(li);
+      $li.append($container);
+      $ul.append($li);
     });
 
     this.registerLinkEvents();

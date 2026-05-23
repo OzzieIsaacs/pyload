@@ -358,13 +358,13 @@ def apikey_auth(func):
         if api_key is not None:
             error = "Invalid API key"
             if api_key.startswith("pl_"):
-                # Look up the API key in the database
+                # Look up the API key in the database (with TTL cache)
                 key_info = api.check_apikey(api_key)
                 if key_info["success"]:
                     # Get user info from the user_id in the key
                     user_id = key_info["data"]["user_id"]
                     key_name = key_info["data"]["name"]
-                    user_data = api.pyload.db.get_all_user_data().get(user_id)
+                    user_data = api.pyload.db.get_user_by_id(user_id)
                     if user_data:
                         now = int(time.time() * 1000)
                         last_used = key_info["data"]["last_used"]

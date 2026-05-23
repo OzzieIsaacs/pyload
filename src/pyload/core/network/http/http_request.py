@@ -3,9 +3,9 @@ import io
 import mimetypes
 import os
 import tempfile
+import urllib.parse
 from itertools import chain
 from logging import getLogger
-from urllib.parse import quote, urlencode
 
 import certifi
 import pycurl
@@ -19,7 +19,7 @@ from ...utils.convert import to_bytes, to_str
 from ...utils.web.check import is_global_address
 from ...utils.web.parse import http_header as parse_header_line
 from ...utils.web.purge import unescape as html_unescape
-from ..exceptions import Abort
+from ..exceptions import Abort, Fail
 from .exceptions import BadHeader
 from .http_headers import HttpHeaders
 
@@ -32,12 +32,12 @@ def myquote(url):
         url = url.encode()
     except AttributeError:
         pass
-    return quote(url, safe="%/:=&?~#+!$,;'@()*[]")
+    return urllib.parse.quote(url, safe="%/:=&?~#+!$,;'@()*[]")
 
 
 def myurlencode(data):
     data = dict(data)
-    return urlencode(
+    return urllib.parse.urlencode(
         {
             x.encode()
             if hasattr(x, "encode")
@@ -71,6 +71,7 @@ class FormFile:
 class HTTPRequest:
     def __init__(self, cookies=None, options=None, limit=2_000_000):
         self.exception = None
+        self.bad_ip = None
         self.limit = limit
         self.http_proxy_host = None
         self.allow_private_ip = False
@@ -289,7 +290,7 @@ class HTTPRequest:
         url = myquote(url)
 
         if get:
-            get = urlencode(get)
+            get = urllib.parse.urlencode(get)
             url = f"{url}?{get}"
 
         if self.ssl_aiachaser and url.startswith("https://"):
@@ -419,10 +420,15 @@ class HTTPRequest:
         try:
             self.c.perform()
         except pycurl.error as exc:
-            if exc.args[0] == pycurl.E_WRITE_ERROR and self.exception:
+            error_code = exc.args[0]
+            if error_code == pycurl.E_WRITE_ERROR and self.exception:
                 raise self.exception from None
+            elif error_code == pycurl.E_ABORTED_BY_CALLBACK:
+                hostname = urllib.parse.urlparse(url).hostname
+                raise Fail(f"Refusing request to Server-Side host ('{hostname}' resolves to {self.bad_ip})") from None
             else:
                 raise
+
         finally:
             if self.aia_cainfo:
                 os.remove(self.aia_cainfo)
@@ -678,6 +684,7 @@ class HTTPRequest:
             is_proxy_ip = self.http_proxy_host and self.http_proxy_host == (conn_primary_ip, conn_primary_port)
 
             if not is_global_address(conn_primary_ip) and not is_proxy_ip:
+                self.bad_ip = conn_primary_ip
                 return pycurl.PREREQFUNC_ABORT
 
         return pycurl.PREREQFUNC_OK

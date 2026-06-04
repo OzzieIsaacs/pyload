@@ -281,9 +281,9 @@ class Package {
       const $span = $(e.currentTarget);
       const index = $span.index();
       const lid = $span.closest("li").find(".child").attr("id").match(/[0-9]+/);
-      if (index === 3) {
+      if (index === 4) {
         this.deleteLink(lid);
-      } else if (index === 4) {
+      } else if (index === 5) {
         this.restartLink(lid);
       }
     });

@@ -145,3 +145,4 @@ class UserData(BaseModel):
     role: Optional[int] = None
     permission: Optional[int] = None
     template: Optional[str] = None
+    is_active: Optional[int] = True

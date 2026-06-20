@@ -344,19 +344,19 @@ def is_executable(filename):
     return os.path.isfile(file) and os.access(file, os.X_OK)
 
 
-def which(filename):
+def which(file_name):
     """
     Works exactly like the unix command which Courtesy of
     http://stackoverflow.com/a/377028/675646.
     """
-    dirname, basename = os.path.split(filename)
+    dirname, basename = os.path.split(file_name)
 
     if dirname:
-        return filename if is_executable(filename) else None
+        return file_name if is_executable(file_name) else None
 
     else:
         for path in os.environ["PATH"].split(os.pathsep):
-            filename = os.path.join(path.strip('"'), filename)
+            filename = os.path.join(path.strip('"'), file_name)
             if is_executable(filename):
                 return filename
 

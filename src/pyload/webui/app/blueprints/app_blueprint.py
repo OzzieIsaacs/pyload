@@ -56,7 +56,7 @@ def login():
         allusers = api.get_all_userdata()
         if len(allusers) == 1:  # TODO: check if localhost
             user_info = list(allusers.values())[0]
-            login_user(user_info, remember=remember)
+            login_user(user_info, remember=True)
             return flask.redirect(next_url)
 
     if flask.request.method == "POST":

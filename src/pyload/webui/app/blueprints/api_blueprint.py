@@ -12,7 +12,7 @@ from pyload import APPID
 
 from ..api_docs.openapi_specification_generator import OpenAPISpecificationGenerator
 from ..cw_login import current_user, login_user
-from ..helpers import apikey_auth, csrf_exempt, is_authenticated, rate_limit
+from ..helpers import apikey_auth, csrf_exempt, rate_limit
 
 bp = flask.Blueprint("api", __name__)
 log = getLogger(APPID)
@@ -123,7 +123,7 @@ def api_docs():
         user_info = api.check_auth(basic_auth.username, basic_auth.password)
         if not user_info:
             return "Forbidden", 403
-    elif not is_authenticated(s):
+    elif not current_user.is_authenticated(s):
         return "Authentication required", 401, {'WWW-Authenticate': 'Basic realm="Login Required"'}
     else:
         user_info = {"role": s["role"], "permission": s["perms"], "id": s["id"]}
@@ -147,7 +147,7 @@ def swagger_ui():
         user_info = api.check_auth(basic_auth.username, basic_auth.password)
         if not user_info:
             return "Forbidden", 403
-    elif not is_authenticated(s):
+    elif not current_user.is_authenticated(s):
         return "Authentication required", 401, {'WWW-Authenticate': 'Basic realm="Login Required"'}
     else:
         user_info = {"role": s["role"], "permission": s["perms"], "id": s["id"]}

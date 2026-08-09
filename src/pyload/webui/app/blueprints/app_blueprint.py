@@ -34,7 +34,7 @@ def favicon():
 @bp.route("/web/<path:filename>", endpoint="web")
 def render(filename):
     # Allow login.html without authentication, protect all other files
-    if filename != "login.html" and not is_authenticated():
+    if filename != "login.html" and not current_user.is_authenticated:
         location = flask.url_for("app.login", next="index")
         return flask.redirect(location)
 

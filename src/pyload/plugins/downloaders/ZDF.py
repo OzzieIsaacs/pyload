@@ -13,7 +13,7 @@ class ZDF(BaseDownloader):
     __version__ = "0.93"
     __status__ = "testing"
 
-    __pattern__ = r"https://(?:www\.)?zdf\.de/(?P<ID>[/\w-]+)\.html"
+    __pattern__ = r"https://(?:www\.)?zdf\.de/(?P<ID>[/\w-]+)"
     __config__ = [
         ("enabled", "bool", "Activated", True),
         ("use_premium", "bool", "Use premium account if available", True),
@@ -29,8 +29,9 @@ class ZDF(BaseDownloader):
     def process(self, pyfile):
         self.data = self.load(pyfile.url)
         try:
+            # {"apiToken":"ahBaeMeekaiy5ohsai4bee4ki6Oopoi5quailieb"
             api_token = re.search(
-                r'window\.zdfsite\.player\.apiToken = "([\d\w]+)";', self.data
+                r'{\\"apiToken\\":\\"(.*?)\\"', self.data
             ).group(1)
 
             self.req.http.set_header("Api-Auth", f"Bearer {api_token}")

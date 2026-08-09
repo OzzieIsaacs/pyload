@@ -221,31 +221,6 @@ def set_permission(perms):
     return permission
 
 
-'''def set_session(user_info, session=flask.session, permanent=True):
-    session.permanent = bool(permanent)
-    session.update(
-        {
-            "authenticated": True,
-            "id": user_info["id"],
-            "name": user_info["name"],
-            "role": user_info["role"],
-            "perms": user_info["permission"],
-            "template": user_info["template"],
-        }
-    )
-    # session.modified = True
-    return session'''
-
-
-# TODO: Recheck...
-def parse_userdata(session=flask.session):
-    return {
-        "name": session.get("name", "Anonymous"),
-        "is_admin": session.get("role", 1) == 0,
-        "is_authenticated": session.get("authenticated", False),
-    }
-
-
 def apiver_check(func):
     # if no apiver is provided assumes latest
     @wraps(func)
@@ -259,12 +234,12 @@ def apiver_check(func):
     return wrapper
 
 
-def is_authenticated(session=flask.session):
+'''def is_authenticated(session=flask.session):
     api = flask.current_app.config["PYLOAD_API"]
     user = session.get("name")
     authenticated = session.get("authenticated", False)
 
-    return authenticated and api.user_exists(user)
+    return authenticated and api.user_exists(user)'''
 
 
 def config_check(config_key: list[str], not_found_msg: str = "Not Found"):

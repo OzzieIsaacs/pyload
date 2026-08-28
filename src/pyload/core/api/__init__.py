@@ -1232,7 +1232,7 @@ class Api:
 
         :return: bool
         """
-        self.pyload.last_client_connected = time.time()
+        self.pyload.last_client_connected = time.monotonic()
         task = self.pyload.captcha_manager.get_task()
         return task is not None
 
@@ -1246,7 +1246,7 @@ class Api:
         :param exclusive: unused
         :return: `CaptchaTask`
         """
-        self.pyload.last_client_connected = time.time()
+        self.pyload.last_client_connected = time.monotonic()
         task = self.pyload.captcha_manager.get_task()
         if task:
             task.set_waiting_for_user(exclusive=exclusive)
@@ -1269,7 +1269,7 @@ class Api:
         :param tid: task id
         :return: string
         """
-        self.pyload.last_client_connected = time.time()
+        self.pyload.last_client_connected = time.monotonic()
         t = self.pyload.captcha_manager.get_task_by_id(tid)
         return t.get_status() if t else ""
 
@@ -1283,7 +1283,7 @@ class Api:
         :param tid: task id
         :param result: captcha result
         """
-        self.pyload.last_client_connected = time.time()
+        self.pyload.last_client_connected = time.monotonic()
         task = self.pyload.captcha_manager.get_task_by_id(tid)
         if task:
             task.set_result(result)

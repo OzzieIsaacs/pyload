@@ -177,6 +177,48 @@ pyload -d
 pytest tests
 ```
 
+### Extracting translatable strings
+
+When you add or change user-visible labels in configuration files or plugin configuration metadata, update the message catalog before shipping changes.
+
+The project uses custom Babel extractors registered in `setup.py` and configured in `babel_v3.cfg`:
+
+- `defaultcfg` extracts labels from `src/pyload/core/config/default.cfg`
+- `pluginconfig` extracts description strings from plugin `__config__` tuples
+
+Run the extractor in the project environment:
+
+```bash
+python -m pip install -e ".[build]"
+python -m babel.messages.frontend extract -F babel_v3.cfg -o src/pyload/locale/pyload.pot src
+```
+
+This generates a `.pot` template that contains the extracted strings. Update the locale files, for example:
+
+```bash
+src/pyload/locale/de/LC_MESSAGES/pyload.po
+```
+
+A common follow-up step is to refresh a specific catalog from the `.pot` file:
+
+```bash
+python setup.py update_catalog --locale de --input-file src/pyload/locale/pyload.pot
+```
+
+This works because `setup.py` registers the Babel extractors and exposes the standard Babel catalog commands through the setuptools entry points. If you prefer the Babel CLI directly, you can also run:
+
+```bash
+python -m babel.messages.frontend update_catalog -d src/pyload/locale -i src/pyload/locale/pyload.pot -l de
+```
+
+Then compile the catalogs when needed:
+
+```bash
+python -m babel.messages.frontend compile -d src/pyload/locale
+```
+
+Keep strings in the catalog synchronized with the source code and config files so labels like `General`, `Reconnection`, and plugin descriptions such as `Check file size` are translated consistently.
+
 ### API specification
 
 pyLoad provides an OpenAPI specification for its REST API, visible via Swagger UI under the endpoint

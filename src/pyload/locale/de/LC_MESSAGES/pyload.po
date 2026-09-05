@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyload\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-09-05 09:56+0200\n"
-"PO-Revision-Date: 2026-09-05 10:00+0200\n"
+"POT-Creation-Date: 2026-09-05 11:58+0200\n"
+"PO-Revision-Date: 2026-09-05 12:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -4262,7 +4262,7 @@ msgstr "Proxy:"
 #: src/pyload/webui/app/themes/next/templates/base.html:190
 #: src/pyload/webui/app/themes/pyplex/templates/base.html:217
 msgid "Reconnect:"
-msgstr "Reconnect:"
+msgstr "Neuverbinden:"
 
 #: src/pyload/webui/app/themes/modern/templates/base.html:221
 #: src/pyload/webui/app/themes/next/templates/base.html:191
@@ -5687,3 +5687,18 @@ msgstr "Link löschen"
 #: src/pyload/webui/app/themes/next/templates/js/packages.js:234
 msgid "Restart Link"
 msgstr "Link neu starten"
+
+msgid "Check file size"
+msgstr "Dateigröße prüfen"
+
+#: src/pyload/plugins/base/simple_downloader.py:20
+msgid "Use premium account if available"
+msgstr "Premium-Konto verwenden, falls verfügbar"
+
+#: src/pyload/plugins/base/simple_downloader.py:21
+msgid "Fallback to free download if premium fails"
+msgstr "Auf kostenlosen Download zurückfallen, wenn Premium fehlschlägt"
+
+#: src/pyload/plugins/base/simple_downloader.py:23
+msgid "Reconnect if waiting time is greater than minutes"
+msgstr "Erneut verbinden, wenn die Wartezeit länger als Minuten ist"

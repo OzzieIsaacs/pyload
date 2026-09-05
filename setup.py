@@ -8,19 +8,9 @@
 #           \  /
 #            \/
 
+import ast
 import os
-
-# from pkg_resources import VersionConflict, require
 from setuptools import setup
-
-# import sys
-
-
-# try:
-#     require("setuptools>=38.3")
-# except VersionConflict:
-#     print("Error: version of setuptools is too old (<38.3)!")
-#     sys.exit(1)
 
 
 def extract_default_cfg(fileobj, keywords, comment_tags, options):
@@ -57,6 +47,58 @@ def extract_default_cfg(fileobj, keywords, comment_tags, options):
                     yield lineno, "_", message, []
 
 
+def _to_text(node):
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    if isinstance(node, ast.Str):
+        return node.s
+    if isinstance(node, ast.JoinedStr):
+        parts = []
+        for v in node.values:
+            if isinstance(v, ast.Constant) and isinstance(v.value, str):
+                parts.append(v.value)
+            elif isinstance(v, ast.Str):
+                parts.append(v.s)
+            else:
+                return None
+        return "".join(parts)
+    return None
+
+
+def extract_plugin_config(fileobj, keywords, comment_tags, options):
+    """Extract plugin __config__ labels (3rd tuple item) from Python files."""
+    source = fileobj.read()
+    if isinstance(source, bytes):
+        source = source.decode("utf-8", errors="replace")
+
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return
+
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ClassDef):
+            continue
+
+        for stmt in node.body:
+            if not isinstance(stmt, ast.Assign):
+                continue
+
+            targets = [t.id for t in stmt.targets if isinstance(t, ast.Name)]
+            if "__config__" not in targets:
+                continue
+
+            if not isinstance(stmt.value, (ast.List, ast.Tuple)):
+                continue
+
+            for item in stmt.value.elts:
+                if not isinstance(item, (ast.List, ast.Tuple)) or len(item.elts) < 3:
+                    continue
+                message = _to_text(item.elts[2])
+                if message:
+                    yield getattr(item, "lineno", getattr(stmt, "lineno", 1)), "_", message, []
+
+
 def retrieve_version():
     version = None
     build = (
@@ -77,6 +119,7 @@ if __name__ == "__main__":
         entry_points={
             "babel.extractors": [
                 "defaultcfg = setup:extract_default_cfg",
+                "pluginconfig = setup:extract_plugin_config",
             ]
         },
     )

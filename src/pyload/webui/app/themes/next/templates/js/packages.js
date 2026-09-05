@@ -31,9 +31,10 @@ class PackageUI {
     }
 
     $packageList.sortable({
-      handle: ".progress",
+      handle: ".progress, .packagename, .packagename .name, .packagename .packageicon",
       axis: "y",
       cursor: "grabbing",
+      distance: 5,
       start(event, ui) {
         $(this).attr('data-previndex', ui.item.index());
       },
@@ -139,7 +140,27 @@ class Package {
     $(imgs[7]).click((e) => this.editOrder(e));
     $(imgs[8]).click((e) => this.extractPackage(e));
 
-    $(this.ele).find('.packagename').click(() => this.toggle());
+    const $packageName = $(this.ele).find('.packagename');
+    $packageName.on("mousedown", (e) => {
+      if (e.which !== 1) {
+        return;
+      }
+      $(e.currentTarget).data("toggle-start", { x: e.pageX, y: e.pageY });
+    });
+    $packageName.on("mouseup", (e) => {
+      if (e.which !== 1) {
+        return;
+      }
+      const start = $(e.currentTarget).data("toggle-start");
+      $(e.currentTarget).removeData("toggle-start");
+      if (!start) {
+        return;
+      }
+      if (Math.abs(e.pageX - start.x) > 3 || Math.abs(e.pageY - start.y) > 3) {
+        return;
+      }
+      this.toggle();
+    });
   }
 
   loadLinks() {
@@ -508,4 +529,3 @@ class Package {
     $('#pack_box').modal('hide');
   }
 }
-

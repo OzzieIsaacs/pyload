@@ -178,6 +178,28 @@ class Api:
         )
         return f
 
+    def _translate_cfg_text(self, text: Optional[str]) -> str:
+        if text is None:
+            return ""
+        return self._(text) if callable(self._) else text
+
+    def _translate_config_dict(self, config: dict[Any, Any]) -> dict[Any, Any]:
+        translated = {}
+        for section_name, sub in config.items():
+            section = {}
+            for key, value in sub.items():
+                if key in ("desc", "outline") and isinstance(value, str):
+                    section[key] = self._translate_cfg_text(value)
+                elif isinstance(value, dict):
+                    option = dict(value)
+                    if isinstance(option.get("desc"), str):
+                        option["desc"] = self._translate_cfg_text(option["desc"])
+                    section[key] = option
+                else:
+                    section[key] = value
+            translated[section_name] = section
+        return translated
+
     def _convert_config_format(self, c) -> dict[str, ConfigSection]:
         sections = {}
         for section_name, sub in c.items():
@@ -186,14 +208,14 @@ class Api:
                 if key in ("desc", "outline"):
                     continue
                 item = ConfigItem(name=key,
-                                  description=data["desc"],
+                                  description=self._translate_cfg_text(data["desc"]),
                                   value=str(data["value"]),
                                   type=data["type"])
                 items.append(item)
             section = ConfigSection(name=section_name,
-                                    description=sub["desc"],
+                                    description=self._translate_cfg_text(sub.get("desc")),
                                     items=items,
-                                    outline=sub.get("outline"))
+                                    outline=self._translate_cfg_text(sub.get("outline")))
             sections[section_name] = section
 
         return sections
@@ -311,7 +333,7 @@ class Api:
 
         :return: dict
         """
-        return self.pyload.config.config
+        return self._translate_config_dict(self.pyload.config.config)
 
     @legacy("getPluginConfig")
     @permission(Perms.SETTINGS)
@@ -333,7 +355,7 @@ class Api:
 
         :return: dict
         """
-        return self.pyload.config.plugin
+        return self._translate_config_dict(self.pyload.config.plugin)
 
     @legacy("pauseServer")
     @permission(Perms.STATUS)

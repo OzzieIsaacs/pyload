@@ -8,12 +8,10 @@
 #           \  /
 #            \/
 
-import importlib.metadata
 import os
 
-import packaging.version
 # from pkg_resources import VersionConflict, require
-from setuptools import Command, setup
+from setuptools import setup
 
 # import sys
 
@@ -25,52 +23,38 @@ from setuptools import Command, setup
 #     sys.exit(1)
 
 
-class BuildLocale(Command):
-    """
-    Build translations
-    """
+def extract_default_cfg(fileobj, keywords, comment_tags, options):
+    """Extract translatable labels from core/config/default.cfg."""
+    for lineno, line in enumerate(fileobj, start=1):
+        if isinstance(line, bytes):
+            line = line.decode("utf-8", errors="replace")
 
-    description = "build locales"
-    user_options = []
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
 
-    def initialize_options(self):
-        pass
+        if " - " in stripped:
+            _, title = stripped.split(" - ", 1)
+            title = title.strip()
+            if title.endswith(":"):
+                title = title[:-1].rstrip()
+            if len(title) >= 2 and title[0] == '"' and title[-1] == '"':
+                message = title[1:-1].strip()
+                if message:
+                    yield lineno, "_", message, []
+                continue
 
-    def finalize_options(self):
-        jinja2_version = importlib.metadata.version("jinja2")
-        if packaging.version.Version(jinja2_version) < packaging.version.Version(
-            "3.0.0"
-        ):
-            mapping_file_version = 2
-        else:
-            mapping_file_version = 3
-        mapping_file = f"babel_v{mapping_file_version}.cfg"
-
-        with open(mapping_file, "r", encoding="utf-8-sig") as fp:
-            mapping = fp.read()
-        input_dirs = self.distribution.get_option_dict("extract_messages")[
-            "input_dirs"
-        ][1]
-
-        self.distribution.message_extractors = {input_dirs: mapping}
-
-    def _execute(self, func_name, cmd_list):
-        execute = getattr(self, func_name)
-        for cmd_name in cmd_list:
-            execute(cmd_name)
-
-    def run(self):
-        # TODO: add "download_catalog"
-        commands = ["extract_messages", "init_catalog", "compile_catalog"]
-
-        if self.dry_run:
-            self._execute("get_command_name", commands)
-        else:
-            dirname = os.path.join(os.path.dirname(__file__), "src", "pyload", "locale")
-            self.mkpath(
-                dirname
-            )  # NOTE: do we have to pass dry_run value explicitly here?
-            self._execute("run_command", commands)
+        quote_parts = line.split('"')
+        if len(quote_parts) >= 3:
+            message = quote_parts[1].strip()
+            if message:
+                yield lineno, "_", message, []
+        elif line[:1].isspace():
+            if ":" in line:
+                _, after_colon = line.split(":", 1)
+                message = after_colon.split("=", 1)[0].strip()
+                if message:
+                    yield lineno, "_", message, []
 
 
 def retrieve_version():
@@ -90,5 +74,9 @@ def retrieve_version():
 if __name__ == "__main__":
     setup(
         version=retrieve_version(),
-        cmdclass={"build_locale": BuildLocale},
+        entry_points={
+            "babel.extractors": [
+                "defaultcfg = setup:extract_default_cfg",
+            ]
+        },
     )

@@ -146,3 +146,14 @@ class UserData(BaseModel):
     permission: Optional[int] = None
     template: Optional[str] = None
     is_active: Optional[int] = True
+
+    @property
+    def is_authenticated(self) -> bool:
+        return bool(self.is_active)
+
+    @property
+    def is_anonymous(self) -> bool:
+        return False
+
+    def get_id(self) -> str:
+        return str(self.id) if self.id is not None else ""

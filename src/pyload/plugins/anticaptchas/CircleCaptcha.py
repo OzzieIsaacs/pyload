@@ -7,11 +7,13 @@ import math
 import operator
 import sys
 import urllib.request
+import base64
 
 from PIL import Image, ImageDraw
 
-from ..base.ocr import BaseOCR
-
+# ImportError: attempted relative import with no known parent package
+#from ..base.captcha_service import CaptchaService
+from pyload.plugins.base.captcha_service import CaptchaService
 
 class ImageSequence:
     def __init__(self, im):
@@ -26,9 +28,9 @@ class ImageSequence:
             raise IndexError  #: end of sequence
 
 
-class CircleCaptcha(BaseOCR):
+class CircleCaptcha(CaptchaService):
     __name__ = "CircleCaptcha"
-    __type__ = "ocr"
+    __type__ = "anticaptcha"
     __version__ = "1.11"
     __status__ = "testing"
 
@@ -535,7 +537,25 @@ class CircleCaptcha(BaseOCR):
         # self.log_debug(f"{(x, y)} = {result}")
         return result
 
+    def challenge(self, img, instructions="click into the open circle"):
+        #if isinstance(img, bytes):
+        #    img = PIL.Image.open(io.BytesIO(img))
+        self.log_debug(f"challenge img {type(img)} {repr(img)[:1000]}")
+        assert isinstance(img, bytes)
+        img_base64 = base64.b64encode(img).decode("ascii")
+        params = {
+            "url": self.pyfile.url,
+            # TODO rename keys?
+            "body": img_base64,
+            "comment": instructions,
+        }
+        # AttributeError: 'CircleCaptcha' object has no attribute 'decrypt_interactive'
+        result = self.decrypt_interactive(params, timeout=300)
+        return result
+
     def decrypt(self, img):
+        if isinstance(img, bytes):
+            img = PIL.Image.open(io.BytesIO(img))
         i_debug_save_file = 0
         mypalette = None
         for im in ImageSequence(img):
@@ -550,7 +570,7 @@ class CircleCaptcha(BaseOCR):
                 # if i_debug_save_file < 7:
                 # continue
                 im.save("output{}.png".format(i_debug_save_file), "png")
-                input("frame: {}".format(im))
+                print("frame: {}".format(im))
 
             pix = im.load()
 
@@ -807,12 +827,3 @@ class CircleCaptcha(BaseOCR):
         coords = self.decrypt(Image.open(filename))
         self.log_info(self._("Coords: {}").format(coords))
 
-
-# DEBUG
-# import datetime
-# a = datetime.now()
-# x = CircleCaptcha()
-# coords = x.decrypt_from_file("decripter/captx.html2.gif")
-# coords = x.decrypt_from_web("http://ncrypt.in/classes/captcha/circlecaptcha.php")
-# b = datetime.now()
-# self.log_debug(f"Elapsed time: {(b-a).seconds} seconds")

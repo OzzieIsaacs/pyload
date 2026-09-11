@@ -9,7 +9,7 @@ from pyload.core.network.request_factory import get_request
 from pyload.core.utils import fs
 from pyload.core.utils.old import fixurl
 
-from ..helpers import DB, Config, exists
+from ..helpers import DB, Config, exists, format_exc, str_exc, parse_html_header
 
 if os.name != "nt":
     import grp
@@ -52,11 +52,28 @@ class BasePlugin:
         self.info = {}
 
         #: Browser instance, see `network.Browser`
-        self.req = self.pyload.request_factory.get_request(self.classname)
+        self._req = False
 
         #: Last loaded html
         self.last_html = ""
         self.last_header = {}
+
+    @property
+    def req(self):
+        """
+        Browser instance, see `network.Browser`
+        """
+        if self._req == False:
+            # first init
+            self._init_req()
+        return self._req
+
+    @req.setter
+    def req(self, val):
+        self._req = val
+
+    def _init_req(self):
+        self._req = self.pyload.request_factory.get_request(self.classname)
 
     def init(self):
         """
@@ -67,15 +84,11 @@ class BasePlugin:
     # TODO: Rewrite to use unique logger from logfactory
     def _log(self, level, plugintype, pluginname, args, kwargs):
         log = getattr(self.pyload.log, level)
-        log(
-            "{plugintype} {pluginname}: {msg}".format(
-                plugintype=plugintype.upper(),
-                pluginname=pluginname,
-                msg=" | ".join(["%s"] * len(args)),
-            ),
-            *args,
-            **kwargs,
-        )
+        msg = " | ".join(map(
+            lambda a: str_exc(a) if isinstance(a, Exception) else str(a),
+            args
+        ))
+        log(f"{plugintype} {pluginname}: {msg}", **kwargs)
 
     def log_debug(self, *args, **kwargs):
         self._log("debug", self.__type__, self.__name__, args, kwargs)

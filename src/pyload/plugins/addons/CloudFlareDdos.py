@@ -24,6 +24,13 @@ def is_simple_plugin(obj):
     )
 
 
+def is_downloader_or_decrypter(obj):
+    return any(
+        k.__name__ in ("BaseDownloader", "BaseDecrypter", "SimpleDownloader", "SimpleDecrypter")
+        for k in inspect.getmro(type(obj))
+    )
+
+
 def get_plugin_last_header(plugin):
     # NOTE: req can be a HTTPRequest or a Browser object
     return plugin.req.http._header_buffer if hasattr(plugin.req, "http") else plugin.req._header_buffer
@@ -212,9 +219,11 @@ class PreloadStub:
     def __init__(self, addon_plugin, owner_plugin):
         self.addon_plugin = addon_plugin
         self.owner_plugin = owner_plugin
-        self.old_preload = owner_plugin._preload
+        self.old_preload = getattr(owner_plugin, "_preload", None)
 
     def my_preload(self, *args, **kwargs):
+        if self.old_preload is None:
+            return
         data = CloudFlare.handle_function(
             self.addon_plugin,
             self.owner_plugin,
@@ -227,6 +236,25 @@ class PreloadStub:
 
     def __repr__(self):
         return "<PreloadStub object at {}>".format(hex(id(self)))
+
+
+class LoadStub:
+    def __init__(self, addon_plugin, owner_plugin):
+        self.addon_plugin = addon_plugin
+        self.owner_plugin = owner_plugin
+        self.old_load = owner_plugin.load
+
+    def my_load(self, *args, **kwargs):
+        return CloudFlare.handle_function(
+            self.addon_plugin,
+            self.owner_plugin,
+            "load",
+            self.old_load,
+            (args, kwargs),
+        )
+
+    def __repr__(self):
+        return "<LoadStub object at {}>".format(hex(id(self)))
 
 
 class CloudFlareDdos(BaseAddon):
@@ -242,21 +270,26 @@ class CloudFlareDdos(BaseAddon):
     __authors__ = [("GammaC0de", "nitzo2001[AT]yahoo[DOT]com")]
 
     def activate(self):
-        self.stubs = {}
+        self.preload_stubs = {}
+        self.load_stubs = {}
         self._override_get_url()
 
     def deactivate(self):
-        while len(self.stubs):
-            stub = next(iter(self.stubs.values()))
+        while len(self.preload_stubs):
+            stub = next(iter(self.preload_stubs.values()))
             self._unoverride_preload(stub.owner_plugin)
+
+        while len(self.load_stubs):
+            stub = next(iter(self.load_stubs.values()))
+            self._unoverride_load(stub.owner_plugin)
 
         self._unoverride_get_url()
 
     def _unoverride_preload(self, plugin):
-        if id(plugin) in self.stubs:
+        if id(plugin) in self.preload_stubs:
             self.log_debug(f"Unoverriding _preload() for {plugin_id(plugin)}")
 
-            stub = self.stubs.pop(id(plugin))
+            stub = self.preload_stubs.pop(id(plugin))
             stub.owner_plugin._preload = stub.old_preload
 
         else:
@@ -267,9 +300,9 @@ class CloudFlareDdos(BaseAddon):
             )
 
     def _override_preload(self, plugin):
-        if id(plugin) not in self.stubs:
+        if id(plugin) not in self.preload_stubs:
             stub = PreloadStub(self, plugin)
-            self.stubs[id(plugin)] = stub
+            self.preload_stubs[id(plugin)] = stub
 
             self.log_debug(f"Overriding _preload() for {plugin_id(plugin)}")
             plugin._preload = stub.my_preload
@@ -277,6 +310,33 @@ class CloudFlareDdos(BaseAddon):
         else:
             self.log_warning(
                 self._("Already overrided _preload() for {}").format(plugin_id(plugin))
+            )
+
+    def _unoverride_load(self, plugin):
+        if id(plugin) in self.load_stubs:
+            self.log_debug(f"Unoverriding load() for {plugin_id(plugin)}")
+
+            stub = self.load_stubs.pop(id(plugin))
+            stub.owner_plugin.load = stub.old_load
+
+        else:
+            self.log_warning(
+                self._(
+                    "No load() override found for {}, cannot un-override>"
+                ).format(plugin_id(plugin))
+            )
+
+    def _override_load(self, plugin):
+        if id(plugin) not in self.load_stubs:
+            stub = LoadStub(self, plugin)
+            self.load_stubs[id(plugin)] = stub
+
+            self.log_debug(f"Overriding load() for {plugin_id(plugin)}")
+            plugin.load = stub.my_load
+
+        else:
+            self.log_warning(
+                self._("Already overrided load() for {}").format(plugin_id(plugin))
             )
 
     def _override_get_url(self):
@@ -311,25 +371,24 @@ class CloudFlareDdos(BaseAddon):
             del frame
 
     def download_preparing(self, pyfile):
-        #: Only SimpleDownloader and SimpleDecrypter based plugins are supported
-        if not is_simple_plugin(pyfile.plugin):
+        #: Support all downloader and decrypter based plugins
+        if not is_downloader_or_decrypter(pyfile.plugin):
             self.log_debug(f"Skipping plugin {plugin_id(pyfile.plugin)}")
             return
 
-        attr = getattr(pyfile.plugin, "_preload", None)
-        if not attr and not callable(attr):
-            self.log_error(
-                self._("{} is missing _preload() function, cannot override!").format(
-                    plugin_id(pyfile.plugin)
-                )
-            )
-            return
+        #: Override _preload() if it exists (for SimpleDownloader/SimpleDecrypter)
+        if hasattr(pyfile.plugin, "_preload") and callable(getattr(pyfile.plugin, "_preload", None)):
+            self._override_preload(pyfile.plugin)
 
-        self._override_preload(pyfile.plugin)
+        #: Always override load() to catch BadHeader from Cloudflare
+        self._override_load(pyfile.plugin)
 
     def download_processed(self, pyfile):
-        if id(pyfile.plugin) in self.stubs:
+        if id(pyfile.plugin) in self.preload_stubs:
             self._unoverride_preload(pyfile.plugin)
+
+        if id(pyfile.plugin) in self.load_stubs:
+            self._unoverride_load(pyfile.plugin)
 
     def my_get_url(self, *args, **kwargs):
         owner_plugin = self._find_owner_plugin()

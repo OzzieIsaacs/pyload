@@ -320,9 +320,14 @@ class PluginManager:
                     configs[name] = new_config
                     continue
 
-                config = literal_eval(
-                    config[0].strip().replace("\n", "").replace("\r", "")
-                )
+                try:
+                    config = literal_eval(config[0].strip().replace("\r", ""))
+                except (ValueError, SyntaxError):
+                    self.pyload.log.warning(
+                        self._("Could not parse config in {}, using fallback").format(name)
+                    )
+                    configs[name] = {"enabled": ["bool", "Activated", False], "desc": desc}
+                    continue
 
                 if isinstance(config, list) and all(
                     isinstance(c, tuple) for c in config

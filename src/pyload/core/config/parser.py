@@ -114,6 +114,8 @@ class ConfigParser:
 
         try:
             homeconf = self.parse_config(self.configpath)
+
+
             self.update_values(homeconf, self.config)
 
         except Exception as exc:
@@ -343,6 +345,9 @@ class ConfigParser:
         gets a value for a plugin.
         """
         return self.plugin[plugin][option]["value"]
+
+    def get_options(self, plugin):
+        return self.plugin[plugin].keys()
 
     def set_plugin(self, plugin, option, value):
         """

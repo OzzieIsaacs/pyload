@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+# TODO refactor with AntiCaptcha
+
 import base64
 import json
 import time
@@ -6,53 +10,75 @@ import urllib.parse
 from pyload.core.utils.convert import to_str
 
 from ..base.addon import BaseAddon, threaded
+from .AntiCaptcha import AntiCaptcha
 
 
-class AntiCaptcha(BaseAddon):
-    __name__ = "AntiCaptcha"
+# based on
+# pyload/src/pyload/plugins/addons/AntiCaptcha.py
+# jdownloader/src/org/jdownloader/captcha/v2/challenge/cutcaptcha/CutCaptchaChallenge.java
+
+class TwoCaptcha(BaseAddon):
+    __name__ = "TwoCaptcha"
     __type__ = "addon"
-    __version__ = "0.04"
+    __version__ = "0.1"
     __status__ = "testing"
 
     __config__ = [
         ("enabled", "bool", "Activated", False),
-        ("check_client", "bool", "Don't use if client is connected", True),
-        ("solve_image", "bool", "Solve image catcha", True),
-        ("solve_recaptcha", "bool", "Solve ReCaptcha", True),
-        ("solve_hcaptcha", "bool", "Solve HCaptcha", True),
-        ("solve_turnstile", "bool", "Solve Turnstile", True),
-        ("refund", "bool", "Request refund if result incorrect", False),
-        ("api_url", "str", "API base URL", "https://api.anti-captcha.com/"),
+        ("check_client", "bool", "Don't use if client is connected", False),
+        *map(lambda captcha_plugin: (
+            f"solve_{captcha_plugin}",
+            "bool",
+            f"Solve {captcha_plugin}",
+            True,
+        #), TASK_TYPES.keys()), # FIXME make this work
+        ), (
+            #"ReCaptcha",
+            #"HCaptcha",
+            "CutCaptcha",
+            "CircleCaptcha",
+        )),
+        (
+            "refund",
+            "bool",
+            "Request refund if result incorrect",
+            False,
+        ),
+        # example: 0123456789abcdef0123456789abcdef
         ("passkey", "password", "API key", ""),
         ("timeout", "int", "Timeout in seconds (min 60, max 3999)", "900"),
     ]
 
-    __description__ = """Send captchas to anti-captcha.com"""
-    __license__ = "GPLv3"
+    __description__ = """Send captchas to 2captcha.com"""
+    __license__ = "MIT"
     __authors__ = [
-        ("GammaC0de", "nitzo2001[AT]yahho[DOT]com"),
+        ("milahu", "milahu@gmail.com"),
     ]
 
     TASK_TYPES = {
-        "ReCaptcha": "RecaptchaV2TaskProxyless",
-        "HCaptcha": "HCaptchaTaskProxyless",
-        "Turnstile": "TurnstileTaskProxyless"
+        "image": "ImageToTextTask",
+        #"ReCaptcha": "RecaptchaV2TaskProxyless",
+        #"HCaptcha": "HCaptchaTaskProxyless",
+        "CutCaptcha": "CutCaptchaTaskProxyless",
+        "CircleCaptcha": "CoordinatesTask",
     }
 
-    # See https://anti-captcha.com/apidoc
-    API_URL = "https://api.anti-captcha.com/"
+    # https://2captcha.com/api-docs
+    API_URL = "https://api.2captcha.com/"
+
+    # credit = price for 1000 captchas
+    # https://2captcha.com/pricing
+    MIN_CREDITS = 0.5
 
     def api_request(self, method, post):
-        api_url = self.config.get("api_url", self.API_URL)
-        api_url += "/" if not api_url.endswith("/") else ""
-        json_data = self.load(api_url + method, post=json.dumps(post))
+        json_data = self.load(self.API_URL + method, post=json.dumps(post))
         return json.loads(json_data)
 
     def get_credits(self):
         credits = self.db.retrieve("credits", {"balance": 0, "time": 0})
 
         #: Docs says: "Please don't call this method more often than once in 30 seconds"
-        if time.monotonic() - credits["time"] >= 30:
+        if time.time() - credits["time"] >= 30:
             api_data = self.api_request(
                 "getBalance", {"clientKey": self.config.get("passkey")}
             )
@@ -60,13 +86,15 @@ class AntiCaptcha(BaseAddon):
                 self.log_error(self._("API error"), api_data["errorDescription"])
                 return 0
 
-            credits = {"balance": api_data["balance"], "time": time.monotonic()}
+            credits = {"balance": api_data["balance"], "time": time.time()}
             self.db.store("credits", credits)
 
         balance = credits["balance"]
         self.log_info(self._("Credits left: {:.2f}$").format(balance))
 
         # 1 credit = 0.001 usd
+        # credit = price for 1000 captchas
+        # https://2captcha.com/pricing
         credits = round(balance * 1000)
 
         return credits
@@ -74,21 +102,24 @@ class AntiCaptcha(BaseAddon):
     @threaded
     def _process_captcha(self, task):
         url_p = urllib.parse.urlparse(task.captcha_params["url"])
+        #if not task.is_textual(): # TODO is this the same?
         if task.is_interactive():
             if url_p.scheme not in ("http", "https"):
                 self.log_error(self._("Invalid url"))
                 return
-
+            task_args = dict(task.captcha_params)
+            for key in ["url", "plugin", "captcha_plugin"]:
+                del task_args[key]
+            self.log_debug("TwoCaptcha: task_args = " + json.dumps(task_args, indent=2))
             api_data = self.api_request(
                 "createTask",
                 {
                     "clientKey": self.config.get("passkey"),
-                    "softId": 976,
                     "task": {
                         "type": self.TASK_TYPES[task.captcha_params["captcha_plugin"]],
                         "websiteURL": r"{}://{}/".format(url_p.scheme, url_p.netloc),
-                        "websiteKey": task.captcha_params["sitekey"],
-                        "isInvisible": task.is_invisible(),
+                        #"isInvisible": task.is_invisible(),
+                        **task_args,
                     },
                 },
             )
@@ -101,16 +132,16 @@ class AntiCaptcha(BaseAddon):
                 self.log_error(exc)
                 return
 
+            # https://2captcha.com/api-docs/normal-captcha
             api_data = self.api_request(
                 "createTask",
                 {
                     "clientKey": self.config.get("passkey"),
-                    "softId": 976,
                     "task": {
                         "type": "ImageToTextTask",
                         "body": to_str(base64.b64encode(data)),
                         "case": True,
-                        "websiteURL": r"{}://{}/".format(url_p.scheme, url_p.netloc),
+                        #"websiteURL": r"{}://{}/".format(url_p.scheme, url_p.netloc),
                     },
                 },
             )
@@ -138,52 +169,28 @@ class AntiCaptcha(BaseAddon):
                 self.log_error(self._("API error"), api_data["errorDescription"])
                 break
             if api_data["status"] == "ready":
-                result = self._result_of_api_data(api_data, task)
+                #result = self._result_of_api_data(api_data, task)
+                # FIXME result == None
+                self.log_info(f"AntiCaptcha._result_of_api_data = {AntiCaptcha._result_of_api_data}")
+                self.log_info(f"api_data = {api_data}")
+                self.log_info(f"task = {task}")
+                result = AntiCaptcha._result_of_api_data(self, api_data, task)
+                self.log_info(f"result = {result}")
                 break
-            assert api_data["status"] == "processing"
+            if api_data["status"] != "processing":
+                raise ValueError("unexpected api_data: " + json.dumps(api_data, indent=2))
             time.sleep(5)
-
         else:
             self.log_debug(f"Could not get result: {ticket}")
-
         self.log_info(self._("Captcha result for ticket {}: {}").format(ticket, result))
-
         task.set_result(result)
-
-    def _result_of_api_data(self, api_data, task):
-        captcha_plugin = task.captcha_params["captcha_plugin"]
-        solution = api_data["solution"]
-        if captcha_plugin in ("HCaptcha", "ReCaptcha"):
-            return solution["gRecaptchaResponse"]
-        if captcha_plugin in ("CutCaptcha"):
-            return solution["token"]
-        if task.is_textual():
-            return solution["text"]
-        if captcha_plugin in ("CircleCaptcha"):
-            point = solution["coordinates"][0]
-            return (point["x"], point["y"])
-        self.log_warning(f"_result_of_api_data: using solution as result. captcha_plugin={captcha_plugin}. solution={json.dumps(solution)}")
-        return solution
 
     def captcha_task(self, task):
         if task.is_interactive():
             captcha_plugin = task.captcha_params["captcha_plugin"]
-            if captcha_plugin == "ReCaptcha":
-                if not self.config.get("solve_recaptcha"):
-                    self.log_debug(f"Not solving {captcha_plugin}")
-                    return
-            elif captcha_plugin == "HCaptcha":
-                if not self.config.get("solve_hcaptcha"):
-                    self.log_debug(f"Not solving {captcha_plugin}")
-                    return
-            elif captcha_plugin == "Turnstile":
-                if not self.config.get("solve_turnstile"):
-                    self.log_debug(f"Not solving {captcha_plugin}")
-                    return
-            else:
+            if not self.config.get(f"solve_{captcha_plugin}"):
                 self.log_debug(f"Not solving {captcha_plugin}")
                 return
-
         else:
             if not task.is_textual():
                 return
@@ -197,8 +204,7 @@ class AntiCaptcha(BaseAddon):
             return
 
         credits = self.get_credits()
-        # a normal captcha costs 3 credits
-        if credits < 3:
+        if credits < self.MIN_CREDITS:
             self.log_error(
                 self._(f"Your captcha anti-captcha.com account has not enough credits: {credits}")
             )
@@ -224,8 +230,6 @@ class AntiCaptcha(BaseAddon):
 
         if task.captcha_params["captcha_plugin"] == "ReCaptcha":
             method = "reportIncorrectRecaptcha"
-        elif task.captcha_params["captcha_plugin"] == "Hcaptcha":
-            method = "reportIncorrectHcaptcha"
         elif task.is_textual():
             method = "reportIncorrectImageCaptcha"
         else:
@@ -252,7 +256,9 @@ class AntiCaptcha(BaseAddon):
             )
 
     def captcha_correct(self, task):
+        self.log_info(f"captcha_correct {task}")
         self._captcha_response(task, True)
 
     def captcha_invalid(self, task):
+        self.log_info(f"captcha_invalid {task}")
         self._captcha_response(task, False)

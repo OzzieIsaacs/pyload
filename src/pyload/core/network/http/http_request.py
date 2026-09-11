@@ -20,6 +20,7 @@ from ...utils.web.check import is_global_address
 from ...utils.web.parse import http_header as parse_header_line
 from ...utils.web.purge import unescape as html_unescape
 from ..exceptions import Abort, Fail
+from .aia_retry_wrap_download import aia_retry_wrap_download
 from .exceptions import BadHeader
 from .http_headers import HttpHeaders
 
@@ -371,6 +372,7 @@ class HTTPRequest:
         else:
             self.c.setopt(pycurl.USERPWD, None)
 
+    @aia_retry_wrap_download
     def load(
         self,
         url,

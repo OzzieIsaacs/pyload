@@ -4065,11 +4065,6 @@ msgstr ""
 "** SCHWERWIEGENDER FEHLER ** Webserver konnte nicht gestartet werden – Adresse "
 "wird bereits verwendet | pyLoad wird beendet"
 
-#: src/pyload/webui/app/templates/files.html:3
-#: src/pyload/webui/app/templates/files.html:6
-msgid "Saved Files"
-msgstr "Gespeicherte Dateien"
-
 #: src/pyload/webui/app/themes/modern/templates/base.html:61
 #: src/pyload/webui/app/themes/modern/templates/base.html:146
 #: src/pyload/webui/app/themes/modern/templates/dashboard.html:14

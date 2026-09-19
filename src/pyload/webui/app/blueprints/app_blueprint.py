@@ -514,7 +514,6 @@ def info():
         "config_folder": api.get_userdir(),
         "download": conf["general"]["storage_folder"]["value"],
         "freespace": format.size(api.free_space()),
-        "remote": conf["remote"]["port"]["value"],
         "webif": conf["webui"]["port"]["value"],
         "language": conf["general"]["language"]["value"],
     }

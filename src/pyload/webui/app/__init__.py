@@ -15,7 +15,7 @@ from werkzeug.serving import WSGIRequestHandler
 
 
 from .blueprints import BLUEPRINTS
-from .config import get_default_config
+from .config import get_default_config, get_secret_key
 from .extensions import EXTENSIONS, THEMES
 from .filters import TEMPLATE_FILTERS
 from .globals import TEMPLATE_GLOBALS
@@ -45,6 +45,20 @@ class App:
     def _configure_config(cls, app, develop):
         conf_obj = get_default_config(develop)
         app.config.from_object(conf_obj)
+        if not develop:
+            userdir = app.config["PYLOAD_API"].get_userdir()
+            app.config["SECRET_KEY"] = get_secret_key(userdir)
+
+    @staticmethod
+    def _normalize_path_prefix(path_prefix):
+        if not path_prefix:
+            return ""
+
+        path_prefix = str(path_prefix).strip().strip("/")
+        if not path_prefix:
+            return ""
+
+        return f"/{path_prefix}"
 
     @classmethod
     def _configure_blueprints(cls, app, path_prefix):
@@ -155,6 +169,8 @@ class App:
         app.logger = pycore.log.getChild("webui")
 
     def __new__(cls, pycore, develop=False, path_prefix=None, locale="en"):
+        path_prefix = cls._normalize_path_prefix(path_prefix)
+
         app = flask.Flask(__name__)
         lm.login_view = 'app.login'
         lm.session_protection = "basic"

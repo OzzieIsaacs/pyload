@@ -1,7 +1,30 @@
 import os
+import secrets
 
-from pyload.core.utils.misc import random_string
 from pyload import PKGDIR
+
+
+def get_secret_key(userdir):
+    data_dir = os.path.join(userdir, "data")
+    secret_key_path = os.path.join(data_dir, "webui-secret.key")
+    os.makedirs(data_dir, exist_ok=True)
+
+    try:
+        fd = os.open(secret_key_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    except FileExistsError:
+        with open(secret_key_path, encoding="ascii") as secret_key_file:
+            secret_key = secret_key_file.read().strip()
+    else:
+        secret_key = secrets.token_hex(32)
+        with os.fdopen(fd, "w", encoding="ascii") as secret_key_file:
+            secret_key_file.write(secret_key)
+
+    if not secret_key:
+        raise ValueError(f"WebUI secret key file is empty: {secret_key_path}")
+
+    os.chmod(secret_key_path, 0o600)
+    return secret_key
+
 
 def get_default_config(develop):
     return DevelopmentConfig if develop else ProductionConfig
@@ -22,7 +45,7 @@ class BaseConfig:
 
 class ProductionConfig(BaseConfig):
     ENV = "production"
-    SECRET_KEY = random_string(16)
+    SECRET_KEY = None
     #: Extensions
     CACHE_TYPE = "simple"
     LANGUAGES = ['en', 'de']

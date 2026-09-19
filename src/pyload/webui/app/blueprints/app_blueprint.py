@@ -75,7 +75,8 @@ def login():
 
     next_url = get_redirect_url(fallback="app.dashboard")
 
-    api = flask.current_app.config["PYLOAD_API"]
+    if current_user.is_authenticated:
+        return flask.redirect(next_url)
 
     if api.get_config_value("webui", "autologin"):
         allusers = api.get_all_userdata()

@@ -8,8 +8,9 @@
 {% endblock %}
 
 {% block footer %}
+  <script type="module" src="{{theme_static('vendor/lean-qr/lean-qr.min.mjs')}}"></script>
 <script type="text/javascript" src="{{theme_template('js/settings.js')}}"></script>
-<script type="text/javascript" src="{{theme_template('js/packages.js')}}"></script>
+  <script type="text/javascript" src="{{theme_template('js/packages.js')}}"></script>
 <script type="text/javascript">
   $(function() {
       const pUI = new PackageUI({{ target }});
@@ -19,7 +20,7 @@
 
 {% block pageactions %}
 {% if user.is_admin %}
-  <div class="btn-group" role="group" aria-label="...">
+  <div class="btn-group btn-group-sm" role="group" aria-label="...">
     <button id="quit-pyload" class="btn btn-default"><span class="glyphicon glyphicon-off"></span> {{_('Quit pyLoad')}}</button>
     <button id="restart-pyload" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> {{_('Restart pyLoad')}}</button>
   </div>
@@ -94,7 +95,7 @@
     </form>
   </div>
   <div id="accounts" class="tab-pane fade">
-    <form id="account_form" action="{{url_for("json.update_accounts")}}" method="POST">
+    <form id="account_form" action="{{url_for('json.update_accounts')}}" method="POST">
       <table class="settable wide table">
         <thead>
         <tr>
@@ -154,70 +155,69 @@
     </form>
   </div>
   {% if user.is_admin %}
-  <div id="users" class="tab-pane fade">
-    <div class="row">
-      <div class="col-sm-4 col-sm-offset-3 mt-sm-10" style="margin-top: 10px">
-        <div class="alert" style="padding:8px;">
-          <p class="align-middle">{{ _("To reset default admin login run:") }} <b>pyload -r</b></p>
-          <br style="line-height: 2px;">
-          <p class="align-middle"><b>{{_('Important:')}}</b> {{_('Admin user have always all permissions!')}}</p>
+    <div id="users" class="tab-pane fade">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-3 mt-sm-10" style="margin-top: 10px">
+          <div class="alert" style="padding:8px;">
+            <p class="align-middle">{{ _("To reset default admin login run:") }} <b>pyload -r</b></p>
+            <br style="line-height: 2px;">
+            <p class="align-middle"><b>{{_('Important:')}}</b> {{_('Admin user have always all permissions!')}}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <form id="user_form" action="" method="POST">
-      <table class="settable table" style="width:50%;">
-        <thead>
-        <tr>
-          <th>{{_('Name')}}</th>
-          <th>{{_('Admin')}}</th>
-          <th>{{_('Permissions')}}</th>
-          <th>{{_('Actions')}}</th>
-        </tr>
-        </thead>
-
-        {% for name, data in conf.admin.users.items() %}
+      <form id="user_form" action="" method="POST">
+        <table class="settable table" style="width:50%;">
+          <thead>
           <tr>
-            <td>{{name}}</td>
-            <td>
-              {% if user.name == name %}
-                <input class="is_admin" name="{{name}}|admin" type="checkbox" {% if data.perms.admin %} checked="checked" {% endif %} disabled="disabled">
-                <input name="{{name}}|admin" type="checkbox" {% if data.perms.admin %} checked="checked" {% endif %} hidden="hidden">
-              {% else %}
-                <input class="is_admin" name="{{name}}|admin" type="checkbox" {% if data.perms.admin %} checked="checked" {% endif %}>
-              {% endif %}
-            </td>
-            <td>
-              <select id="{{name}}|perms" class="permlist" multiple="multiple" size="{{conf.admin.permlist|length}}" name="{{name}}|perms" {% if data.perms.admin %} disabled="disabled" {% endif %}>
-                {% for perm in conf.admin.permlist %}
-                  {% if data.perms[perm] %}
-                    <option selected="selected">{{perm}}</option>
-                  {% else %}
-                    <option>{{perm}}</option>
-                  {% endif %}
-                {% endfor %}
-              </select>
-            </td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-success btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{_('Actions')}}&nbsp;<span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a class="change_password" href="#" data-toggle="modal" data-target="#password_box" id="{{name}}|change_pw"><span class="glyphicon glyphicon-pencil"></span> {{_('Change Password')}}</a></li>
-                  {% if user.is_admin %}
-                    <li {% if user.name == name %} class="disabled" {% endif %}><a href="#" class="delete_user" id="{{name}}|delete"><span class="glyphicon glyphicon-trash"></span> {{_('Delete User')}}</a></li>
-                  {% endif %}
-                  <li><a href="#" data-toggle="modal" data-target="#apikeys_box" id="{{name}}|apikeys"><span class="glyphicon glyphicon-lock"></span> {{_('Manage API Keys')}}</a></li>
-                </ul>
-              </div>
-            </td>
+            <th>{{_('Name')}}</th>
+            <th>{{_('Admin')}}</th>
+            <th>{{_('Permissions')}}</th>
+            <th>{{_('Actions')}}</th>
           </tr>
-        {% endfor %}
-      </table>
-      <button id="user_add" type="button" data-toggle="modal" data-target="#user_box" style="margin-left: 5px;" class="btn btn-default">&nbsp;<span class="glyphicon glyphicon-plus"></span></button>
-      <button id="user_submit" class="btn btn-primary" type="submit">{{_('Submit')}}</button>
-    </form>
-  </div>
-  {% endif %}
+          </thead>
 
+          {% for name, data in conf.admin.users.items() %}
+            <tr>
+              <td>{{name}}</td>
+              <td>
+                {% if user.name == name %}
+                  <input class="is_admin" name="{{name}}|admin" type="checkbox" {% if data.perms.admin %} checked="checked" {% endif %} disabled="disabled">
+                  <input name="{{name}}|admin" type="checkbox" {% if data.perms.admin %} checked="checked" {% endif %} hidden="hidden">
+                {% else %}
+                  <input class="is_admin" name="{{name}}|admin" type="checkbox" {% if data.perms.admin %} checked="checked" {% endif %}>
+                {% endif %}
+              </td>
+              <td>
+                <select id="{{name}}|perms" class="permlist" multiple="multiple" size="{{conf.admin.permlist|length}}" name="{{name}}|perms" {% if data.perms.admin %} disabled="disabled" {% endif %}>
+                  {% for perm in conf.admin.permlist %}
+                    {% if data.perms[perm] %}
+                      <option selected="selected">{{perm}}</option>
+                    {% else %}
+                      <option>{{perm}}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-success btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{_('Actions')}}&nbsp;<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a class="change_password" href="#" data-toggle="modal" data-target="#password_box" id="{{name}}|change_pw"><span class="glyphicon glyphicon-pencil"></span> {{_('Change Password')}}</a></li>
+                    {% if user.is_admin %}
+                      <li {% if user.name == name %} class="disabled" {% endif %}><a href="#" class="delete_user" id="{{name}}|delete"><span class="glyphicon glyphicon-trash"></span> {{_('Delete User')}}</a></li>
+                    {% endif %}
+                    <li><a href="#" data-toggle="modal" data-target="#apikeys_box" id="{{name}}|apikeys"><span class="glyphicon glyphicon-lock"></span> {{_('Manage API Keys')}}</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        <button id="user_add" type="button" data-toggle="modal" data-target="#user_box" style="margin-left: 5px;" class="btn btn-default">&nbsp;<span class="glyphicon glyphicon-plus"></span></button>
+        <button id="user_submit" class="btn btn-primary" type="submit">{{_('Submit')}}</button>
+      </form>
+    </div>
+  {% endif %}
 </div>
 {% endblock %}
 
@@ -291,7 +291,7 @@
 
 <div id="shutdown_msg" class="hidden" style="position:fixed; z-index: 1; width: 100%;">
   <div align="center" class="alert alert-success">
-    <p style="font-weight: bold;">{{_('pyLoad was shut down, goodbye!')}}</p>
+    <p style="font-weight: bold;">{{_('pyLoad is shutting down...')}}</p>
   </div>
 </div>
 
@@ -299,7 +299,7 @@
   <div class="modal-dialog modal-sm">
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header bg-info text-center" style="padding: 5px;">{{_('Change Password')}}</div>
+      <div class="modal-header bg-info text-center" style="padding: 5px">{{_('Change Password')}}</div>
       <div class="modal-body" style="overflow-x: hidden; margin-bottom: 30px;">
         <form id="password_form" class="from-group" action="{{url_for("json.change_password")}}" method="POST" enctype="multipart/form-data" style="margin-bottom: 40px;">
           <p>{{_('Enter your current and desired Password.')}}</p>
@@ -335,12 +335,12 @@
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header bg-info text-center" style="padding: 5px;">{{_('API Keys')}}</div>
+      <div class="modal-header bg-info text-center" style="padding: 5px">{{_('API Keys')}}</div>
       <div class="modal-body" style="margin-bottom: 30px;">
         <div id="apikeyMainContent">
           <p>{{_('Manage your API keys for programmatic access to pyLoad.')}}</p>
           <div style="overflow-y: auto; max-height: 300px;">
-            <table class="table">
+            <table class="table table-striped">
               <thead style="position: sticky; top: 0; z-index: 1;>
               <tr style="background-color: #555;">
                 <th>{{_('Name')}}</th>
@@ -382,7 +382,12 @@
           </form>
         </div>
         <div id="apikeyCopyContent" class="hidden">
-          <div class="alert alert-warning text-center"><h4 class="modal-title text-center">{{_("API Key generated successfully")}}</h4><br>{{_("Please save this key in a secure location,")}}<br><strong>{{_("You won't be able to see it again!")}}</strong></div>
+          <div id="apikeyCopyNotice" class="alert alert-danger" style="position: relative; min-height: 100px;">
+            <lean-qr id="apikeyQr" style="position: absolute; left: 15px; top: 50%; width: 90px; height: 90px; margin-top: -45px;"></lean-qr>
+            <div style="position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center;">
+              <h4 class="modal-title">{{_("API Key generated successfully")}}</h4><br>{{_("Please save this key in a secure location,")}}<br><strong>{{_("You won't be able to see it again!")}}</strong>
+            </div>
+          </div>
           <div class="input-group">
             <input type="text" id="apikeyGeneratedKey" class="form-control font-mono" style="cursor: text" value="" readonly>
             <span class="input-group-btn">
@@ -430,7 +435,7 @@
           </div>
           <div class="form-group">
             <label for="new_password2">{{_('Password (repeat)')}}</label>
-            <input class="form-control reveal-pass" id="new_password2" name="new_password2" type="password" />
+            <input class="form-control reveal-pass" id="new_password2" name="new_password2" type="password"/>
             <p class="help-block">{{_('Please repeat the password.')}}</p>
           </div>
           <div class="form-group">
@@ -445,7 +450,7 @@
                 <option>{{perm}}</option>
               {% endfor %}
             </select>
-            <p class="help-block">{{ _("Permissions for the new user") }}</p>
+            <p class="help-block">{{ _("Permissions for the new user.") }}</p>
           </div>
           <button class="btn btn-primary pull-right" id="new_user_button" type="submit">{{ _("Add") }}</button>
           <button class="btn btn-default pull-left" id="new_user_reset" data-dismiss="modal" type="reset">{{ _("Cancel") }}</button>
@@ -454,18 +459,4 @@
     </div>
   </div>
 </div>
-
-<div id="restart_box" class="modal" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header bg-info text-center" style="padding: 5px" >{{_('Are you sure you want to restart pyLoad?')}}</div>
-        <div class="modal-body" style="margin-bottom: 30px;">
-            <button class="btn btn-primary pull-right" id="restart-pyload" type="submit">{{ _("Submit") }}</button>
-            <button class="btn btn-default pull-left" data-dismiss="modal" id="restart_reset" type="reset">{{ _("Reset") }}</button>
-        </div>
-    </div>
-  </div>
-</div>
-
 {% endblock %}

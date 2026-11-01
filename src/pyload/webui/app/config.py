@@ -1,7 +1,6 @@
 import os
-import secrets
-
 from pyload import PKGDIR
+from pyload.core.utils.misc import random_string
 
 
 def get_secret_key(userdir):
@@ -45,11 +44,11 @@ class BaseConfig:
 
 class ProductionConfig(BaseConfig):
     ENV = "production"
-    SECRET_KEY = None
+    SECRET_KEY = random_string(16)
     #: Extensions
-    CACHE_TYPE = "simple"
     LANGUAGES = ['en', 'de']
     BABEL_TRANSLATION_DIRECTORIES = os.path.join(PKGDIR, 'locale')
+    CACHE_TYPE = "SimpleCache"
     # SESSION_USE_SIGNER = True
 
 

@@ -13,11 +13,19 @@ import flask
 from pyload import APPID, PKGDIR
 from pyload.core.utils import format, fs
 
-# from ..usermanagement import login_required
 from ..cw_login import login_user, logout_user, current_user
-from ..helpers import (login_required,
-    csrf_exempt, get_permission, get_redirect_url, permlist,
-    render_base, render_template, static_file_url)
+from ..helpers import (
+    login_required,
+    csrf_exempt,
+    get_client_ip,
+    get_permission,
+    get_redirect_url,
+    login_required,
+    permlist,
+    render_base,
+    render_template,
+    static_file_url,
+)
 
 _RE_LOGLINE = re.compile(r"\[([\d\-]+) ([\d:]+)\] +([A-Z]+) +(.+?) (.*)")
 
@@ -68,12 +76,33 @@ def manifest():
     })
 
 
+@bp.route("/qr-redirector", endpoint="qr_redirector")
+def qr_redirector():
+    return flask.send_from_directory("static", "qr-redirector.html")
+
+
 # TODO: Rewrite login route using flask-login
 @bp.route("/login", methods=["GET", "POST"], endpoint="login")
 def login():
     api = flask.current_app.config["PYLOAD_API"]
 
     next_url = get_redirect_url(fallback="app.dashboard")
+
+    if flask.request.method == "POST":
+        user = flask.request.form["username"]
+        password = flask.request.form["password"]        
+
+        client_ip = get_client_ip()
+
+        sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
+        user_info = api.check_auth(sanitized_user, password)
+        if not user_info:
+            log.error(f"Login failed for user '{sanitized_user}' using Web Client [CLIENT: {client_ip}]")
+            return render_template("login.html", errors=True)
+
+        login_user(user_info, remember=True)
+        log.info(f"User '{sanitized_user}' successfully logged in using Web Client [CLIENT: {client_ip}]")
+        flask.flash("Logged in successfully")        
 
     if current_user.is_authenticated:
         return flask.redirect(next_url)
@@ -84,23 +113,6 @@ def login():
             user_info = list(allusers.values())[0]
             login_user(user_info, remember=True)
             return flask.redirect(next_url)
-
-    if flask.request.method == "POST":
-        user = flask.request.form["username"]
-        password = flask.request.form["password"]
-
-        client_ip = flask.request.headers.get("X-Forwarded-For", "").split(',')[0].strip() or flask.request.remote_addr
-
-        sanitized_user = user.replace("\n", "\\n").replace("\r", "\\r")
-        user_info = api.check_auth(sanitized_user, password)
-        if not user_info:
-            log.error(f"Login failed for user '{sanitized_user}' using Web Client [CLIENT: {client_ip}]")
-            return render_template("login.html", errors=True)
-
-        login_user(user_info, remember=True)
-        log.info(f"User '{sanitized_user}' successfully logged in [CLIENT: {client_ip}]")
-        flask.flash("Logged in successfully")
-        return flask.redirect(next_url)
 
     return render_template("login.html")
 
@@ -305,6 +317,7 @@ def settings():
     context = {
         "conf": {"plugin": plugin_menu, "general": conf_menu, "accs": accs, "admin": admin_menu},
         "types": api.get_account_types(),
+        "path_prefix": api.get_config_value("webui", "prefix"),
     }
     return render_template("settings.html", **context)
 

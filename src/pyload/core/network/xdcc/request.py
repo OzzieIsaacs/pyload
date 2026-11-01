@@ -7,6 +7,7 @@ import struct
 import time
 
 from ..exceptions import Abort, Fail
+from ...utils.web.check import is_global_address
 
 
 class XDCCRequest:
@@ -87,6 +88,9 @@ class XDCCRequest:
             pass
 
     def download(self, ip, port, filename, status_notify=None, resume=None, use_ssl=False):
+        if not is_global_address(ip):
+            raise Fail("Cannot download from private or reserved IP addresses: {}".format(ip))
+
         self.status_notify = status_notify
         self.send_64bits_ack = not self.filesize < 1 << 32
 

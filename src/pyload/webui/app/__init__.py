@@ -25,7 +25,6 @@ from .helpers import clear_all_user_sessions
 from .processors import CONTEXT_PROCESSORS
 from .MyLoginManager import MyLoginManager
 
-from flask_babel import Babel
 from pyload import APPID
 
 
@@ -197,7 +196,8 @@ class App:
         cls._configure_json_encoding(app)
         cls._configure_session(app, path_prefix or r"/")
         cls._configure_blueprints(app, path_prefix)
-        Babel(app, default_domain=APPID, default_locale=locale)
+        app.config["BABEL_DOMAIN"] = APPID
+        app.config["BABEL_DEFAULT_LOCALE"] = locale
 
         cls._configure_extensions(app)
         cls._configure_themes(app, path_prefix or "")

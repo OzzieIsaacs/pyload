@@ -66,6 +66,10 @@ class ArteTv(SimpleDownloader):
         if not m:
             self.error("URL passt nicht zum Muster")
 
+        self.ffmpeg = Ffmpeg(self.config.get("priority"), self)
+        if not self.ffmpeg.found:
+            self.fail("ffmpeg nicht gefunden oder nicht ausführbar; Installation und PATH des pyLoad-Prozesses prüfen")
+
         lang     = m.group("lang")
         video_id = m.group("video_id")
 
@@ -147,22 +151,19 @@ class ArteTv(SimpleDownloader):
         self.pyfile.set_custom_status("downloading")
         self.pyfile.set_progress(0)
 
-        self.ffmpeg = Ffmpeg(self.config.get("priority"), self)
+        self.ffmpeg.set_video(streams[720])
+        self.ffmpeg.set_audio_streams(audio_streams)
+        # Untertitel müssen auch noch dazu
 
-        if self.ffmpeg.found:
-            self.ffmpeg.set_video(streams[720])
-            self.ffmpeg.set_audio_streams(audio_streams)
-            # Untertitel müssen auch noch dazu
+        dl_root_folder = self.pyload.config.get("general", "storage_folder")
+        dl_package_folder = fs.safejoin(dl_root_folder, self.pyfile.package().folder)
+        if not os.path.exists(dl_package_folder):
+            os.makedirs(dl_package_folder)
+        self.ffmpeg.set_output_filename(dl_package_folder, pyfile.name)
+        self.pyfile.size = 1000000000
 
-            dl_root_folder = self.pyload.config.get("general", "storage_folder")
-            dl_package_folder = fs.safejoin(dl_root_folder, self.pyfile.package().folder)
-            if not os.path.exists(dl_package_folder):
-                os.makedirs(dl_package_folder)
-            self.ffmpeg.set_output_filename(dl_package_folder, pyfile.name)
-            self.pyfile.size = 1000000000
-
-            if not self.ffmpeg.run():
-                self.log_warning(self._("ffmpeg error"), self.ffmpeg.error_message)
+        if not self.ffmpeg.run():
+            self.fail(f"ffmpeg error: {self.ffmpeg.error_message}")
 
         self.pyfile.set_progress(100)
         self.last_download = pyfile.name

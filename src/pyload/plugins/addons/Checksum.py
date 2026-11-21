@@ -42,7 +42,7 @@ def compute_checksum(local_file, algorithm, progress_notify=None, abort=None):
             last = 0
 
             with open(local_file, mode="rb") as fp:
-                for chunk in iter(lambda: fp.read(8192), ""):
+                for chunk in iter(lambda: fp.read(8192), b""):
                     if abort and abort():
                         return False
 
@@ -96,7 +96,7 @@ class Checksum(BaseAddon):
 
     _regexmap = {
         "sfv": r"^(?P<NAME>[^;].+)\s+(?P<HASH>[0-9A-Fa-f]{8})$",
-        "md5": r"^(?P<NAME>[0-9A-Fa-f]{32})  (?P<FILE>.+)$",
+        "md5": r"^(?P<HASH>[0-9A-Fa-f]{32}) [ *](?P<NAME>.+)$",
         "crc": r"filename=(?P<NAME>.+)\nsize=(?P<SIZE>\d+)\ncrc32=(?P<HASH>[0-9A-Fa-f]{8})$",
         "default": r"^(?P<HASH>[0-9A-Fa-f]+)\s+\*?(?P<NAME>.+)$",
     }

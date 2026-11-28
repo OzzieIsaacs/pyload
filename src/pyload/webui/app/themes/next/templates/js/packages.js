@@ -184,7 +184,7 @@ class Package {
   createLinks(data) {
     const $ul = $(`#sort_children_${this.id}`);
     const nbsp = '\u00A0';
-    $ul.html("");
+    $ul.empty();
     data.links.forEach(link => {
       const $li = $("<li>").css("margin-left", 0).data("lid", link.fid);
 
@@ -367,7 +367,7 @@ class Package {
         const imgs1 = $(ele1).find(".glyphicon");
         $(imgs1[0]).attr("class", "glyphicon glyphicon-time text-info");
         const spans = $(ele1).find(".child_status");
-        $(spans[1]).html("{{_('queued')}}");
+        $(spans[1]).text("{{_('queued')}}");
         uiHandler.indicateSuccess();
       })
       .fail(() => {
@@ -448,7 +448,7 @@ class Package {
       icon.addClass('glyphicon-folder-close');
     }
     const ul = $(`#sort_children_${this.id}`);
-    ul.html("");
+    ul.empty();
     this.linksLoaded = false;
   }
 

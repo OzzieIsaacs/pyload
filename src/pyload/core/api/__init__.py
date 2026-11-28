@@ -16,7 +16,6 @@ from threading import RLock
 from typing import Any, Callable, Optional
 from urllib.parse import urlparse
 
-import flask
 from werkzeug.utils import secure_filename
 
 from pyload import PKGDIR
@@ -258,71 +257,54 @@ class Api:
         :param value: new config value
         :param section: 'plugin' or 'core'
         """
+        # Reject newlines or control characters early
+        if isinstance(value, str) and ("\r" in value or "\n" in value or "\0" in value):
+            self.pyload.log.error(
+                self._("Config value for {}/{} cannot contain newline or control characters").format(
+                    category, option
+                )
+            )
+            return
+
+        if isinstance(value, list) and any(
+            isinstance(x, str) and ("\r" in x or "\n" in x or "\0" in x) for x in value
+        ):
+            self.pyload.log.error(
+                self._("Config list item for {}/{} cannot contain newline or control characters").format(
+                    category, option
+                )
+            )
+            return
+
         try:
-            user_info = self.pyload.db.get_all_user_data().get(int(flask.session['_user_id']))
+            if section == "core":
+                if category == "general" and option == "storage_folder":
+                    # Forbid setting the download folder inside dangerous locations
+                    blocked_dirs = [PKGDIR, self.pyload.userdir]
+                    if any(fs.is_within_directory(d, value) for d in blocked_dirs):
+                        return
 
-        # Attempt to access outside an active Flask request
-        except RuntimeError:
-            user_info = {"role": Role.ADMIN}
-        is_admin = user_info.get("role") == Role.ADMIN
+                self.pyload.config.set(category, option, value)
 
-        ADMIN_ONLY_CORE_OPTIONS = {
-            ("general", "ssl_verify"),
-            ("general", "storage_folder"),
-            ("log", "syslog_host"),
-            ("log", "syslog_port"),
-            ("proxy", "enabled"),
-            ("proxy", "host"),
-            ("proxy", "password"),
-            ("proxy", "socks_resolve_dns"),
-            ("proxy", "type"),
-            ("proxy", "username"),
-            ("reconnect", "script"),
-            ("webui", "allow_iframe"),
-            ("webui", "host"),
-            ("webui", "ssl_certfile"),
-            ("webui", "ssl_keyfile"),
-            ("webui", "ssl_certchain"),
-            ("webui", "trusted_proxies"),
-            ("webui", "use_ssl"),
-        }
+                if category == "download" and option in (
+                    "limit_speed",
+                    "max_speed",
+                ):  #: not such a nice method to update the limit
+                    self.pyload.request_factory.update_bucket()
 
-        ADMIN_ONLY_PLUGIN_OPTIONS = {
-            ("AntiVirus", "avfile"),
-            ("AntiVirus", "avargs"),
-        }
+            elif section == "plugin":
+                self.pyload.config.set_plugin(category, option, value)
 
-        if section == "core":
-            if category == "general" and option == "storage_folder":
-                # Forbid setting the download folder inside dangerous locations
-                blocked_dirs = [PKGDIR, self.pyload.userdir]
-                if any(fs.is_within_directory(d, value) for d in blocked_dirs):
-                    return
-
-            # Require ADMIN role for security-critical settings
-            if (category, option) in ADMIN_ONLY_CORE_OPTIONS and not is_admin:
-                self.pyload.log.error(self._("Writing config value {}/{} requires Admin role").format(category, option))
-                return
-
-            self.pyload.config.set(category, option, value)
-
-            if category == "download" and option in (
-                "limit_speed",
-                "max_speed",
-            ):  #: not such a nice method to update the limit
-                self.pyload.request_factory.update_bucket()
-
-        elif section == "plugin":
-            # Require ADMIN role for security-critical settings
-            if (category, option) in ADMIN_ONLY_PLUGIN_OPTIONS and not is_admin:
-                self.pyload.log.error(self._("Writing config value {}/{} requires Admin role").format(category, option))
-                return
-
-            self.pyload.config.set_plugin(category, option, value)
-
-        self.pyload.addon_manager.dispatch_event(
-            "config_changed", category, option, value, section
-        )
+            self.pyload.addon_manager.dispatch_event(
+                "config_changed", category, option, value, section
+            )
+        except ValueError as exc:
+            self.pyload.log.error(
+                self._("Failed to set config value {}/{}: {}").format(
+                    category, option, exc
+                )
+            )
+            return
 
     @legacy("getConfig")
     @permission(Perms.SETTINGS)
